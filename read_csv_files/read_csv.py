@@ -8,8 +8,9 @@ path_file = '/home/horacio/Documentos/UFAL/TCC/tcc_data/microdados_censo_superio
 column1 = ['NO_MUNICIPIO_CURSO']
 
 data = pd.read_csv(path_file, sep = '|')
-uf_al = data[data['SGL_UF_CURSO'] == 'AL']
-#data = pd.read_csv(path_file, sep = '|', skipinitialspace=True, usecols=column1)
+data[data['SGL_UF_CURSO'] == 'AL']
+without_al = data[data['SGL_UF_CURSO'] != 'AL']
+data_random = without_al.sample(10000)
 
 
 
