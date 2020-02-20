@@ -4,13 +4,15 @@ import numpy as np
 import pandas as pd
 
 
-path_file = '/home/horacio/Documentos/UFAL/TCC/tcc_data/microdados_censo_superior_2016/DADOS/DM_CURSO.csv'
-column1 = ['NO_MUNICIPIO_CURSO']
+path_file_ufal = '/home/horacio/Documentos/UFAL/TCC/tcc_data/UFAL.csv'
+path_file_brazil = '/home/horacio/Documentos/UFAL/TCC/tcc_data/Random.csv'
 
-data = pd.read_csv(path_file, sep = '|')
-data[data['SGL_UF_CURSO'] == 'AL']
-without_al = data[data['SGL_UF_CURSO'] != 'AL']
-data_random = without_al.sample(10000)
+data_ufal = pd.read_csv(path_file_ufal, sep = ',')
+data_brazil = pd.read_csv(path_file_brazil, sep = ',')
+
+#data[data['SGL_UF_CURSO'] == 'AL']
+#without_al = data[data['SGL_UF_CURSO'] != 'AL']
+#data_random = without_al.sample(10000)
 
 
 
