@@ -11,15 +11,15 @@ path = '/home/horacio/Documentos/UFAL/ENADE/microdados_Enade_2017_portal_2018.10
 
 #data_brazil = pd.read_csv(path_file_brazil, sep = ',')
 #data_al = pd.read_csv(path_file_al, sep = ',')
-data = pd.read_csv(path, sep = ';')
-data_al = data[data['QE_I16'] == 27]
-data_al_save = data_al.to_csv('UFAL.csv')
-#data_br = data[data['QE_I16'] != 27]
+data = pd.read_csv(path, sep = ';')# Lendo
 
+data_al = data[data['QE_I16'] == 27]# Get apenas em Alagoas
+data_al_save = data_al.to_csv('AL_data.csv')# Salvando como .csv
 
-#for col in data_al.columns:
-#    print(col)
-    
+data_br = data[data['QE_I16'] != 27]
+data_br_br = data_br.sample(7048)# Escolhendo aleatoriamente no DataFrame
+data_br_save = data_br_br.to_csv('Brazil_Random_data.csv')
+
     
 #def main():
 #    read_file()#main()
