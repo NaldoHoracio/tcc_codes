@@ -29,3 +29,4 @@ data_br_clean = data_br.drop(data_br.iloc[:, 35:44], inplace = True, axis = 1)
 
 data_al_clean = data_al.to_csv('AL_data_clean.csv')
 data_br_clean = data_al.to_csv('Brazil_Random_data_clean.csv')
+
