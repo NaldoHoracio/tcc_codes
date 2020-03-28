@@ -7,6 +7,7 @@ Created on Mon Mar 23 15:37:56 2020
 
 import os
 import csv
+import math
 import random
 import numpy as np
 import pandas as pd
@@ -27,19 +28,22 @@ for idx in data_al.index:
     elif isinstance(element, str) == False:
         aux_data_al.append(element)
 
-
+# Transformando string em float
 for idx in range(len(aux_data_al)):
     element = aux_data_al[idx]
     if isinstance(aux_data_al[idx], str) == True:
         aux_data_al[idx] = float(element)
-    elif isinstance(aux_data_al[idx], str) == False:
-        print("Float")
 
-sum_list = 0.0
+# Somando os valores da coluna
+s_list = 0.0
+cont_nan = 0
 for idx in range(len(aux_data_al)):
-    if aux_data_al[idx] == 'nan':
-        sum_list = sum_list
-    elif aux_data_al[idx] != 'nan':
-        sum_list += aux_data_al[idx]
+    element = aux_data_al[idx]
+    if math.isnan(float(aux_data_al[idx])) == False:
+        s_list += element
+    elif math.isnan(float(aux_data_al[idx])) == True:
+        cont_nan += 1
+
+print("Soma da lista: ", s_list)
+print("Nan number: ", cont_nan)
         
-print("Soma da lista ", sum_list)
