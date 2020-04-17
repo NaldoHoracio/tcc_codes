@@ -12,8 +12,8 @@ import random
 import numpy as np
 import pandas as pd
 
-path_al = '/home/horacio/Documentos/UFAL/TCC/tcc_codes/clear_data/AL_data_clean.csv'
-path_br = '/home/horacio/Documentos/UFAL/TCC/tcc_codes/clear_data/Brazil_Random_data_clean.csv'
+path_al = 'G:/Meu Drive/UFAL/TCC/CODES/tcc_codes/clear_data/AL_data_clean.csv'
+path_br = 'G:/Meu Drive/UFAL/TCC/CODES/tcc_codes/clear_data/Brazil_Random_data_clean.csv'
 
 data_al = pd.read_csv(path_al, sep = ',')# Lendo dados de Alagoas
 #data_br = pd.read_csv(path_br, sep = ',')# Lendo dados do Brasil
