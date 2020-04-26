@@ -11,6 +11,7 @@ import math
 import random
 import numpy as np
 import pandas as pd
+import datetime as dt
 import matplotlib.pyplot as plt
 
 path = 'G:/Meu Drive/UFAL/2020.1/Aprendizado de Máquina/Databases/temps.csv'
@@ -19,65 +20,129 @@ features = pd.read_csv(path)
 
 anomalies = features.describe()
 
-# Janeiro
-jan = features[features['month'] == 1]
-jan_average = jan['average']
-print('Average Jan %.2f' %(jan_average.sum()/jan_average.size))
+years = features['year']
+months = features['month']
+days = features['day']
 
-# Fevereiro
-feb = features[features['month'] == 2]
-feb_average = feb['average']
-print('Average Feb %.2f' %(feb_average.sum()/feb_average.size))
+# List and then convert to datetime object
+new_features = [str(int(year)) + '/' + str(int(months)) + '/' + str(int(days))
+                for year, months, days in zip(years, months, days)]
 
-# Março
-mar = features[features['month'] == 3]
-mar_average = mar['average']
-print('Average Mar %.2f' %(mar_average.sum()/mar_average.size))
+new_features = [dt.datetime.strptime(new_feature, '%Y/%m/%d')
+                for new_feature in new_features]
 
-# Abril
-abr = features[features['month'] == 4]
-abr_average = abr['average']
-print('Average Abr %.2f' %(abr_average.sum()/abr_average.size))
+plt.style.use('fivethirtyeight')
 
-# Maio
-may = features[features['month'] == 5]
-may_average = may['average']
-print('Average May %.2f' %(may_average.sum()/may_average.size))
+#%%
 
-# Junho
-jun = features[features['month'] == 6]
-jun_average = jun['average']
-print('Average Jun %.2f' %(jun_average.sum()/jun_average.size))
+# Set up the plotting layout
+fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(nrows=2, ncols=2, figsize = (15,10))
+fig.autofmt_xdate(rotation = 45)
 
-# Julho
-jul = features[features['month'] == 7]
-jul_average = jul['average']
-print('Average Jul %.2f' %(jul_average.sum()/jul_average.size))
+# Actual max temperature measurement
+ax1.plot(new_features, features['actual'])
+ax1.set_xlabel(''); 
+ax1.set_ylabel('Temperature (F)');
+ax1.set_title('Max Temp')
 
-# Agosto
-aug = features[features['month'] == 8]
-aug_average = aug['average']
-print('Average Aug %.2f' %(aug_average.sum()/aug_average.size))
+# Temperature from 1 day ago
+ax2.plot(new_features, features['temp_1'])
+ax2.set_xlabel(''); 
+ax2.set_ylabel('Temperature (F)'); 
+ax2.set_title('Prior Max Temp')
 
-# Setembro
-sept = features[features['month'] == 9]
-sept_average = sept['average']
-print('Average Sept %.2f' %(sept_average.sum()/sept_average.size))
+# Temperature from 2 days ago
+ax3.plot(new_features, features['temp_2'])
+ax3.set_xlabel('Date'); 
+ax3.set_ylabel('Temperature (F)'); 
+ax3.set_title('Two Days Prior Max Temp')
 
-# Outubro
-octb = features[features['month'] == 10]
-octb_average = octb['average']
-print('Average Octb %.2f' %(octb_average.sum()/octb_average.size))
+# Friend Estimate
+ax4.plot(new_features, features['friend'])
+ax4.set_xlabel('Date'); 
+ax4.set_ylabel('Temperature (F)'); 
+ax4.set_title('Friend Estimate')
 
-# Novembro
-nov = features[features['month'] == 11]
-nov_average = nov['average']
-print('Average Nov %.2f' %(nov_average.sum()/nov_average.size))
+plt.tight_layout(pad=2)
 
-# Dezembro
-dec = features[features['month'] == 12]
-dec_average = dec['average']
-print('Average Dec %.2f' %(dec_average.sum()/dec_average.size))
+#%% Prepare to data
 
-        
+features = pd.get_dummies(features)
 
+# Labels are the values we want to predict
+labels = np.array(features['actual'])
+
+# Remove the labels from the features axis 1 refers to the columns
+features = features.drop('actual', axis = 1)
+
+# Saving feature names for later use
+feature_list = list(features.columns)
+
+# Convert to numpy array
+features = np.array(features)
+
+#%% Split data
+# Using Skicit-learn to split data into training and testing sets
+from sklearn.model_selection import train_test_split
+
+# Split the data into training and testing sets
+train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size = 0.25, random_state = 42)
+
+print('Training Features Shape:', train_features.shape)
+print('Training Labels Shape:', train_labels.shape)
+print('Testing Features Shape:', test_features.shape)
+print('Testing Labels Shape:', test_labels.shape)
+
+#%% Base line
+# The baseline predictions are the historical averages
+baseline_preds = test_features[:, feature_list.index('average')]
+
+# Baseline errors, and display average baseline error
+baseline_errors = abs(baseline_preds - test_labels)
+
+print('Average baseline error: ', round(np.mean(baseline_errors), 2))
+
+#%% Training data
+
+# Import the model we are using
+from sklearn.ensemble import RandomForestRegressor
+
+# Instantiate model with 1000 decision trees
+rf = RandomForestRegressor(n_estimators = 1000, random_state = 42)
+
+# Train the model on training data
+rf.fit(train_features, train_labels);
+
+#%% Making predictions
+# Use the forest's predict method on the test data
+predictions = rf.predict(test_features)
+
+# Calculate the absolute errors
+errors = abs(predictions - test_labels)
+
+# Print out the mean absolute error (mae)
+print('Mean Absolute Error:', round(np.mean(errors), 2), 'degrees.')
+
+#%% Performance metrics
+# Calculate mean absolute percentage error (MAPE)
+mape = 100 * (errors / test_labels)
+
+# Calculate and display accuracy
+accuracy = 100 - np.mean(mape)
+print('Accuracy:', round(accuracy, 2), '%.')
+
+#%% Vizualizing One Tree Decision
+# Import tools needed for visualization
+from sklearn.tree import export_graphviz
+import pydot
+
+# Pull out one tree from the forest
+tree = rf.estimators_[5]
+
+export_graphviz(tree, out_file = 'tree.dot', feature_names = feature_list, rounded = True, precision = 1)
+
+# Use dot file to create a graph
+(graph, ) = pydot.graph_from_dot_file('tree.dot')
+
+# Write graph to a png file
+graph.write_png('tree.png')
