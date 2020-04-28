@@ -14,6 +14,8 @@ import pandas as pd
 import datetime as dt
 import matplotlib.pyplot as plt
 
+# Identify Anomalies
+
 path = 'G:/Meu Drive/UFAL/2020.1/Aprendizado de Máquina/Databases/temps.csv'
 
 features = pd.read_csv(path)
@@ -33,7 +35,7 @@ new_features = [dt.datetime.strptime(new_feature, '%Y/%m/%d')
 
 plt.style.use('fivethirtyeight')
 
-#%%
+#%% Identify Anomalies
 
 # Set up the plotting layout
 fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(nrows=2, ncols=2, figsize = (15,10))
@@ -132,17 +134,123 @@ accuracy = 100 - np.mean(mape)
 print('Accuracy:', round(accuracy, 2), '%.')
 
 #%% Vizualizing One Tree Decision
-# Import tools needed for visualization
 from sklearn.tree import export_graphviz
 import pydot
 
 # Pull out one tree from the forest
 tree = rf.estimators_[5]
 
-export_graphviz(tree, out_file = 'tree.dot', feature_names = feature_list, rounded = True, precision = 1)
+# Export the image to a dot file
+export_graphviz(tree, out_file = 'tree.dot', 
+                feature_names = feature_list, 
+                rounded = True, precision = 1)
 
 # Use dot file to create a graph
-(graph, ) = pydot.graph_from_dot_file('tree.dot')
+(graph,) = pydot.graph_from_dot_file('tree.dot')
 
-# Write graph to a png file
-graph.write_png('tree.png')
+#%%
+print('The depth of this tree is:', tree.tree_.max_depth)
+
+#%% Small vizualization
+
+# Limit depth of tree to 2 levels
+rf_small = RandomForestRegressor(n_estimators=10, max_depth = 3, random_state=42)
+rf_small.fit(train_features, train_labels)
+
+# Extract the small tree
+tree_small = rf_small.estimators_[5]
+
+# Save the tree as a png image
+export_graphviz(tree_small, out_file = 'small_tree.dot', feature_names = feature_list, rounded = True, precision = 1)
+
+(graph, ) = pydot.graph_from_dot_file('small_tree.dot')
+
+#%% Variables importances
+# Get numerical feature importances
+importances = list(rf.feature_importances_)
+
+# List of tuples with variable and importance
+feature_importances = [(feature, round(importance, 2)) for feature, importance in zip(feature_list, importances)]
+
+# Sort the feature importances by most important first
+feature_importances = sorted(feature_importances, key = lambda x: x[1], reverse = True)
+
+# Print out the feature and importances 
+[print('Variable: {:20} Importance: {}'.format(*pair)) for pair in feature_importances];
+
+#%% Model with Two Most Important Features
+rf_most_important = RandomForestRegressor(n_estimators= 1000, random_state=42)
+
+# Extract the two most important features
+important_indices = [feature_list.index('temp_1'), feature_list.index('average')]
+train_important = train_features[:, important_indices]
+test_important = test_features[:, important_indices]
+
+# Train the random forest
+rf_most_important.fit(train_important, train_labels)
+
+# Make predictions and determine the error
+predictions = rf_most_important.predict(test_important)
+
+errors = abs(predictions - test_labels)
+
+# Display the performance metrics
+print('Mean Absolute Error:', round(np.mean(errors), 2), 'degrees.')
+
+mape = np.mean(100 * (errors / test_labels))
+accuracy = 100 - mape
+
+print('Accuracy: %.2f' %(accuracy), '%.')
+
+#%% Variable Importances
+# list of x locations for plotting
+x_values = list(range(len(importances)))
+
+# Make a bar chart
+plt.bar(x_values, importances, orientation = 'vertical')
+
+# Tick labels for x axis
+plt.xticks(x_values, feature_list, rotation='vertical')
+
+# Axis labels and title
+plt.ylabel('Importance'); plt.xlabel('Variable'); plt.title('Variable Importances');
+
+#%% Predictions and Actual Values
+# Dates of training values
+months = features[:, feature_list.index('month')]
+days = features[:, feature_list.index('day')]
+years = features[:, feature_list.index('year')]
+
+# List and then convert to datetime object
+dates = [str(int(year)) + '-' + str(int(month)) + '-' + str(int(day)) for year, month, day in zip(years, months, days)]
+dates = [dt.datetime.strptime(date, '%Y-%m-%d') for date in dates]
+
+# Dataframe with true values and dates
+true_data = pd.DataFrame(data = {'date': dates, 'actual': labels})
+
+# Dates of predictions
+months = test_features[:, feature_list.index('month')]
+days = test_features[:, feature_list.index('day')]
+years = test_features[:, feature_list.index('year')]
+
+# Column of dates
+test_dates = [str(int(year)) + '-' + str(int(month)) + '-' + str(int(day)) for year, month, day in zip(years, months, days)]
+
+# Convert to datetime objects
+test_dates = [dt.datetime.strptime(date, '%Y-%m-%d') for date in test_dates]
+
+# Dataframe with predictions and dates
+predictions_data = pd.DataFrame(data = {'date': test_dates, 'prediction': predictions})
+
+#%% Visualizations
+plt.plot(true_data['date'], true_data['actual'], 'b-', label = 'actual')
+
+# Plot the predicted values
+plt.plot(predictions_data['date'], predictions_data['prediction'], 'ro', label = 'prediction')
+plt.xticks(rotation = '60'); 
+plt.legend()
+
+# Graph labels
+plt.xlabel('Date'); 
+plt.ylabel('Maximum Temperature (F)'); 
+plt.title('Actual and Predicted Values');
