@@ -60,7 +60,8 @@ features_al['NT_DIS_CE'] = features_al['NT_DIS_CE'].astype(float)
 
 #%% Trocando nan pela mediana
 
-for idx in range()
+for idx in range(0,8,2):
+    print('Substituir a mediana')
 
 #%%
 features_al['NT_FG'] = features_al['NT_FG'].fillna(features_al['NT_FG'].median())
