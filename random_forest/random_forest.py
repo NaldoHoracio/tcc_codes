@@ -14,7 +14,7 @@ import pandas as pd
 import datetime as dt
 import matplotlib.pyplot as plt
 
-# IDENTIFY ANOMALIES / MISSING DATA
+# PREPRANDO OS DADOS
 
 path_al = 'G:/Meu Drive/UFAL/TCC/CODES/tcc_codes/tcc_data/AL_data.csv'
 
@@ -78,19 +78,26 @@ features_al = pd.get_dummies(data=features_al, columns=['QE_I01','QE_I02','QE_I0
                                                         'QE_I17','QE_I18','QE_I19','QE_I20',
                                                         'QE_I21','QE_I22','QE_I23','QE_I24',
                                                         'QE_I25','QE_I26'])
-#%% Convertendo os dados para arrays
-labels_to_predict = np.array(features_al.loc[:,'NT_GER':'NT_CE_D3'])
+#%% Convertendo os labels de predição para arrays numpy
+#labels_to_predict = np.array(features_al.loc[:,'NT_GER':'NT_CE_D3'])
+labels_to_predict = np.array(features_al['NT_GER'])
+print('Media das labels: %.2f' %(labels_to_predict.mean()) )
 #%%
-# Removendo as features que serão preditas
+# Removendo as features de notas
 features_al = features_al.drop(['NT_GER','NT_FG','NT_OBJ_FG','NT_DIS_FG',
                                'NT_FG_D1','NT_FG_D1_PT','NT_FG_D1_CT',
                                'NT_FG_D2','NT_FG_D2_PT','NT_FG_D2_CT',
                                'NT_CE','NT_OBJ_CE','NT_DIS_CE',
                                'NT_CE_D1','NT_CE_D2','NT_CE_D3'], axis = 1)
-#%% Salvando os nomes das colunas com os dados para uso posterior
-features_al_predict_list = list(features_al.columns)
+#%% Salvando e convertendo
+# Salvando os nomes das colunas (features) com os dados para uso posterior
+features_al_list = list(features_al.columns)
 
-#%% Conjunto de Treino e de Teste
+# Convertendo para numpy
+features_al = np.array(features_al)
+
+#%% DIVIDINDO OS DADOS EM TREINO E TESTE
+# Conjunto de Treino e de Teste
 from sklearn.model_selection import train_test_split
 
 train_features_al, test_features_al, train_labels_to_predict_al, test_labels_to_predict_al = train_test_split(features_al, 
@@ -103,3 +110,34 @@ print('Forma dos valores preditos de Treino (train labels): ', train_labels_to_p
 print('Forma dos recursos de Teste (test features):', test_features_al.shape)
 print('Forma dos valores preditos de Teste (test labels): ', test_labels_to_predict_al.shape)
 
+#%% Estabelecendo a Baseline de erro
+baseline_preds_al = train_labels_to_predict_al
+
+baseline_err_al = abs(baseline_preds_al.mean() - test_labels_to_predict_al.mean())
+
+print('Erro medio da Baseline: %.2f ' %(baseline_err_al), 'any units')
+
+#%% TREINANDO O MODELO
+from sklearn.ensemble import RandomForestRegressor
+
+# Instanciando o modelo
+rf_al = RandomForestRegressor(n_estimators = 1000, random_state = 42)
+
+# Treinando os modelos com os dados de treinamento
+rf_al.fit(train_features_al, train_labels_to_predict_al)
+
+#%% TESTANDO O MODELO
+# Usando o RF nos dados
+predictions_al = rf_al.predict(test_features_al)
+
+# Calculando os erros
+errors_al = abs(predictions_al - test_labels_to_predict_al)
+
+print('Erro absoluto medio: %.2f' %(np.mean(errors_al)), 'any units')
+
+#%% Acurácia
+# Percentual do erro medio absoluto
+
+# Calculando a acurácia
+#accuracy_al = 100 - np.mean(mape_al)
+#print('Acurácia AL: %.2f' %(accuracy_al), '%')
