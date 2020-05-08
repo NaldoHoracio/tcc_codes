@@ -105,7 +105,7 @@ from sklearn.model_selection import train_test_split
 train_features_al, test_features_al, train_labels_al, test_labels_al = train_test_split(features_al, 
                                                                          labels_to_predict, 
                                                                          test_size = 0.25, 
-                                                                         random_state=42)
+                                                                         random_state = 0)
 #%% Forma dos recursos de Treino e Teste
 print('Forma (recursos de treino): ', train_features_al.shape)
 print('Forma (valores-alvo de treino): ', train_labels_al.shape)
@@ -117,7 +117,7 @@ print('Forma (valores-alvo de teste): ', test_labels_al.shape)
 from sklearn.ensemble import RandomForestRegressor
 
 # Instanciando o modelo
-rf_al = RandomForestRegressor(n_estimators = 500, random_state = 42)
+rf_al = RandomForestRegressor(n_estimators = 1000, random_state = 0)
 
 # Treinando os modelos com os dados de treinamento
 rf_al.fit(train_features_al, train_labels_al)
@@ -128,7 +128,7 @@ predictions_al = rf_al.predict(test_features_al)
 
 print('Min: %.2f' %(np.min(predictions_al)))
 print('Max: %.2f' %(np.max(predictions_al)))
-print('Media: ', round(np.mean(predictions_al),2))
+print('Media: ', round(np.mean(predictions_al), 2))
 
 # Calculando os erros
 errors_al = abs(predictions_al - test_labels_al)
@@ -136,10 +136,8 @@ errors_al = abs(predictions_al - test_labels_al)
 print('Erro absoluto medio: %.2f' %(np.mean(errors_al)), 'u.m.')
 
 #%% Acurácia
-# Percentual do erro medio absoluto
-#mape_al = (errors_al/test_labels_al) * 100
+from sklearn.metrics import mean_squared_error
 
-# Calculando a acurácia
-# accuracy_al = 100 - np.mean(mape_al)
+accuracy_al = 100 - mean_squared_error(test_labels_al, predictions_al)
 
-#print('Acurácia AL: %.2f' %(accuracy_al), '%')
+print('Accuracy: ', round(accuracy_al, 2), '%.')

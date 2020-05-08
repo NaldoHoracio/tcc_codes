@@ -40,7 +40,7 @@ features = np.array(features)
 # Using Skicit-learn to split data into training and testing sets
 from sklearn.model_selection import train_test_split
 # Split the data into training and testing sets
-train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size = 0.25, random_state = 42)
+train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size = 0.33, random_state = 0)
 print('Training Features Shape:', train_features.shape)
 print('Training Labels Shape:', train_labels.shape)
 print('Testing Features Shape:', test_features.shape)
@@ -70,6 +70,13 @@ errors = abs(predictions - test_labels)
 print('Mean Absolute Error:', round(np.mean(errors), 2), 'degrees.')
 
 #%% Metrics performance
+from sklearn.metrics import mean_absolute_error
+
+accuracy = 100 - mean_absolute_error(test_labels, predictions)
+
+print('Accuracy: ', round(accuracy, 2), '%.')
+
+#%% MAPE
 # Calculate mean absolute percentage error (MAPE)
 mape = 100 * (errors / test_labels)
 # Calculate and display accuracy
