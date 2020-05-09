@@ -91,6 +91,7 @@ for train_index, test_index in kf_cv.split(features):
 #%% Scores
 importance_fields_t = importance_fields/12
 print('Accuracy: ', round(np.mean(scores), 2), '%.')
+
 print('Total: ', round(np.sum(importance_fields_t),2))
 
 #%% Variable importances
@@ -103,30 +104,37 @@ feature_importances = [(feature, round(importance, 8)) for feature, importance i
 # Print out the feature and importances
 [print('Variable: {:20} Importance: {}'.format(*pair)) for pair in feature_importances];
 
-#%% Convert list tuple in dataframe
-df_importance = pd.DataFrame(feature_importances)
-
-sum_day = df_importance.iloc[10:17,-1].sum()
-
-#%% Excluindo as linhas
-df_importance = df_importance.loc[0:9,:]
-
-#%%
-pd_day = [pd.Series(['day', sum_day])]
-
-df_importance = df_importance.append(pd_day, ignore_index=True)
 #%% Visualization of Variable Importances
 import matplotlib.pyplot as plt
+
+year_to_temp1 = importance_fields_t[0:5]
+average_to_friend = importance_fields_t[5:10]
+fri_to_wed = importance_fields_t[10:17]
+
+# year to temp1
+fig1 = plt.figure()
+ax = fig1.add_axes([0,0,1,1])
+x1 = ['year', 'month', 'day', 'temp_2', 'temp_1']
+y1 = [year_to_temp1[0],year_to_temp1[1],year_to_temp1[2],year_to_temp1[3],year_to_temp1[4]]
+ax.bar(x1,y1)
+plt.ylabel('Importance'); 
+plt.xlabel('Variable'); 
+plt.savefig('VI_P1.png', dpi=450, bbox_inches='tight');
+
+#%%
+import matplotlib.pyplot as plt
+
 # list of x locations for plotting
 x_values = list(range(len(importance_fields_t)))
 
 # Make a bar chart
-plt.bar(x_values, df_importance.iloc[:,-1], orientation = 'vertical')
+plt.bar(x_values, importance_fields_t, orientation = 'vertical')
 
 # Tick labels for x axis
-plt.xticks(x_values, feature_list, rotation='vertical')
+plt.xticks(x_values, feature_list_get_dummies, rotation='vertical')
 
 # Axis labels and title
 plt.ylabel('Importance'); 
 plt.xlabel('Variable'); 
 plt.title('Variable Importances');
+plt.savefig('VI.png', dpi=450, bbox_inches='tight')
