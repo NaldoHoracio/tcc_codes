@@ -23,7 +23,7 @@ features_al = pd.read_csv(path_al)
 del features_al['Unnamed: 0']
 
 
-# Choosing only the columns of interest
+# Escolhendo apenas as colunas de interesse
 features_al = features_al.loc[:,'NT_GER':'QE_I26']
 features_al = features_al.drop(features_al.loc[:, 'CO_RS_I1':'CO_RS_I9'].columns, axis=1)
 
@@ -82,8 +82,8 @@ features_al = pd.get_dummies(data=features_al, columns=['QE_I01','QE_I02','QE_I0
                                                         'QE_I25','QE_I26'])
 #%% Convertendo os labels de predição para arrays numpy
 #labels_to_predict = np.array(features_al.loc[:,'NT_GER':'NT_CE_D3'])
-labels_to_predict = np.array(features_al['NT_GER'])
-print('Media das labels: %.2f' %(labels_to_predict.mean()) )
+labels_al = np.array(features_al['NT_GER'])
+print('Media das labels: %.2f' %(labels_al.mean()) )
 #%%
 # Removendo as features de notas
 features_al = features_al.drop(['NT_GER','NT_FG','NT_OBJ_FG','NT_DIS_FG',
@@ -98,46 +98,42 @@ features_al_list = list(features_al.columns)
 # Convertendo para numpy
 features_al = np.array(features_al)
 
-#%% DIVIDINDO OS DADOS EM TREINO E TESTE
-# Conjunto de Treino e de Teste
-from sklearn.model_selection import train_test_split
-
-train_features_al, test_features_al, train_labels_al, test_labels_al = train_test_split(features_al, 
-                                                                         labels_to_predict, 
-                                                                         test_size = 0.25, 
-                                                                         random_state = 0)
-#%% Forma dos recursos de Treino e Teste
-print('Forma (recursos de treino): ', train_features_al.shape)
-print('Forma (valores-alvo de treino): ', train_labels_al.shape)
-print('Forma (recursos de teste):', test_features_al.shape)
-print('Forma (valores-alvo de teste): ', test_labels_al.shape)
-
-
-#%% TREINANDO O MODELO
+#%% K-Fold CV
+from sklearn.metrics import mean_absolute_error
+from sklearn.model_selection import KFold
 from sklearn.ensemble import RandomForestRegressor
 
-# Instanciando o modelo
-rf_al = RandomForestRegressor(n_estimators = 1000, random_state = 0)
+scores_al = []
 
-# Treinando os modelos com os dados de treinamento
-rf_al.fit(train_features_al, train_labels_al)
+rf_al = RandomForestRegressor(n_estimators = 500, random_state=0)
 
-#%% TESTANDO O MODELO
-# Usando o RF nos dados
-predictions_al = rf_al.predict(test_features_al)
+kf_cv_al = KFold(n_splits=46, random_state=None, shuffle=False) # n_splits: divisores de 7084 ^ memory
 
-print('Min: %.2f' %(np.min(predictions_al)))
-print('Max: %.2f' %(np.max(predictions_al)))
-print('Media: ', round(np.mean(predictions_al), 2))
+for train_index_al, test_index_al in kf_cv_al.split(features_al):
+    #print("Train index: ", np.min(train_index_al), '- ', np.max(train_index_al))
+    print("Test index: ", np.min(test_index_al), '-', np.max(test_index_al))
+    
+    # Dividindo nas features e labels
+    train_features_al = features_al[train_index_al]
+    test_features_al = features_al[test_index_al]
+    train_labels_al = labels_al[train_index_al]
+    test_labels_al = labels_al[test_index_al]
+    
+    # Ajustando cada features e label com RF
+    rf_al.fit(train_features_al, train_labels_al)
+    
+    # Usando o Random Forest para predição dos dados
+    predictions_al = rf_al.predict(test_features_al)
+    
+    # Erro
+    errors_al = abs(predictions_al - test_labels_al)
+    
+    # Acurácia
+    accuracy_al = 100 - mean_absolute_error(test_labels_al, predictions_al)
+    
+    # Append em cada valor médio
+    scores_al.append(accuracy_al)
 
-# Calculando os erros
-errors_al = abs(predictions_al - test_labels_al)
-
-print('Erro absoluto medio: %.2f' %(np.mean(errors_al)), 'u.m.')
-
-#%% Acurácia
-from sklearn.metrics import mean_squared_error
-
-accuracy_al = 100 - mean_squared_error(test_labels_al, predictions_al)
-
-print('Accuracy: ', round(accuracy_al, 2), '%.')
+#%% Acurácia AL
+    
+print('Accuracy: ', round(np.average(scores_al), 2), "%.")

@@ -9,11 +9,14 @@ Created on Fri May  1 21:56:32 2020
 # Pandas is used for data manipulation
 import pandas as pd
 
+
 path = 'G:/Meu Drive/UFAL/TCC/CODES/tcc_codes/random_forest/temps.csv'
 
 # Read in data as pandas dataframe and display first 5 rows
 features = pd.read_csv(path)
 
+# Saving feature names for later use
+feature_list = list(features.columns)
 #%%
 # One-hot encode categorical features
 features = pd.get_dummies(features)
@@ -29,56 +32,101 @@ labels = np.array(features['actual'])
 
 # Remove the labels from the features
 # axis 1 refers to the columns
-features= features.drop('actual', axis = 1)
+features = features.drop('actual', axis = 1)
 
 # Saving feature names for later use
-feature_list = list(features.columns)
+feature_list_get_dummies = list(features.columns)
 
 # Convert to numpy array
 features = np.array(features)
-#%%
-# Using Skicit-learn to split data into training and testing sets
-from sklearn.model_selection import train_test_split
-# Split the data into training and testing sets
-train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size = 0.33, random_state = 0)
-print('Training Features Shape:', train_features.shape)
-print('Training Labels Shape:', train_labels.shape)
-print('Testing Features Shape:', test_features.shape)
-print('Testing Labels Shape:', test_labels.shape)
 
-#%% Baseline error
-# The baseline predictions are the historical averages
-baseline_preds = test_features[:, feature_list.index('average')]
-# Baseline errors, and display average baseline error
-baseline_errors = abs(baseline_preds - test_labels)
-print('Average baseline error: ', round(np.mean(baseline_errors), 2))
-
-#%% Train model
+#%% K-Fold CV
 # Import the model we are using
+from sklearn.metrics import mean_absolute_error
+from sklearn.model_selection import KFold
 from sklearn.ensemble import RandomForestRegressor
 # Instantiate model with 1000 decision trees
-rf = RandomForestRegressor(n_estimators = 1000, random_state = 42)
-# Train the model on training data
-rf.fit(train_features, train_labels);
 
-#%% Make predictions
-# Use the forest's predict method on the test data
-predictions = rf.predict(test_features)
-# Calculate the absolute errors
-errors = abs(predictions - test_labels)
-# Print out the mean absolute error (mae)
-print('Mean Absolute Error:', round(np.mean(errors), 2), 'degrees.')
+scores = []
 
-#%% Metrics performance
-from sklearn.metrics import mean_absolute_error
+importance_fields = 0.0
+importance_fields_aux = []
 
-accuracy = 100 - mean_absolute_error(test_labels, predictions)
+# Instance RF
+rf = RandomForestRegressor(n_estimators=500, random_state = 0)
 
-print('Accuracy: ', round(accuracy, 2), '%.')
+kf_cv = KFold(n_splits=12, random_state=None, shuffle=False)
 
-#%% MAPE
-# Calculate mean absolute percentage error (MAPE)
-mape = 100 * (errors / test_labels)
-# Calculate and display accuracy
-accuracy = 100 - np.mean(mape)
-print('Accuracy:', round(accuracy, 2), '%.')
+for train_index, test_index in kf_cv.split(features):
+    #print("Train index: ", np.min(train_index), '- ', np.max(train_index))
+    print("Test index: ", np.min(test_index), '-', np.max(test_index))
+    
+    train_features = features[train_index]
+    test_features = features[test_index]
+    train_labels = labels[train_index]
+    test_labels = labels[test_index]
+    
+    rf.fit(train_features, train_labels)
+    
+    # Use the forest's predict method on the test data
+    predictions = rf.predict(test_features)
+    
+    # Erro
+    errors = abs(predictions - test_labels)
+    
+    # Accuracy
+    accuracy = 100 - mean_absolute_error(test_labels, predictions)
+    
+    #print('Fields: ', importance_fields)
+    
+    # Variable importances
+    importance_fields_aux = rf.feature_importances_
+    importance_fields += importance_fields_aux
+    
+    #print('Fields aux: ', importance_fields_aux)
+    
+    # Append
+    scores.append(accuracy)
+
+#%% Scores
+importance_fields_t = importance_fields/12
+print('Accuracy: ', round(np.mean(scores), 2), '%.')
+print('Total: ', round(np.sum(importance_fields_t),2))
+
+#%% Variable importances
+# List of tuples with variable and importance
+feature_importances = [(feature, round(importance, 8)) for feature, importance in zip(feature_list_get_dummies, importance_fields_t)]
+
+# Sort the feature importances by most important first
+# feature_importances = sorted(feature_importances, key = lambda x: x[1], reverse = True)
+
+# Print out the feature and importances
+[print('Variable: {:20} Importance: {}'.format(*pair)) for pair in feature_importances];
+
+#%% Convert list tuple in dataframe
+df_importance = pd.DataFrame(feature_importances)
+
+sum_day = df_importance.iloc[10:17,-1].sum()
+
+#%% Excluindo as linhas
+df_importance = df_importance.loc[0:9,:]
+
+#%%
+pd_day = [pd.Series(['day', sum_day])]
+
+df_importance = df_importance.append(pd_day, ignore_index=True)
+#%% Visualization of Variable Importances
+import matplotlib.pyplot as plt
+# list of x locations for plotting
+x_values = list(range(len(importance_fields_t)))
+
+# Make a bar chart
+plt.bar(x_values, df_importance.iloc[:,-1], orientation = 'vertical')
+
+# Tick labels for x axis
+plt.xticks(x_values, feature_list, rotation='vertical')
+
+# Axis labels and title
+plt.ylabel('Importance'); 
+plt.xlabel('Variable'); 
+plt.title('Variable Importances');
