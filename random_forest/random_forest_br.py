@@ -58,12 +58,15 @@ features_br['NT_OBJ_FG'] = features_br['NT_OBJ_FG'].astype(float)
 features_br['NT_DIS_FG'] = features_br['NT_DIS_FG'].str.replace(',','.')
 features_br['NT_DIS_FG'] = features_br['NT_DIS_FG'].astype(float)
 
+# NT_CE
 features_br['NT_CE'] = features_br['NT_CE'].str.replace(',','.')
 features_br['NT_CE'] = features_br['NT_CE'].astype(float)
 
+# NT_OBJ_CE
 features_br['NT_OBJ_CE'] = features_br['NT_OBJ_CE'].str.replace(',','.')
 features_br['NT_OBJ_CE'] = features_br['NT_OBJ_CE'].astype(float)
 
+# NT_DIS_CE
 features_br['NT_DIS_CE'] = features_br['NT_DIS_CE'].str.replace(',','.')
 features_br['NT_DIS_CE'] = features_br['NT_DIS_CE'].astype(float)
 #%% Substituindo valores nan pela mediana (medida resistente) e 0 por 1
@@ -195,17 +198,17 @@ I11_BR = importance_fields_br_t[58:69]; I12_BR = importance_fields_br_t[69:75];
 
 I13_BR = importance_fields_br_t[75:81]; I14_BR = importance_fields_br_t[81:87]; 
 
-I15_BR = importance_fields_br_t[87:93]; I16_BR = importance_fields_br_t[93:94]; 
+I15_BR = importance_fields_br_t[87:93]; I16_BR = importance_fields_br_t[93:120]; 
 
-I17_BR = importance_fields_br_t[94:100]; I18_BR = importance_fields_br_t[100:105]; 
+I17_BR = importance_fields_br_t[120:126]; I18_BR = importance_fields_br_t[126:131]; 
 
-I19_BR = importance_fields_br_t[105:112]; I20_BR = importance_fields_br_t[112:123]; 
+I19_BR = importance_fields_br_t[131:138]; I20_BR = importance_fields_br_t[138:149]; 
 
-I21_BR = importance_fields_br_t[123:125]; I22_BR = importance_fields_br_t[125:130]; 
+I21_BR = importance_fields_br_t[149:151]; I22_BR = importance_fields_br_t[151:156]; 
 
-I23_BR = importance_fields_br_t[130:135]; I24_BR = importance_fields_br_t[135:140];
+I23_BR = importance_fields_br_t[156:161]; I24_BR = importance_fields_br_t[161:166];
 
-I25_BR = importance_fields_br_t[140:148]; I26_BR = importance_fields_br_t[148:157];
+I25_BR = importance_fields_br_t[166:174]; I26_BR = importance_fields_br_t[174:183];
 
 
 
@@ -422,8 +425,12 @@ plt.savefig('QE_I15_BR.png', dpi=450, bbox_inches='tight');
 # QE_I16
 fig16 = plt.figure();
 ax16 = fig16.add_axes([0,0,1,1]);
-x16 = ['BR'];
-y16 = [I16_BR[0]];
+x16 = ['RO','AC','AM','RR','PA','AP','TO','MA','PI','CE','RN','PB','PE',
+       'SE','BA','MG','ES','RJ','SP','PR','SC','RS','MS','MT','GO','DF','Outro'];
+y16 = [I16_BR[0],I16_BR[1],I16_BR[2],I16_BR[3],I16_BR[4],I16_BR[5],I16_BR[6],I16_BR[7],
+       I16_BR[8],I16_BR[9],I16_BR[10],I16_BR[11],I16_BR[12],I16_BR[13],I16_BR[14],I16_BR[15],
+       I16_BR[16],I16_BR[17],I16_BR[18],I16_BR[19],I16_BR[20],I16_BR[21],I16_BR[22],I16_BR[23],
+       I16_BR[24],I16_BR[25],I16_BR[26]];
 ax16.bar(x16,y16);
 plt.ylabel('Importance'); 
 plt.xlabel('Variable');
@@ -568,18 +575,4 @@ plt.ylabel('Importance');
 plt.xlabel('Variable');
 plt.title('Porque escolhi essa IES');
 plt.savefig('QE_I26_BR.png', dpi=450, bbox_inches='tight');
-#%%
-# list of x locations for plotting
-x_values = list(range(len(importance_fields_br_t)));
 
-# Make a bar chart
-plt.bar(x_values, importance_fields_br_t, orientation = 'vertical');
-
-# Tick labels for x axis
-plt.xticks(x_values, features_br_list_oh, rotation='vertical');
-
-# Axis labels and title
-plt.ylabel('Importance'); 
-plt.xlabel('Variable'); 
-plt.title('Variable Importances');
-plt.savefig('VI_BR.png', dpi=450, bbox_inches='tight')
