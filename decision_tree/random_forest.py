@@ -200,7 +200,7 @@ I23_AL = importance_fields_al_t[130:135]; I24_AL = importance_fields_al_t[135:14
 
 I25_AL = importance_fields_al_t[140:148]; I26_AL = importance_fields_al_t[148:157];
 
-print('I01_AL: ', round(np.sum(I01_AL), 2))
+
 
 #%% Visualization of Variable Importances
 # QE_I01
@@ -561,79 +561,18 @@ plt.ylabel('Importance');
 plt.xlabel('Variable');
 plt.title('Porque escolhi essa IES');
 plt.savefig('QE_I26_AL.png', dpi=450, bbox_inches='tight');
-#%% Plotando as 26 variáveis
-
-# Cria multiplos plots
-fig27, axes27 = plt.subplots(2, 2, fontsize = 8,constrained_layout = True)
-
-ax27a = ['QE_I01_AL', 'QE_I02_AL', 'QE_I03_AL', 'QE_I04_AL', 'QE_I05_AL', 'QE_I06_AL']
-ax27b = ['QE_I07_AL', 'QE_I08_AL', 'QE_I09_AL', 'QE_I10_AL', 'QE_I11_AL', 'QE_I12_AL', 
-        'QE_I13_AL']
-ax27c = ['QE_I14_AL', 'QE_I15_AL', 'QE_I16_AL', 'QE_I17_AL', 'QE_I18_AL', 'QE_I19_AL']
-ax27d = ['QE_I20_AL', 'QE_I21_AL', 'QE_I22_AL', 'QE_I23_AL', 'QE_I24_AL', 'QE_I25_AL', 
-        'QE_I26_AL']
-
-ay27a = [np.sum(I01_AL), np.sum(I02_AL), np.sum(I03_AL), np.sum(I04_AL), np.sum(I05_AL), 
-         np.sum(I06_AL)]
-ay27b = [np.sum(I07_AL), np.sum(I08_AL), np.sum(I09_AL), np.sum(I10_AL), 
-         np.sum(I11_AL), np.sum(I12_AL), np.sum(I13_AL)]
-ay27c = [np.sum(I14_AL), np.sum(I15_AL), np.sum(I16_AL), np.sum(I17_AL), np.sum(I18_AL), 
-         np.sum(I19_AL)]
-ay27d = [np.sum(I20_AL), np.sum(I21_AL), np.sum(I22_AL), np.sum(I23_AL), 
-         np.sum(I24_AL), np.sum(I25_AL), np.sum(I26_AL)]
-
-# plt.subplots - 00
-axes27[0][0].bar(ax27a, ay27a);
-# axes27[0].set_title('subplot 1');
-# axes27[0][0].set_xlabel('Variable');
-axes27[0][0].set_ylabel('Importance');
-
-# plt.subplots - 01
-axes27[0][1].bar(ax27b, ay27b)
-# axes27[1].set_title('subplot 2');
-# axes27[0][1].set_xlabel('Variable');
-axes27[0][1].set_ylabel('Importance');
-
-# plt.subplots - 10
-axes27[1][0].bar(ax27c, ay27c)
-# axes27[1].set_title('subplot 2');
-# axes27[1][0].set_xlabel('Variable');
-axes27[1][0].set_ylabel('Importance'); 
-
-# plt.subplots - 11
-axes27[1][1].bar(ax27d, ay27d)
-# axes27[1].set_title('subplot 2');
-# axes27[1][1].set_xlabel('Variable');
-axes27[1][1].set_ylabel('Importance');
-
-plt.savefig('AL.png', dpi=450, bbox_inches='tight');
-plt.show()
-
 #%%
-# GENERAL AL
-import numpy as np
-import matplotlib.pyplot as plt
+# list of x locations for plotting
+x_values = list(range(len(importance_fields_al_t)));
 
-# create multiple plots via plt.subplots(rows,columns)
-fig, axes = plt.subplots(2, 1, constrained_layout=True)
+# Make a bar chart
+plt.bar(x_values, importance_fields_al_t, orientation = 'vertical');
 
-# just plot things on each individual axes
-x1 = ['Var 1','Var 2', 'Var 3']
-x2 = ['Var 4', 'Var 5', 'Var 6']
-y1 = [0.23, 0.5, 0.88]
-y2 = [1, 5, 6]
+# Tick labels for x axis
+plt.xticks(x_values, features_al_list_oh, rotation='vertical');
 
-#plt.subplot(2, 1, 2)
-axes[0].bar(x1,y1)
-axes[0].set_title('subplot 1');
-axes[0].set_title('Sub 1 1')
-axes[0].set_xlabel('x value');
-axes[0].set_ylabel('t value'); 
-
-#plt.subplot(2, 2, 2)
-axes[1].bar(x2,y2)
-axes[1].set_title('subplot 2');
-axes[1].set_xlabel('x value');
-axes[1].set_ylabel('y value'); 
-
-plt.show()
+# Axis labels and title
+plt.ylabel('Importance'); 
+plt.xlabel('Variable'); 
+plt.title('Variable Importances');
+plt.savefig('VI_AL.png', dpi=450, bbox_inches='tight')
