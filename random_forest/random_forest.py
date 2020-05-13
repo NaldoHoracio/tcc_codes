@@ -123,7 +123,7 @@ scores_al = []
 importance_fields_al = 0.0
 importance_fields_aux_al = []
 
-rf_al = RandomForestRegressor(n_estimators = 500, random_state=0)
+rf_al = RandomForestRegressor(n_estimators = 1000, random_state=0)
 
 kf_cv_al = KFold(n_splits=11, random_state=None, shuffle=False) # n_splits: divisores de 7084 ^ memory
 
@@ -503,7 +503,7 @@ y22 = [I22_AL[0],I22_AL[1],I22_AL[2],I22_AL[3],I22_AL[4]];
 ax22.bar(x22,y22);
 plt.ylabel('Importance'); 
 plt.xlabel('Variable');
-plt.title('Livros lido no ano (excluindo da Biografia do curso');
+plt.title('Livros lido no ano (excluindo da Biografia do curso)');
 plt.savefig('QE_I22_AL.png', dpi=450, bbox_inches='tight');
 
 #%%
@@ -555,85 +555,42 @@ x26 = ['Gratuidade', 'Preço da mensalidade', 'Prox. a residência', 'Prox. ao t
        'Facilidade de acesso', 'Qualidade/reputação', 'Única opção de aprovação',
        'Possibilidade de bolsa de estudo', 'Outro motivo'];
 y26 = [I26_AL[0],I26_AL[1],I26_AL[2],I26_AL[3],I26_AL[4],I26_AL[5],I26_AL[6],I26_AL[7],I26_AL[8]];
-ax26.bar(x26,y26);
+ax26.bar(x26, y26);
 plt.xticks(x26,rotation=90,fontsize=8);
 plt.ylabel('Importance'); 
 plt.xlabel('Variable');
 plt.title('Porque escolhi essa IES');
 plt.savefig('QE_I26_AL.png', dpi=450, bbox_inches='tight');
-#%% Plotando as 26 variáveis
-
+#%% Plotando as 13 variáveis
 # Cria multiplos plots
-fig27, axes27 = plt.subplots(2, 2, fontsize = 8,constrained_layout = True)
-
-ax27a = ['QE_I01_AL', 'QE_I02_AL', 'QE_I03_AL', 'QE_I04_AL', 'QE_I05_AL', 'QE_I06_AL']
-ax27b = ['QE_I07_AL', 'QE_I08_AL', 'QE_I09_AL', 'QE_I10_AL', 'QE_I11_AL', 'QE_I12_AL', 
-        'QE_I13_AL']
-ax27c = ['QE_I14_AL', 'QE_I15_AL', 'QE_I16_AL', 'QE_I17_AL', 'QE_I18_AL', 'QE_I19_AL']
-ax27d = ['QE_I20_AL', 'QE_I21_AL', 'QE_I22_AL', 'QE_I23_AL', 'QE_I24_AL', 'QE_I25_AL', 
-        'QE_I26_AL']
-
+fig27a = plt.figure();
+ax27aa = fig27a.add_axes([0,0,1,1]);
+ax27a = ['QE_I01_AL', 'QE_I02_AL', 'QE_I03_AL', 'QE_I04_AL', 'QE_I05_AL', 'QE_I06_AL',
+         'QE_I07_AL', 'QE_I08_AL', 'QE_I09_AL', 'QE_I10_AL', 'QE_I11_AL', 'QE_I12_AL', 'QE_I13_AL'];
 ay27a = [np.sum(I01_AL), np.sum(I02_AL), np.sum(I03_AL), np.sum(I04_AL), np.sum(I05_AL), 
-         np.sum(I06_AL)]
-ay27b = [np.sum(I07_AL), np.sum(I08_AL), np.sum(I09_AL), np.sum(I10_AL), 
-         np.sum(I11_AL), np.sum(I12_AL), np.sum(I13_AL)]
-ay27c = [np.sum(I14_AL), np.sum(I15_AL), np.sum(I16_AL), np.sum(I17_AL), np.sum(I18_AL), 
-         np.sum(I19_AL)]
-ay27d = [np.sum(I20_AL), np.sum(I21_AL), np.sum(I22_AL), np.sum(I23_AL), 
-         np.sum(I24_AL), np.sum(I25_AL), np.sum(I26_AL)]
+         np.sum(I06_AL), np.sum(I07_AL), np.sum(I08_AL), np.sum(I09_AL), np.sum(I10_AL), 
+         np.sum(I11_AL), np.sum(I12_AL), np.sum(I13_AL)];
 
-# plt.subplots - 00
-axes27[0][0].bar(ax27a, ay27a);
-# axes27[0].set_title('subplot 1');
-# axes27[0][0].set_xlabel('Variable');
-axes27[0][0].set_ylabel('Importance');
+ax27aa.bar(ax27a, ay27a);
+plt.xticks(ax27a, rotation=90, fontsize=8);
+plt.ylabel('Importance'); 
+plt.xlabel('Variable');
+plt.title('QE_I01 a QE_I13');
+plt.savefig('01_13_AL.png', dpi=450, bbox_inches='tight');
 
-# plt.subplots - 01
-axes27[0][1].bar(ax27b, ay27b)
-# axes27[1].set_title('subplot 2');
-# axes27[0][1].set_xlabel('Variable');
-axes27[0][1].set_ylabel('Importance');
+#%% Plotando as outras 13
+# Cria multiplos plots
+fig27b = plt.figure();
+ax27bb = fig27b.add_axes([0,0,1,1]);
+ax27b = ['QE_I14_AL', 'QE_I15_AL', 'QE_I16_AL', 'QE_I17_AL', 'QE_I18_AL', 'QE_I19_AL',
+         'QE_I20_AL', 'QE_I21_AL', 'QE_I22_AL', 'QE_I23_AL', 'QE_I24_AL', 'QE_I25_AL', 'QE_I26_AL'];
 
-# plt.subplots - 10
-axes27[1][0].bar(ax27c, ay27c)
-# axes27[1].set_title('subplot 2');
-# axes27[1][0].set_xlabel('Variable');
-axes27[1][0].set_ylabel('Importance'); 
-
-# plt.subplots - 11
-axes27[1][1].bar(ax27d, ay27d)
-# axes27[1].set_title('subplot 2');
-# axes27[1][1].set_xlabel('Variable');
-axes27[1][1].set_ylabel('Importance');
-
-plt.savefig('AL.png', dpi=450, bbox_inches='tight');
-plt.show()
-
-#%%
-# GENERAL AL
-import numpy as np
-import matplotlib.pyplot as plt
-
-# create multiple plots via plt.subplots(rows,columns)
-fig, axes = plt.subplots(2, 1, constrained_layout=True)
-
-# just plot things on each individual axes
-x1 = ['Var 1','Var 2', 'Var 3']
-x2 = ['Var 4', 'Var 5', 'Var 6']
-y1 = [0.23, 0.5, 0.88]
-y2 = [1, 5, 6]
-
-#plt.subplot(2, 1, 2)
-axes[0].bar(x1,y1)
-axes[0].set_title('subplot 1');
-axes[0].set_title('Sub 1 1')
-axes[0].set_xlabel('x value');
-axes[0].set_ylabel('t value'); 
-
-#plt.subplot(2, 2, 2)
-axes[1].bar(x2,y2)
-axes[1].set_title('subplot 2');
-axes[1].set_xlabel('x value');
-axes[1].set_ylabel('y value'); 
-
-plt.show()
+ay27b = [np.sum(I14_AL), np.sum(I15_AL), np.sum(I16_AL), np.sum(I17_AL), np.sum(I18_AL), 
+         np.sum(I19_AL), np.sum(I20_AL), np.sum(I21_AL), np.sum(I22_AL), np.sum(I23_AL), 
+         np.sum(I24_AL), np.sum(I25_AL), np.sum(I26_AL)];
+ax27bb.bar(ax27b, ay27b);
+plt.xticks(ax27b, rotation=90, fontsize=8);
+plt.ylabel('Importance'); 
+plt.xlabel('Variable');
+plt.title('QE_I14 a QE_I26');
+plt.savefig('13_26_AL.png', dpi=450, bbox_inches='tight');

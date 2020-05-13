@@ -133,7 +133,7 @@ scores_br = []
 importance_fields_br = 0.0
 importance_fields_aux_br = []
 
-rf_br = RandomForestRegressor(n_estimators = 500, random_state=0)
+rf_br = RandomForestRegressor(n_estimators = 1000, random_state=0)
 
 kf_cv_br = KFold(n_splits=11, random_state=None, shuffle=False) # n_splits: divisores de 7084 ^ memory
 
@@ -432,6 +432,7 @@ y16 = [I16_BR[0],I16_BR[1],I16_BR[2],I16_BR[3],I16_BR[4],I16_BR[5],I16_BR[6],I16
        I16_BR[16],I16_BR[17],I16_BR[18],I16_BR[19],I16_BR[20],I16_BR[21],I16_BR[22],I16_BR[23],
        I16_BR[24],I16_BR[25],I16_BR[26]];
 ax16.bar(x16,y16);
+plt.xticks(x16,rotation=90,fontsize=8);
 plt.ylabel('Importance'); 
 plt.xlabel('Variable');
 plt.title('UF que concluiu o médio');
@@ -576,3 +577,36 @@ plt.xlabel('Variable');
 plt.title('Porque escolhi essa IES');
 plt.savefig('QE_I26_BR.png', dpi=450, bbox_inches='tight');
 
+#%% Plotando as 13 variáveis
+# Cria multiplos plots
+fig27a = plt.figure();
+ax27aa = fig27a.add_axes([0,0,1,1]);
+ax27a = ['QE_I01_BR', 'QE_I02_BR', 'QE_I03_BR', 'QE_I04_BR', 'QE_I05_BR', 'QE_I06_BR',
+         'QE_I07_BR', 'QE_I08_BR', 'QE_I09_BR', 'QE_I10_BR', 'QE_I11_BR', 'QE_I12_BR', 'QE_I13_BR'];
+ay27a = [np.sum(I01_BR), np.sum(I02_BR), np.sum(I03_BR), np.sum(I04_BR), np.sum(I05_BR), 
+         np.sum(I06_BR), np.sum(I07_BR), np.sum(I08_BR), np.sum(I09_BR), np.sum(I10_BR), 
+         np.sum(I11_BR), np.sum(I12_BR), np.sum(I13_BR)];
+
+ax27aa.bar(ax27a, ay27a);
+plt.xticks(ax27a, rotation=90, fontsize=8);
+plt.ylabel('Importance'); 
+plt.xlabel('Variable');
+plt.title('QE_I01 a QE_I13');
+plt.savefig('01_13_BR.png', dpi=450, bbox_inches='tight');
+
+#%% Plotando as outras 13
+# Cria multiplos plots
+fig27b = plt.figure();
+ax27bb = fig27b.add_axes([0,0,1,1]);
+ax27b = ['QE_I14_BR', 'QE_I15_BR', 'QE_I16_BR', 'QE_I17_BR', 'QE_I18_BR', 'QE_I19_BR',
+         'QE_I20_BR', 'QE_I21_BR', 'QE_I22_BR', 'QE_I23_BR', 'QE_I24_BR', 'QE_I25_BR', 'QE_I26_BR'];
+
+ay27b = [np.sum(I14_BR), np.sum(I15_BR), np.sum(I16_BR), np.sum(I17_BR), np.sum(I18_BR), 
+         np.sum(I19_BR), np.sum(I20_BR), np.sum(I21_BR), np.sum(I22_BR), np.sum(I23_BR), 
+         np.sum(I24_BR), np.sum(I25_BR), np.sum(I26_BR)];
+ax27bb.bar(ax27b, ay27b);
+plt.xticks(ax27b, rotation=90, fontsize=8);
+plt.ylabel('Importance'); 
+plt.xlabel('Variable');
+plt.title('QE_I14 a QE_I26');
+plt.savefig('13_26_BR.png', dpi=450, bbox_inches='tight');
