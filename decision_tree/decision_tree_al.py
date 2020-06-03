@@ -110,16 +110,16 @@ features_al = np.array(features_al)
 #%% K-Fold CV
 from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import KFold
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.tree import DecisionTreeClassifier
 
 scores_al = []
 
 importance_fields_al = 0.0
 importance_fields_aux_al = []
 
-dt_al = RandomForestRegressor(random_state=0)
+dt_al = DecisionTreeClassifier(random_state = 0)
 
-kf_cv_al = KFold(n_splits=77, random_state=None, shuffle=False) # n_splits: divisores de 7084 ^ memory
+kf_cv_al = KFold(n_splits=11, random_state=None, shuffle=False) # n_splits: divisores de 7084 ^ memory
 
 for train_index_al, test_index_al in kf_cv_al.split(features_al):
     #print("Train index: ", np.min(train_index_al), '- ', np.max(train_index_al))
