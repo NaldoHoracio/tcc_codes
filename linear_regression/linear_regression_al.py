@@ -23,9 +23,7 @@ path_al = 'G:/Meu Drive/UFAL/TCC/CODES/tcc_codes/tcc_data/AL_data.csv'
 features_al = pd.read_csv(path_al)
 
 #%%
-
 del features_al['Unnamed: 0']
-
 
 # Escolhendo apenas as colunas de interesse
 features_al = features_al.loc[:,'NT_GER':'QE_I26']
@@ -61,13 +59,14 @@ features_al['NT_OBJ_CE'] = features_al['NT_OBJ_CE'].astype(float)
 
 features_al['NT_DIS_CE'] = features_al['NT_DIS_CE'].str.replace(',','.')
 features_al['NT_DIS_CE'] = features_al['NT_DIS_CE'].astype(float)
-#%% Substituindo valores nan pela mediana (medida resistente) e 0 por 1
+#%% Substituindo valores nan pela media (medida resistente) e 0 por 1
 
 features_al_median = features_al.iloc[:,0:16].median()
 
-features_al.iloc[:,0:16] = features_al.iloc[:,0:16].fillna(features_al.iloc[:,0:16].median())
+features_al.iloc[:,0:16] = features_al.iloc[:,0:16].fillna(features_al.iloc[:,0:16].mean())
 
-features_al.iloc[:,0:16] = features_al.iloc[:,0:16].replace(to_replace = 0, value = 1)
+#features_al.iloc[:,0:16] = features_al.iloc[:,0:16].replace(to_replace = 0, value = 1)
+#features_al.iloc[:,0:16] = features_al.iloc[:,0:16].replace(to_replace = 0, value = features_al.iloc[:,0:16].mean())
 #%% Observando os dados
 print('O formato dos dados é: ', features_al.shape)
 
@@ -107,23 +106,55 @@ features_al_list_oh = list(features_al.columns)
 #%%
 # Convertendo para numpy
 features_al = np.array(features_al)
+
+#%% Hold out and Random Subsampling
+from sklearn.metrics import mean_absolute_error
+from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+
+
+train_features_al, test_features_al, train_labels_al, test_labels_al = \
+train_test_split(features_al, labels_al, test_size = 0.33, random_state = 42)
+
+l_regression_al = LinearRegression()
+
+l_regression_al.fit(train_features_al, train_labels_al)
+
+predictions_al = l_regression_al.predict(test_features_al)
+
+errors_al = abs(predictions_al - test_labels_al)
+
+accuracy_al = 100 - mean_absolute_error(test_labels_al, predictions_al)
+
+#%% Acurácia AL
+print('Accuracy MAE: ', round(np.average(accuracy_al), 2), "%.")
+print('Min value: ', round(np.min(accuracy_al), 2))
+print('Max value: ', round(np.max(accuracy_al), 2))
+print('Erro medio: ', round(np.average(errors_al),2))
+
 #%% K-Fold CV
 from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import KFold
-from sklearn import linear_model
+from sklearn.linear_model import LinearRegression
 
 scores_al = []
 
 importance_fields_al = 0.0
 importance_fields_aux_al = []
 
-l_regression_al = linear_model.LinearRegression()
+predictions_aux_al = []
 
-kf_cv_al = KFold(n_splits=7084, random_state=None, shuffle=False) # n_splits: divisores de 7084 ^ memory
+coefs_al = []
+
+l_regression_al = LinearRegression()
+
+kf_cv_al = KFold(n_splits=2, random_state=None, shuffle=False) # n_splits: divisores de 7084 ^ memory
+
+idx = 0
 
 for train_index_al, test_index_al in kf_cv_al.split(features_al):
     #print("Train index: ", np.min(train_index_al), '- ', np.max(train_index_al))
-    print("Test index: ", np.min(test_index_al), '-', np.max(test_index_al))
+    #print("Test index: ", np.min(test_index_al), '-', np.max(test_index_al))
     
     # Dividindo nas features e labels
     train_features_al = features_al[train_index_al]
@@ -136,10 +167,19 @@ for train_index_al, test_index_al in kf_cv_al.split(features_al):
     
     # Usando o Random Forest para predição dos dados
     predictions_al = l_regression_al.predict(test_features_al)
+    predictions_aux_al.append(predictions_al)
+    coefs_al.append(l_regression_al.coef_)
     
     # Erro
     errors_al = abs(predictions_al - test_labels_al)
     
+    print('Index: ', (idx));
+    idx += 1;
+    print('Test labels: ', round(np.average(test_labels_al),2))
+    print('Predictions: ', round(np.average(predictions_al),2))
+    print('Min value lables: ', np.min(test_labels_al))
+    print('Max value lables: ', np.max(test_labels_al))
+    print("\n")
     # Acurácia
     accuracy_al = 100 - mean_absolute_error(test_labels_al, predictions_al)
     
@@ -151,9 +191,12 @@ for train_index_al, test_index_al in kf_cv_al.split(features_al):
     scores_al.append(accuracy_al)
 
 #%% Acurácia AL
-print('Accuracy: ', round(np.average(scores_al), 2), "%.")
-print('Min: ', round(np.min(scores_al), 2))
-print('Max: ', round(np.max(scores_al), 2))
+print('Accuracy MAE: ', round(np.average(scores_al), 2), "%.")
+print('Min value: ', round(np.min(scores_al), 2))
+print('Max value: ', round(np.max(scores_al), 2))
+#print('Accuracy R^2 error: ', round(np.average(scores_r2_al),2))
+#print('Min R^2 error: ', round(np.min(scores_r2_al),2))
+#print('Min R^2 error: ', round(np.max(scores_r2_al),2))
 
 #importance_fields_al_t = importance_fields_al/11
 

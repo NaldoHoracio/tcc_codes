@@ -5,7 +5,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-path = 'G:/Meu Drive/UFAL/TCC/CODES/tcc_codes/random_forest/temps.csv'
+path = 'G:/Meu Drive/UFAL/TCC/CODES/tcc_codes/data_test/temps_extended.csv'
 
 # Read in data as pandas dataframe and display first 5 rows
 features = pd.read_csv(path)
@@ -41,6 +41,7 @@ from sklearn import linear_model
 
 
 scores = []
+coefs = []
 
 importance_fields = 0.0
 importance_fields_aux = []
@@ -48,7 +49,7 @@ importance_fields_aux = []
 # Instance RF
 l_regression = linear_model.LinearRegression()
 
-kf_cv = KFold(n_splits=347, random_state=None, shuffle=False)
+kf_cv = KFold(n_splits=2191, random_state=None, shuffle=False)
 
 for train_index, test_index in kf_cv.split(features):
     #print("Train index: ", np.min(train_index), '- ', np.max(train_index))
@@ -80,9 +81,13 @@ for train_index, test_index in kf_cv.split(features):
     
     # Append
     scores.append(accuracy)
+    coefs.append(l_regression.coef_)
+
     
 #%% Scores
 #importance_fields_t = importance_fields/347
 print('Acurácia: ', round(np.mean(scores), 2), '%.')
+print('Min: ', round(np.min(scores), 2))
+print('Max: ', round(np.max(scores), 2))
 
 #print('Total: ', round(np.sum(importance_fields_t),2))
