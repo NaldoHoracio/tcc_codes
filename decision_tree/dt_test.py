@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri May  1 21:56:32 2020
-
 @author: edvonaldo
+
 """
 
 
@@ -32,8 +31,12 @@ labels = np.array(features['actual'])
 
 # Remove the labels from the features
 # axis 1 refers to the columns
-features = features.drop('actual', axis = 1)
+#features = features.drop(columns=['actual', 'year', 'day', 'month', 'temp_2',\
+#                         'temp_1', 'average', 'forecast_noaa',\
+#                             'forecast_acc', 'forecast_under', 'friend'])
+features = features.drop(columns=['actual'])
 
+#%%
 # Saving feature names for later use
 feature_list_get_dummies = list(features.columns)
 
@@ -44,7 +47,7 @@ features = np.array(features)
 # Import the model we are using
 from sklearn.metrics import mean_absolute_error, accuracy_score
 from sklearn.model_selection import KFold
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeRegressor
 # Instantiate model with 1000 decision trees
 
 scores = []
@@ -53,7 +56,7 @@ importance_fields = 0.0
 importance_fields_aux = []
 
 # Instance RF
-dt = DecisionTreeClassifier(random_state = 0)
+dt = DecisionTreeRegressor(random_state = 0)
 
 kf_cv = KFold(n_splits=347, random_state=None, shuffle=False)
 
@@ -83,7 +86,7 @@ for train_index, test_index in kf_cv.split(features):
     importance_fields_aux = dt.feature_importances_
     importance_fields += importance_fields_aux
     
-    print('Fields aux: ', importance_fields_aux)
+    #sprint('Fields aux: ', importance_fields_aux)
     
     # Append
     scores.append(accuracy)

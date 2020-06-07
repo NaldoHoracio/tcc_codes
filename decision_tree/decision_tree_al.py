@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu Mar 26 15:37:56 2020
-
 Técnica: Árvore de Decisão aplicada a dados em Alagoas
 
 @author: edvonaldo
@@ -21,16 +19,12 @@ import matplotlib.pyplot as plt
 path_al = 'G:/Meu Drive/UFAL/TCC/CODES/tcc_codes/tcc_data/AL_data.csv'
 
 features_al = pd.read_csv(path_al)
-
 #%%
-
 del features_al['Unnamed: 0']
-
 
 # Escolhendo apenas as colunas de interesse
 features_al = features_al.loc[:,'NT_GER':'QE_I26']
 features_al = features_al.drop(features_al.loc[:, 'CO_RS_I1':'CO_RS_I9'].columns, axis=1)
-
 #%% Observando os dados
 print('O formato dos dados é: ', features_al.shape)
 
@@ -38,7 +32,6 @@ describe_al = features_al.describe()
 
 print('Descrição para as colunas: ', describe_al)
 print(describe_al.columns)
-
 #%% Números que são strings para float
 # Colunas NT_GER a NT_DIS_FG ^ NT_CE a NT_DIS_CE
 features_al['NT_GER'] = features_al['NT_GER'].str.replace(',','.')
@@ -67,7 +60,7 @@ features_al_median = features_al.iloc[:,0:16].median()
 
 features_al.iloc[:,0:16] = features_al.iloc[:,0:16].fillna(features_al.iloc[:,0:16].median())
 
-features_al.iloc[:,0:16] = features_al.iloc[:,0:16].replace(to_replace = 0, value = 1)
+#features_al.iloc[:,0:16] = features_al.iloc[:,0:16].replace(to_replace = 0, value = 1)
 #%% Observando os dados
 print('O formato dos dados é: ', features_al.shape)
 
@@ -75,11 +68,10 @@ describe_al = features_al.describe()
 
 print('Descrição para as colunas: ', describe_al)
 print(describe_al.columns)
-
 #%% Convertendo os labels de predição para arrays numpy
 #labels_to_predict = np.array(features_al.loc[:,'NT_GER':'NT_CE_D3'])
 labels_al = np.array(features_al['NT_GER'])
-print('Media das labels: %.2f' %(labels_al.mean()) )
+print('Media das labels: %.2f' %(labels_al.mean()))
 #%%
 # Removendo as features de notas
 features_al = features_al.drop(['NT_GER','NT_FG','NT_OBJ_FG','NT_DIS_FG',
@@ -110,14 +102,14 @@ features_al = np.array(features_al)
 #%% K-Fold CV
 from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import KFold
-from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import DecisionTreeRegressor
 
 scores_al = []
 
 importance_fields_al = 0.0
 importance_fields_aux_al = []
 
-dt_al = DecisionTreeClassifier(random_state = 0)
+dt_al = DecisionTreeRegressor(random_state=0)
 
 kf_cv_al = KFold(n_splits=11, random_state=None, shuffle=False) # n_splits: divisores de 7084 ^ memory
 
@@ -126,13 +118,14 @@ for train_index_al, test_index_al in kf_cv_al.split(features_al):
     print("Test index: ", np.min(test_index_al), '-', np.max(test_index_al))
     
     # Dividindo nas features e labels
-    train_features_al = features_al[train_index_al]
-    test_features_al = features_al[test_index_al]
-    train_labels_al = labels_al[train_index_al]
-    test_labels_al = labels_al[test_index_al]
+    train_features_al = features_al[train_index_al];
+    test_features_al = features_al[test_index_al];
     
-    # Ajustando cada features e label com RF
-    dt_al.fit(train_features_al, train_labels_al)
+    train_labels_al = labels_al[train_index_al];
+    test_labels_al = labels_al[test_index_al];
+    
+    # Treinando o modelo
+    dt_al.fit(train_features_al, train_labels_al);
     
     # Usando o Random Forest para predição dos dados
     predictions_al = dt_al.predict(test_features_al)

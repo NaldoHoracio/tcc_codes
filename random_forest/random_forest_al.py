@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu 26 15:37:56 2020
-
 @author: edvonaldo
+
 """
 
 import os
@@ -21,9 +20,7 @@ path_al = 'G:/Meu Drive/UFAL/TCC/CODES/tcc_codes/tcc_data/AL_data.csv'
 features_al = pd.read_csv(path_al)
 
 #%%
-
 del features_al['Unnamed: 0']
-
 
 # Escolhendo apenas as colunas de interesse
 features_al = features_al.loc[:,'NT_GER':'QE_I26']
@@ -73,15 +70,6 @@ describe_al = features_al.describe()
 
 print('Descrição para as colunas: ', describe_al)
 print(describe_al.columns)
-
-#%% One hot encoding - QE_I01 a QE_I26
-#features_al = pd.get_dummies(data=features_al, columns=['QE_I01','QE_I02','QE_I03','QE_I04',
-#                                                        'QE_I05','QE_I06','QE_I07','QE_I08',
-#                                                        'QE_I09','QE_I10','QE_I11','QE_I12',
-#                                                        'QE_I13','QE_I14','QE_I15','QE_I16',
-#                                                        'QE_I17','QE_I18','QE_I19','QE_I20',
-#                                                        'QE_I21','QE_I22','QE_I23','QE_I24',
-#                                                        'QE_I25','QE_I26'])
 #%% Convertendo os labels de predição para arrays numpy
 #labels_to_predict = np.array(features_al.loc[:,'NT_GER':'NT_CE_D3'])
 labels_al = np.array(features_al['NT_GER'])
