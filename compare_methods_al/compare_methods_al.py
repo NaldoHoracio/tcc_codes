@@ -107,6 +107,8 @@ from sklearn.model_selection import KFold
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.tree import DecisionTreeRegressor
 
+split_is_multiple = int(11);
+
 scores_al_rf = []
 scores_al_dt = []
 
@@ -116,10 +118,10 @@ importance_fields_aux_al_rf = []
 importance_fields_al_dt = 0.0
 importance_fields_aux_al_dt = []
 
-rf_al = RandomForestRegressor(n_estimators = 500, random_state=0)
-dt_al = DecisionTreeClassifier(random_state = 0)
+rf_al = RandomForestRegressor(n_estimators = 1000, random_state=0)
+dt_al = DecisionTreeRegressor(random_state = 0)
 
-kf_cv_al = KFold(n_splits=11, random_state=None, shuffle=False) # n_splits: divisores de 7084 ^ memory
+kf_cv_al = KFold(n_splits=split_is_multiple, random_state=None, shuffle=False) # n_splits: divisores de 7084 ^ memory
 
 for train_index_al, test_index_al in kf_cv_al.split(features_al):
     print("Train index: ", np.min(train_index_al), '- ', np.max(train_index_al))
@@ -132,41 +134,41 @@ for train_index_al, test_index_al in kf_cv_al.split(features_al):
     test_labels_al = labels_al[test_index_al]
     
     # Ajustando cada features e label com RF e DT
-    #rf_al.fit(train_features_al, train_labels_al)
+    rf_al.fit(train_features_al, train_labels_al)
     dt_al.fit(train_features_al, train_labels_al)
     
     # Usando o RF e DT para predição dos dados
-    #predictions_al_rf = rf_al.predict(test_features_al)
+    predictions_al_rf = rf_al.predict(test_features_al)
     predictions_al_dt = dt_al.predict(test_features_al)
-    
+
     # Erro
-    #errors_al_rf = abs(predictions_al_rf - test_labels_al)
+    errors_al_rf = abs(predictions_al_rf - test_labels_al)
     errors_al_dt = abs(predictions_al_dt - test_labels_al)
     
     # Acurácia
-    #accuracy_al_rf = 100 - mean_absolute_error(test_labels_al, predictions_al_rf)
+    accuracy_al_rf = 100 - mean_absolute_error(test_labels_al, predictions_al_rf)
     accuracy_al_dt = 100 - mean_absolute_error(test_labels_al, predictions_al_dt)
     
     # Importância das variáveis
-    #importance_fields_aux_al_rf = rf_al.feature_importances_
-    #importance_fields_al_rf += importance_fields_aux_al_rf
+    importance_fields_aux_al_rf = rf_al.feature_importances_
+    importance_fields_al_rf += importance_fields_aux_al_rf
     
     importance_fields_aux_al_dt = dt_al.feature_importances_
     importance_fields_al_dt += importance_fields_aux_al_dt
     
     # Append em cada valor médio
-    #scores_al_rf.append(accuracy_al_rf)
+    scores_al_rf.append(accuracy_al_rf)
     scores_al_dt.append(accuracy_al_dt)
 
 #%% Acurácia AL
 print('Accuracy RF: ', round(np.average(scores_al_rf), 2), "%.")
 print('Accuracy DT: ', round(np.average(scores_al_dt), 2), "%.")
 
-importance_fields_al_rf_t = importance_fields_al_rf/11
-importance_fields_al_dt_t = importance_fields_al_dt/11
+importance_fields_al_rf_t = importance_fields_al_rf/split_is_multiple
+importance_fields_al_dt_t = importance_fields_al_dt/split_is_multiple
 
-print('Total RF: ', round(np.sum(importance_fields_al_rf_t),2))
-print('Total DT: ', round(np.sum(importance_fields_al_dt_t),2))
+print('Total RF: ', round(np.sum(importance_fields_al_rf_t),2));
+print('Total DT: ', round(np.sum(importance_fields_al_dt_t),2));
 
 #%% Importancia das variáveis
 # Lista de tupla com as variáveis de importância - Random Forest
@@ -248,7 +250,9 @@ bar_width = 0.1;
 
 x1 = ['Solteiro', 'Casado (a)', 'Separado', 'Viúvo', 'Outro'];
 y1_rf = [I01_AL_RF[0],I01_AL_RF[1],I01_AL_RF[2],I01_AL_RF[3],I01_AL_RF[4]];
+#y1_rf = [100*t for t in y1_rf];
 y1_dt = [I01_AL_DT[0],I01_AL_DT[1],I01_AL_DT[2],I01_AL_DT[3],I01_AL_DT[4]];
+#y1_dt = [100*t for t in y1_dt];
 
 # Configurando a posição no eixo x
 axis1 = np.arange(len(y1_rf))
@@ -256,14 +260,14 @@ y11 = [x + bar_width for x in axis1]
 y12 = [x + bar_width for x in y11]
 
 # Fazendo o plot
-plt.bar(y11, y1_rf, color='red', width=bar_width, edgecolor='white', \
-        label='Random Forest', rotation=90, fontsize=8)
-plt.bar(y12, y1_rf, color='green', width=bar_width, edgecolor='white', \
-        label='Decision Tree', rotation=90, fontsize=8)
+plt.bar(y11, y1_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
+plt.bar(y12, y1_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
-plt.xticks([k + bar_width for k in range(len(y1_rf))], x1, rotation=90, fontsize=8)
+plt.xticks([k + bar_width for k in range(len(y1_rf))], \
+           ['Solteiro', 'Casado (a)', 'Separado', 'Viúvo', 'Outro'],\
+           rotation=90, fontsize=8)
 plt.ylabel('Importância'); 
 plt.xlabel('Variável');
 plt.title('Estado civil');
