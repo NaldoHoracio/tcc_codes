@@ -285,7 +285,7 @@ x2 = ['Branca','Preta','Amarela','Parda','Indígena','Não quero declarar'];
 y2_rf = [I02_AL_RF[0],I02_AL_RF[1],I02_AL_RF[2],I02_AL_RF[3],I02_AL_RF[4],I02_AL_RF[5]];
 y2_rf = list(map(lambda t:t*100, y2_rf))
 y2_dt = [I02_AL_DT[0],I02_AL_DT[1],I02_AL_DT[2],I02_AL_DT[3],I02_AL_DT[4],I02_AL_DT[5]];
-y2_rf = list(map(lambda t:t*100, y2_dt))
+y2_dt = list(map(lambda t:t*100, y2_dt))
 
 # Configurando a posição no eixo x
 axis2 = np.arange(len(y2_rf))
@@ -365,7 +365,7 @@ plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y4_rf))], \
            x4,\
            rotation=90, fontsize=8)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Escolarização da pai');
 plt.legend();
@@ -397,7 +397,7 @@ plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y5_rf))], \
            x5,\
            rotation=90, fontsize=8)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Escolarização da mãe');
 plt.legend();
@@ -431,7 +431,7 @@ plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y6_rf))], \
            x6,\
            rotation=90, fontsize=8)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Onde e com quem moro');
 plt.legend();
@@ -465,7 +465,7 @@ plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y7_rf))], \
            x7,\
            rotation=90, fontsize=8)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Quantos moram com o estudante');
 plt.legend();
@@ -501,7 +501,7 @@ plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y8_rf))], \
            x8,\
            rotation=90, fontsize=8)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Renda total');
 plt.legend();
@@ -538,7 +538,7 @@ plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y9_rf))], \
            x9,\
            rotation=90, fontsize=9)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Situação financeira');
 plt.legend();
@@ -573,7 +573,7 @@ plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y10_rf))], \
            x10,\
            rotation=90, fontsize=9)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Situação de trabalho');
 plt.legend();
@@ -611,7 +611,7 @@ plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y11_rf))], \
            x11,\
            rotation=90, fontsize=9)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Bolsa ou financiamento para custeio de mensalidade');
 plt.legend();
@@ -645,7 +645,7 @@ plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y12_rf))], \
            x12,\
            rotation=90, fontsize=9)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Auxílio permanência');
 plt.legend();
@@ -680,7 +680,7 @@ plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y13_rf))], \
            x13,\
            rotation=90, fontsize=9)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Tipo de bolsa recebido');
 plt.legend();
@@ -716,7 +716,7 @@ plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y14_rf))], \
            x14,\
            rotation=90, fontsize=9)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Programas de atividade no exterior');
 plt.legend();
@@ -751,7 +751,7 @@ plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y15_rf))], \
            x15,\
            rotation=90, fontsize=9)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Ingresso por cota');
 plt.legend();
@@ -783,7 +783,7 @@ plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y16_rf))], \
            x16,\
            rotation=90, fontsize=9)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('UF que concluiu o médio');
 plt.legend();
@@ -819,7 +819,7 @@ plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y17_rf))], \
            x17,\
            rotation=90, fontsize=9)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Tipo de escola no médio');
 plt.legend();
@@ -852,7 +852,7 @@ plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y18_rf))], \
            x18,\
            rotation=90, fontsize=9)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Modalidade do Ensino Médio');
 plt.legend();
@@ -887,7 +887,7 @@ plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y19_rf))], \
            x19,\
            rotation=90, fontsize=9)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Maior incentivo para cursar a graduação');
 plt.legend();
@@ -924,7 +924,7 @@ plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y20_rf))], \
            x20,\
            rotation=90, fontsize=9)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Grupo determinante para enfrentar as dificuldades do curso e concluí-lo');
 plt.legend();
@@ -956,7 +956,7 @@ plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y21_rf))], \
            x21,\
            rotation=90, fontsize=9)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Alguém da família concluiu curso superior');
 plt.legend();
@@ -987,7 +987,7 @@ plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y22_rf))], \
            x22,\
            rotation=90, fontsize=9)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Livros lido no ano (excluindo da Biografia do curso');
 plt.legend();
@@ -1019,7 +1019,7 @@ plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y23_rf))], \
            x23,\
            rotation=90, fontsize=9)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Horas de estudo por semana (excluindo aulas)');
 plt.legend();
@@ -1052,7 +1052,7 @@ plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y24_rf))], \
            x24,\
            rotation=90, fontsize=9)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Oportunidade de aprendizado de idioma estrangeiro');
 plt.legend();
@@ -1088,7 +1088,7 @@ plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y25_rf))], \
            x25,\
            rotation=90, fontsize=9)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Porque escolhi o curso');
 plt.legend();
@@ -1124,7 +1124,7 @@ plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y26_rf))], \
            x26,\
            rotation=90, fontsize=9)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Porque escolhi essa IES');
 plt.legend();
