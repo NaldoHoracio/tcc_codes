@@ -106,7 +106,7 @@ from sklearn.model_selection import KFold
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.tree import DecisionTreeRegressor
 
-split_is_multiple = int(11);
+split_is_multiple = int(2);
 
 scores_al_rf = []
 scores_al_dt = []
@@ -251,9 +251,9 @@ bar_width = 0.1;
 
 x1 = ['Solteiro', 'Casado (a)', 'Separado', 'Viúvo', 'Outro'];
 y1_rf = [I01_AL_RF[0],I01_AL_RF[1],I01_AL_RF[2],I01_AL_RF[3],I01_AL_RF[4]];
-#y1_rf = [100*t for t in y1_rf];
+y1_rf = list(map(lambda t:t*100, y1_rf))
 y1_dt = [I01_AL_DT[0],I01_AL_DT[1],I01_AL_DT[2],I01_AL_DT[3],I01_AL_DT[4]];
-#y1_dt = [100*t for t in y1_dt];
+y1_dt = list(map(lambda t:t*100, y1_dt))
 
 # Configurando a posição no eixo x
 axis1 = np.arange(len(y1_rf))
@@ -262,14 +262,14 @@ y12 = [x + bar_width for x in y11]
 
 # Fazendo o plot
 plt.bar(y11, y1_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y12, y1_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y12, y1_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y1_rf))], \
            ['Solteiro', 'Casado (a)', 'Separado', 'Viúvo', 'Outro'],\
            rotation=90, fontsize=8)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)');
 plt.xlabel('Variável');
 plt.title('Estado civil');
 plt.legend();
@@ -283,9 +283,9 @@ bar_width = 0.1;
 
 x2 = ['Branca','Preta','Amarela','Parda','Indígena','Não quero declarar'];
 y2_rf = [I02_AL_RF[0],I02_AL_RF[1],I02_AL_RF[2],I02_AL_RF[3],I02_AL_RF[4],I02_AL_RF[5]];
-#y1_rf = [100*t for t in y1_rf];
+y2_rf = list(map(lambda t:t*100, y2_rf))
 y2_dt = [I02_AL_DT[0],I02_AL_DT[1],I02_AL_DT[2],I02_AL_DT[3],I02_AL_DT[4],I02_AL_DT[5]];
-#y1_dt = [100*t for t in y1_dt];
+y2_rf = list(map(lambda t:t*100, y2_dt))
 
 # Configurando a posição no eixo x
 axis2 = np.arange(len(y2_rf))
@@ -294,14 +294,14 @@ y22 = [x + bar_width for x in y21]
 
 # Fazendo o plot
 plt.bar(y21, y2_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y22, y2_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y22, y2_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y2_rf))], \
            x2,\
            rotation=90, fontsize=8)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Cor/raça');
 plt.legend();
@@ -315,9 +315,9 @@ bar_width = 0.1;
 
 x3 = ['Brasileira','Brasileira naturalizada','Estrangeira'];
 y3_rf = [I03_AL_RF[0],I03_AL_RF[1],I03_AL_RF[2]];
-#y1_rf = [100*t for t in y1_rf];
+y3_rf = list(map(lambda t:t*100, y3_rf))
 y3_dt = [I03_AL_DT[0],I03_AL_DT[1],I03_AL_DT[2]];
-#y1_dt = [100*t for t in y1_dt];
+y3_dt = list(map(lambda t:t*100, y3_dt))
 
 # Configurando a posição no eixo x
 axis3 = np.arange(len(y3_rf))
@@ -326,14 +326,14 @@ y32 = [x + bar_width for x in y31]
 
 # Fazendo o plot
 plt.bar(y31, y3_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y32, y3_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y32, y3_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y3_rf))], \
            x3,\
            rotation=90, fontsize=8)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('Nacionalidade');
 plt.legend();
@@ -347,9 +347,9 @@ bar_width = 0.1;
 
 x4 = ['Nenhum','1º ao 5º ano','6º ao 9º ano','Ensino médio','Graduação','Pós-graduação'];
 y4_rf = [I04_AL_RF[0],I04_AL_RF[1],I04_AL_RF[2],I04_AL_RF[3],I04_AL_RF[4],I04_AL_RF[5]];
-#y1_rf = [100*t for t in y1_rf];
+y4_rf = list(map(lambda t:t*100, y4_rf))
 y4_dt = [I04_AL_DT[0],I04_AL_DT[1],I04_AL_DT[2],I04_AL_DT[3],I04_AL_DT[4],I04_AL_DT[5]];
-#y1_dt = [100*t for t in y1_dt];
+y4_dt = list(map(lambda t:t*100, y4_dt));
 
 # Configurando a posição no eixo x
 axis4 = np.arange(len(y4_rf))
@@ -358,7 +358,7 @@ y42 = [x + bar_width for x in y41]
 
 # Fazendo o plot
 plt.bar(y41, y4_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y42, y4_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y42, y4_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -379,9 +379,9 @@ bar_width = 0.1;
 
 x5 = ['Nenhum','1º ao 5º ano','6º ao 9º ano','Ensino médio','Graduação','Pós-graduação'];
 y5_rf = [I05_AL_RF[0],I05_AL_RF[1],I05_AL_RF[2],I05_AL_RF[3],I05_AL_RF[4],I05_AL_RF[5]];
-#y1_rf = [100*t for t in y1_rf];
+y5_rf = list(map(lambda t:t*100, y5_rf))
 y5_dt = [I05_AL_DT[0],I05_AL_DT[1],I05_AL_DT[2],I05_AL_DT[3],I05_AL_DT[4],I05_AL_DT[5]];
-#y1_dt = [100*t for t in y1_dt];
+y5_dt = list(map(lambda t:t*100, y5_dt));
 
 # Configurando a posição no eixo x
 axis5 = np.arange(len(y5_rf))
@@ -390,7 +390,7 @@ y52 = [x + bar_width for x in y51]
 
 # Fazendo o plot
 plt.bar(y51, y5_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y52, y5_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y52, y5_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -413,9 +413,9 @@ x6 = ['Casa/apartamento (sozinho)','Casa/apartamento (pais/parentes)',
       'Casa/apartamento (cônjugue/filhos)','Casa/apartamento (outras pessoas)',
       'Alojamento univ. na própria IES','Outro'];
 y6_rf = [I06_AL_RF[0],I06_AL_RF[1],I06_AL_RF[2],I06_AL_RF[3],I06_AL_RF[4],I06_AL_RF[5]];
-#y1_rf = [100*t for t in y1_rf];
+y6_rf = list(map(lambda t:t*100, y6_rf));
 y6_dt = [I06_AL_DT[0],I06_AL_DT[1],I06_AL_DT[2],I06_AL_DT[3],I06_AL_DT[4],I06_AL_DT[5]];
-#y1_dt = [100*t for t in y1_dt];
+y6_dt = list(map(lambda t:t*100, y6_dt));
 
 # Configurando a posição no eixo x
 axis6 = np.arange(len(y6_rf))
@@ -424,7 +424,7 @@ y62 = [x + bar_width for x in y61]
 
 # Fazendo o plot
 plt.bar(y61, y6_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y62, y6_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y62, y6_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -446,10 +446,10 @@ bar_width = 0.1;
 x7 = ['Nenhuma','Uma','Duas','Três','Quatro','Cinco','Seis','Sete ou mais'];
 y7_rf = [I07_AL_RF[0],I07_AL_RF[1],I07_AL_RF[2],I07_AL_RF[3],
          I07_AL_RF[4],I07_AL_RF[5],I07_AL_RF[6],I07_AL_RF[7]];
-#y1_rf = [100*t for t in y1_rf];
+y7_rf = list(map(lambda t:t*100, y7_rf));
 y7_dt = [I07_AL_DT[0],I07_AL_DT[1],I07_AL_DT[2],I07_AL_DT[3],
          I07_AL_DT[4],I07_AL_DT[5],I07_AL_DT[6],I07_AL_DT[7]];
-#y1_dt = [100*t for t in y1_dt];
+y7_dt = list(map(lambda t:t*100, y7_dt));
 
 # Configurando a posição no eixo x
 axis7 = np.arange(len(y7_rf))
@@ -458,7 +458,7 @@ y72 = [x + bar_width for x in y71]
 
 # Fazendo o plot
 plt.bar(y71, y7_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y72, y7_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y72, y7_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -482,10 +482,10 @@ x8 = ['Até 1,5 sál. mín','De 1 a 3 sál. mín.','De 3 a 4,5 sál. mín.',
       'Acima de 30 sál. mín.'];
 y8_rf = [I08_AL_RF[0],I08_AL_RF[1],I08_AL_RF[2],I08_AL_RF[3],
          I08_AL_RF[4],I08_AL_RF[5],I08_AL_RF[6]];
-#y1_rf = [100*t for t in y1_rf];
+y8_rf = list(map(lambda t:t*100, y8_rf));
 y8_dt = [I08_AL_DT[0],I08_AL_DT[1],I08_AL_DT[2],I08_AL_DT[3],
          I08_AL_DT[4],I08_AL_DT[5],I08_AL_DT[6]];
-#y1_dt = [100*t for t in y1_dt];
+y8_dt = list(map(lambda t:t*100, y8_dt));
 
 # Configurando a posição no eixo x
 axis8 = np.arange(len(y8_rf))
@@ -494,7 +494,7 @@ y82 = [x + bar_width for x in y81]
 
 # Fazendo o plot
 plt.bar(y81, y8_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y82, y8_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y82, y8_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -519,10 +519,10 @@ x9 = ['Sem renda (financiamento governamental)','Sem renda (financ. por família
       'Sou o principal a ajudar a família'];
 y9_rf = [I09_AL_RF[0],I09_AL_RF[1],I09_AL_RF[2],I09_AL_RF[3],
          I09_AL_RF[4],I09_AL_RF[5]];
-#y1_rf = [100*t for t in y1_rf];
+y9_rf = list(map(lambda t:t*100, y9_rf));
 y9_dt = [I09_AL_DT[0],I07_AL_DT[1],I09_AL_DT[2],I07_AL_DT[3],
          I09_AL_DT[4],I09_AL_DT[5]];
-#y1_dt = [100*t for t in y1_dt];
+y9_dt = list(map(lambda t:t*100, y9_dt));
 
 # Configurando a posição no eixo x
 axis9 = np.arange(len(y9_rf))
@@ -531,7 +531,7 @@ y92 = [x + bar_width for x in y91]
 
 # Fazendo o plot
 plt.bar(y91, y9_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y92, y9_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y92, y9_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -554,10 +554,10 @@ x10 = ['Não estou trabalhando','Trabalho eventualmente','Trablho (até 20h/sem)
        'Trabalho (de 21h/sem a 39h/sem)','Trabalho 40h/sem ou mais'];
 y10_rf = [I10_AL_RF[0],I10_AL_RF[1],I10_AL_RF[2],I10_AL_RF[3],
          I10_AL_RF[4]];
-#y1_rf = [100*t for t in y1_rf];
+y10_rf = list(map(lambda t:t*100, y10_rf));
 y10_dt = [I10_AL_DT[0],I10_AL_DT[1],I10_AL_DT[2],I10_AL_DT[3],
          I10_AL_DT[4]];
-#y1_dt = [100*t for t in y1_dt];
+y10_dt = list(map(lambda t:t*100, y10_dt));
 
 # Configurando a posição no eixo x
 axis10 = np.arange(len(y10_rf))
@@ -566,7 +566,7 @@ y102 = [x + bar_width for x in y101]
 
 # Fazendo o plot
 plt.bar(y101, y10_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y102, y10_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y102, y10_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -592,10 +592,10 @@ x11 = ['Nenhum (curso gratuito)','Nenhum (mas não gratuito)','ProUni integral',
        'Financiamento bancário'];
 y11_rf = [I11_AL_RF[0],I11_AL_RF[1],I11_AL_RF[2],I11_AL_RF[3], I11_AL_RF[4],
           I11_AL_RF[5],I11_AL_RF[6],I11_AL_RF[7],I11_AL_RF[8], I11_AL_RF[9], I11_AL_RF[10]];
-#y1_rf = [100*t for t in y1_rf];
+y11_rf = list(map(lambda t:t*100, y11_rf));
 y11_dt = [I11_AL_DT[0],I11_AL_DT[1],I11_AL_DT[2],I11_AL_DT[3],I11_AL_DT[4],
           I11_AL_DT[5],I11_AL_DT[6],I11_AL_DT[7],I11_AL_DT[8], I11_AL_DT[9], I11_AL_DT[10]];
-#y1_dt = [100*t for t in y1_dt];
+y11_dt = list(map(lambda t:t*100, y11_dt));
 
 # Configurando a posição no eixo x
 axis11 = np.arange(len(y11_rf))
@@ -604,7 +604,7 @@ y112 = [x + bar_width for x in y111]
 
 # Fazendo o plot
 plt.bar(y111, y11_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y112, y11_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y112, y11_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -626,10 +626,10 @@ bar_width = 0.1;
 x12 = ['Nenhum','Moradia','Alimentação','Moradia e alimentação', 'Permanência','Outros'];
 y12_rf = [I12_AL_RF[0],I12_AL_RF[1],I12_AL_RF[2],I12_AL_RF[3], I12_AL_RF[4],
           I12_AL_RF[5]];
-#y1_rf = [100*t for t in y1_rf];
+y12_rf = list(map(lambda t:t*100, y12_rf));
 y12_dt = [I12_AL_DT[0],I12_AL_DT[1],I12_AL_DT[2],I12_AL_DT[3],I12_AL_DT[4],
           I12_AL_DT[5]];
-#y1_dt = [100*t for t in y1_dt];
+y12_dt = list(map(lambda t:t*100, y12_dt));
 
 # Configurando a posição no eixo x
 axis12 = np.arange(len(y12_rf))
@@ -638,7 +638,7 @@ y122 = [x + bar_width for x in y121]
 
 # Fazendo o plot
 plt.bar(y121, y12_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y122, y12_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y122, y12_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -661,10 +661,10 @@ x13 = ['Nenhum', 'Bolsa IC', 'Bolsa extensão','Bolsa monitoria/tutoria',
        'Bolsa PET','Outro tipo'];
 y13_rf = [I13_AL_RF[0],I13_AL_RF[1],I13_AL_RF[2],I13_AL_RF[3], I13_AL_RF[4],
           I13_AL_RF[5]];
-#y1_rf = [100*t for t in y1_rf];
+y13_rf = list(map(lambda t:t*100, y13_rf));
 y13_dt = [I13_AL_DT[0],I13_AL_DT[1],I13_AL_DT[2],I13_AL_DT[3],I13_AL_DT[4],
           I13_AL_DT[5]];
-#y1_dt = [100*t for t in y1_dt];
+y13_dt = list(map(lambda t:t*100, y13_dt));
 
 # Configurando a posição no eixo x
 axis13 = np.arange(len(y13_rf))
@@ -673,7 +673,7 @@ y132 = [x + bar_width for x in y131]
 
 # Fazendo o plot
 plt.bar(y131, y13_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y132, y13_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y132, y13_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -697,10 +697,10 @@ x14 = ['Não','Sim, Ciências sem Fronteiras', 'Sim, intercâmbio pelo Governo F
        'Sim, intercâmbio não institucional'];
 y14_rf = [I14_AL_RF[0],I14_AL_RF[1],I14_AL_RF[2],I14_AL_RF[3], I14_AL_RF[4],
           I14_AL_RF[5]];
-#y1_rf = [100*t for t in y1_rf];
+y14_rf = list(map(lambda t:t*100, y14_rf));
 y14_dt = [I14_AL_DT[0],I14_AL_DT[1],I14_AL_DT[2],I14_AL_DT[3],I14_AL_DT[4],
           I14_AL_DT[5]];
-#y1_dt = [100*t for t in y1_dt];
+y14_dt = list(map(lambda t:t*100, y14_dt));
 
 # Configurando a posição no eixo x
 axis14 = np.arange(len(y14_rf))
@@ -709,7 +709,7 @@ y142 = [x + bar_width for x in y141]
 
 # Fazendo o plot
 plt.bar(y141, y14_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y142, y14_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y142, y14_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -732,10 +732,10 @@ x15 = ['Não','Sim, étnico-racial','Sim, renda', 'Sim, escola pública ou parti
        'Sim, combina dois mais', 'Sim, outra'];
 y15_rf = [I15_AL_RF[0],I15_AL_RF[1],I15_AL_RF[2],I15_AL_RF[3], I15_AL_RF[4],
           I15_AL_RF[5]];
-#y1_rf = [100*t for t in y1_rf];
+y15_rf = list(map(lambda t:t*100, y15_rf));
 y15_dt = [I15_AL_DT[0],I15_AL_DT[1],I15_AL_DT[2],I15_AL_DT[3],I15_AL_DT[4],
           I15_AL_DT[5]];
-#y1_dt = [100*t for t in y1_dt];
+y15_dt = list(map(lambda t:t*100, y15_dt));
 
 # Configurando a posição no eixo x
 axis15 = np.arange(len(y15_rf))
@@ -744,7 +744,7 @@ y152 = [x + bar_width for x in y151]
 
 # Fazendo o plot
 plt.bar(y151, y15_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y152, y15_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y152, y15_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -765,9 +765,9 @@ bar_width = 0.1;
 
 x16 = ['AL'];
 y16_rf = [I16_AL_RF[0]];
-#y1_rf = [100*t for t in y1_rf];
+y16_rf = list(map(lambda t:t*100, y16_rf));
 y16_dt = [I16_AL_DT[0]];
-#y1_dt = [100*t for t in y1_dt];
+y16_dt = list(map(lambda t:t*100, y16_dt));
 
 # Configurando a posição no eixo x
 axis16 = np.arange(len(y16_rf))
@@ -776,7 +776,7 @@ y162 = [x + bar_width for x in y161]
 
 # Fazendo o plot
 plt.bar(y161, y16_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y162, y16_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y162, y16_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -800,10 +800,10 @@ x17 = ['Todo em escola pública', 'Todo em escola privada','Todo no exterior',
        'Parte no Brasil e parte no exterior'];
 y17_rf = [I17_AL_RF[0],I17_AL_RF[1],I17_AL_RF[2],I17_AL_RF[3], I17_AL_RF[4],
           I17_AL_RF[5]];
-#y1_rf = [100*t for t in y1_rf];
+y17_rf = list(map(lambda t:t*100, y17_rf));
 y17_dt = [I17_AL_DT[0],I17_AL_DT[1],I17_AL_DT[2],I17_AL_DT[3],I17_AL_DT[4],
           I17_AL_DT[5]];
-#y1_dt = [100*t for t in y1_dt];
+y17_dt = list(map(lambda t:t*100, y17_dt));
 
 # Configurando a posição no eixo x
 axis17 = np.arange(len(y17_rf))
@@ -812,7 +812,7 @@ y172 = [x + bar_width for x in y171]
 
 # Fazendo o plot
 plt.bar(y171, y17_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y172, y17_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y172, y17_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -834,9 +834,9 @@ bar_width = 0.1;
 x18 = ['Tradicional', 'Prof. técnico', 'Prof. magistério (curso normal)', 
        'EJA e/ou Supletivo', 'Outra'];
 y18_rf = [I18_AL_RF[0],I18_AL_RF[1],I18_AL_RF[2],I18_AL_RF[3], I18_AL_RF[4]];
-#y1_rf = [100*t for t in y1_rf];
+y18_rf = list(map(lambda t:t*100, y18_rf));
 y18_dt = [I18_AL_DT[0],I18_AL_DT[1],I18_AL_DT[2],I18_AL_DT[3],I18_AL_DT[4]];
-#y1_dt = [100*t for t in y1_dt];
+y18_dt = list(map(lambda t:t*100, y18_dt));
 
 # Configurando a posição no eixo x
 axis18 = np.arange(len(y18_rf))
@@ -845,7 +845,7 @@ y182 = [x + bar_width for x in y181]
 
 # Fazendo o plot
 plt.bar(y181, y18_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y182, y18_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y182, y18_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -868,10 +868,10 @@ x19 = ['Ninguém', 'Pais', 'Outros membros (excluindo os pais)', 'Professores',
        'Líder ou representante religioso', 'Colegas/amigos', 'Outras pessoas'];
 y19_rf = [I19_AL_RF[0],I19_AL_RF[1],I19_AL_RF[2],I19_AL_RF[3], 
           I19_AL_RF[4], I19_AL_RF[5], I19_AL_RF[6]];
-#y1_rf = [100*t for t in y1_rf];
+y19_rf = list(map(lambda t:t*100, y19_rf));
 y19_dt = [I19_AL_DT[0],I19_AL_DT[1],I19_AL_DT[2],I19_AL_DT[3],
           I19_AL_DT[4], I19_AL_DT[5], I19_AL_DT[6]];
-#y1_dt = [100*t for t in y1_dt];
+y19_dt = list(map(lambda t:t*100, y19_dt));
 
 # Configurando a posição no eixo x
 axis19 = np.arange(len(y19_rf))
@@ -880,7 +880,7 @@ y192 = [x + bar_width for x in y191]
 
 # Fazendo o plot
 plt.bar(y191, y19_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y192, y19_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y192, y19_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -905,10 +905,10 @@ x20 = ['Não tive dificuldade', 'Não recebi apoio', 'Pais', 'Avós', 'Irmãos, 
        'Colegas de trabalho', 'Outro grupo'];
 y20_rf = [I20_AL_RF[0],I20_AL_RF[1],I20_AL_RF[2],I20_AL_RF[3], I20_AL_RF[4], I20_AL_RF[5], 
           I20_AL_RF[6], I20_AL_RF[7], I20_AL_RF[8], I20_AL_RF[9], I20_AL_RF[10]];
-#y1_rf = [100*t for t in y1_rf];
+y20_rf = list(map(lambda t:t*100, y20_rf));
 y20_dt = [I20_AL_DT[0],I20_AL_DT[1],I20_AL_DT[2],I20_AL_DT[3],I20_AL_DT[4], I20_AL_DT[5],
           I20_AL_DT[6],I20_AL_DT[7], I20_AL_DT[8], I20_AL_DT[9], I20_AL_DT[10]];
-#y1_dt = [100*t for t in y1_dt];
+y20_dt = list(map(lambda t:t*100, y20_dt));
 
 # Configurando a posição no eixo x
 axis20 = np.arange(len(y20_rf))
@@ -917,7 +917,7 @@ y202 = [x + bar_width for x in y201]
 
 # Fazendo o plot
 plt.bar(y201, y20_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y202, y20_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y202, y20_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -938,9 +938,9 @@ bar_width = 0.1;
 
 x21 = ['Sim', 'Não'];
 y21_rf = [I21_AL_RF[0],I21_AL_RF[1]];
-#y1_rf = [100*t for t in y1_rf];
+y21_rf = list(map(lambda t:t*100, y21_rf));
 y21_dt = [I21_AL_DT[0],I21_AL_DT[1]];
-#y1_dt = [100*t for t in y1_dt];
+y21_dt = list(map(lambda t:t*100, y21_dt));
 
 # Configurando a posição no eixo x
 axis21 = np.arange(len(y21_rf))
@@ -949,7 +949,7 @@ y212 = [x + bar_width for x in y211]
 
 # Fazendo o plot
 plt.bar(y211, y21_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y212, y21_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y212, y21_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -970,10 +970,9 @@ bar_width = 0.1;
 
 x22 = ['Nenhum  ', 'Um ou dois', 'Três a cinco', 'Seis a oito', 'Mais de oito'];
 y22_rf = [I22_AL_RF[0],I22_AL_RF[1],I22_AL_RF[2],I22_AL_RF[3], I22_AL_RF[4]];
-#y1_rf = [100*t for t in y1_rf];
+y22_rf = list(map(lambda t:t*100, y22_rf));
 y22_dt = [I22_AL_DT[0],I22_AL_DT[1],I22_AL_DT[2],I22_AL_DT[3],I22_AL_DT[4]];
-#y1_dt = [100*t for t in y1_dt];
-
+y22_dt = list(map(lambda t:t*100, y22_dt));
 # Configurando a posição no eixo x
 axis22 = np.arange(len(y22_rf))
 y221 = [x + bar_width for x in axis22]
@@ -981,7 +980,7 @@ y222 = [x + bar_width for x in y221]
 
 # Fazendo o plot
 plt.bar(y221, y22_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y222, y22_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y222, y22_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -1002,9 +1001,9 @@ bar_width = 0.1;
 
 x23 = ['Nenhuma', 'De uma a três', 'De quatro a sete', 'De oito a doze', 'Mais de doze'];
 y23_rf = [I23_AL_RF[0],I23_AL_RF[1],I23_AL_RF[2],I23_AL_RF[3],I23_AL_RF[4]];
-#y1_rf = [100*t for t in y1_rf];
+y23_rf = list(map(lambda t:t*100, y23_rf));
 y23_dt = [I23_AL_DT[0],I23_AL_DT[1],I23_AL_DT[2],I23_AL_DT[3],I23_AL_DT[4]];
-#y1_dt = [100*t for t in y1_dt];
+y23_dt = list(map(lambda t:t*100, y23_dt));
 
 # Configurando a posição no eixo x
 axis23 = np.arange(len(y23_rf))
@@ -1013,7 +1012,7 @@ y232 = [x + bar_width for x in y231]
 
 # Fazendo o plot
 plt.bar(y231, y23_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y232, y23_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y232, y23_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -1035,9 +1034,9 @@ bar_width = 0.1;
 x24 = ['Sim, apenas presencial', 'Sim, apenas semipresencial', 
        'Sim, parte presencial e parte semipresencial', 'Sim, EAD', 'Não'];
 y24_rf = [I24_AL_RF[0],I24_AL_RF[1],I24_AL_RF[2],I24_AL_RF[3], I24_AL_RF[4]];
-#y1_rf = [100*t for t in y1_rf];
+y24_rf = list(map(lambda t:t*100, y24_rf));
 y24_dt = [I24_AL_DT[0],I24_AL_DT[1],I24_AL_DT[2],I24_AL_DT[3],I24_AL_DT[4]];
-#y1_dt = [100*t for t in y1_dt];
+y24_dt = list(map(lambda t:t*100, y24_dt));
 
 # Configurando a posição no eixo x
 axis24 = np.arange(len(y24_rf))
@@ -1046,7 +1045,7 @@ y242 = [x + bar_width for x in y241]
 
 # Fazendo o plot
 plt.bar(y241, y24_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y242, y24_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y242, y24_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -1070,10 +1069,10 @@ x25 = ['Inserção no mercado de trabalho', 'Influência familiar','Valorizaçã
        'Baixa concorrência', 'Outro motivo'];
 y25_rf = [I25_AL_RF[0],I25_AL_RF[1],I25_AL_RF[2],I25_AL_RF[3], 
           I25_AL_RF[4], I25_AL_RF[5], I25_AL_RF[6], I25_AL_RF[7]];
-#y1_rf = [100*t for t in y1_rf];
+y25_rf = list(map(lambda t:t*100, y25_rf));
 y25_dt = [I25_AL_DT[0],I25_AL_DT[1],I25_AL_DT[2],I25_AL_DT[3],
           I25_AL_DT[4], I25_AL_DT[5], I25_AL_DT[6],I25_AL_DT[7]];
-#y1_dt = [100*t for t in y1_dt];
+y25_dt = list(map(lambda t:t*100, y25_dt));
 
 # Configurando a posição no eixo x
 axis25 = np.arange(len(y25_rf))
@@ -1082,7 +1081,7 @@ y252 = [x + bar_width for x in y251]
 
 # Fazendo o plot
 plt.bar(y251, y25_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y252, y25_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y252, y25_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -1106,10 +1105,10 @@ x26 = ['Gratuidade', 'Preço da mensalidade', 'Prox. a residência', 'Prox. ao t
        'Possibilidade de bolsa de estudo', 'Outro motivo'];
 y26_rf = [I26_AL_RF[0],I26_AL_RF[1],I26_AL_RF[2],I26_AL_RF[3], I26_AL_RF[4], I26_AL_RF[5], 
           I26_AL_RF[6], I26_AL_RF[7], I26_AL_RF[8]];
-#y1_rf = [100*t for t in y1_rf];
+y26_rf = list(map(lambda t:t*100, y26_rf));
 y26_dt = [I26_AL_DT[0],I26_AL_DT[1],I26_AL_DT[2],I26_AL_DT[3],I26_AL_DT[4], I26_AL_DT[5],
           I26_AL_DT[6],I26_AL_DT[7], I26_AL_DT[8]];
-#y1_dt = [100*t for t in y1_dt];
+y26_dt = list(map(lambda t:t*100, y26_dt));
 
 # Configurando a posição no eixo x
 axis26 = np.arange(len(y26_rf))
@@ -1118,7 +1117,7 @@ y262 = [x + bar_width for x in y261]
 
 # Fazendo o plot
 plt.bar(y261, y26_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y262, y26_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y262, y26_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -1144,12 +1143,12 @@ y27a_rf = [np.sum(I01_AL_RF),np.sum(I02_AL_RF),np.sum(I03_AL_RF),np.sum(I04_AL_R
           np.sum(I05_AL_RF),np.sum(I06_AL_RF),np.sum(I07_AL_RF),np.sum(I08_AL_RF),
           np.sum(I09_AL_RF),np.sum(I10_AL_RF),np.sum(I11_AL_RF),np.sum(I12_AL_RF),
           np.sum(I13_AL_RF)];
-#y1_rf = [100*t for t in y1_rf];
+y27a_rf = list(map(lambda t:t*100, y27a_rf));
 y27a_dt = [np.sum(I01_AL_DT),np.sum(I02_AL_DT),np.sum(I03_AL_DT),np.sum(I04_AL_DT),
           np.sum(I05_AL_DT),np.sum(I06_AL_DT),np.sum(I07_AL_DT),np.sum(I08_AL_DT),
           np.sum(I09_AL_DT),np.sum(I10_AL_DT),np.sum(I11_AL_DT),np.sum(I12_AL_DT),
           np.sum(I13_AL_DT)];
-#y1_dt = [100*t for t in y1_dt];
+y27a_dt = list(map(lambda t:t*100, y27a_dt));
 
 # Configurando a posição no eixo x
 axis27a = np.arange(len(y27a_rf))
@@ -1158,14 +1157,14 @@ y27a2 = [x + bar_width for x in y27a1]
 
 # Fazendo o plot
 plt.bar(y27a1, y27a_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y27a2, y27a_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y27a2, y27a_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y27a_rf))], \
            ax27a,\
            rotation=90, fontsize=9)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)');
 plt.xlabel('Variável');
 plt.title('QE_I01 a QE_I13');
 plt.legend();
@@ -1184,12 +1183,12 @@ y27b_rf = [np.sum(I14_AL_RF),np.sum(I15_AL_RF),np.sum(I16_AL_RF),np.sum(I17_AL_R
           np.sum(I18_AL_RF),np.sum(I19_AL_RF),np.sum(I19_AL_RF),np.sum(I20_AL_RF),
           np.sum(I21_AL_RF),np.sum(I22_AL_RF),np.sum(I23_AL_RF),np.sum(I24_AL_RF),
           np.sum(I13_AL_RF)];
-#y1_rf = [100*t for t in y1_rf];
+y27b_rf = list(map(lambda t:t*100, y27b_rf));
 y27b_dt =  [np.sum(I14_AL_DT),np.sum(I15_AL_DT),np.sum(I16_AL_DT),np.sum(I17_AL_DT),
           np.sum(I18_AL_DT),np.sum(I19_AL_DT),np.sum(I19_AL_DT),np.sum(I20_AL_DT),
           np.sum(I21_AL_DT),np.sum(I22_AL_DT),np.sum(I23_AL_DT),np.sum(I24_AL_DT),
           np.sum(I13_AL_DT)];
-#y1_dt = [100*t for t in y1_dt];
+y27b_dt = list(map(lambda t:t*100, y27b_dt));
 
 # Configurando a posição no eixo x
 axis27b = np.arange(len(y27b_rf))
@@ -1198,14 +1197,14 @@ y27b2 = [x + bar_width for x in y27b1]
 
 # Fazendo o plot
 plt.bar(y27b1, y27b_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y27b2, y27b_rf, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y27b2, y27b_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
 plt.xticks([k + bar_width for k in range(len(y27b_rf))], \
            ax27b,\
            rotation=90, fontsize=9)
-plt.ylabel('Importância'); 
+plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
 plt.title('QE_I14 a QE_I26');
 plt.legend();
