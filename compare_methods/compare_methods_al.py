@@ -107,7 +107,7 @@ from sklearn.model_selection import KFold
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.tree import DecisionTreeRegressor
 
-split_is_multiple = int(2);
+split_is_multiple = int(11);
 
 scores_al_rf = []
 scores_al_dt = []
