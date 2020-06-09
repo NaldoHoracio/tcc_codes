@@ -58,7 +58,7 @@ features_br['NT_OBJ_CE'] = features_br['NT_OBJ_CE'].astype(float)
 
 features_br['NT_DIS_CE'] = features_br['NT_DIS_CE'].str.replace(',','.')
 features_br['NT_DIS_CE'] = features_br['NT_DIS_CE'].astype(float)
-#%% Substituindo valores nan pela mediana (medida resistente) e 0 por 1
+#%% Substituindo valores nan pela mediana (medida resistente)
 features_br_median = features_br.iloc[:,0:16].median()
 
 features_br.iloc[:,0:16] = features_br.iloc[:,0:16].fillna(features_br.iloc[:,0:16].median())
@@ -107,7 +107,7 @@ from sklearn.model_selection import KFold
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.tree import DecisionTreeRegressor
 
-split_is_multiple = int(2);
+split_is_multiple = int(11);
 
 scores_br_rf = []
 scores_br_dt = []
@@ -481,10 +481,10 @@ bar_width = 0.1;
 x8 = ['Até 1,5 sál. mín','De 1 a 3 sál. mín.','De 3 a 4,5 sál. mín.',
       'De 4,5 a 6 sál. mín','De 6 a 10 sál. mín.','De 30 a 10 sál. mín',
       'Acima de 30 sál. mín.'];
-y8_rf = [I08_BR_RF[0],I08_BR_RF[1],I08_AL_RF[2],I08_BR_RF[3],
+y8_rf = [I08_BR_RF[0],I08_BR_RF[1],I08_BR_RF[2],I08_BR_RF[3],
          I08_BR_RF[4],I08_BR_RF[5],I08_BR_RF[6]];
 y8_rf = list(map(lambda t:t*100, y8_rf));
-y8_dt = [I08_BR_DT[0],I08_BR_DT[1],I08_BR_DT[2],I08_AL_DT[3],
+y8_dt = [I08_BR_DT[0],I08_BR_DT[1],I08_BR_DT[2],I08_BR_DT[3],
          I08_BR_DT[4],I08_BR_DT[5],I08_BR_DT[6]];
 y8_dt = list(map(lambda t:t*100, y8_dt));
 
@@ -762,7 +762,7 @@ plt.savefig('QE_I15_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I16
 fig16 = plt.figure();
 ax16 = fig16.add_axes([0,0,1,1]);
-bar_width = 0.1;
+bar_width = 0.3;
 
 x16 = ['RO','AC','AM','RR','PA','AP','TO','MA','PI','CE','RN','PB','PE',
        'SE','BA','MG','ES','RJ','SP','PR','SC','RS','MS','MT','GO','DF','Outro'];
@@ -772,7 +772,11 @@ y16_rf = [I16_BR_RF[0],I16_BR_RF[1],I16_BR_RF[2],I16_BR_RF[3],I16_BR_RF[4],I16_B
           I16_BR_RF[18],I16_BR_RF[19],I16_BR_RF[20],I16_BR_RF[21],I16_BR_RF[22],I16_BR_RF[23],
           I16_BR_RF[24],I16_BR_RF[25],I16_BR_RF[26]];
 y16_rf = list(map(lambda t:t*100, y16_rf));
-y16_dt = [I16_BR_DT[0]];
+y16_dt = [I16_BR_DT[0],I16_BR_DT[1],I16_BR_DT[2],I16_BR_DT[3],I16_BR_DT[4],I16_BR_DT[5],
+          I16_BR_DT[6],I16_BR_DT[7],I16_BR_DT[8],I16_BR_DT[9],I16_BR_DT[10],I16_BR_DT[11],
+          I16_BR_DT[12],I16_BR_DT[13],I16_BR_DT[14],I16_BR_DT[15],I16_BR_DT[16],I16_BR_DT[17],
+          I16_BR_DT[18],I16_BR_DT[19],I16_BR_DT[20],I16_BR_DT[21],I16_BR_DT[22],I16_BR_DT[23],
+          I16_BR_DT[24],I16_BR_DT[25],I16_BR_DT[26]];
 y16_dt = list(map(lambda t:t*100, y16_dt));
 
 # Configurando a posição no eixo x
@@ -782,7 +786,7 @@ y162 = [x + bar_width for x in y161]
 
 # Fazendo o plot
 plt.bar(y161, y16_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y162, y16_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y162, y16_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -1140,7 +1144,7 @@ plt.savefig('QE_I26_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I27a
 fig27a = plt.figure();
 ax27aa = fig27a.add_axes([0,0,1,1]);
-bar_width = 0.1;
+bar_width = 0.3;
 
 ax27a = ['QE_I01_BR', 'QE_I02_BR', 'QE_I03_BR', 'QE_I04_BR', 'QE_I05_BR', 'QE_I06_BR',
          'QE_I07_BR', 'QE_I08_BR', 'QE_I09_BR', 'QE_I10_BR', 'QE_I11_BR', 'QE_I12_BR', 
@@ -1163,7 +1167,7 @@ y27a2 = [x + bar_width for x in y27a1]
 
 # Fazendo o plot
 plt.bar(y27a1, y27a_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y27a2, y27a_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y27a2, y27a_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -1180,20 +1184,20 @@ plt.savefig('QE_I27a_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I27b
 fig27b = plt.figure();
 ax27ab = fig27b.add_axes([0,0,1,1]);
-bar_width = 0.1;
+bar_width = 0.3;
 
 ax27b = ['QE_I14_BR', 'QE_I15_BR', 'QE_I16_BR', 'QE_I17_BR', 'QE_I18_BR', 'QE_I19_BR',
          'QE_I20_BR', 'QE_I21_BR', 'QE_I22_BR', 'QE_I23_BR', 'QE_I24_BR', 'QE_I25_BR', 
          'QE_I26_BR'];
 y27b_rf = [np.sum(I14_BR_RF),np.sum(I15_BR_RF),np.sum(I16_BR_RF),np.sum(I17_BR_RF),
-          np.sum(I18_BR_RF),np.sum(I19_BR_RF),np.sum(I19_BR_RF),np.sum(I20_BR_RF),
-          np.sum(I21_BR_RF),np.sum(I22_BR_RF),np.sum(I23_BR_RF),np.sum(I24_BR_RF),
-          np.sum(I13_BR_RF)];
+          np.sum(I18_BR_RF),np.sum(I19_BR_RF),np.sum(I20_BR_RF), np.sum(I21_BR_RF),
+          np.sum(I22_BR_RF),np.sum(I23_BR_RF),np.sum(I24_BR_RF),
+          np.sum(I25_BR_RF),np.sum(I26_BR_RF)];
 y27b_rf = list(map(lambda t:t*100, y27b_rf));
 y27b_dt =  [np.sum(I14_BR_DT),np.sum(I15_BR_DT),np.sum(I16_BR_DT),np.sum(I17_BR_DT),
-          np.sum(I18_BR_DT),np.sum(I19_BR_DT),np.sum(I19_BR_DT),np.sum(I20_BR_DT),
-          np.sum(I21_BR_DT),np.sum(I22_BR_DT),np.sum(I23_BR_DT),np.sum(I24_BR_DT),
-          np.sum(I13_BR_DT)];
+          np.sum(I18_BR_DT),np.sum(I19_BR_DT),np.sum(I20_BR_DT), np.sum(I21_BR_DT),
+          np.sum(I22_BR_DT),np.sum(I23_BR_DT),np.sum(I24_BR_DT),np.sum(I25_BR_DT),
+          np.sum(I26_BR_DT)];
 y27b_dt = list(map(lambda t:t*100, y27b_dt));
 
 # Configurando a posição no eixo x
@@ -1203,7 +1207,7 @@ y27b2 = [x + bar_width for x in y27b1]
 
 # Fazendo o plot
 plt.bar(y27b1, y27b_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y27b2, y27b_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y27b2, y27b_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
