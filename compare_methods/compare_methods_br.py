@@ -248,7 +248,7 @@ I25_BR_DT = importance_fields_br_dt_t[166:174]; I26_BR_DT = importance_fields_br
 # QE_I01
 fig1 = plt.figure();
 ax1 = fig1.add_axes([0,0,1,1]);
-bar_width = 0.1;
+bar_width = 0.3;
 
 x1 = ['Solteiro', 'Casado (a)', 'Separado', 'Viúvo', 'Outro'];
 y1_rf = [I01_BR_RF[0],I01_BR_RF[1],I01_BR_RF[2],I01_BR_RF[3],I01_BR_RF[4]];
@@ -263,7 +263,7 @@ y12 = [x + bar_width for x in y11]
 
 # Fazendo o plot
 plt.bar(y11, y1_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y12, y1_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y12, y1_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -280,7 +280,7 @@ plt.savefig('QE_I01_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I02
 fig2 = plt.figure();
 ax2 = fig2.add_axes([0,0,1,1]);
-bar_width = 0.1;
+bar_width = 0.3;
 
 x2 = ['Branca','Preta','Amarela','Parda','Indígena','Não quero declarar'];
 y2_rf = [I02_BR_RF[0],I02_BR_RF[1],I02_BR_RF[2],I02_BR_RF[3],I02_BR_RF[4],I02_BR_RF[5]];
@@ -295,7 +295,7 @@ y22 = [x + bar_width for x in y21]
 
 # Fazendo o plot
 plt.bar(y21, y2_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y22, y2_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y22, y2_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -312,7 +312,7 @@ plt.savefig('QE_I02_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I03
 fig3 = plt.figure();
 ax3 = fig3.add_axes([0,0,1,1]);
-bar_width = 0.1;
+bar_width = 0.3;
 
 x3 = ['Brasileira','Brasileira naturalizada','Estrangeira'];
 y3_rf = [I03_BR_RF[0],I03_BR_RF[1],I03_BR_RF[2]];
@@ -327,7 +327,7 @@ y32 = [x + bar_width for x in y31]
 
 # Fazendo o plot
 plt.bar(y31, y3_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y32, y3_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y32, y3_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -344,7 +344,7 @@ plt.savefig('QE_I03_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I04
 fig4 = plt.figure();
 ax4 = fig4.add_axes([0,0,1,1]);
-bar_width = 0.1;
+bar_width = 0.3;
 
 x4 = ['Nenhum','1º ao 5º ano','6º ao 9º ano','Ensino médio','Graduação','Pós-graduação'];
 y4_rf = [I04_BR_RF[0],I04_BR_RF[1],I04_BR_RF[2],I04_BR_RF[3],I04_BR_RF[4],I04_BR_RF[5]];
@@ -359,7 +359,7 @@ y42 = [x + bar_width for x in y41]
 
 # Fazendo o plot
 plt.bar(y41, y4_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y42, y4_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y42, y4_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -376,7 +376,7 @@ plt.savefig('QE_I04_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I05
 fig5 = plt.figure();
 ax5 = fig5.add_axes([0,0,1,1]);
-bar_width = 0.1;
+bar_width = 0.3;
 
 x5 = ['Nenhum','1º ao 5º ano','6º ao 9º ano','Ensino médio','Graduação','Pós-graduação'];
 y5_rf = [I05_BR_RF[0],I05_BR_RF[1],I05_BR_RF[2],I05_BR_RF[3],I05_BR_RF[4],I05_BR_RF[5]];
@@ -391,7 +391,7 @@ y52 = [x + bar_width for x in y51]
 
 # Fazendo o plot
 plt.bar(y51, y5_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y52, y5_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y52, y5_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -408,7 +408,7 @@ plt.savefig('QE_I05_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I06
 fig6 = plt.figure();
 ax6 = fig6.add_axes([0,0,1,1]);
-bar_width = 0.1;
+bar_width = 0.3;
 
 x6 = ['Casa/apartamento (sozinho)','Casa/apartamento (pais/parentes)',
       'Casa/apartamento (cônjugue/filhos)','Casa/apartamento (outras pessoas)',
@@ -425,7 +425,7 @@ y62 = [x + bar_width for x in y61]
 
 # Fazendo o plot
 plt.bar(y61, y6_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y62, y6_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y62, y6_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -442,7 +442,7 @@ plt.savefig('QE_I06_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I07
 fig7 = plt.figure();
 ax7 = fig7.add_axes([0,0,1,1]);
-bar_width = 0.1;
+bar_width = 0.3;
 
 x7 = ['Nenhuma','Uma','Duas','Três','Quatro','Cinco','Seis','Sete ou mais'];
 y7_rf = [I07_BR_RF[0],I07_BR_RF[1],I07_BR_RF[2],I07_BR_RF[3],
@@ -459,7 +459,7 @@ y72 = [x + bar_width for x in y71]
 
 # Fazendo o plot
 plt.bar(y71, y7_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y72, y7_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y72, y7_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -476,7 +476,7 @@ plt.savefig('QE_I07_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I08
 fig8 = plt.figure();
 ax8 = fig8.add_axes([0,0,1,1]);
-bar_width = 0.1;
+bar_width = 0.3;
 
 x8 = ['Até 1,5 sál. mín','De 1 a 3 sál. mín.','De 3 a 4,5 sál. mín.',
       'De 4,5 a 6 sál. mín','De 6 a 10 sál. mín.','De 30 a 10 sál. mín',
@@ -495,7 +495,7 @@ y82 = [x + bar_width for x in y81]
 
 # Fazendo o plot
 plt.bar(y81, y8_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y82, y8_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y82, y8_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -512,7 +512,7 @@ plt.savefig('QE_I08_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I09
 fig9 = plt.figure();
 ax9 = fig1.add_axes([0,0,1,1]);
-bar_width = 0.1;
+bar_width = 0.3;
 
 x9 = ['Sem renda (financiamento governamental)','Sem renda (financ. por família/outros)',
       'Tenho renda, mas recebo ajuda (família/outras pessoas)',
@@ -532,7 +532,7 @@ y92 = [x + bar_width for x in y91]
 
 # Fazendo o plot
 plt.bar(y91, y9_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y92, y9_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y92, y9_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -549,7 +549,7 @@ plt.savefig('QE_I09_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I10
 fig10 = plt.figure();
 ax10 = fig10.add_axes([0,0,1,1]);
-bar_width = 0.1;
+bar_width = 0.3;
 
 x10 = ['Não estou trabalhando','Trabalho eventualmente','Trablho (até 20h/sem)',
        'Trabalho (de 21h/sem a 39h/sem)','Trabalho 40h/sem ou mais'];
@@ -567,7 +567,7 @@ y102 = [x + bar_width for x in y101]
 
 # Fazendo o plot
 plt.bar(y101, y10_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y102, y10_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y102, y10_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -584,7 +584,7 @@ plt.savefig('QE_I10_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I11
 fig11 = plt.figure();
 ax11 = fig11.add_axes([0,0,1,1]);
-bar_width = 0.1;
+bar_width = 0.3;
 
 x11 = ['Nenhum (curso gratuito)','Nenhum (mas não gratuito)','ProUni integral',
        'ProUni parcial, apenas','FIES, apenas','ProUni parcial e FIES',
@@ -605,7 +605,7 @@ y112 = [x + bar_width for x in y111]
 
 # Fazendo o plot
 plt.bar(y111, y11_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y112, y11_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y112, y11_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -622,7 +622,7 @@ plt.savefig('QE_I11_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I12
 fig12 = plt.figure();
 ax12 = fig12.add_axes([0,0,1,1]);
-bar_width = 0.1;
+bar_width = 0.3;
 
 x12 = ['Nenhum','Moradia','Alimentação','Moradia e alimentação', 'Permanência','Outros'];
 y12_rf = [I12_BR_RF[0],I12_BR_RF[1],I12_BR_RF[2],I12_BR_RF[3], I12_BR_RF[4],
@@ -639,7 +639,7 @@ y122 = [x + bar_width for x in y121]
 
 # Fazendo o plot
 plt.bar(y121, y12_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y122, y12_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y122, y12_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -656,7 +656,7 @@ plt.savefig('QE_I12_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I13
 fig13 = plt.figure();
 ax13 = fig13.add_axes([0,0,1,1]);
-bar_width = 0.1;
+bar_width = 0.3;
 
 x13 = ['Nenhum', 'Bolsa IC', 'Bolsa extensão','Bolsa monitoria/tutoria',
        'Bolsa PET','Outro tipo'];
@@ -674,7 +674,7 @@ y132 = [x + bar_width for x in y131]
 
 # Fazendo o plot
 plt.bar(y131, y13_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y132, y13_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y132, y13_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -691,7 +691,7 @@ plt.savefig('QE_I13_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I14
 fig14 = plt.figure();
 ax14 = fig14.add_axes([0,0,1,1]);
-bar_width = 0.1;
+bar_width = 0.3;
 
 x14 = ['Não','Sim, Ciências sem Fronteiras', 'Sim, intercâmbio pelo Governo Federal',
        'Sim, intercâmbio pelo Governo Estadual', 'Sim, intercâmbio pela minha IES',
@@ -710,7 +710,7 @@ y142 = [x + bar_width for x in y141]
 
 # Fazendo o plot
 plt.bar(y141, y14_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y142, y14_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y142, y14_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -727,7 +727,7 @@ plt.savefig('QE_I14_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I15
 fig15 = plt.figure();
 ax15 = fig15.add_axes([0,0,1,1]);
-bar_width = 0.1;
+bar_width = 0.3;
 
 x15 = ['Não','Sim, étnico-racial','Sim, renda', 'Sim, escola pública ou particular (com bolsa)',
        'Sim, combina dois mais', 'Sim, outra'];
@@ -745,7 +745,7 @@ y152 = [x + bar_width for x in y151]
 
 # Fazendo o plot
 plt.bar(y151, y15_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y152, y15_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y152, y15_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -803,7 +803,7 @@ plt.savefig('QE_I16_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I17
 fig17 = plt.figure();
 ax17 = fig17.add_axes([0,0,1,1]);
-bar_width = 0.1;
+#bar_width = 0.1;
 
 x17 = ['Todo em escola pública', 'Todo em escola privada','Todo no exterior',
        'Maior parte em escola pública','Maior parte em escola privada',
@@ -822,7 +822,7 @@ y172 = [x + bar_width for x in y171]
 
 # Fazendo o plot
 plt.bar(y171, y17_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y172, y17_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y172, y17_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -839,7 +839,7 @@ plt.savefig('QE_I17_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I18
 fig18 = plt.figure();
 ax18 = fig18.add_axes([0,0,1,1]);
-bar_width = 0.1;
+#bar_width = 0.1;
 
 x18 = ['Tradicional', 'Prof. técnico', 'Prof. magistério (curso normal)', 
        'EJA e/ou Supletivo', 'Outra'];
@@ -855,7 +855,7 @@ y182 = [x + bar_width for x in y181]
 
 # Fazendo o plot
 plt.bar(y181, y18_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y182, y18_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y182, y18_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -872,7 +872,7 @@ plt.savefig('QE_I18_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I19
 fig19 = plt.figure();
 ax19 = fig19.add_axes([0,0,1,1]);
-bar_width = 0.1;
+#bar_width = 0.1;
 
 x19 = ['Ninguém', 'Pais', 'Outros membros (excluindo os pais)', 'Professores', 
        'Líder ou representante religioso', 'Colegas/amigos', 'Outras pessoas'];
@@ -890,7 +890,7 @@ y192 = [x + bar_width for x in y191]
 
 # Fazendo o plot
 plt.bar(y191, y19_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y192, y19_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y192, y19_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -907,7 +907,7 @@ plt.savefig('QE_I19_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I20
 fig20 = plt.figure();
 ax20 = fig20.add_axes([0,0,1,1]);
-bar_width = 0.1;
+#bar_width = 0.1;
 
 x20 = ['Não tive dificuldade', 'Não recebi apoio', 'Pais', 'Avós', 'Irmãos, primos ou tios',
        'Líder ou representante religioso', 'Colegas de curso ou amigos',
@@ -927,7 +927,7 @@ y202 = [x + bar_width for x in y201]
 
 # Fazendo o plot
 plt.bar(y201, y20_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y202, y20_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y202, y20_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -944,7 +944,7 @@ plt.savefig('QE_I20_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I21
 fig21 = plt.figure();
 ax21 = fig21.add_axes([0,0,1,1]);
-bar_width = 0.1;
+#bar_width = 0.1;
 
 x21 = ['Sim', 'Não'];
 y21_rf = [I21_BR_RF[0],I21_BR_RF[1]];
@@ -959,7 +959,7 @@ y212 = [x + bar_width for x in y211]
 
 # Fazendo o plot
 plt.bar(y211, y21_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y212, y21_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y212, y21_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -976,7 +976,7 @@ plt.savefig('QE_I21_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I22
 fig22 = plt.figure();
 ax22 = fig22.add_axes([0,0,1,1]);
-bar_width = 0.1;
+#bar_width = 0.1;
 
 x22 = ['Nenhum  ', 'Um ou dois', 'Três a cinco', 'Seis a oito', 'Mais de oito'];
 y22_rf = [I22_BR_RF[0],I22_BR_RF[1],I22_BR_RF[2],I22_BR_RF[3], I22_BR_RF[4]];
@@ -990,7 +990,7 @@ y222 = [x + bar_width for x in y221]
 
 # Fazendo o plot
 plt.bar(y221, y22_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y222, y22_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y222, y22_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -999,7 +999,7 @@ plt.xticks([k + bar_width for k in range(len(y22_rf))], \
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável');
-plt.title('Livros lido no ano (excluindo da Biografia do curso');
+plt.title('Livros lido no ano (excluindo da Biografia do curso)');
 plt.legend();
 plt.savefig('QE_I22_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -1007,7 +1007,7 @@ plt.savefig('QE_I22_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I23
 fig23 = plt.figure();
 ax23 = fig23.add_axes([0,0,1,1]);
-bar_width = 0.1;
+#bar_width = 0.1;
 
 x23 = ['Nenhuma', 'De uma a três', 'De quatro a sete', 'De oito a doze', 'Mais de doze'];
 y23_rf = [I23_BR_RF[0],I23_BR_RF[1],I23_BR_RF[2],I23_BR_RF[3],I23_BR_RF[4]];
@@ -1022,7 +1022,7 @@ y232 = [x + bar_width for x in y231]
 
 # Fazendo o plot
 plt.bar(y231, y23_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y232, y23_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y232, y23_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -1039,7 +1039,7 @@ plt.savefig('QE_I23_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I24
 fig24 = plt.figure();
 ax24 = fig24.add_axes([0,0,1,1]);
-bar_width = 0.1;
+#bar_width = 0.1;
 
 x24 = ['Sim, apenas presencial', 'Sim, apenas semipresencial', 
        'Sim, parte presencial e parte semipresencial', 'Sim, EAD', 'Não'];
@@ -1055,7 +1055,7 @@ y242 = [x + bar_width for x in y241]
 
 # Fazendo o plot
 plt.bar(y241, y24_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y242, y24_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y242, y24_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -1072,7 +1072,7 @@ plt.savefig('QE_I24_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I25
 fig25 = plt.figure();
 ax25 = fig25.add_axes([0,0,1,1]);
-bar_width = 0.1;
+#bar_width = 0.1;
 
 x25 = ['Inserção no mercado de trabalho', 'Influência familiar','Valorização profissional',
        'Prestígio social', 'Vocação', 'Oferecido na modalidade EAD',
@@ -1091,7 +1091,7 @@ y252 = [x + bar_width for x in y251]
 
 # Fazendo o plot
 plt.bar(y251, y25_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y252, y25_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y252, y25_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -1108,7 +1108,7 @@ plt.savefig('QE_I25_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I26
 fig26 = plt.figure();
 ax26 = fig26.add_axes([0,0,1,1]);
-bar_width = 0.1;
+#bar_width = 0.1;
 
 x26 = ['Gratuidade', 'Preço da mensalidade', 'Prox. a residência', 'Prox. ao trabalho', 
        'Facilidade de acesso', 'Qualidade/reputação', 'Única opção de aprovação',
@@ -1127,7 +1127,7 @@ y262 = [x + bar_width for x in y261]
 
 # Fazendo o plot
 plt.bar(y261, y26_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y262, y26_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y262, y26_dt, color='blue', width=bar_width, edgecolor='white', label='Decision Tree')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -1144,7 +1144,7 @@ plt.savefig('QE_I26_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I27a
 fig27a = plt.figure();
 ax27aa = fig27a.add_axes([0,0,1,1]);
-bar_width = 0.3;
+#bar_width = 0.3;
 
 ax27a = ['QE_I01_BR', 'QE_I02_BR', 'QE_I03_BR', 'QE_I04_BR', 'QE_I05_BR', 'QE_I06_BR',
          'QE_I07_BR', 'QE_I08_BR', 'QE_I09_BR', 'QE_I10_BR', 'QE_I11_BR', 'QE_I12_BR', 
@@ -1184,7 +1184,7 @@ plt.savefig('QE_I27a_BR_CP.png', dpi=450, bbox_inches='tight');
 # QE_I27b
 fig27b = plt.figure();
 ax27ab = fig27b.add_axes([0,0,1,1]);
-bar_width = 0.3;
+#bar_width = 0.3;
 
 ax27b = ['QE_I14_BR', 'QE_I15_BR', 'QE_I16_BR', 'QE_I17_BR', 'QE_I18_BR', 'QE_I19_BR',
          'QE_I20_BR', 'QE_I21_BR', 'QE_I22_BR', 'QE_I23_BR', 'QE_I24_BR', 'QE_I25_BR', 
