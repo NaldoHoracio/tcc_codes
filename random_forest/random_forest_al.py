@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """
-@author: edvonaldo
+Título: Random Forest aplicado a dados em Alagoas
 
+@author: edvonaldo
 """
 
 import os
@@ -106,6 +107,8 @@ from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import KFold
 from sklearn.ensemble import RandomForestRegressor
 
+number_splits = int(11)
+
 scores_al = []
 
 importance_fields_al = 0.0
@@ -113,7 +116,7 @@ importance_fields_aux_al = []
 
 rf_al = RandomForestRegressor(n_estimators = 1000, random_state=0)
 
-kf_cv_al = KFold(n_splits=11, random_state=None, shuffle=False) # n_splits: divisores de 7084 ^ memory
+kf_cv_al = KFold(n_splits=number_splits, random_state=None, shuffle=False) # n_splits: divisores de 7084 ^ memory
 
 for train_index_al, test_index_al in kf_cv_al.split(features_al):
     #print("Train index: ", np.min(train_index_al), '- ', np.max(train_index_al))
@@ -147,7 +150,7 @@ for train_index_al, test_index_al in kf_cv_al.split(features_al):
 #%% Acurácia AL
 print('Accuracy: ', round(np.average(scores_al), 2), "%.")
 
-importance_fields_al_t = importance_fields_al/11
+importance_fields_al_t = importance_fields_al/number_splits
 
 print('Total: ', round(np.sum(importance_fields_al_t),8))
 
@@ -187,9 +190,6 @@ I21_AL = importance_fields_al_t[123:125]; I22_AL = importance_fields_al_t[125:13
 I23_AL = importance_fields_al_t[130:135]; I24_AL = importance_fields_al_t[135:140];
 
 I25_AL = importance_fields_al_t[140:148]; I26_AL = importance_fields_al_t[148:157];
-
-print('I01_AL: ', round(np.sum(I01_AL), 2))
-
 #%% Visualization of Variable Importances
 # QE_I01
 fig1 = plt.figure();

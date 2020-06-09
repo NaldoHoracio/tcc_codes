@@ -1,13 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Thu 26  15:37:56 2020
-
-@author: edvonaldo
-"""
-
-# -*- coding: utf-8 -*-
-"""
-Created on Thu 26 15:37:56 2020
+Título: Árvore de Decisão aplicada a dados no Brasil (excluindo Alagoas)
 
 @author: edvonaldo
 """
@@ -83,15 +76,6 @@ describe_br = features_br.describe()
 
 print('Descrição para as colunas: ', describe_br)
 print(describe_br.columns)
-
-#%% One hot encoding - QE_I01 a QE_I26
-#features_al = pd.get_dummies(data=features_al, columns=['QE_I01','QE_I02','QE_I03','QE_I04',
-#                                                        'QE_I05','QE_I06','QE_I07','QE_I08',
-#                                                        'QE_I09','QE_I10','QE_I11','QE_I12',
-#                                                        'QE_I13','QE_I14','QE_I15','QE_I16',
-#                                                        'QE_I17','QE_I18','QE_I19','QE_I20',
-#                                                        'QE_I21','QE_I22','QE_I23','QE_I24',
-#                                                        'QE_I25','QE_I26'])
 #%% Convertendo os labels de predição para arrays numpy
 #labels_to_predict = np.array(features_al.loc[:,'NT_GER':'NT_CE_D3'])
 labels_br = np.array(features_br['NT_GER'])
@@ -128,14 +112,16 @@ from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import KFold
 from sklearn.ensemble import RandomForestRegressor
 
+number_splits = int(11);
+
 scores_br = []
 
 importance_fields_br = 0.0
 importance_fields_aux_br = []
 
-rf_br = RandomForestRegressor(n_estimators = 500, random_state=0)
+rf_br = RandomForestRegressor(n_estimators = 1000, random_state=0)
 
-kf_cv_br = KFold(n_splits=11, random_state=None, shuffle=False) # n_splits: divisores de 7084 ^ memory
+kf_cv_br = KFold(n_splits=number_splits, random_state=None, shuffle=False) # n_splits: divisores de 7084 ^ memory
 
 for train_index_br, test_index_br in kf_cv_br.split(features_br):
     #print("Train index: ", np.min(train_index_al), '- ', np.max(train_index_al))
@@ -169,7 +155,7 @@ for train_index_br, test_index_br in kf_cv_br.split(features_br):
 #%% Acurácia AL
 print('Accuracy: ', round(np.average(scores_br), 2), "%.")
 
-importance_fields_br_t = importance_fields_br/11
+importance_fields_br_t = importance_fields_br/number_splits
 
 print('Total: ', round(np.sum(importance_fields_br_t),8))
 
