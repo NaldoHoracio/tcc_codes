@@ -151,7 +151,7 @@ for train_index_br, test_index_br in kf_cv_br.split(features_br):
     # Append em cada valor médio
     scores_br.append(accuracy_br)
 
-#%% Acurácia AL
+#%% Acurácia BR
 print('Accuracy: ', round(np.average(scores_br), 2), "%.")
 
 importance_fields_br_t = importance_fields_br/number_splits
