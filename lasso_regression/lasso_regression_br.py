@@ -1,5 +1,5 @@
 """
-T√≠tulo: Lasso Regression aplicado a dados no Brasil (excluindo Alagoas)
+TÌ≠tulo: Lasso Regression aplicado a dados no Brasil (excluindo Alagoas)
 
 @author: edvonaldo
 """
@@ -23,19 +23,20 @@ features_br = pd.read_csv(path_br)
 del features_br['Unnamed: 0']
 
 #%%
+
 # Escolhendo apenas as colunas de interesse
 features_br = features_br.loc[:,'NT_GER':'QE_I26']
 features_br = features_br.drop(features_br.loc[:, 'CO_RS_I1':'CO_RS_I9'].columns, axis=1)
 
 #%% Observando os dados
-print('O formato dos dados √©: ', features_br.shape)
+print('O formato dos dados È: ', features_br.shape)
 
 describe_br = features_br.describe()
 
-print('Descri√ß√£o para as colunas: ', describe_br)
+print('DescriÁ„o para as colunas: ', describe_br)
 print(describe_br.columns)
 
-#%% N√∫meros que s√£o strings para float
+#%% N˙meros que s„o strings para float
 # Colunas NT_GER a NT_DIS_FG ^ NT_CE a NT_DIS_CE
 features_br['NT_GER'] = features_br['NT_GER'].str.replace(',','.')
 features_br['NT_GER'] = features_br['NT_GER'].astype(float)
@@ -68,13 +69,14 @@ features_br.iloc[:,0:16] = features_br.iloc[:,0:16].fillna(features_br.iloc[:,0:
 
 features_br.iloc[:,0:16] = features_br.iloc[:,0:16].replace(to_replace = 0, value = 1)
 #%% Observando os dados
-print('O formato dos dados √©: ', features_br.shape)
+print('O formato dos dados È: ', features_br.shape)
 
 describe_br = features_br.describe()
 
-print('Descri√ß√£o para as colunas: ', describe_br)
+print('DescriÁ„o para as colunas: ', describe_br)
 print(describe_br.columns)
-#%% Convertendo os labels de predi√ß√£o para arrays numpy
+#%% Convertendo os labels de prediÁ„o para arrays numpy
+#labels_to_predict = np.array(features_al.loc[:,'NT_GER':'NT_CE_D3'])
 labels_br = np.array(features_br['NT_GER'])
 print('Media das labels: %.2f' %(labels_br.mean()) )
 #%%
@@ -104,7 +106,6 @@ features_br_list_oh = list(features_br.columns)
 #%%
 # Convertendo para numpy
 features_br = np.array(features_br)
-
 #%% K-Fold CV
 from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import KFold
@@ -134,21 +135,21 @@ for train_index_br, test_index_br in kf_cv_br.split(features_br):
     # Ajustando cada features e label com RF
     lasso_br.fit(train_features_br, train_labels_br)
     
-    # Usando o Random Forest para predi√ß√£o dos dados
+    # Usando o Random Forest para prediÁ„o dos dados
     predictions_br = lasso_br.predict(test_features_br)
     
     # Erro
     errors_br = abs(predictions_br - test_labels_br)
     
-    # Acur√°cia
+    # Acur·cia
     accuracy_br = 100 - mean_absolute_error(test_labels_br, predictions_br)
     
-    # Import√¢ncia das vari√°veis
+    # Import‚nncia das vari·veis
     #importance_fields_aux_br = lasso_br.feature_importances_
     #importance_fields_br += importance_fields_aux_br
     
-    # Append em cada valor m√©dio
+    # Append em cada valor mÈdio
     scores_br.append(accuracy_br)
 
-#%% - Acur√°cia BR
+#%% - Acur·cia BR
 print('Accuracy: ', round(np.average(scores_br), 2), "%.")
