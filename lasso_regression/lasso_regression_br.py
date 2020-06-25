@@ -118,7 +118,7 @@ scores_br = []
 importance_fields_br = 0.0
 importance_fields_aux_br = []
 
-lasso_br = linear_model.Lasso(alpha=0.1)
+lasso_br = linear_model.Lasso(alpha=0.1, positive=True)
 
 kf_cv_br = KFold(n_splits=number_splits, random_state=None, shuffle=False) # n_splits: divisores de 7084 ^ memory
 
@@ -145,11 +145,52 @@ for train_index_br, test_index_br in kf_cv_br.split(features_br):
     accuracy_br = 100 - mean_absolute_error(test_labels_br, predictions_br)
     
     # Importânncia das variáveis
-    #importance_fields_aux_br = lasso_br.feature_importances_
-    #importance_fields_br += importance_fields_aux_br
+    importance_fields_aux_br = lasso_br.coef_
+    importance_fields_br += importance_fields_aux_br
+    
     
     # Append em cada valor médio
     scores_br.append(accuracy_br)
 
 #%% - Acurácia BR
 print('Accuracy: ', round(np.average(scores_br), 2), "%.")
+
+importance_fields_br_t = importance_fields_br/number_splits
+
+#%% Importancia das variáveis
+# List of tuples with variable and importance
+feature_importances_br = [(feature, round(importance, 8)) for feature, importance in zip(features_br_list_oh, importance_fields_br_t)]
+
+# Sort the feature importances by most important first
+# feature_importances = sorted(feature_importances, key = lambda x: x[1], reverse = True)
+
+# Print out the feature and importances
+[print('Variable: {:20} Importance: {}'.format(*pair)) for pair in feature_importances_br];
+
+
+#%% Separando os valores
+I01_BR = importance_fields_br_t[0:5]; I02_BR = importance_fields_br_t[5:11]; 
+
+I03_BR = importance_fields_br_t[11:14]; I04_BR = importance_fields_br_t[14:20]; 
+
+I05_BR = importance_fields_br_t[20:26]; I06_BR = importance_fields_br_t[26:32];
+
+I07_BR = importance_fields_br_t[32:40]; I08_BR = importance_fields_br_t[40:47]; 
+
+I09_BR = importance_fields_br_t[47:53]; I10_BR = importance_fields_br_t[53:58]; 
+
+I11_BR = importance_fields_br_t[58:69]; I12_BR = importance_fields_br_t[69:75];
+
+I13_BR = importance_fields_br_t[75:81]; I14_BR = importance_fields_br_t[81:87]; 
+
+I15_BR = importance_fields_br_t[87:93]; I16_BR = importance_fields_br_t[93:120]; 
+
+I17_BR = importance_fields_br_t[120:126]; I18_BR = importance_fields_br_t[126:131]; 
+
+I19_BR = importance_fields_br_t[131:138]; I20_BR = importance_fields_br_t[138:149]; 
+
+I21_BR = importance_fields_br_t[149:151]; I22_BR = importance_fields_br_t[151:156]; 
+
+I23_BR = importance_fields_br_t[156:161]; I24_BR = importance_fields_br_t[161:166];
+
+I25_BR = importance_fields_br_t[166:174]; I26_BR = importance_fields_br_t[174:183];
