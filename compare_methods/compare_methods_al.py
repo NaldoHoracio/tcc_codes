@@ -355,7 +355,7 @@ plt.xticks([k + bar_width for k in range(len(y1_rf))], \
            ['Solteiro', 'Casado (a)', 'Separado', 'Viúvo', 'Outro'],\
            rotation=90, fontsize=8)
 plt.ylabel('Importância (%)');
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Estado civil');
 plt.legend();
 plt.savefig('QE_I01_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -391,7 +391,7 @@ plt.xticks([k + bar_width for k in range(len(y2_rf))], \
            x2,\
            rotation=90, fontsize=8)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Cor/raça');
 plt.legend();
 plt.savefig('QE_I02_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -427,7 +427,7 @@ plt.xticks([k + bar_width for k in range(len(y3_rf))], \
            x3,\
            rotation=90, fontsize=8)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Nacionalidade');
 plt.legend();
 plt.savefig('QE_I03_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -450,13 +450,13 @@ y4_ls = list(map(lambda t:t*100, y4_ls));
 axis4 = np.arange(len(y4_rf))
 y41 = [x + bar_width for x in axis4]
 y42 = [x + bar_width for x in y41]
-y42 = [x + bar_width for x in y41]
+y43 = [x + bar_width for x in y42]
 
 
 # Fazendo o plot
 plt.bar(y41, y4_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
 plt.bar(y42, y4_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
-plt.bar(y42, y4_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
+plt.bar(y43, y4_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
 plt.xlabel('group', fontweight='bold')
@@ -464,7 +464,7 @@ plt.xticks([k + bar_width for k in range(len(y4_rf))], \
            x4,\
            rotation=90, fontsize=8)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Escolarização da pai');
 plt.legend();
 plt.savefig('QE_I04_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -501,7 +501,7 @@ plt.xticks([k + bar_width for k in range(len(y5_rf))], \
            x5,\
            rotation=90, fontsize=8)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Escolarização da mãe');
 plt.legend();
 plt.savefig('QE_I05_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -512,9 +512,9 @@ fig6 = plt.figure();
 ax6 = fig6.add_axes([0,0,1,1]);
 #bar_width = 0.1;
 
-x6 = ['Casa/apartamento (sozinho)','Casa/apartamento (pais/parentes)',
-      'Casa/apartamento (cônjugue/filhos)','Casa/apartamento (outras pessoas)',
-      'Alojamento univ. na própria IES','Outro'];
+x6 = ['Casa/apartamento(sozinho)','Casa/apartamento(pais/parentes)',
+      'Casa/apartamento(cônjugue/filhos)','Casa/apartamento(outras pessoas)',
+      'Alojamento univ na IES','Outro'];
 y6_rf = [I06_AL_RF[0],I06_AL_RF[1],I06_AL_RF[2],I06_AL_RF[3],I06_AL_RF[4],I06_AL_RF[5]];
 y6_rf = list(map(lambda t:t*100, y6_rf));
 y6_dt = [I06_AL_DT[0],I06_AL_DT[1],I06_AL_DT[2],I06_AL_DT[3],I06_AL_DT[4],I06_AL_DT[5]];
@@ -539,7 +539,7 @@ plt.xticks([k + bar_width for k in range(len(y6_rf))], \
            x6,\
            rotation=90, fontsize=8)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Onde e com quem moro');
 plt.legend();
 plt.savefig('QE_I06_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -578,7 +578,7 @@ plt.xticks([k + bar_width for k in range(len(y7_rf))], \
            x7,\
            rotation=90, fontsize=8)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Quantos moram com o estudante');
 plt.legend();
 plt.savefig('QE_I07_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -589,9 +589,9 @@ fig8 = plt.figure();
 ax8 = fig8.add_axes([0,0,1,1]);
 #bar_width = 0.1;
 
-x8 = ['Até 1,5 sál. mín','De 1 a 3 sál. mín.','De 3 a 4,5 sál. mín.',
-      'De 4,5 a 6 sál. mín','De 6 a 10 sál. mín.','De 30 a 10 sál. mín',
-      'Acima de 30 sál. mín.'];
+x8 = ['Até 1,5 sál mín','1 a 3 sál mín.','3 a 4,5 sál mín',
+      '4,5 a 6 sál mín','6 a 10 sál mín','30 a 10 sál mín',
+      'Acima de 30 sál mín'];
 y8_rf = [I08_AL_RF[0],I08_AL_RF[1],I08_AL_RF[2],I08_AL_RF[3],
          I08_AL_RF[4],I08_AL_RF[5],I08_AL_RF[6]];
 y8_rf = list(map(lambda t:t*100, y8_rf));
@@ -620,7 +620,7 @@ plt.xticks([k + bar_width for k in range(len(y8_rf))], \
            x8,\
            rotation=90, fontsize=8)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Renda total');
 plt.legend();
 plt.savefig('QE_I08_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -628,13 +628,13 @@ plt.savefig('QE_I08_AL_CP.png', dpi=450, bbox_inches='tight');
 #%% Visualization of Variable Importances
 # QE_I09
 fig9 = plt.figure();
-ax9 = fig1.add_axes([0,0,1,1]);
+ax9 = fig9.add_axes([0,0,1,1]);
 #bar_width = 0.1;
 
-x9 = ['Sem renda (financiamento governamental)','Sem renda (financ. por família/outros)',
-      'Tenho renda, mas recebo ajuda (família/outras pessoas)',
+x9 = ['Sem renda (fonte: governamental)','Sem renda (fonte: família/outros)',
+      'Tenho renda; recebo ajuda (família/colegas)',
       'Tenho renda (autossuficiente)','Tenho renda e ajudo a família',
-      'Sou o principal a ajudar a família'];
+      'Sou o provedor da família'];
 y9_rf = [I09_AL_RF[0],I09_AL_RF[1],I09_AL_RF[2],I09_AL_RF[3],
          I09_AL_RF[4],I09_AL_RF[5]];
 y9_rf = list(map(lambda t:t*100, y9_rf));
@@ -662,7 +662,7 @@ plt.xticks([k + bar_width for k in range(len(y9_rf))], \
            x9,\
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Situação financeira');
 plt.legend();
 plt.savefig('QE_I09_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -673,8 +673,8 @@ fig10 = plt.figure();
 ax10 = fig10.add_axes([0,0,1,1]);
 #bar_width = 0.1;
 
-x10 = ['Não estou trabalhando','Trabalho eventualmente','Trablho (até 20h/sem)',
-       'Trabalho (de 21h/sem a 39h/sem)','Trabalho 40h/sem ou mais'];
+x10 = ['Não trabalho','Trabalho eventualmente','Trablho (até 20h/sem)',
+       'Trabalho (21h/sem a 39h/sem)','Trabalho 40h/sem ou mais'];
 y10_rf = [I10_AL_RF[0],I10_AL_RF[1],I10_AL_RF[2],I10_AL_RF[3],
          I10_AL_RF[4]];
 y10_rf = list(map(lambda t:t*100, y10_rf));
@@ -703,7 +703,7 @@ plt.xticks([k + bar_width for k in range(len(y10_rf))], \
            x10,\
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Situação de trabalho');
 plt.legend();
 plt.savefig('QE_I10_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -715,8 +715,8 @@ ax11 = fig11.add_axes([0,0,1,1]);
 #bar_width = 0.1;
 
 x11 = ['Nenhum (curso gratuito)','Nenhum (mas não gratuito)','ProUni integral',
-       'ProUni parcial, apenas','FIES, apenas','ProUni parcial e FIES',
-       'Bolsa do governo (estadual/distrital/municipal)',
+       'ProUni parcial;apenas','FIES;apenas','ProUni e FIES',
+       'Bolsa do governo (E/D/MUN)',
        'Bolsa pela IES','Bolsa por outra entidade','Financiamento pela IES',
        'Financiamento bancário'];
 y11_rf = [I11_AL_RF[0],I11_AL_RF[1],I11_AL_RF[2],I11_AL_RF[3], I11_AL_RF[4],
@@ -746,7 +746,7 @@ plt.xticks([k + bar_width for k in range(len(y11_rf))], \
            x11,\
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Bolsa ou financiamento para custeio de mensalidade');
 plt.legend();
 plt.savefig('QE_I11_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -785,7 +785,7 @@ plt.xticks([k + bar_width for k in range(len(y12_rf))], \
            x12,\
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Auxílio permanência');
 plt.legend();
 plt.savefig('QE_I12_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -796,7 +796,7 @@ fig13 = plt.figure();
 ax13 = fig13.add_axes([0,0,1,1]);
 #bar_width = 0.1;
 
-x13 = ['Nenhum', 'Bolsa IC', 'Bolsa extensão','Bolsa monitoria/tutoria',
+x13 = ['Nenhum', 'Bolsa IC', 'Bolsa extensão','Monitoria/tutoria',
        'Bolsa PET','Outro tipo'];
 y13_rf = [I13_AL_RF[0],I13_AL_RF[1],I13_AL_RF[2],I13_AL_RF[3], I13_AL_RF[4],
           I13_AL_RF[5]];
@@ -826,7 +826,7 @@ plt.xticks([k + bar_width for k in range(len(y13_rf))], \
            x13,\
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Tipo de bolsa recebido');
 plt.legend();
 plt.savefig('QE_I13_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -837,8 +837,8 @@ fig14 = plt.figure();
 ax14 = fig14.add_axes([0,0,1,1]);
 #bar_width = 0.1;
 
-x14 = ['Não','Sim, Ciências sem Fronteiras', 'Sim, intercâmbio pelo Governo Federal',
-       'Sim, intercâmbio pelo Governo Estadual', 'Sim, intercâmbio pela minha IES',
+x14 = ['Não','Sim, Ciências sem Fronteiras', 'Sim, intercâmbio pelo Gov Fed',
+       'Sim, intercâmbio pelo Gov Est', 'Sim, intercâmbio pela minha IES',
        'Sim, intercâmbio não institucional'];
 y14_rf = [I14_AL_RF[0],I14_AL_RF[1],I14_AL_RF[2],I14_AL_RF[3], I14_AL_RF[4],
           I14_AL_RF[5]];
@@ -867,7 +867,7 @@ plt.xticks([k + bar_width for k in range(len(y14_rf))], \
            x14,\
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Programas de atividade no exterior');
 plt.legend();
 plt.savefig('QE_I14_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -878,8 +878,8 @@ fig15 = plt.figure();
 ax15 = fig15.add_axes([0,0,1,1]);
 #bar_width = 0.1;
 
-x15 = ['Não','Sim, étnico-racial','Sim, renda', 'Sim, escola pública ou particular (com bolsa)',
-       'Sim, combina dois mais', 'Sim, outra'];
+x15 = ['Não','Sim, étnico-racial','Sim, renda', 'Sim, esc púb ou part (c/ bolsa)',
+       'Sim, combina dois ou mais', 'Sim, outra'];
 y15_rf = [I15_AL_RF[0],I15_AL_RF[1],I15_AL_RF[2],I15_AL_RF[3], I15_AL_RF[4],
           I15_AL_RF[5]];
 y15_rf = list(map(lambda t:t*100, y15_rf));
@@ -907,7 +907,7 @@ plt.xticks([k + bar_width for k in range(len(y15_rf))], \
            x15,\
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Ingresso por cota');
 plt.legend();
 plt.savefig('QE_I15_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -943,7 +943,7 @@ plt.xticks([k + bar_width for k in range(len(y16_rf))], \
            x16,\
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('UF que concluiu o médio');
 plt.legend();
 plt.savefig('QE_I16_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -954,9 +954,9 @@ fig17 = plt.figure();
 ax17 = fig17.add_axes([0,0,1,1]);
 #bar_width = 0.1;
 
-x17 = ['Todo em escola pública', 'Todo em escola privada','Todo no exterior',
-       'Maior parte em escola pública','Maior parte em escola privada',
-       'Parte no Brasil e parte no exterior'];
+x17 = ['Todo em esc púb', 'Todo em esc priv','Todo no ext',
+       'Maior parte em esc púb','Maior parte em esc priv',
+       'Parte no Brasil'];
 y17_rf = [I17_AL_RF[0],I17_AL_RF[1],I17_AL_RF[2],I17_AL_RF[3], I17_AL_RF[4],
           I17_AL_RF[5]];
 y17_rf = list(map(lambda t:t*100, y17_rf));
@@ -984,7 +984,7 @@ plt.xticks([k + bar_width for k in range(len(y17_rf))], \
            x17,\
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Tipo de escola no médio');
 plt.legend();
 plt.savefig('QE_I17_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -995,7 +995,7 @@ fig18 = plt.figure();
 ax18 = fig18.add_axes([0,0,1,1]);
 #bar_width = 0.1;
 
-x18 = ['Tradicional', 'Prof. técnico', 'Prof. magistério (curso normal)', 
+x18 = ['Tradicional', 'Prof técnico', 'Prof magistério (curso normal)', 
        'EJA e/ou Supletivo', 'Outra'];
 y18_rf = [I18_AL_RF[0],I18_AL_RF[1],I18_AL_RF[2],I18_AL_RF[3], I18_AL_RF[4]];
 y18_rf = list(map(lambda t:t*100, y18_rf));
@@ -1021,7 +1021,7 @@ plt.xticks([k + bar_width for k in range(len(y18_rf))], \
            x18,\
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Modalidade do Ensino Médio');
 plt.legend();
 plt.savefig('QE_I18_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -1032,7 +1032,7 @@ fig19 = plt.figure();
 ax19 = fig19.add_axes([0,0,1,1]);
 #bar_width = 0.1;
 
-x19 = ['Ninguém', 'Pais', 'Outros membros (excluindo os pais)', 'Professores', 
+x19 = ['Ninguém', 'Pais', 'Outros membros (excluindo pais)', 'Profs', 
        'Líder ou representante religioso', 'Colegas/amigos', 'Outras pessoas'];
 y19_rf = [I19_AL_RF[0],I19_AL_RF[1],I19_AL_RF[2],I19_AL_RF[3], 
           I19_AL_RF[4], I19_AL_RF[5], I19_AL_RF[6]];
@@ -1061,7 +1061,7 @@ plt.xticks([k + bar_width for k in range(len(y19_rf))], \
            x19,\
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Maior incentivo para cursar a graduação');
 plt.legend();
 plt.savefig('QE_I19_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -1103,7 +1103,7 @@ plt.xticks([k + bar_width for k in range(len(y20_rf))], \
            x20,\
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Grupo determinante para enfrentar as dificuldades do curso e concluí-lo');
 plt.legend();
 plt.savefig('QE_I20_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -1139,7 +1139,7 @@ plt.xticks([k + bar_width for k in range(len(y21_rf))], \
            x21,\
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Alguém da família concluiu curso superior');
 plt.legend();
 plt.savefig('QE_I21_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -1175,8 +1175,8 @@ plt.xticks([k + bar_width for k in range(len(y22_rf))], \
            x22,\
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
-plt.title('Livros lido no ano (excluindo da Biografia do curso');
+plt.xlabel('Variável (AL)');
+plt.title('Livros lido no ano (excluindo da biografia do curso)');
 plt.legend();
 plt.savefig('QE_I22_AL_CP.png', dpi=450, bbox_inches='tight');
 
@@ -1211,7 +1211,7 @@ plt.xticks([k + bar_width for k in range(len(y23_rf))], \
            x23,\
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Horas de estudo por semana (excluindo aulas)');
 plt.legend();
 plt.savefig('QE_I23_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -1222,8 +1222,8 @@ fig24 = plt.figure();
 ax24 = fig24.add_axes([0,0,1,1]);
 #bar_width = 0.1;
 
-x24 = ['Sim, apenas presencial', 'Sim, apenas semipresencial', 
-       'Sim, parte presencial e parte semipresencial', 'Sim, EAD', 'Não'];
+x24 = ['Sim, presencial', 'Sim, semipresencial', 
+       'Sim, presencial e semipresencial', 'Sim, EAD', 'Não'];
 y24_rf = [I24_AL_RF[0],I24_AL_RF[1],I24_AL_RF[2],I24_AL_RF[3], I24_AL_RF[4]];
 y24_rf = list(map(lambda t:t*100, y24_rf));
 y24_dt = [I24_AL_DT[0],I24_AL_DT[1],I24_AL_DT[2],I24_AL_DT[3],I24_AL_DT[4]];
@@ -1248,7 +1248,7 @@ plt.xticks([k + bar_width for k in range(len(y24_rf))], \
            x24,\
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Oportunidade de aprendizado de idioma estrangeiro');
 plt.legend();
 plt.savefig('QE_I24_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -1259,7 +1259,7 @@ fig25 = plt.figure();
 ax25 = fig25.add_axes([0,0,1,1]);
 #bar_width = 0.1;
 
-x25 = ['Inserção no mercado de trabalho', 'Influência familiar','Valorização profissional',
+x25 = ['Inserção no merc de trab', 'Influência familiar','Valorização profissional',
        'Prestígio social', 'Vocação', 'Oferecido na modalidade EAD',
        'Baixa concorrência', 'Outro motivo'];
 y25_rf = [I25_AL_RF[0],I25_AL_RF[1],I25_AL_RF[2],I25_AL_RF[3], 
@@ -1270,7 +1270,7 @@ y25_dt = [I25_AL_DT[0],I25_AL_DT[1],I25_AL_DT[2],I25_AL_DT[3],
 y25_dt = list(map(lambda t:t*100, y25_dt));
 y25_ls = [I25_AL_LS[0],I25_AL_LS[1],I25_AL_LS[2],I25_AL_LS[3],
           I25_AL_LS[4], I25_AL_LS[5], I25_AL_LS[6],I25_AL_LS[7]];
-y25_ls = list(map(lambda t:t*100, y25_dt));
+y25_ls = list(map(lambda t:t*100, y25_ls));
 
 # Configurando a posição no eixo x
 axis25 = np.arange(len(y25_rf))
@@ -1290,7 +1290,7 @@ plt.xticks([k + bar_width for k in range(len(y25_rf))], \
            x25,\
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Porque escolhi o curso');
 plt.legend();
 plt.savefig('QE_I25_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -1301,8 +1301,8 @@ fig26 = plt.figure();
 ax26 = fig26.add_axes([0,0,1,1]);
 #bar_width = 0.1;
 
-x26 = ['Gratuidade', 'Preço da mensalidade', 'Prox. a residência', 'Prox. ao trabalho', 
-       'Facilidade de acesso', 'Qualidade/reputação', 'Única opção de aprovação',
+x26 = ['Gratuidade', 'Preço da mensalidade', 'Prox à residência', 'Prox ao trab', 
+       'Facilidade de acesso', 'Qualidade/reputação', 'Única op de aprovação',
        'Possibilidade de bolsa de estudo', 'Outro motivo'];
 y26_rf = [I26_AL_RF[0],I26_AL_RF[1],I26_AL_RF[2],I26_AL_RF[3], I26_AL_RF[4], I26_AL_RF[5], 
           I26_AL_RF[6], I26_AL_RF[7], I26_AL_RF[8]];
@@ -1331,7 +1331,7 @@ plt.xticks([k + bar_width for k in range(len(y26_rf))], \
            x26,\
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
+plt.xlabel('Variável (AL)');
 plt.title('Porque escolhi essa IES');
 plt.legend();
 plt.savefig('QE_I26_AL_CP.png', dpi=450, bbox_inches='tight');
@@ -1342,9 +1342,10 @@ fig27a = plt.figure();
 ax27aa = fig27a.add_axes([0,0,1,1]);
 #bar_width = 0.1;
 
-ax27a = ['QE_I01_AL', 'QE_I02_AL', 'QE_I03_AL', 'QE_I04_AL', 'QE_I05_AL', 'QE_I06_AL',
-         'QE_I07_AL', 'QE_I08_AL', 'QE_I09_AL', 'QE_I10_AL', 'QE_I11_AL', 'QE_I12_AL', 
-         'QE_I13_AL'];
+ax27a = ['Estado civil', 'Cor;raça', 'Nacionalidade', 'Escolarização;pai', 'Escolarização;mãe', 
+         'Onde;com quem;moro', 'Qtde;moram;comigo', 'Renda;total;família', 'Situação;financeira;atual', 
+         'Situação;atual;trabalho', 'Fonte;bolsa;mensalidade', 'Aux;permanência', 
+         'Bolsa;acadêmica;graduação'];
 y27a_rf = [np.sum(I01_AL_RF),np.sum(I02_AL_RF),np.sum(I03_AL_RF),np.sum(I04_AL_RF),
           np.sum(I05_AL_RF),np.sum(I06_AL_RF),np.sum(I07_AL_RF),np.sum(I08_AL_RF),
           np.sum(I09_AL_RF),np.sum(I10_AL_RF),np.sum(I11_AL_RF),np.sum(I12_AL_RF),
@@ -1380,8 +1381,8 @@ plt.xticks([k + bar_width for k in range(len(y27a_rf))], \
            ax27a,\
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)');
-plt.xlabel('Variável');
-plt.title('QE_I01 a QE_I13');
+plt.xlabel('Variável (AL)');
+plt.title('Categorias QE_I01 a QE_I13');
 plt.legend();
 plt.savefig('QE_I27a_AL_CP.png', dpi=450, bbox_inches='tight');
 
@@ -1391,9 +1392,10 @@ fig27b = plt.figure();
 ax27ab = fig27b.add_axes([0,0,1,1]);
 #bar_width = 0.1;
 
-ax27b = ['QE_I14_AL', 'QE_I15_AL', 'QE_I16_AL', 'QE_I17_AL', 'QE_I18_AL', 'QE_I19_AL',
-         'QE_I20_AL', 'QE_I21_AL', 'QE_I22_AL', 'QE_I23_AL', 'QE_I24_AL', 'QE_I25_AL', 
-         'QE_I26_AL'];
+ax27b = ['Atividade;exterior', 'Ingresso;cota', 'UF;medio', 'Tipo;escola;medio', 'Modalidade;medio', 
+         'Quem;incentivo;curso',         'Grupo;força;curso', 'Quem;família;superior', 
+         'Quantos;livros;ano', 'Horas;estudo;semana', 'Oportunidade;idioma;estrang', 'Por que;curso', 
+         'Por que;IES'];
 y27b_rf = [np.sum(I14_AL_RF),np.sum(I15_AL_RF),np.sum(I16_AL_RF),np.sum(I17_AL_RF),
           np.sum(I18_AL_RF),np.sum(I19_AL_RF),np.sum(I19_AL_RF),np.sum(I20_AL_RF),
           np.sum(I21_AL_RF),np.sum(I22_AL_RF),np.sum(I23_AL_RF),np.sum(I24_AL_RF),
@@ -1427,7 +1429,7 @@ plt.xticks([k + bar_width for k in range(len(y27b_rf))], \
            ax27b,\
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
-plt.xlabel('Variável');
-plt.title('QE_I14 a QE_I26');
+plt.xlabel('Variável (BR)');
+plt.title('Categorias QE_I14 a QE_I26');
 plt.legend();
 plt.savefig('QE_I27b_AL_CP.png', dpi=450, bbox_inches='tight');

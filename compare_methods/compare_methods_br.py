@@ -1083,9 +1083,9 @@ fig20 = plt.figure();
 ax20 = fig20.add_axes([0,0,1,1]);
 #bar_width = 0.1;
 
-x20 = ['Não tive dificuldade', 'Não recebi apoio', 'Pais', 'Avós', 'Irmãos/primos/tios',
-       'Líder ou representante religioso', 'Colegas de curso/amigos',
-       'Profs do curso', 'Profissionais de apoio da IES',
+x20 = ['Não tive dificuldade', 'Não recebi apoio', 'Pais', 'Avós', 'Irmãos, primos ou tios',
+       'Líder ou representante religioso', 'Colegas de curso ou amigos',
+       'Professores do curso', 'Profissionais do serviço de apoio da IES',
        'Colegas de trabalho', 'Outro grupo'];
 y20_rf = [I20_BR_RF[0],I20_BR_RF[1],I20_BR_RF[2],I20_BR_RF[3], I20_BR_RF[4], I20_BR_RF[5], 
           I20_BR_RF[6], I20_BR_RF[7], I20_BR_RF[8], I20_BR_RF[9], I20_BR_RF[10]];
