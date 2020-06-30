@@ -14,7 +14,7 @@ import pandas as pd
 import datetime as dt
 import matplotlib.pyplot as plt
 
-# PREPRANDO OS DADOS
+# PREPARANDO OS DADOS
 
 path_br = 'G:/Meu Drive/UFAL/TCC/CODES/tcc_codes/tcc_data/BR_data.csv'
 
