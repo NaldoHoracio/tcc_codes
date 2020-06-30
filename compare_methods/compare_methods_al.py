@@ -210,7 +210,7 @@ feature_importances_al_ls = \
  for feature, importance in zip(features_al_list_oh, importance_fields_al_ls_t)]
 
 # Print out the feature and importances
-[print('Variable LS: {:20} Importance DT: {}'.format(*pair)) for pair in feature_importances_al_ls];
+[print('Variable LS: {:20} Importance LS: {}'.format(*pair)) for pair in feature_importances_al_ls];
 
 #%% Separando os valores
 # Random Forest
@@ -1359,6 +1359,7 @@ y27a_ls = [np.sum(I01_AL_LS),np.sum(I02_AL_LS),np.sum(I03_AL_LS),np.sum(I04_AL_L
           np.sum(I05_AL_LS),np.sum(I06_AL_LS),np.sum(I07_AL_LS),np.sum(I08_AL_LS),
           np.sum(I09_AL_LS),np.sum(I10_AL_LS),np.sum(I11_AL_LS),np.sum(I12_AL_LS),
           np.sum(I13_AL_LS)];
+
 y27a_ls = list(map(lambda t:t*100, y27a_ls));
 
 

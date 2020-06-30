@@ -212,7 +212,7 @@ feature_importances_br_ls = \
  for feature, importance in zip(features_br_list_oh, importance_fields_br_ls_t)]
 
 # Print out the feature and importances
-[print('Variable LS: {:20} Importance DT: {}'.format(*pair)) for pair in feature_importances_br_ls];
+[print('Variable LS: {:20} Importance LS: {}'.format(*pair)) for pair in feature_importances_br_ls];
 
 #%% Separando os valores
 # Random Forest
