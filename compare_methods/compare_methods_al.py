@@ -16,9 +16,16 @@ import matplotlib.pyplot as plt
 
 # PREPARANDO OS DADOS
 
-path_al = 'G:/Meu Drive/UFAL/TCC/CODES/tcc_codes/tcc_data/AL_data.csv'
+labels_al = [] # Labels
+features_al = [] # Features
+features_al_list = [] # Guardando as variáveis das features
+features_al_list_oh = [] # Variáveis das features com one-hot
 
+path_al = 'C:/Users/edvon/Google Drive/UFAL/TCC/CODES/tcc_codes/read_csv_files/AL_data.csv'
+    
 features_al = pd.read_csv(path_al)
+
+# 2.1 - LIMPEZA
 
 del features_al['Unnamed: 0']
 
@@ -56,28 +63,34 @@ features_al['NT_OBJ_CE'] = features_al['NT_OBJ_CE'].astype(float)
 
 features_al['NT_DIS_CE'] = features_al['NT_DIS_CE'].str.replace(',','.')
 features_al['NT_DIS_CE'] = features_al['NT_DIS_CE'].astype(float)
-# Substituindo valores nan pela mediana (medida resistente) e 0 por 1
+
+# 2.2 - ENRIQUECIMENTO
+
 features_al_median = features_al.iloc[:,0:16].median()
 
 features_al.iloc[:,0:16] = features_al.iloc[:,0:16].fillna(features_al.iloc[:,0:16].median())
 # Observando os dados
-print('O formato dos dados é: ', features_al.shape)
+#print('O formato dos dados é: ', features_al.shape)
 
 describe_al = features_al.describe()
 
-print('Descrição para as colunas: ', describe_al)
-print(describe_al.columns)
+#print('Descrição para as colunas: ', describe_al)
+#print(describe_al.columns)
+
+# 3 - TRANSFORMAÇÃO
 
 # Convertendo os labels de predição para arrays numpy
 labels_al = np.array(features_al['NT_GER'])
-print('Media das labels: %.2f' %(labels_al.mean()) )
-#
+#print('Media das labels: %.2f' %(labels_al.mean()) )
+
 # Removendo as features de notas
 features_al = features_al.drop(['NT_GER','NT_FG','NT_OBJ_FG','NT_DIS_FG',
                                'NT_FG_D1','NT_FG_D1_PT','NT_FG_D1_CT',
                                'NT_FG_D2','NT_FG_D2_PT','NT_FG_D2_CT',
                                'NT_CE','NT_OBJ_CE','NT_DIS_CE',
                                'NT_CE_D1','NT_CE_D2','NT_CE_D3'], axis = 1)
+
+# %%
 # Salvando e convertendo
 # Salvando os nomes das colunas (features) com os dados para uso posterior
 # antes de codificar
