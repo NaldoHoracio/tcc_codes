@@ -28,28 +28,45 @@ data_2016 = pd.read_csv(path_2016, sep=';')
 data_2018 = pd.read_csv(path_2018, sep=';')
 
 #data_al = data[data['QE_I16'] == 27]# Get apenas em Alagoas 2017
-data_al_2014 = data_2014[data_2014['QE_I16'] == 27]
-data_al_2015 = data_2015[data_2015['QE_I16'] == 27]
-data_al_2016 = data_2016[data_2016['QE_I16'] == 27]
-data_al_2018 = data_2018[data_2018['QE_I16'] == 27]
+#data_al_2014 = data_2014[data_2014['QE_I16'] == 27]
+#data_al_2015 = data_2015[data_2015['QE_I16'] == 27]
+#data_al_2016 = data_2016[data_2016['QE_I16'] == 27]
+#data_al_2018 = data_2018[data_2018['QE_I16'] == 27]
 
-data_al_save_2014 = data_al_2014.to_csv('AL_2014.csv')
-data_al_save_2015 = data_al_2015.to_csv('AL_2015.csv')
-data_al_save_2016 = data_al_2016.to_csv('AL_2016.csv')
-data_al_save_2018 = data_al_2018.to_csv('AL_2018.csv')
+#data_al_save_2014 = data_al_2014.to_csv('AL_2014.csv')
+#data_al_save_2015 = data_al_2015.to_csv('AL_2015.csv')
+#data_al_save_2016 = data_al_2016.to_csv('AL_2016.csv')
+#data_al_save_2018 = data_al_2018.to_csv('AL_2018.csv')
 #data_al_save = data_al.to_csv('AL_data.csv')# Salvando como .csv 2017
 seconds_al = (time.time() - start_time) # Time end
 seconds_transform(seconds_al)
 
-#% Excluindo Alagoas
-#data_br = data[data['QE_I16'] != 27]
+#%% Excluindo Alagoas
+data_br_2014 = data_2014[data_2014['QE_I16'] != 27]
+data_br_2015 = data_2015[data_2015['QE_I16'] != 27]
+data_br_2016 = data_2016[data_2016['QE_I16'] != 27]
+data_br_2018 = data_2018[data_2018['QE_I16'] != 27]
 
-#% Removendo linhas com Nan
-#data_br_no_nan = data_br.dropna(subset = ["QE_I01"], inplace = True)
+#%% Removendo linhas com Nan
+#data_br_2014_n = data_br_2014.dropna(subset = ["QE_I01"], inplace = True)
+data_br_2014 = data_br_2014.dropna(axis=0)
+data_br_2015 = data_br_2015.dropna(axis=0)
+data_br_2016 = data_br_2016.dropna(axis=0)
+data_br_2018 = data_br_2018.dropna(axis=0)
 
-#%
+#%% Escolhendo aleatoriamente
 #data_br_br = data_br.sample(7084)# Escolhendo aleatoriamente no DataFrame
 #data_br_save = data_br_br.to_csv('BR_data.csv')
+data_br_2014 = data_2014.sample(7257)
+data_br_2015 = data_2015.sample(5469)
+data_br_2016 = data_2016.sample(3559)
+data_br_2018 = data_2018.sample(5482)
+
+#%% Salvando os dados
+data_br_save_2014 = data_br_2014.to_csv('BR_2014.csv')
+data_br_save_2015 = data_br_2015.to_csv('BR_2015.csv')
+data_br_save_2016 = data_br_2016.to_csv('BR_2016.csv')
+data_br_save_2018 = data_br_2018.to_csv('BR_2018.csv')
 
     
 #def main():
