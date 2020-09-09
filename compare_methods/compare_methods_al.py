@@ -14,116 +14,221 @@ import pandas as pd
 import datetime as dt
 import matplotlib.pyplot as plt
 
+# Funções úteis - Tempo de execução
+# Tempo de execução
+def seconds_transform(seconds_time):
+  hours = int(seconds_time/3600)
+  rest_1 = seconds_time%3600
+  minutes = int(rest_1/60)
+  seconds = rest_1 - 60*minutes
+  #print(seconds)
+  print(" ", (hours), "h ", (minutes), "min ", round(seconds,2), " s")
+  return hours, minutes, round(seconds,2)
+
 # PREPARANDO OS DADOS
+
+data_al2014 = pd.read_csv(r'tcc_data/AL_2014.csv')
+data_al2015 = pd.read_csv(r'tcc_data/AL_2015.csv')
+data_al2016 = pd.read_csv(r'tcc_data/AL_2016.csv')
+data_al2017 = pd.read_csv(r'tcc_data/AL_2017.csv')
+data_al2018 = pd.read_csv(r'tcc_data/AL_2018.csv')
 
 labels_al = [] # Labels
 features_al = [] # Features
 features_al_list = [] # Guardando as variáveis das features
 features_al_list_oh = [] # Variáveis das features com one-hot
 
-path_al = 'C:/Users/edvon/Google Drive/UFAL/TCC/CODES/tcc_codes/read_csv_files/AL_data.csv'
+#%% Pré-processamento e enriquecimento
+
+def processing_set_al(data_al2014, data_al2015, data_al2016, data_al2017, data_al2018):
+    #% 2.1 - Limpeza
+    del data_al2014['Unnamed: 0']
+    del data_al2015['Unnamed: 0']
+    del data_al2016['Unnamed: 0']
+    del data_al2017['Unnamed: 0']
+    del data_al2018['Unnamed: 0']
+
+    # Escolhendo apenas as colunas de interesse
+    data_al2014 = data_al2014.loc[:,'NT_GER':'QE_I26']
+    data_al2015 = data_al2015.loc[:,'NT_GER':'QE_I26']
+    data_al2016 = data_al2016.loc[:,'NT_GER':'QE_I26']
+    data_al2017 = data_al2017.loc[:,'NT_GER':'QE_I26']
+    data_al2018 = data_al2018.loc[:,'NT_GER':'QE_I26']
+
+    data_al2014 = data_al2014.drop(data_al2014.loc[:, 'CO_RS_I1':'CO_RS_I9'].columns, axis=1)
+    data_al2015 = data_al2015.drop(data_al2015.loc[:, 'CO_RS_I1':'CO_RS_I9'].columns, axis=1)
+    data_al2016 = data_al2016.drop(data_al2016.loc[:, 'CO_RS_I1':'CO_RS_I9'].columns, axis=1)
+    data_al2017 = data_al2017.drop(data_al2017.loc[:, 'CO_RS_I1':'CO_RS_I9'].columns, axis=1)
+    data_al2018 = data_al2018.drop(data_al2018.loc[:, 'CO_RS_I1':'CO_RS_I9'].columns, axis=1)
+
+    data_al2014 = data_al2014.drop(data_al2014.loc[:, 'NT_FG':'NT_CE_D3'].columns, axis=1)
+    data_al2015 = data_al2015.drop(data_al2015.loc[:, 'NT_FG':'NT_CE_D3'].columns, axis=1)
+    data_al2016 = data_al2016.drop(data_al2016.loc[:, 'NT_FG':'NT_CE_D3'].columns, axis=1)
+    data_al2017 = data_al2017.drop(data_al2017.loc[:, 'NT_FG':'NT_CE_D3'].columns, axis=1)
+    data_al2018 = data_al2018.drop(data_al2018.loc[:, 'NT_FG':'NT_CE_D3'].columns, axis=1)
     
-features_al = pd.read_csv(path_al)
+    # MERGE NOS DADOS: data al
+    frames = [data_al2014, data_al2015, data_al2016, data_al2017, data_al2018];
+    data_al = pd.concat(frames);
 
-# 2.1 - LIMPEZA
+# Enriquecimento
+    data_al['NT_GER'] = data_al['NT_GER'].str.replace(',','.')
+    data_al['NT_GER'] = data_al['NT_GER'].astype(float)
 
-del features_al['Unnamed: 0']
+    data_al_media = round(data_al['NT_GER'].mean(),2)
+    
+    data_al['NT_GER'] = data_al['NT_GER'].fillna(data_al_media)
+    
+    describe_al = data_al.describe()
+    
+    # 3 - Transformação
+    labels_al = np.array(data_al['NT_GER'])
 
-# Escolhendo apenas as colunas de interesse
-features_al = features_al.loc[:,'NT_GER':'QE_I26']
-features_al = features_al.drop(features_al.loc[:, 'CO_RS_I1':'CO_RS_I9'].columns, axis=1)
-
-# Observando os dados
-print('O formato dos dados é: ', features_al.shape)
-
-describe_al = features_al.describe()
-
-print('Descrição para as colunas: ', describe_al)
-print(describe_al.columns)
-
-# Números que são strings para float
-# Colunas NT_GER a NT_DIS_FG ^ NT_CE a NT_DIS_CE
-features_al['NT_GER'] = features_al['NT_GER'].str.replace(',','.')
-features_al['NT_GER'] = features_al['NT_GER'].astype(float)
-
-features_al['NT_FG'] = features_al['NT_FG'].str.replace(',','.')
-features_al['NT_FG'] = features_al['NT_FG'].astype(float)
-
-features_al['NT_OBJ_FG'] = features_al['NT_OBJ_FG'].str.replace(',','.')
-features_al['NT_OBJ_FG'] = features_al['NT_OBJ_FG'].astype(float)
-
-features_al['NT_DIS_FG'] = features_al['NT_DIS_FG'].str.replace(',','.')
-features_al['NT_DIS_FG'] = features_al['NT_DIS_FG'].astype(float)
-
-features_al['NT_CE'] = features_al['NT_CE'].str.replace(',','.')
-features_al['NT_CE'] = features_al['NT_CE'].astype(float)
-
-features_al['NT_OBJ_CE'] = features_al['NT_OBJ_CE'].str.replace(',','.')
-features_al['NT_OBJ_CE'] = features_al['NT_OBJ_CE'].astype(float)
-
-features_al['NT_DIS_CE'] = features_al['NT_DIS_CE'].str.replace(',','.')
-features_al['NT_DIS_CE'] = features_al['NT_DIS_CE'].astype(float)
-
-# 2.2 - ENRIQUECIMENTO
-
-features_al_median = features_al.iloc[:,0:16].median()
-
-features_al.iloc[:,0:16] = features_al.iloc[:,0:16].fillna(features_al.iloc[:,0:16].median())
-# Observando os dados
-#print('O formato dos dados é: ', features_al.shape)
-
-describe_al = features_al.describe()
-
-#print('Descrição para as colunas: ', describe_al)
-#print(describe_al.columns)
-
-# 3 - TRANSFORMAÇÃO
-
-# Convertendo os labels de predição para arrays numpy
-labels_al = np.array(features_al['NT_GER'])
-#print('Media das labels: %.2f' %(labels_al.mean()) )
-
-# Removendo as features de notas
-features_al = features_al.drop(['NT_GER','NT_FG','NT_OBJ_FG','NT_DIS_FG',
-                               'NT_FG_D1','NT_FG_D1_PT','NT_FG_D1_CT',
-                               'NT_FG_D2','NT_FG_D2_PT','NT_FG_D2_CT',
-                               'NT_CE','NT_OBJ_CE','NT_DIS_CE',
-                               'NT_CE_D1','NT_CE_D2','NT_CE_D3'], axis = 1)
-
-# %%
-# Salvando e convertendo
-# Salvando os nomes das colunas (features) com os dados para uso posterior
-# antes de codificar
-features_al_list = list(features_al.columns)
+    # Removendo as features de notas
+    data_al = data_al.drop(['NT_GER'], axis = 1)
+    
+    features_al_list = list(data_al.columns)
 
 
-# One hot encoding - QE_I01 a QE_I26
-features_al = pd.get_dummies(data=features_al, columns=['QE_I01','QE_I02','QE_I03','QE_I04',
+    # One hot encoding - QE_I01 a QE_I26
+    features_al = pd.get_dummies(data=data_al, columns=['QE_I01','QE_I02','QE_I03','QE_I04',
                                                         'QE_I05','QE_I06','QE_I07','QE_I08',
                                                         'QE_I09','QE_I10','QE_I11','QE_I12',
                                                         'QE_I13','QE_I14','QE_I15','QE_I16',
                                                         'QE_I17','QE_I18','QE_I19','QE_I20',
                                                         'QE_I21','QE_I22','QE_I23','QE_I24',
                                                         'QE_I25','QE_I26'])
-# Salvando os nomes das colunas (features) com os dados para uso posterior
-# depois de codificar
-features_al_list_oh = list(features_al.columns)
-#
-# Convertendo para numpy
-features_al = np.array(features_al)
+    # Salvando os nomes das colunas (features) com os dados para uso posterior
+    # depois de codificar
+    features_al_list_oh = list(features_al.columns)
+    #
+    # Convertendo para numpy
+    features_al = np.array(features_al)
+    
+    return features_al, labels_al, features_al_list_oh
 
-#%% MÉTODOS KDD
-from sklearn.metrics import mean_absolute_error
+#%% Aplicando o pré-processamento
+
+features_al, labels_al, features_al_list_oh = processing_set_al(data_al2014, data_al2015, data_al2016, data_al2017, data_al2018)
+
+#%% BIBLIOTECAS
+from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
+from sklearn.model_selection import train_test_split
 from sklearn.model_selection import KFold
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.tree import DecisionTreeRegressor
 from sklearn import linear_model
+from sklearn.model_selection import cross_val_score
+import time
 
-split_is_multiple = int(11);
+n_cv = int(5);
+
+train_x_al, test_x_al, train_y_al, test_y_al = train_test_split(features_al, labels_al, test_size=0.33, random_state=42)
+
+#%% Cross Validation - Árvore de decisão
+
+dt_al = DecisionTreeRegressor(min_samples_split=320, min_samples_leaf=200, random_state=42)
+
+time_dt_al_cv = time.time() # Time start DT CV
+# min_samples_split = 320; min_samples_leaf = 200; max_features= log2
+accuracy_al_dt_cv = cross_val_score(dt_al, train_x_al, train_y_al, cv=n_cv, scoring='r2')
+sec_dt_al_cv = (time.time() - time_dt_al_cv) # Time end DT CV
+
+print('Accuracy DT CV: ', round(np.mean(accuracy_al_dt_cv), 4))
+seconds_transform(sec_dt_al_cv)
+
+#%% Escrevendo em Arquivo - DT
+fields_al_dt = ['Método', 'Split', 'Leaf', 'Acc', 'Acc médio', 'Tempo (h,min,s)']
+
+rows_al_dt = [['DT','320', '200', accuracy_al_dt_cv, accuracy_al_dt_cv.mean(),
+              seconds_transform(sec_dt_al_cv)]]
+
+file_al_dt = "DT_CV.csv"
+
+with open(file_al_dt, 'a') as csvfile:
+    # creating a csv writer object  
+    csv_al_dt = csv.writer(csvfile)  
+        
+    # writing the fields  
+    csv_al_dt.writerow(fields_al_dt)  
+        
+    # writing the data rows  
+    csv_al_dt.writerows(rows_al_dt) 
+
+#%% Cross Validation - RF
+
+# min_samples_split=40, min_samples_leaf=20
+rf_al = RandomForestRegressor(n_estimators=1000, min_samples_split=40, min_samples_leaf=20, random_state=42)
+
+time_rf_al_cv = time.time()
+accuracy_al_rf_cv = cross_val_score(rf_al, train_x_al, train_y_al, cv=n_cv, scoring='r2')
+
+sec_rf_al_cv = (time.time() - time_rf_al_cv)
+
+print('Accuracy RF CV: ', round(np.mean(accuracy_al_rf_cv), 4))
+seconds_transform(sec_rf_al_cv)
+
+#%% Escrevendo em Arquivo - RF
+fields_al_rf = ['Método', 'N_tree', 'Split', 'Leaf', 'Acc', 'Acc médio', 'Tempo (h,min,s)']
+
+rows_al_rf = [['RF','10', '40', '20', accuracy_al_rf_cv, 
+               accuracy_al_rf_cv.mean(), seconds_transform(sec_rf_al_cv)]]
+
+file_al_rf = "RF_CV.csv"
+
+with open(file_al_rf, 'a') as csvfile:
+    # creating a csv writer object  
+    csvwriter = csv.writer(csvfile)  
+        
+    # writing the fields  
+    csvwriter.writerow(fields_al_rf)  
+        
+    # writing the data rows  
+    csvwriter.writerows(rows_al_rf) 
+
+#%% LASSO
+
+ls_al = linear_model.Lasso(alpha=0.005, positive=True, random_state=42)
+
+time_ls_al_cv = time.time()
+accuracy_al_ls_cv = cross_val_score(ls_al, train_x_al, train_y_al, cv=n_cv, scoring='r2')
+sec_ls_al_cv = (time.time() - time_ls_al_cv)
+
+print('Accuracy LS CV: ', round(np.mean(accuracy_al_ls_cv), 4))
+seconds_transform(sec_ls_al_cv)
+
+#%% Escrevendo arquivo - LS
+fields_al_ls = ['Método', 'Alfa', 'Acc','Acc médio', 'Tempo (h,min,s)']
+
+rows_al_ls = [['LS','0.005', accuracy_al_ls_cv, accuracy_al_ls_cv.mean(),
+              seconds_transform(sec_ls_al_cv)]]
+
+file_al_ls = "LS_CV.csv"
+
+with open(file_al_ls, 'a') as csvfile:
+    # creating a csv writer object  
+    csv_al_ls = csv.writer(csvfile)  
+        
+    # writing the fields  
+    csv_al_ls.writerow(fields_al_ls)  
+        
+    # writing the data rows  
+    csv_al_ls.writerows(rows_al_ls) 
+
+#%% Treinando os modelos
 
 scores_al_rf = []
+scores_al_dt_mae = [];
+scores_al_dt_mse = [];
+
 scores_al_dt = []
+scores_al_rf_mae = [];
+scores_al_rf_mse = [];
+
+
 scores_al_ls = []
+scores_al_ls_mae = [];
+scores_al_ls_mse = [];
 
 importance_fields_al_rf = 0.0
 importance_fields_aux_al_rf = []
@@ -134,65 +239,176 @@ importance_fields_aux_al_dt = []
 importance_fields_al_ls = 0.0
 importance_fields_aux_al_ls = []
 
-rf_al = RandomForestRegressor(n_estimators = 1000, random_state=0)
-dt_al = DecisionTreeRegressor(random_state = 0)
-lasso_al = linear_model.Lasso(alpha=0.1, positive=True)
+dt_al = DecisionTreeRegressor(min_samples_split=320, min_samples_leaf=200, random_state=42)
+rf_al = RandomForestRegressor(n_estimators=1000, min_samples_split=40, min_samples_leaf=20, random_state=42)
+lasso_al = linear_model.Lasso(alpha=0.005, positive=True, random_state=42)
 
-kf_cv_al = KFold(n_splits=split_is_multiple, random_state=None, shuffle=False) # n_splits: divisores de 7084 ^ memory
+kf_cv_al = KFold(n_splits=n_cv, random_state=42, shuffle=False) # n_splits
 
-for train_index_al, test_index_al in kf_cv_al.split(features_al):
+#%% Treinando dados - DT_AL
+
+time_dt_al = time.time() # Time start dt loop
+
+for train_index_al, test_index_al in kf_cv_al.split(train_x_al):
     #print("Train index: ", np.min(train_index_al), '- ', np.max(train_index_al))
     print("Test index: ", np.min(test_index_al), '-', np.max(test_index_al))
     
     # Dividindo nas features e labels
-    train_features_al = features_al[train_index_al]
-    test_features_al = features_al[test_index_al]
-    train_labels_al = labels_al[train_index_al]
-    test_labels_al = labels_al[test_index_al]
+    train_features_al = train_x_al[train_index_al]
+    test_features_al = train_x_al[test_index_al]
+    train_labels_al = train_y_al[train_index_al]
+    test_labels_al = train_y_al[test_index_al]
     
     # Ajustando cada features e label com RF e DT
-    rf_al.fit(train_features_al, train_labels_al)
+    
+    # Método 1 - Árvore de decisão
+    
     dt_al.fit(train_features_al, train_labels_al)
-    lasso_al.fit(train_features_al, train_labels_al)
     
-    # Usando o RF e DT para predição dos dados
-    predictions_al_rf = rf_al.predict(test_features_al)
     predictions_al_dt = dt_al.predict(test_features_al)
-    predictions_al_ls = lasso_al.predict(test_features_al)
+    
+    accuracy_al_dt = dt_al.score(test_features_al, test_labels_al)
 
-    # Erro
-    errors_al_rf = abs(predictions_al_rf - test_labels_al)
-    errors_al_dt = abs(predictions_al_dt - test_labels_al)
-    errors_al_ls = abs(predictions_al_ls - test_labels_al)
+    accuracy_mae_al_dt = mean_absolute_error(test_labels_al, predictions_al_dt)
     
-    # Acurácia
-    accuracy_al_rf = 100 - mean_absolute_error(test_labels_al, predictions_al_rf)
-    accuracy_al_dt = 100 - mean_absolute_error(test_labels_al, predictions_al_dt)
-    accuracy_al_ls = 100 - mean_absolute_error(test_labels_al, predictions_al_ls)
+    accuracy_mse_al_dt = mean_squared_error(test_labels_al, predictions_al_dt)
     
-    # Importância das variáveis
-    importance_fields_aux_al_rf = rf_al.feature_importances_
-    importance_fields_al_rf += importance_fields_aux_al_rf
-    
+    # Importância de variável
     importance_fields_aux_al_dt = dt_al.feature_importances_
     importance_fields_al_dt += importance_fields_aux_al_dt
     
-    importance_fields_aux_al_ls = lasso_al.coef_
-    importance_fields_al_ls += importance_fields_aux_al_ls
+    # Append em cada valor médio
+    scores_al_dt.append(accuracy_al_dt)
+    
+    scores_al_dt_mae.append(accuracy_mae_al_dt)
+    
+    scores_al_dt_mse.append(accuracy_mse_al_dt)
+
+sec_dt_al = (time.time() - time_dt_al) # Time end dt loop
+
+seconds_transform(sec_dt_al)
+
+#%% Treino dos dados - RF_AL
+
+time_rf_al = time.time() # Time start dt loop
+
+for train_index_al, test_index_al in kf_cv_al.split(train_x_al):
+    #print("Train index: ", np.min(train_index_al), '- ', np.max(train_index_al))
+    print("Test index: ", np.min(test_index_al), '-', np.max(test_index_al))
+    
+    # Dividindo nas features e labels
+    train_features_al = train_x_al[train_index_al]
+    test_features_al = train_x_al[test_index_al]
+    train_labels_al = train_y_al[train_index_al]
+    test_labels_al = train_y_al[test_index_al]
+    
+    # Método 2 - Random Forest
+    
+    rf_al.fit(train_features_al, train_labels_al)
+    
+    predictions_al_rf = rf_al.predict(test_features_al)
+    
+    accuracy_al_rf = rf_al.score(test_features_al, test_labels_al)
+
+    accuracy_mae_al_rf = mean_absolute_error(test_labels_al, predictions_al_rf)
+    
+    accuracy_mse_al_rf = mean_squared_error(test_labels_al, predictions_al_rf)
+     
+    # Importância de variável
+    importance_fields_aux_al_rf = rf_al.feature_importances_
+    importance_fields_al_rf += importance_fields_aux_al_rf
     
     # Append em cada valor médio
     scores_al_rf.append(accuracy_al_rf)
-    scores_al_dt.append(accuracy_al_dt)
+    
+    scores_al_rf_mae.append(accuracy_mae_al_rf)
+    
+    scores_al_rf_mse.append(accuracy_mse_al_rf)
+
+sec_rf_al = (time.time() - time_rf_al) # Time end dt loop
+
+#seconds_transform(sec_rf_al)
+#print("")
+seconds_transform(sec_rf_al)
+
+#%% Treino dos dados - LS_AL
+
+ls_al = linear_model.Lasso(alpha=0.005, positive=True, random_state=42)
+
+time_ls_al = time.time() # Time start dt loop
+
+for train_index_al, test_index_al in kf_cv_al.split(train_x_al):
+    #print("Train index: ", np.min(train_index_al), '- ', np.max(train_index_al))
+    print("Test index: ", np.min(test_index_al), '-', np.max(test_index_al))
+    
+    # Dividindo nas features e labels
+    train_features_al = train_x_al[train_index_al]
+    test_features_al = train_x_al[test_index_al]
+    train_labels_al = train_y_al[train_index_al]
+    test_labels_al = train_y_al[test_index_al]
+    
+    
+    # Método 3 - Lasso
+    
+    ls_al.fit(train_features_al, train_labels_al)
+    
+    predictions_al_ls = ls_al.predict(test_features_al)
+    
+    accuracy_al_ls = ls_al.score(test_features_al, test_labels_al)
+
+    accuracy_mae_al_ls = mean_absolute_error(test_labels_al, predictions_al_ls)
+    
+    accuracy_mse_al_ls = mean_squared_error(test_labels_al, predictions_al_ls)    
+    
+    # Importância das variáveis
+    importance_fields_aux_al_ls = ls_al.coef_
+    importance_fields_al_ls += importance_fields_aux_al_ls
+    
+    # Append em cada valor médio
     scores_al_ls.append(accuracy_al_ls)
+    
+    scores_al_ls_mae.append(accuracy_mae_al_ls)
+    
+    scores_al_ls_mse.append(accuracy_mse_al_ls)
+
+sec_ls_al = (time.time() - time_ls_al) # Time end dt loop
+
+seconds_transform(sec_ls_al)
+
+#%% Testando - RF
+predictions_al_rf = rf_al.predict(test_x_al)
+    
+accuracy_al_rf_f = dt_al.score(test_x_al, test_y_al)
+
+accuracy_mae_al_rf_f = mean_absolute_error(test_y_al, predictions_al_rf)
+    
+accuracy_mse_al_rf_f = mean_squared_error(test_y_al, predictions_al_rf)
+
+print('Accuracy AL RF: ', round(accuracy_al_rf_f, 4))
+print('Accuracy RF MAE AL: ', round(accuracy_mae_al_rf_f, 4))
+print('Accuracy RF MSE AL: ', round(accuracy_mse_al_rf_f, 4))
+
+#%% Testando - DT
+predictions_al_dt = dt_al.predict(test_x_al)
+    
+accuracy_al_dt_f = dt_al.score(test_x_al, test_y_al)
+
+accuracy_mae_al_dt_f = mean_absolute_error(test_y_al, predictions_al_dt)
+    
+accuracy_mse_al_dt_f = mean_squared_error(test_y_al, predictions_al_dt)
+
+print('Final Accuracy AL DT: ', round(accuracy_al_dt_f, 4))
+print('Final Accuracy MAE AL: ', round(accuracy_mae_al_dt_f, 4))
+print('Final Accuracy MSE AL: ', round(accuracy_mse_al_dt_f, 4))
 
 #%% Acurácia AL
-print('Accuracy RF: ', round(np.average(scores_al_rf), 2), "%.")
-print('Accuracy DT: ', round(np.average(scores_al_dt), 2), "%.")
-print('Accuracy LS: ', round(np.average(scores_al_ls), 2), "%.")
+print('Accuracy RF: ', round(np.average(scores_al_rf), 4), "%.")
+print('Accuracy DT: ', round(np.average(scores_al_dt), 4), "%.")
+print('Accuracy LS: ', round(np.average(scores_al_ls), 4), "%.")
 
-importance_fields_al_rf_t = importance_fields_al_rf/split_is_multiple
-importance_fields_al_dt_t = importance_fields_al_dt/split_is_multiple
-importance_fields_al_ls_t = importance_fields_al_ls/split_is_multiple
+importance_fields_al_rf_t = importance_fields_al_rf/n_cv
+importance_fields_al_dt_t = importance_fields_al_dt/n_cv
+importance_fields_al_ls_t = importance_fields_al_ls/n_cv
 
 print('Total RF: ', round(np.sum(importance_fields_al_rf_t),2));
 print('Total DT: ', round(np.sum(importance_fields_al_dt_t),2));
@@ -280,7 +496,7 @@ I23_AL_DT = importance_fields_al_dt_t[130:135]; I24_AL_DT = importance_fields_al
 
 I25_AL_DT = importance_fields_al_dt_t[140:148]; I26_AL_DT = importance_fields_al_dt_t[148:157];
 
-# Lassos
+# Lasso
 I01_AL_LS = importance_fields_al_ls_t[0:5]; I02_AL_LS = importance_fields_al_ls_t[5:11]; 
 
 I03_AL_LS = importance_fields_al_ls_t[11:14]; I04_AL_LS = importance_fields_al_ls_t[14:20]; 
