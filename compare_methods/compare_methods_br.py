@@ -14,105 +14,219 @@ import pandas as pd
 import datetime as dt
 import matplotlib.pyplot as plt
 
+# Funções úteis - Tempo de execução
+# Tempo de execução
+def seconds_transform(seconds_time):
+  hours = int(seconds_time/3600)
+  rest_1 = seconds_time%3600
+  minutes = int(rest_1/60)
+  seconds = rest_1 - 60*minutes
+  #print(seconds)
+  print(" ", (hours), "h ", (minutes), "min ", round(seconds,2), " s")
+  return hours, minutes, round(seconds,2)
+
 # PREPARANDO OS DADOS
 
-path_br = 'G:/Meu Drive/UFAL/TCC/CODES/tcc_codes/tcc_data/BR_data.csv'
+data_br2014 = pd.read_csv(r'tcc_data/BR_2014.csv')
+data_br2015 = pd.read_csv(r'tcc_data/BR_2015.csv')
+data_br2016 = pd.read_csv(r'tcc_data/BR_2016.csv')
+data_br2017 = pd.read_csv(r'tcc_data/BR_2017.csv')
+data_br2018 = pd.read_csv(r'tcc_data/BR_2018.csv')
 
-features_br = pd.read_csv(path_br)
+labels_br = [] # Labels
+features_br = [] # Features
+features_br_list = [] # Guardando as variáveis das features
+features_br_list_oh = [] # Variáveis das features com one-hot
 
-#
+#%% Pré-processamento e enriquecimento
 
-del features_br['Unnamed: 0']
+def processing_set_br(data_br2014, data_br2015, data_br2016, data_br2017, data_br2018):
+    #% 2.1 - Limpeza
+    del data_br2014['Unnamed: 0']
+    del data_br2015['Unnamed: 0']
+    del data_br2016['Unnamed: 0']
+    del data_br2017['Unnamed: 0']
+    del data_br2018['Unnamed: 0']
 
-# Escolhendo apenas as colunas de interesse
-features_br = features_br.loc[:,'NT_GER':'QE_I26']
-features_br = features_br.drop(features_br.loc[:, 'CO_RS_I1':'CO_RS_I9'].columns, axis=1)
+    # Escolhendo apenas as colunas de interesse
+    data_br2014 = data_br2014.loc[:,'NT_GER':'QE_I26']
+    data_br2015 = data_br2015.loc[:,'NT_GER':'QE_I26']
+    data_br2016 = data_br2016.loc[:,'NT_GER':'QE_I26']
+    data_br2017 = data_br2017.loc[:,'NT_GER':'QE_I26']
+    data_br2018 = data_br2018.loc[:,'NT_GER':'QE_I26']
 
-# Observando os dados
-#print('O formato dos dados é: ', features_br.shape)
+    data_br2014 = data_br2014.drop(data_br2014.loc[:, 'CO_RS_I1':'CO_RS_I9'].columns, axis=1)
+    data_br2015 = data_br2015.drop(data_br2015.loc[:, 'CO_RS_I1':'CO_RS_I9'].columns, axis=1)
+    data_br2016 = data_br2016.drop(data_br2016.loc[:, 'CO_RS_I1':'CO_RS_I9'].columns, axis=1)
+    data_br2017 = data_br2017.drop(data_br2017.loc[:, 'CO_RS_I1':'CO_RS_I9'].columns, axis=1)
+    data_br2018 = data_br2018.drop(data_br2018.loc[:, 'CO_RS_I1':'CO_RS_I9'].columns, axis=1)
 
-describe_br = features_br.describe()
+    data_br2014 = data_br2014.drop(data_br2014.loc[:, 'NT_FG':'NT_CE_D3'].columns, axis=1)
+    data_br2015 = data_br2015.drop(data_br2015.loc[:, 'NT_FG':'NT_CE_D3'].columns, axis=1)
+    data_br2016 = data_br2016.drop(data_br2016.loc[:, 'NT_FG':'NT_CE_D3'].columns, axis=1)
+    data_br2017 = data_br2017.drop(data_br2017.loc[:, 'NT_FG':'NT_CE_D3'].columns, axis=1)
+    data_br2018 = data_br2018.drop(data_br2018.loc[:, 'NT_FG':'NT_CE_D3'].columns, axis=1)
+    
+    # MERGE NOS DADOS: data br
+    frames = [data_br2014, data_br2015, data_br2016, data_br2017, data_br2018];
+    data_br = pd.concat(frames);
 
-#print('Descrição para as colunas: ', describe_br)
-#print(describe_br.columns)
+    # Enriquecimento
+    data_br['NT_GER'] = data_br['NT_GER'].str.replace(',','.')
+    data_br['NT_GER'] = data_br['NT_GER'].astype(float)
 
-# Números que são strings para float
-# Colunas NT_GER a NT_DIS_FG ^ NT_CE a NT_DIS_CE
-features_br['NT_GER'] = features_br['NT_GER'].str.replace(',','.')
-features_br['NT_GER'] = features_br['NT_GER'].astype(float)
+    data_br_media = round(data_br['NT_GER'].mean(),2)
+    
+    data_br['NT_GER'] = data_br['NT_GER'].fillna(data_br_media)
+    
+    describe_br = data_br.describe()
+    
+    # 3 - Transformação
+    labels_br = np.array(data_br['NT_GER'])
 
-features_br['NT_FG'] = features_br['NT_FG'].str.replace(',','.')
-features_br['NT_FG'] = features_br['NT_FG'].astype(float)
-
-features_br['NT_OBJ_FG'] = features_br['NT_OBJ_FG'].str.replace(',','.')
-features_br['NT_OBJ_FG'] = features_br['NT_OBJ_FG'].astype(float)
-
-features_br['NT_DIS_FG'] = features_br['NT_DIS_FG'].str.replace(',','.')
-features_br['NT_DIS_FG'] = features_br['NT_DIS_FG'].astype(float)
-
-features_br['NT_CE'] = features_br['NT_CE'].str.replace(',','.')
-features_br['NT_CE'] = features_br['NT_CE'].astype(float)
-
-features_br['NT_OBJ_CE'] = features_br['NT_OBJ_CE'].str.replace(',','.')
-features_br['NT_OBJ_CE'] = features_br['NT_OBJ_CE'].astype(float)
-
-features_br['NT_DIS_CE'] = features_br['NT_DIS_CE'].str.replace(',','.')
-features_br['NT_DIS_CE'] = features_br['NT_DIS_CE'].astype(float)
-# Substituindo valores nan pela mediana (medida resistente)
-features_br_median = features_br.iloc[:,0:16].median()
-
-features_br.iloc[:,0:16] = features_br.iloc[:,0:16].fillna(features_br.iloc[:,0:16].median())
-# Observando os dados
-#print('O formato dos dados é: ', features_br.shape)
-
-describe_br = features_br.describe()
-
-#print('Descrição para as colunas: ', describe_br)
-#print(describe_br.columns)
-
-# Convertendo os labels de predição para arrays numpy
-labels_br = np.array(features_br['NT_GER'])
-#print('Media das labels: %.2f' %(labels_br.mean()) )
-#
-# Removendo as features de notas
-features_br = features_br.drop(['NT_GER','NT_FG','NT_OBJ_FG','NT_DIS_FG',
-                               'NT_FG_D1','NT_FG_D1_PT','NT_FG_D1_CT',
-                               'NT_FG_D2','NT_FG_D2_PT','NT_FG_D2_CT',
-                               'NT_CE','NT_OBJ_CE','NT_DIS_CE',
-                               'NT_CE_D1','NT_CE_D2','NT_CE_D3'], axis = 1)
-# Salvando e convertendo
-# Salvando os nomes das colunas (features) com os dados para uso posterior
-# antes de codificar
-features_br_list = list(features_br.columns)
+    # Removendo as features de notas
+    data_br = data_br.drop(['NT_GER'], axis = 1)
+    
+    features_br_list = list(data_br.columns)
 
 
-# One hot encoding - QE_I01 a QE_I26
-features_br = pd.get_dummies(data=features_br, columns=['QE_I01','QE_I02','QE_I03','QE_I04',
+    # One hot encoding - QE_I01 a QE_I26
+    features_br = pd.get_dummies(data=data_br, columns=['QE_I01','QE_I02','QE_I03','QE_I04',
                                                         'QE_I05','QE_I06','QE_I07','QE_I08',
                                                         'QE_I09','QE_I10','QE_I11','QE_I12',
                                                         'QE_I13','QE_I14','QE_I15','QE_I16',
                                                         'QE_I17','QE_I18','QE_I19','QE_I20',
                                                         'QE_I21','QE_I22','QE_I23','QE_I24',
                                                         'QE_I25','QE_I26'])
-# Salvando os nomes das colunas (features) com os dados para uso posterior
-# depois de codificar
-features_br_list_oh = list(features_br.columns)
-#
-# Convertendo para numpy
-features_br = np.array(features_br)
+    # Salvando os nomes das colunas (features) com os dados para uso posterior
+    # depois de codificar
+    features_br_list_oh = list(features_br.columns)
+    #
+    # Convertendo para numpy
+    features_br = np.array(features_br)
+    
+    return features_br, labels_br, features_br_list_oh
 
-#%% MÉTODOS KDD
-from sklearn.metrics import mean_absolute_error
-from sklearn.model_selection import KFold
+#%% Aplicando o pré-processamento
+
+features_br, labels_br, features_br_list_oh = processing_set_br(data_br2014, data_br2015, data_br2016, data_br2017, data_br2018)
+
+#%% BIBLIOTECAS
+from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error
+from sklearn.model_selection import train_test_split, KFold, cross_val_score
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.tree import DecisionTreeRegressor
 from sklearn import linear_model
+import time
 
-split_is_multiple = int(11);
+n_cv = int(5);
+
+train_x_br, test_x_br, train_y_br, test_y_br = train_test_split(features_br, labels_br, test_size=0.33, random_state=42)
+
+#%% Cross Vbridation - Árvore de decisão
+
+dt_br = DecisionTreeRegressor(min_samples_split=320, min_samples_leaf=200, random_state=42)
+
+time_dt_br_cv = time.time() # Time start DT CV
+# min_samples_split = 320; min_samples_leaf = 200; max_features= log2
+accuracy_br_dt_cv = cross_val_score(dt_br, train_x_br, train_y_br, cv=n_cv, scoring='r2')
+sec_dt_br_cv = (time.time() - time_dt_br_cv) # Time end DT CV
+
+print('Accuracy DT CV: ', round(np.mean(accuracy_br_dt_cv), 4))
+seconds_transform(sec_dt_br_cv)
+
+#%% Escrevendo em Arquivo - DT
+fields_br_dt = ['Método', 'Split', 'Leaf', 'Acc', 'Acc médio', 'Tempo (h,min,s)']
+
+rows_br_dt = [['DT','320', '200', accuracy_br_dt_cv, accuracy_br_dt_cv.mean(),
+              seconds_transform(sec_dt_br_cv)]]
+
+file_br_dt = "DT_CV_BR.csv"
+
+with open(file_br_dt, 'a') as csvfile:
+    # creating a csv writer object  
+    csv_br_dt = csv.writer(csvfile)  
+        
+    # writing the fields  
+    csv_br_dt.writerow(fields_br_dt)  
+        
+    # writing the data rows  
+    csv_br_dt.writerows(rows_br_dt) 
+
+#%% Cross Validation - RF
+
+# min_samples_split=40, min_samples_leaf=20
+rf_br = RandomForestRegressor(n_estimators=1000, min_samples_split=40, min_samples_leaf=20, random_state=42)
+
+time_rf_br_cv = time.time()
+accuracy_br_rf_cv = cross_val_score(rf_br, train_x_br, train_y_br, cv=n_cv, scoring='r2')
+
+sec_rf_br_cv = (time.time() - time_rf_br_cv)
+
+print('Accuracy RF CV: ', round(np.mean(accuracy_br_rf_cv), 4))
+seconds_transform(sec_rf_br_cv)
+
+#%% Escrevendo em Arquivo - RF
+fields_br_rf = ['Método', 'N_tree', 'Split', 'Leaf', 'Acc', 'Acc médio', 'Tempo (h,min,s)']
+
+rows_br_rf = [['RF','1000', '40', '20', accuracy_br_rf_cv, 
+               accuracy_br_rf_cv.mean(), seconds_transform(sec_rf_br_cv)]]
+
+file_br_rf = "RF_CV_BR.csv"
+
+with open(file_br_rf, 'a') as csvfile:
+    # creating a csv writer object  
+    csvwriter = csv.writer(csvfile)  
+        
+    # writing the fields  
+    csvwriter.writerow(fields_br_rf)  
+        
+    # writing the data rows  
+    csvwriter.writerows(rows_br_rf) 
+
+#%% LASSO
+
+ls_br = linear_model.Lasso(alpha=0.005, positive=True, random_state=42)
+
+time_ls_br_cv = time.time()
+accuracy_br_ls_cv = cross_val_score(ls_br, train_x_br, train_y_br, cv=n_cv, scoring='r2')
+sec_ls_br_cv = (time.time() - time_ls_br_cv)
+
+print('Accuracy LS CV: ', round(np.mean(accuracy_br_ls_cv), 4))
+seconds_transform(sec_ls_br_cv)
+
+#%% Escrevendo arquivo - LS
+fields_br_ls = ['Método', 'Alfa', 'Acc','Acc médio', 'Tempo (h,min,s)']
+
+rows_br_ls = [['LS','0.005', accuracy_br_ls_cv, accuracy_br_ls_cv.mean(),
+              seconds_transform(sec_ls_br_cv)]]
+
+file_br_ls = "LS_CV_BR.csv"
+
+with open(file_br_ls, 'a') as csvfile:
+    # creating a csv writer object  
+    csv_br_ls = csv.writer(csvfile)  
+        
+    # writing the fields  
+    csv_br_ls.writerow(fields_br_ls)  
+        
+    # writing the data rows  
+    csv_br_ls.writerows(rows_br_ls) 
+
+#%% Treinando os modelos
 
 scores_br_rf = []
+scores_br_dt_mae = [];
+scores_br_dt_mse = [];
+
 scores_br_dt = []
+scores_br_rf_mae = [];
+scores_br_rf_mse = [];
+
+
 scores_br_ls = []
+scores_br_ls_mae = [];
+scores_br_ls_mse = [];
 
 importance_fields_br_rf = 0.0
 importance_fields_aux_br_rf = []
@@ -123,69 +237,246 @@ importance_fields_aux_br_dt = []
 importance_fields_br_ls = 0.0
 importance_fields_aux_br_ls = []
 
-rf_br = RandomForestRegressor(n_estimators = 1000, random_state=0)
-dt_br = DecisionTreeRegressor(random_state = 0)
-lasso_br = linear_model.Lasso(alpha=0.1, positive=True)
+dt_br = DecisionTreeRegressor(min_samples_split=320, min_samples_leaf=200, random_state=42)
+rf_br = RandomForestRegressor(n_estimators=1000, min_samples_split=40, min_samples_leaf=20, random_state=42)
+lasso_br = linear_model.Lasso(alpha=0.005, positive=True, random_state=42)
 
-kf_cv_br = KFold(n_splits=split_is_multiple, random_state=None, shuffle=False) # n_splits: divisores de 7084 ^ memory
+kf_cv_br = KFold(n_splits=n_cv, random_state=42, shuffle=False) # n_splits
 
-for train_index_br, test_index_br in kf_cv_br.split(features_br):
+#%% Treinando dados - DT_BR
+
+time_dt_br = time.time() # Time start dt loop
+
+for train_index_br, test_index_br in kf_cv_br.split(train_x_br):
     #print("Train index: ", np.min(train_index_br), '- ', np.max(train_index_br))
     print("Test index: ", np.min(test_index_br), '-', np.max(test_index_br))
     
     # Dividindo nas features e labels
-    train_features_br = features_br[train_index_br]
-    test_features_br = features_br[test_index_br]
-    train_labels_br = labels_br[train_index_br]
-    test_labels_br = labels_br[test_index_br]
+    train_features_br = train_x_br[train_index_br]
+    test_features_br = train_x_br[test_index_br]
+    train_labels_br = train_y_br[train_index_br]
+    test_labels_br = train_y_br[test_index_br]
     
-    # Ajustando cada features e label com RF e DT e Lasso
-    rf_br.fit(train_features_br, train_labels_br)
+    # Ajustando cada features e label com RF e DT
+    
+    # Método 1 - Árvore de decisão
+    
     dt_br.fit(train_features_br, train_labels_br)
-    lasso_br.fit(train_features_br, train_labels_br)
     
-    # Usando o RF e DT para predição dos dados
-    predictions_br_rf = rf_br.predict(test_features_br)
     predictions_br_dt = dt_br.predict(test_features_br)
-    predictions_br_ls = lasso_br.predict(test_features_br)
+    
+    accuracy_br_dt = dt_br.score(test_features_br, test_labels_br)
 
-    # Erro
-    errors_br_rf = abs(predictions_br_rf - test_labels_br)
-    errors_br_dt = abs(predictions_br_dt - test_labels_br)
-    errors_br_ls = abs(predictions_br_ls - test_labels_br)
+    accuracy_mae_br_dt = mean_absolute_error(test_labels_br, predictions_br_dt)
     
-    # Acurácia
-    accuracy_br_rf = 100 - mean_absolute_error(test_labels_br, predictions_br_rf)
-    accuracy_br_dt = 100 - mean_absolute_error(test_labels_br, predictions_br_dt)
-    accuracy_br_ls = 100 - mean_absolute_error(test_labels_br, predictions_br_ls)
+    accuracy_mse_br_dt = mean_squared_error(test_labels_br, predictions_br_dt)
     
-    # Importância das variáveis
-    importance_fields_aux_br_rf = rf_br.feature_importances_
-    importance_fields_br_rf += importance_fields_aux_br_rf
-    
+    # Importância de variável
     importance_fields_aux_br_dt = dt_br.feature_importances_
     importance_fields_br_dt += importance_fields_aux_br_dt
     
-    importance_fields_aux_br_ls = lasso_br.coef_
+    # Append em cada valor médio
+    scores_br_dt.append(accuracy_br_dt)
+    
+    scores_br_dt_mae.append(accuracy_mae_br_dt)
+    
+    scores_br_dt_mse.append(accuracy_mse_br_dt)
+
+sec_dt_br = (time.time() - time_dt_br) # Time end dt loop
+
+seconds_transform(sec_dt_br)
+
+#%% Treino dos dados - RF_BR
+
+time_rf_br = time.time() # Time start dt loop
+
+for train_index_br, test_index_br in kf_cv_br.split(train_x_br):
+    #print("Train index: ", np.min(train_index_br), '- ', np.max(train_index_br))
+    print("Test index: ", np.min(test_index_br), '-', np.max(test_index_br))
+    
+    # Dividindo nas features e labels
+    train_features_br = train_x_br[train_index_br]
+    test_features_br = train_x_br[test_index_br]
+    train_labels_br = train_y_br[train_index_br]
+    test_labels_br = train_y_br[test_index_br]
+    
+    # Método 2 - Random Forest
+    
+    rf_br.fit(train_features_al, train_labels_br)
+    
+    predictions_br_rf = rf_br.predict(test_features_br)
+    
+    accuracy_br_rf = rf_br.score(test_features_br, test_labels_br)
+
+    accuracy_mae_br_rf = mean_absolute_error(test_labels_br, predictions_br_rf)
+    
+    accuracy_mse_br_rf = mean_squared_error(test_labels_br, predictions_br_rf)
+     
+    # Importância de variável
+    importance_fields_aux_br_rf = rf_br.feature_importances_
+    importance_fields_br_rf += importance_fields_aux_br_rf
+    
+    # Append em cada vbror médio
+    scores_br_rf.append(accuracy_br_rf)
+    
+    scores_br_rf_mae.append(accuracy_mae_br_rf)
+    
+    scores_br_rf_mse.append(accuracy_mse_br_rf)
+
+sec_rf_br = (time.time() - time_rf_br) # Time end dt loop
+
+seconds_transform(sec_rf_br)
+
+#%% Treino dos dados - LS_BR
+
+ls_br = linear_model.Lasso(alpha=0.005, positive=True, random_state=42)
+
+time_ls_br = time.time() # Time start dt loop
+
+for train_index_br, test_index_br in kf_cv_br.split(train_x_br):
+    #print("Train index: ", np.min(train_index_br), '- ', np.max(train_index_br))
+    print("Test index: ", np.min(test_index_br), '-', np.max(test_index_br))
+    
+    # Dividindo nas features e labels
+    train_features_br = train_x_br[train_index_br]
+    test_features_br = train_x_br[test_index_br]
+    train_labels_br = train_y_br[train_index_br]
+    test_labels_br = train_y_br[test_index_br]
+    
+    
+    # Método 3 - Lasso
+    
+    ls_br.fit(train_features_br, train_labels_br)
+    
+    predictions_br_ls = ls_br.predict(test_features_br)
+    
+    accuracy_br_ls = ls_br.score(test_features_br, test_labels_br)
+
+    accuracy_mae_br_ls = mean_absolute_error(test_labels_br, predictions_br_ls)
+    
+    accuracy_mse_br_ls = mean_squared_error(test_labels_br, predictions_br_ls)    
+    
+    # Importância das variáveis
+    importance_fields_aux_br_ls = ls_br.coef_
     importance_fields_br_ls += importance_fields_aux_br_ls
     
     # Append em cada valor médio
-    scores_br_rf.append(accuracy_br_rf)
-    scores_br_dt.append(accuracy_br_dt)
     scores_br_ls.append(accuracy_br_ls)
+    
+    scores_br_ls_mae.append(accuracy_mae_br_ls)
+    
+    scores_br_ls_mse.append(accuracy_mse_br_ls)
 
-#%% Acurácia 
-print('Accuracy RF: ', round(np.average(scores_br_rf), 2), "%.")
-print('Accuracy DT: ', round(np.average(scores_br_dt), 2), "%.")
-print('Accuracy LS: ', round(np.average(scores_br_ls), 2), "%.")
+sec_ls_br = (time.time() - time_ls_br) # Time end dt loop
 
-importance_fields_br_rf_t = importance_fields_br_rf/split_is_multiple
-importance_fields_br_dt_t = importance_fields_br_dt/split_is_multiple
-importance_fields_br_ls_t = importance_fields_br_ls/split_is_multiple
+seconds_transform(sec_ls_br)
 
-print('Total RF: ', round(np.sum(importance_fields_br_rf_t),2));
-print('Total DT: ', round(np.sum(importance_fields_br_dt_t),2));
-print('Total LS: ', round(np.sum(importance_fields_br_ls_t),2));
+#%% Testando - RF
+predictions_br_rf = rf_br.predict(test_x_br)
+    
+accuracy_br_rf_f = rf_br.score(test_x_br, test_y_br)
+
+accuracy_mae_br_rf_f = mean_absolute_error(test_y_br, predictions_br_rf)
+    
+accuracy_mse_br_rf_f = mean_squared_error(test_y_br, predictions_br_rf)
+
+print('Accuracy br RF: ', round(accuracy_br_rf_f, 4))
+print('Accuracy RF MAE BR RF: ', round(accuracy_mae_br_rf_f, 4))
+print('Accuracy RF MSE BR RF: ', round(accuracy_mse_br_rf_f, 4))
+
+#%% Escrevendo em arquivo - RF
+fields_br_rf = ['Método', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
+
+rows_br_rf = [['RF', round(accuracy_br_rf_f,4), round(accuracy_mae_br_rf_f,4),
+               round(accuracy_mse_br_rf_f,4), seconds_transform(sec_rf_br)]]
+
+file_br_rf = "RF_BR.csv"
+
+with open(file_br_rf, 'a') as csvfile:
+    # creating a csv writer object  
+    csv_br_rf = csv.writer(csvfile)  
+        
+    # writing the fields  
+    csv_br_rf.writerow(fields_br_rf)  
+        
+    # writing the data rows  
+    csv_br_rf.writerows(rows_br_rf)
+
+#%% Testando - DT
+predictions_br_dt = dt_br.predict(test_x_br)
+    
+accuracy_br_dt_f = dt_br.score(test_x_br, test_y_br)
+
+accuracy_mae_br_dt_f = mean_absolute_error(test_y_br, predictions_br_dt)
+    
+accuracy_mse_br_dt_f = mean_squared_error(test_y_br, predictions_br_dt)
+
+print('Final Accuracy BR DT: ', round(accuracy_br_dt_f, 4))
+print('Final Accuracy MAE BR DT: ', round(accuracy_mae_br_dt_f, 4))
+print('Final Accuracy MSE BR DT: ', round(accuracy_mse_br_dt_f, 4))
+
+#%% Escrevendo em arquivo - DT
+fields_br_dt = ['Método', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
+
+rows_br_dt = [['DT', round(accuracy_br_dt_f,4), round(accuracy_mae_br_dt_f,4),
+               round(accuracy_mse_br_dt_f,4), seconds_transform(sec_dt_br)]]
+
+file_br_dt = "DT_BR.csv"
+
+with open(file_br_dt, 'a') as csvfile:
+    # creating a csv writer object  
+    csv_br_dt = csv.writer(csvfile)  
+        
+    # writing the fields  
+    csv_br_dt.writerow(fields_br_dt)  
+        
+    # writing the data rows  
+    csv_br_dt.writerows(rows_br_dt)
+    
+#%% Testando LS
+predictions_br_ls = lasso_br.predict(test_x_br)
+    
+accuracy_br_ls_f = lasso_br.score(test_x_br, test_y_br)
+
+accuracy_mae_br_ls_f = mean_absolute_error(test_y_br, predictions_br_ls)
+    
+accuracy_mse_br_ls_f = mean_squared_error(test_y_br, predictions_br_ls)
+
+print('Final Accuracy BR LS: ', round(accuracy_br_ls_f, 4))
+print('Final Accuracy MAE BR LS: ', round(accuracy_mae_br_ls_f, 4))
+print('Final Accuracy MSE BR LS: ', round(accuracy_mse_br_ls_f, 4))
+
+#%% Escrevendo em arquivo - LS
+fields_br_ls = ['Método', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
+
+rows_br_ls = [['DT', round(accuracy_br_ls_f,4), round(accuracy_mae_br_ls_f,4),
+               round(accuracy_mse_br_ls_f,4), seconds_transform(sec_ls_br)]]
+
+file_br_ls = "LS_BR.csv"
+
+with open(file_br_ls, 'a') as csvfile:
+    # creating a csv writer object  
+    csv_br_ls = csv.writer(csvfile)  
+        
+    # writing the fields  
+    csv_br_ls.writerow(fields_br_ls)  
+        
+    # writing the data rows  
+    csv_br_ls.writerows(rows_br_ls)
+
+#%% Acurácia BR
+#print('Accuracy RF: ', round(np.average(scores_br_rf), 4), "%.")
+#print('Accuracy DT: ', round(np.average(scores_br_dt), 4), "%.")
+#print('Accuracy LS: ', round(np.average(scores_br_ls), 4), "%.")
+
+importance_fields_br_rf_t = importance_fields_br_rf/n_cv
+importance_fields_br_dt_t = importance_fields_br_dt/n_cv
+importance_fields_br_ls_t = importance_fields_br_ls/n_cv
+
+print('VImp Total BR RF: ', round(np.sum(importance_fields_br_rf_t),2));
+print('VImp Total BR DT: ', round(np.sum(importance_fields_br_dt_t),2));
+print('VImp Total BR LS: ', round(np.sum(importance_fields_br_ls_t),2));
+
 
 #%% Importancia das variáveis
 # Lista de tupla com as variáveis de importância - Random Forest
