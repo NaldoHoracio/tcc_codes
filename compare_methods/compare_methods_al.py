@@ -14,7 +14,7 @@ import pandas as pd
 import datetime as dt
 import matplotlib.pyplot as plt
 
-# Funções úteis - Tempo de execução
+# Funções úteis
 # Tempo de execução
 def seconds_transform(seconds_time):
   hours = int(seconds_time/3600)
@@ -26,46 +26,35 @@ def seconds_transform(seconds_time):
   return hours, minutes, round(seconds,2)
 
 # Controle de build
-def version_file_cross_val_al(name_file, fields_cross_val, rows_cross_val):    
-    rows_v = []
-    fields_v = []
+def version_file(name_file, fields, rows_version):
+    rows_aux = []
     
     if os.path.isfile(name_file):
         file_version_py = name_file      
-        df = pd.read_csv(name_file, delimiter=';')
+        df = pd.read_csv(name_file)
         teste = df['Version'].iloc[-1]
         value = int(teste)
         value += 1
-        rows_v = [[value, rows_cross_val[1], rows_cross_val[2], 
-                   rows_cross_val[3], rows_cross_val[4], 
-                   rows_cross_val[5], rows_cross_val[6]]]
+        rows_version['Version'] = value
+        rows_aux = [rows_version]
         with open(file_version_py, 'a') as csvfile:
             # creating a csv writer object  
-            csvwriter = csv.writer(csvfile, delimiter=';') 
-            # writing the fields  
-            #csvwriter.writerow(field_version)    
+            csvwriter = csv.DictWriter(csvfile, fieldnames = fields) 
             # writing the data rows  
-            csvwriter.writerows(rows_v) 
+            csvwriter.writerows(rows_aux) 
     else:
-        #teste = int(0)
-        #teste = 1
         file_version_py = name_file
-        fields_v = [fields_cross_val[0], fields_cross_val[1], fields_cross_val[2],
-                    fields_cross_val[3], fields_cross_val[4], fields_cross_val[5], fields_cross_val[6]]
-        rows_v = [[rows_cross_val[0], rows_cross_val[1], rows_cross_val[2], 
-                   rows_cross_val[3], rows_cross_val[4], rows_cross_val[5],
-                   rows_cross_val[6]]]
+        rows_aux = [rows_version]
         with open(file_version_py, 'a') as csvfile:
             # creating a csv writer object  
-            csvwriter = csv.writer(csvfile, delimiter=';')
-            # writing the fields  
-            csvwriter.writerow(fields_v)  
-            # writing the data rows  
-            csvwriter.writerows(rows_v) 
+            csvwriter = csv.DictWriter(csvfile, fieldnames = fields) 
+            # writing the fields
+            csvwriter.writeheader()
+            # writing the data rows 
+            csvwriter.writerows(rows_aux)
+            #print ("File not exist")
 
-#%%
-
-# PREPARANDO OS DADOS
+#%% PREPARANDO OS DADOS
 
 data_al2014 = pd.read_csv(r'tcc_data/AL_2014.csv')
 data_al2015 = pd.read_csv(r'tcc_data/AL_2015.csv')
@@ -176,25 +165,16 @@ print('Accuracy DT CV: ', round(np.mean(accuracy_al_dt_cv), 4))
 seconds_transform(sec_dt_al_cv)
 
 #%% Escrevendo em Arquivo - DT
-fields_al_dt = ['Version','Método', 'Split', 'Leaf', 'Acc', 'Acc médio', 'Tempo (h,min,s)']
+fields_al_dt_cv = ['Version','Método', 'Split', 'Leaf', 'Acc', 'Acc médio', 'Tempo (h,min,s)', 'n_cv']
 
-rows_al_dt = [[0,'DT', 320, 200, accuracy_al_dt_cv, accuracy_al_dt_cv.mean(),
-              seconds_transform(sec_dt_al_cv)]]
+rows_al_dt_cv = {'Version':0,'Método':'DT', 
+                 'Split': 320, 'Leaf':200, 
+                 'Acc': accuracy_al_dt_cv, 'Acc médio': accuracy_al_dt_cv.mean(),
+                 'Tempo (h,min,s)':seconds_transform(sec_dt_al_cv), 'n_cv':n_cv}
 
-file_al_dt = "../compare_methods/Logs/CV/DT_CV_AL.csv"
+file_al_dt_cv = "../tcc_codes/compare_methods/Logs/CV/DT_CV_AL.csv"
 
-version_file_cross_val_al(file_al_dt, fields_al_dt, rows_al_dt)
-
-#%%
-with open(file_al_dt, 'a') as csvfile:
-    # creating a csv writer object  
-    csv_al_dt = csv.writer(csvfile, delimiter=';')  
-        
-    # writing the fields  
-    csv_al_dt.writerow(fields_al_dt)  
-        
-    # writing the data rows  
-    csv_al_dt.writerows(rows_al_dt) 
+version_file(file_al_dt_cv, fields_al_dt_cv, rows_al_dt_cv)
 
 #%% Cross Validation - RF
 
@@ -210,22 +190,17 @@ print('Accuracy RF CV: ', round(np.mean(accuracy_al_rf_cv), 4))
 seconds_transform(sec_rf_al_cv)
 
 #%% Escrevendo em Arquivo - RF
-fields_al_rf = ['Método', 'N_tree', 'Split', 'Leaf', 'Acc', 'Acc médio', 'Tempo (h,min,s)']
+fields_al_rf_cv = ['Version', 'Método', 'N_tree', 'Split', 'Leaf', 'Acc', 'Acc médio', 
+                   'Tempo (h,min,s)', 'n_cv']
 
-rows_al_rf = [['RF','1000', '40', '20', accuracy_al_rf_cv, 
-               accuracy_al_rf_cv.mean(), seconds_transform(sec_rf_al_cv)]]
+rows_al_rf_cv = {'Version':0,'Método':'RF',
+                 'N_tree':'1000', 'Split':40, 'Leaf':20, 
+                 'Acc':accuracy_al_rf_cv, 'Acc médio':accuracy_al_rf_cv.mean(), 
+                 'Tempo (h,min,s)':seconds_transform(sec_rf_al_cv), 'n_cv':n_cv}
 
-file_al_rf = "Logs/CV/RF_CV_AL.csv"
+file_al_rf_cv = "../tcc_codes/compare_methods/Logs/CV/RF_CV_AL.csv"
 
-with open(file_al_rf, 'a') as csvfile:
-    # creating a csv writer object  
-    csvwriter = csv.writer(csvfile, delimiter=';')  
-        
-    # writing the fields  
-    csvwriter.writerow(fields_al_rf)  
-        
-    # writing the data rows  
-    csvwriter.writerows(rows_al_rf) 
+version_file(file_al_rf_cv, fields_al_rf_cv, rows_al_rf_cv)
 
 #%% LASSO
 
@@ -239,22 +214,17 @@ print('Accuracy LS CV: ', round(np.mean(accuracy_al_ls_cv), 4))
 seconds_transform(sec_ls_al_cv)
 
 #%% Escrevendo arquivo - LS
-fields_al_ls = ['Método', 'Alfa', 'Acc','Acc médio', 'Tempo (h,min,s)']
+fields_al_ls_cv = ['Version','Método', 'Alfa', 'Acc','Acc médio', 'Tempo (h,min,s)', 'n_cv']
 
-rows_al_ls = [['LS','0.005', accuracy_al_ls_cv, accuracy_al_ls_cv.mean(),
-              seconds_transform(sec_ls_al_cv)]]
+rows_al_ls_cv = {'Version':0,'Método':'LS',
+                 'Alfa':0.005, 'Acc':accuracy_al_ls_cv, 
+                 'Acc médio':accuracy_al_ls_cv.mean(),
+                 'Tempo (h,min,s)':seconds_transform(sec_ls_al_cv),
+                 'n_cv':n_cv}
 
-file_al_ls = "Logs/CV/LS_CV_AL.csv"
+file_al_ls_cv = "../tcc_codes/compare_methods/Logs/CV/LS_CV_AL.csv"
 
-with open(file_al_ls, 'a') as csvfile:
-    # creating a csv writer object  
-    csv_al_ls = csv.writer(csvfile, delimiter=';')  
-        
-    # writing the fields  
-    csv_al_ls.writerow(fields_al_ls)  
-        
-    # writing the data rows  
-    csv_al_ls.writerows(rows_al_ls) 
+version_file(file_al_ls_cv, fields_al_ls_cv, rows_al_ls_cv)
 
 #%% Treinando os modelos
 
@@ -428,22 +398,14 @@ print('Accuracy MAE AL RF: ', round(accuracy_mae_al_rf_f, 4))
 print('Accuracy MSE AL RF: ', round(accuracy_mse_al_rf_f, 4))
 
 #%% Escrevendo em arquivo - RF
-fields_al_rf = ['Método', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
+fields_al_rf = ['Version','Método', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
 
-rows_al_rf = [['RF', round(accuracy_al_rf_f,4), round(accuracy_mae_al_rf_f,4),
-               round(accuracy_mse_al_rf_f,4), seconds_transform(sec_rf_al)]]
+rows_al_rf = {'Version':0,'Método':'RF', 'R2':round(accuracy_al_rf_f,4), 'MAE':round(accuracy_mae_al_rf_f,4),
+               'MSE':round(accuracy_mse_al_rf_f,4), 'Tempo (h,min,s)':seconds_transform(sec_rf_al)}
 
-file_al_rf = "Logs/METRICS_EVALUATE/RF_AL.csv"
+file_al_rf = "../tcc_codes/compare_methods/Logs/METRICS_EVALUATE/RF_AL.csv"
 
-with open(file_al_rf, 'a') as csvfile:
-    # creating a csv writer object  
-    csv_al_rf = csv.writer(csvfile, delimiter=';')  
-        
-    # writing the fields  
-    csv_al_rf.writerow(fields_al_rf)  
-        
-    # writing the data rows  
-    csv_al_rf.writerows(rows_al_rf)
+version_file(file_al_rf, fields_al_rf, rows_al_rf)
 
 #%% Testando - DT
 predictions_al_dt = dt_al.predict(test_x_al)
@@ -459,22 +421,17 @@ print('Final Accuracy MAE AL DT: ', round(accuracy_mae_al_dt_f, 4))
 print('Final Accuracy MSE AL DT: ', round(accuracy_mse_al_dt_f, 4))
 
 #%% Escrevendo em arquivo - DT
-fields_al_dt = ['Método', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
+fields_al_dt = ['Version','Método', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
 
-rows_al_dt = [['DT', round(accuracy_al_dt_f,4), round(accuracy_mae_al_dt_f,4),
-               round(accuracy_mse_al_dt_f,4), seconds_transform(sec_dt_al)]]
+rows_al_dt = {'Version':0,'Método':'DT', 
+              'R2':round(accuracy_al_dt_f,4), 
+              'MAE':round(accuracy_mae_al_dt_f,4),
+              'MSE':round(accuracy_mse_al_dt_f,4), 
+              'Tempo (h,min,s)':seconds_transform(sec_dt_al)}
 
-file_al_dt = "Logs/METRICS_EVALUATE/DT_AL.csv"
+file_al_dt = "../tcc_codes/compare_methods/Logs/METRICS_EVALUATE/DT_AL.csv"
 
-with open(file_al_dt, 'a') as csvfile:
-    # creating a csv writer object  
-    csv_al_dt = csv.writer(csvfile, delimiter=';')  
-        
-    # writing the fields  
-    csv_al_dt.writerow(fields_al_dt)  
-        
-    # writing the data rows  
-    csv_al_dt.writerows(rows_al_dt)
+version_file(file_al_dt, fields_al_dt, rows_al_dt)
     
 #%% Testando LS
 predictions_al_ls = lasso_al.predict(test_x_al)
@@ -490,22 +447,15 @@ print('Final Accuracy MAE AL LS: ', round(accuracy_mae_al_ls_f, 4))
 print('Final Accuracy MSE AL LS: ', round(accuracy_mse_al_ls_f, 4))
 
 #%% Escrevendo em arquivo - LS
-fields_al_ls = ['Método', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
+fields_al_ls = ['Version','Método', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
 
-rows_al_ls = [['DT', round(accuracy_al_ls_f,4), round(accuracy_mae_al_ls_f,4),
-               round(accuracy_mse_al_ls_f,4), seconds_transform(sec_ls_al)]]
+rows_al_ls = {'Version':0, 'Método':'LS', 'R2':round(accuracy_al_ls_f,4), 
+              'MAE':round(accuracy_mae_al_ls_f,4),'MSE':round(accuracy_mse_al_ls_f,4), 
+              'Tempo (h,min,s)':seconds_transform(sec_ls_al)}
 
-file_al_ls = "Logs/METRICS_EVALUATE/LS_AL.csv"
+file_al_ls = "../tcc_codes/compare_methods/Logs/METRICS_EVALUATE/LS_AL.csv"
 
-with open(file_al_ls, 'a') as csvfile:
-    # creating a csv writer object  
-    csv_al_ls = csv.writer(csvfile, delimiter=';')  
-        
-    # writing the fields  
-    csv_al_ls.writerow(fields_al_ls)  
-        
-    # writing the data rows  
-    csv_al_ls.writerows(rows_al_ls)
+version_file(file_al_dt, fields_al_dt, rows_al_ls)
 
 #%% Acurácia AL
 #print('Accuracy RF: ', round(np.average(scores_al_rf), 4), "%.")
@@ -694,7 +644,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Estado civil');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I01_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I01_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I02
@@ -730,7 +680,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Cor/raça');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I02_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I02_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I03
@@ -766,7 +716,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Nacionalidade');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I03_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I03_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I04
@@ -803,7 +753,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Escolarização da pai');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I04_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I04_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I05
@@ -840,7 +790,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Escolarização da mãe');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I05_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I05_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I06
@@ -878,7 +828,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Onde e com quem moro');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I06_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I06_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I07
@@ -917,7 +867,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Quantos moram com o estudante');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I07_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I07_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I08
@@ -959,7 +909,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Renda total');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I08_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I08_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I09
@@ -1001,7 +951,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Situação financeira');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I09_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I09_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I10
@@ -1042,7 +992,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Situação de trabalho');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I10_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I10_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I11
@@ -1085,7 +1035,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Bolsa ou financiamento para custeio de mensalidade');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I11_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I11_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I12
@@ -1124,7 +1074,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Auxílio permanência');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I12_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I12_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I13
@@ -1165,7 +1115,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Tipo de bolsa recebido');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I13_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I13_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I14
@@ -1206,7 +1156,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Programas de atividade no exterior');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I14_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I14_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I15
@@ -1246,7 +1196,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Ingresso por cota');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I15_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I15_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I16
@@ -1282,7 +1232,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('UF que concluiu o médio');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I16_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I16_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I17
@@ -1323,7 +1273,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Tipo de escola no médio');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I17_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I17_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I18
@@ -1360,7 +1310,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Modalidade do Ensino Médio');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I18_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I18_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I19
@@ -1400,7 +1350,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Maior incentivo para cursar a graduação');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I19_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I19_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I20
@@ -1442,7 +1392,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Grupo determinante para enfrentar as dificuldades do curso e concluí-lo');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I20_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I20_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I21
@@ -1478,7 +1428,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Alguém da família concluiu curso superior');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I21_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I21_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I22
@@ -1514,7 +1464,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Livros lido no ano (excluindo da biografia do curso)');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I22_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I22_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I23
@@ -1550,7 +1500,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Horas de estudo por semana (excluindo aulas)');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I23_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I23_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I24
@@ -1587,7 +1537,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Oportunidade de aprendizado de idioma estrangeiro');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I24_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I24_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I25
@@ -1629,7 +1579,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Porque escolhi o curso');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I25_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I25_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I26
@@ -1670,7 +1620,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Porque escolhi essa IES');
 plt.legend();
-plt.savefig('AL/DETAILS_VAR_AL/QE_I26_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/DETAILS_VAR_AL/QE_I26_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I27a
@@ -1720,7 +1670,7 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (AL)');
 plt.title('Categorias QE_I01 a QE_I13');
 plt.legend();
-plt.savefig('AL/QE_I27a_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/QE_I27a_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Visualization of Variable Importances
 # QE_I27b
@@ -1768,112 +1718,90 @@ plt.ylabel('Importância (%)');
 plt.xlabel('Variável (BR)');
 plt.title('Categorias QE_I14 a QE_I26');
 plt.legend();
-plt.savefig('AL/QE_I27b_AL_CP.png', dpi=450, bbox_inches='tight');
+plt.savefig('compare_methods/AL/QE_I27b_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Arquivo de registro AL DT
-fields_vimp_al_dt = ['Método', 
+fields_vimp_al_dt = ['Version','Método', 
                      'I01_AL', 'I02_AL', 'I03_AL', 'I04_AL', 'I05_AL', 'I06_AL',
                      'I07_AL', 'I08_AL', 'I09_AL', 'I10_AL', 'I11_AL', 'I12_AL', 
                      'I13_AL', 'I14_AL', 'I15_AL', 'I16_AL', 'I17_AL', 'I18_AL', 
                      'I19_AL', 'I20_AL', 'I21_AL', 'I22_AL', 'I23_AL', 'I24_AL',
                      'I25_AL', 'I26_AL']
 
-rows_vimp_al_dt = [['RF_AL',round(np.sum(I01_AL_DT),6),
-                   round(np.sum(I02_AL_DT),6), round(np.sum(I03_AL_DT),6),
-                   round(np.sum(I04_AL_DT),6), round(np.sum(I05_AL_DT),6),
-                   round(np.sum(I06_AL_DT),6), round(np.sum(I07_AL_DT),6),
-                   round(np.sum(I08_AL_DT),6), round(np.sum(I09_AL_DT),6),
-                   round(np.sum(I10_AL_DT),6), round(np.sum(I11_AL_DT),6),
-                   round(np.sum(I12_AL_DT),6), round(np.sum(I13_AL_DT),6),
-                   round(np.sum(I14_AL_DT),6), round(np.sum(I15_AL_DT),6),
-                   round(np.sum(I16_AL_DT),6), round(np.sum(I17_AL_DT),6),
-                   round(np.sum(I18_AL_DT),6), round(np.sum(I19_AL_DT),6),
-                   round(np.sum(I20_AL_DT),6), round(np.sum(I21_AL_DT),6),
-                   round(np.sum(I22_AL_DT),6), round(np.sum(I23_AL_DT),6),
-                   round(np.sum(I24_AL_DT),6), round(np.sum(I25_AL_DT),6),
-                   round(np.sum(I26_AL_DT),6)]]
+rows_vimp_al_dt = {'Version':0,'Método':'DT_AL',
+                   'I01_AL':round(np.sum(I01_AL_DT),6),
+                   'I02_AL':round(np.sum(I02_AL_DT),6), 'I03_AL':round(np.sum(I03_AL_DT),6),
+                   'I04_AL':round(np.sum(I04_AL_DT),6), 'I05_AL':round(np.sum(I05_AL_DT),6),
+                   'I06_AL':round(np.sum(I06_AL_DT),6), 'I07_AL':round(np.sum(I07_AL_DT),6),
+                   'I08_AL':round(np.sum(I08_AL_DT),6), 'I09_AL':round(np.sum(I09_AL_DT),6),
+                   'I10_AL':round(np.sum(I10_AL_DT),6), 'I11_AL':round(np.sum(I11_AL_DT),6),
+                   'I12_AL':round(np.sum(I12_AL_DT),6), 'I13_AL':round(np.sum(I13_AL_DT),6),
+                   'I14_AL':round(np.sum(I14_AL_DT),6), 'I15_AL':round(np.sum(I15_AL_DT),6),
+                   'I16_AL':round(np.sum(I16_AL_DT),6), 'I17_AL':round(np.sum(I17_AL_DT),6),
+                   'I18_AL':round(np.sum(I18_AL_DT),6), 'I19_AL':round(np.sum(I19_AL_DT),6),
+                   'I20_AL':round(np.sum(I20_AL_DT),6), 'I21_AL':round(np.sum(I21_AL_DT),6),
+                   'I22_AL':round(np.sum(I22_AL_DT),6), 'I23_AL':round(np.sum(I23_AL_DT),6),
+                   'I24_AL':round(np.sum(I24_AL_DT),6), 'I25_AL':round(np.sum(I25_AL_DT),6),
+                   'I26_AL': round(np.sum(I26_AL_DT),6)}
 
-file_vimp_al_dt = "Logs/VIMPS/VIMP_DT_AL.csv"
+file_vimp_al_dt = "../tcc_codes/compare_methods/Logs/VIMPS/VIMP_DT_AL.csv"
 
-with open(file_vimp_al_dt, 'a') as csvfile:
-    # creating a csv writer object  
-    csvwriter = csv.writer(csvfile, delimiter=';')  
-        
-    # writing the fields  
-    csvwriter.writerow(fields_vimp_al_dt)  
-        
-    # writing the data rows  
-    #csvwriter.writerows(map(lambda x : [x], rows_vimp_al_dt))
-    csvwriter.writerows(rows_vimp_al_dt)
+version_file(file_vimp_al_dt, fields_vimp_al_dt, rows_vimp_al_dt)
 
 #%% Arquivo de registro AL RF
-fields_vimp_al_rf = ['Método', 
+fields_vimp_al_rf = ['Version','Método', 
                      'I01_AL', 'I02_AL', 'I03_AL', 'I04_AL', 'I05_AL', 'I06_AL',
                      'I07_AL', 'I08_AL', 'I09_AL', 'I10_AL', 'I11_AL', 'I12_AL', 
                      'I13_AL', 'I14_AL', 'I15_AL', 'I16_AL', 'I17_AL', 'I18_AL', 
                      'I19_AL', 'I20_AL', 'I21_AL', 'I22_AL', 'I23_AL', 'I24_AL',
                      'I25_AL', 'I26_AL']
 
-rows_vimp_al_rf = [['RF_AL',round(np.sum(I01_AL_RF),6),
-                   round(np.sum(I02_AL_RF),6), round(np.sum(I03_AL_RF),6),
-                   round(np.sum(I04_AL_RF),6), round(np.sum(I05_AL_RF),6),
-                   round(np.sum(I06_AL_RF),6), round(np.sum(I07_AL_RF),6),
-                   round(np.sum(I08_AL_RF),6), round(np.sum(I09_AL_RF),6),
-                   round(np.sum(I10_AL_RF),6), round(np.sum(I11_AL_RF),6),
-                   round(np.sum(I12_AL_RF),6), round(np.sum(I13_AL_RF),6),
-                   round(np.sum(I14_AL_RF),6), round(np.sum(I15_AL_RF),6),
-                   round(np.sum(I16_AL_RF),6), round(np.sum(I17_AL_RF),6),
-                   round(np.sum(I18_AL_RF),6), round(np.sum(I19_AL_RF),6),
-                   round(np.sum(I20_AL_RF),6), round(np.sum(I21_AL_RF),6),
-                   round(np.sum(I22_AL_RF),6), round(np.sum(I23_AL_RF),6),
-                   round(np.sum(I24_AL_RF),6), round(np.sum(I25_AL_RF),6),
-                   round(np.sum(I26_AL_RF),6)]]
+rows_vimp_al_rf = {'Version':0,'Método':'RF_AL',
+                   'I01_AL':round(np.sum(I01_AL_RF),6),
+                   'I02_AL':round(np.sum(I02_AL_RF),6), 'I03_AL':round(np.sum(I03_AL_RF),6),
+                   'I04_AL':round(np.sum(I04_AL_RF),6), 'I05_AL':round(np.sum(I05_AL_RF),6),
+                   'I06_AL':round(np.sum(I06_AL_RF),6), 'I07_AL':round(np.sum(I07_AL_RF),6),
+                   'I08_AL':round(np.sum(I08_AL_RF),6), 'I09_AL':round(np.sum(I09_AL_RF),6),
+                   'I10_AL':round(np.sum(I10_AL_RF),6), 'I11_AL':round(np.sum(I11_AL_RF),6),
+                   'I12_AL':round(np.sum(I12_AL_RF),6), 'I13_AL':round(np.sum(I13_AL_RF),6),
+                   'I14_AL':round(np.sum(I14_AL_RF),6), 'I15_AL':round(np.sum(I15_AL_RF),6),
+                   'I16_AL':round(np.sum(I16_AL_RF),6), 'I17_AL':round(np.sum(I17_AL_RF),6),
+                   'I18_AL':round(np.sum(I18_AL_RF),6), 'I19_AL':round(np.sum(I19_AL_RF),6),
+                   'I20_AL':round(np.sum(I20_AL_RF),6), 'I21_AL':round(np.sum(I21_AL_RF),6),
+                   'I22_AL':round(np.sum(I22_AL_RF),6), 'I23_AL':round(np.sum(I23_AL_RF),6),
+                   'I24_AL':round(np.sum(I24_AL_RF),6), 'I25_AL':round(np.sum(I25_AL_RF),6),
+                   'I26_AL': round(np.sum(I26_AL_RF),6)}
 
-file_vimp_al_rf = "Logs/VIMPS/VIMP_RF_AL.csv"
+file_vimp_al_rf = "../tcc_codes/compare_methods/Logs/VIMPS/VIMP_RF_AL.csv"
 
-with open(file_vimp_al_rf, 'a') as csvfile:
-    # creating a csv writer object  
-    csvwriter = csv.writer(csvfile, delimiter=';')  
-        
-    # writing the fields  
-    csvwriter.writerow(fields_vimp_al_rf)  
-        
-    # writing the data rows  
-    csvwriter.writerows(rows_vimp_al_rf)
+version_file(file_vimp_al_rf, fields_vimp_al_rf, rows_vimp_al_rf)
     
 #%% Arquivo de registro AL LS
-fields_vimp_al_ls = ['Método', 
+fields_vimp_al_ls = ['Version','Método', 
                      'I01_AL', 'I02_AL', 'I03_AL', 'I04_AL', 'I05_AL', 'I06_AL',
                      'I07_AL', 'I08_AL', 'I09_AL', 'I10_AL', 'I11_AL', 'I12_AL', 
                      'I13_AL', 'I14_AL', 'I15_AL', 'I16_AL', 'I17_AL', 'I18_AL', 
                      'I19_AL', 'I20_AL', 'I21_AL', 'I22_AL', 'I23_AL', 'I24_AL',
                      'I25_AL', 'I26_AL']
 
-rows_vimp_al_ls = [['LS_AL',round(np.sum(I01_AL_LS),6),
-                   round(np.sum(I02_AL_LS),6), round(np.sum(I03_AL_LS),6),
-                   round(np.sum(I04_AL_LS),6), round(np.sum(I05_AL_LS),6),
-                   round(np.sum(I06_AL_LS),6), round(np.sum(I07_AL_LS),6),
-                   round(np.sum(I08_AL_LS),6), round(np.sum(I09_AL_LS),6),
-                   round(np.sum(I10_AL_LS),6), round(np.sum(I11_AL_LS),6),
-                   round(np.sum(I12_AL_LS),6), round(np.sum(I13_AL_LS),6),
-                   round(np.sum(I14_AL_LS),6), round(np.sum(I15_AL_LS),6),
-                   round(np.sum(I16_AL_LS),6), round(np.sum(I17_AL_LS),6),
-                   round(np.sum(I18_AL_LS),6), round(np.sum(I19_AL_LS),6),
-                   round(np.sum(I20_AL_LS),6), round(np.sum(I21_AL_LS),6),
-                   round(np.sum(I22_AL_LS),6), round(np.sum(I23_AL_LS),6),
-                   round(np.sum(I24_AL_LS),6), round(np.sum(I25_AL_LS),6),
-                   round(np.sum(I26_AL_LS),6)]]
+rows_vimp_al_ls = {'Version':0,'Método':'LS_AL',
+                   'I01_AL':round(np.sum(I01_AL_LS),6),
+                   'I02_AL':round(np.sum(I02_AL_LS),6), 'I03_AL':round(np.sum(I03_AL_LS),6),
+                   'I04_AL':round(np.sum(I04_AL_LS),6), 'I05_AL':round(np.sum(I05_AL_LS),6),
+                   'I06_AL':round(np.sum(I06_AL_LS),6), 'I07_AL':round(np.sum(I07_AL_LS),6),
+                   'I08_AL':round(np.sum(I08_AL_LS),6), 'I09_AL':round(np.sum(I09_AL_LS),6),
+                   'I10_AL':round(np.sum(I10_AL_LS),6), 'I11_AL':round(np.sum(I11_AL_LS),6),
+                   'I12_AL':round(np.sum(I12_AL_LS),6), 'I13_AL':round(np.sum(I13_AL_LS),6),
+                   'I14_AL':round(np.sum(I14_AL_LS),6), 'I15_AL':round(np.sum(I15_AL_LS),6),
+                   'I16_AL':round(np.sum(I16_AL_LS),6), 'I17_AL':round(np.sum(I17_AL_LS),6),
+                   'I18_AL':round(np.sum(I18_AL_LS),6), 'I19_AL':round(np.sum(I19_AL_LS),6),
+                   'I20_AL':round(np.sum(I20_AL_LS),6), 'I21_AL':round(np.sum(I21_AL_LS),6),
+                   'I22_AL':round(np.sum(I22_AL_LS),6), 'I23_AL':round(np.sum(I23_AL_LS),6),
+                   'I24_AL':round(np.sum(I24_AL_LS),6), 'I25_AL':round(np.sum(I25_AL_LS),6),
+                   'I26_AL': round(np.sum(I26_AL_LS),6)}
 
-file_vimp_al_ls = "Logs/VIMPS/VIMP_LS_AL.csv"
+file_vimp_al_ls = "../tcc_codes/compare_methods/Logs/VIMPS/VIMP_LS_AL.csv"
 
-with open(file_vimp_al_ls, 'a') as csvfile:
-    # creating a csv writer object  
-    csvwriter = csv.writer(csvfile, delimiter=';')  
-        
-    # writing the fields  
-    csvwriter.writerow(fields_vimp_al_ls)  
-        
-    # writing the data rows  
-    csvwriter.writerows(rows_vimp_al_ls) 
+version_file(file_vimp_al_ls, fields_vimp_al_ls, rows_vimp_al_ls)
 
 
