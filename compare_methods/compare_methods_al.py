@@ -25,6 +25,46 @@ def seconds_transform(seconds_time):
   print(" ", (hours), "h ", (minutes), "min ", round(seconds,2), " s")
   return hours, minutes, round(seconds,2)
 
+# Controle de build
+def version_file_cross_val_al(name_file, fields_cross_val, rows_cross_val):    
+    rows_v = []
+    fields_v = []
+    
+    if os.path.isfile(name_file):
+        file_version_py = name_file      
+        df = pd.read_csv(name_file, delimiter=';')
+        teste = df['Version'].iloc[-1]
+        value = int(teste)
+        value += 1
+        rows_v = [[value, rows_cross_val[1], rows_cross_val[2], 
+                   rows_cross_val[3], rows_cross_val[4], 
+                   rows_cross_val[5], rows_cross_val[6]]]
+        with open(file_version_py, 'a') as csvfile:
+            # creating a csv writer object  
+            csvwriter = csv.writer(csvfile, delimiter=';') 
+            # writing the fields  
+            #csvwriter.writerow(field_version)    
+            # writing the data rows  
+            csvwriter.writerows(rows_v) 
+    else:
+        #teste = int(0)
+        #teste = 1
+        file_version_py = name_file
+        fields_v = [fields_cross_val[0], fields_cross_val[1], fields_cross_val[2],
+                    fields_cross_val[3], fields_cross_val[4], fields_cross_val[5], fields_cross_val[6]]
+        rows_v = [[rows_cross_val[0], rows_cross_val[1], rows_cross_val[2], 
+                   rows_cross_val[3], rows_cross_val[4], rows_cross_val[5],
+                   rows_cross_val[6]]]
+        with open(file_version_py, 'a') as csvfile:
+            # creating a csv writer object  
+            csvwriter = csv.writer(csvfile, delimiter=';')
+            # writing the fields  
+            csvwriter.writerow(fields_v)  
+            # writing the data rows  
+            csvwriter.writerows(rows_v) 
+
+#%%
+
 # PREPARANDO OS DADOS
 
 data_al2014 = pd.read_csv(r'tcc_data/AL_2014.csv')
@@ -136,13 +176,16 @@ print('Accuracy DT CV: ', round(np.mean(accuracy_al_dt_cv), 4))
 seconds_transform(sec_dt_al_cv)
 
 #%% Escrevendo em Arquivo - DT
-fields_al_dt = ['Método', 'Split', 'Leaf', 'Acc', 'Acc médio', 'Tempo (h,min,s)']
+fields_al_dt = ['Version','Método', 'Split', 'Leaf', 'Acc', 'Acc médio', 'Tempo (h,min,s)']
 
-rows_al_dt = [['DT','320', '200', accuracy_al_dt_cv, accuracy_al_dt_cv.mean(),
+rows_al_dt = [[0,'DT', 320, 200, accuracy_al_dt_cv, accuracy_al_dt_cv.mean(),
               seconds_transform(sec_dt_al_cv)]]
 
-file_al_dt = "Logs/CV/DT_CV_AL.csv"
+file_al_dt = "../compare_methods/Logs/CV/DT_CV_AL.csv"
 
+version_file_cross_val_al(file_al_dt, fields_al_dt, rows_al_dt)
+
+#%%
 with open(file_al_dt, 'a') as csvfile:
     # creating a csv writer object  
     csv_al_dt = csv.writer(csvfile, delimiter=';')  
