@@ -342,7 +342,7 @@ seconds_transform(sec_rf_br)
 
 #%% Treino dos dados - LS_BR
 
-ls_br = linear_model.Lasso(alpha=0.005, positive=True, random_state=42)
+lasso_br = linear_model.Lasso(alpha=0.005, positive=True, random_state=42)
 
 time_ls_br = time.time() # Time start dt loop
 
@@ -359,11 +359,11 @@ for train_index_br, test_index_br in kf_cv_br.split(train_x_br):
     
     # Método 3 - Lasso
     
-    ls_br.fit(train_features_br, train_labels_br)
+    lasso_br.fit(train_features_br, train_labels_br)
     
-    predictions_br_ls = ls_br.predict(test_features_br)
+    predictions_br_ls = lasso_br.predict(test_features_br)
     
-    accuracy_br_ls = ls_br.score(test_features_br, test_labels_br)
+    accuracy_br_ls = lasso_br.score(test_features_br, test_labels_br)
 
     accuracy_mae_br_ls = mean_absolute_error(test_labels_br, predictions_br_ls)
     
@@ -585,7 +585,7 @@ I23_BR_LS = importance_fields_br_ls_t[156:161]; I24_BR_LS = importance_fields_br
 
 I25_BR_LS = importance_fields_br_ls_t[166:174]; I26_BR_LS = importance_fields_br_ls_t[174:183];
 
-#%% Lasso percentual
+# Lasso percentual
 sum_variables_br = np.sum(importance_fields_br_ls_t)
 
 I01_BR_LS = I01_BR_LS/sum_variables_br; I02_BR_LS = I02_BR_LS/sum_variables_br; 
@@ -646,7 +646,7 @@ plt.xticks([k + bar_width for k in range(len(y1_rf))], \
            rotation=90, fontsize=8)
 plt.ylabel('Importância (%)');
 plt.xlabel('Variável (BR)');
-plt.title('Estado civil');
+plt.title('Estado civil (I01_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I01_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -682,7 +682,7 @@ plt.xticks([k + bar_width for k in range(len(y2_rf))], \
            rotation=90, fontsize=8)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Cor/raça');
+plt.title('Cor/raça (I02_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I02_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -718,7 +718,7 @@ plt.xticks([k + bar_width for k in range(len(y3_rf))], \
            rotation=90, fontsize=8)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Nacionalidade');
+plt.title('Nacionalidade (I03_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I03_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -753,7 +753,7 @@ plt.xticks([k + bar_width for k in range(len(y4_rf))], \
            rotation=90, fontsize=8)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Escolarização da pai');
+plt.title('Escolarização da pai (I04_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I04_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -791,7 +791,7 @@ plt.xticks([k + bar_width for k in range(len(y5_rf))], \
            rotation=90, fontsize=8)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Escolarização da mãe');
+plt.title('Escolarização da mãe (I05_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I05_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -829,7 +829,7 @@ plt.xticks([k + bar_width for k in range(len(y6_rf))], \
            rotation=90, fontsize=8)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Onde e com quem moro');
+plt.title('Onde e com quem moro (I06_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I06_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -868,7 +868,7 @@ plt.xticks([k + bar_width for k in range(len(y7_rf))], \
            rotation=90, fontsize=8)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Quantos moram com o estudante');
+plt.title('Quantos moram com o estudante (I07_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I07_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -909,7 +909,7 @@ plt.xticks([k + bar_width for k in range(len(y8_rf))], \
            rotation=90, fontsize=8)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Renda total');
+plt.title('Renda total (I08_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I08_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -951,7 +951,7 @@ plt.xticks([k + bar_width for k in range(len(y9_rf))], \
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Situação financeira');
+plt.title('Situação financeira (I09_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I09_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -991,7 +991,7 @@ plt.xticks([k + bar_width for k in range(len(y10_rf))], \
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Situação de trabalho');
+plt.title('Situação de trabalho (I10_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I10_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -1034,7 +1034,7 @@ plt.xticks([k + bar_width for k in range(len(y11_rf))], \
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Bolsa ou financiamento para custeio de mensalidade');
+plt.title('Bolsa ou financiamento para custeio de mensalidade (I11_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I11_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -1073,7 +1073,7 @@ plt.xticks([k + bar_width for k in range(len(y12_rf))], \
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Auxílio permanência');
+plt.title('Auxílio permanência (I12_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I12_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -1114,7 +1114,7 @@ plt.xticks([k + bar_width for k in range(len(y13_rf))], \
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Tipo de bolsa recebido');
+plt.title('Tipo de bolsa recebido (I13_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I13_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -1155,7 +1155,7 @@ plt.xticks([k + bar_width for k in range(len(y14_rf))], \
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Programas de atividade no exterior');
+plt.title('Programas de atividade no exterior (I14_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I14_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -1195,7 +1195,7 @@ plt.xticks([k + bar_width for k in range(len(y15_rf))], \
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Ingresso por cota');
+plt.title('Ingresso por cota (I15_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I15_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -1244,7 +1244,7 @@ plt.xticks([k + bar_width for k in range(len(y16_rf))], \
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('UF que concluiu o médio');
+plt.title('UF que concluiu o médio (I16_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I16_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -1285,7 +1285,7 @@ plt.xticks([k + bar_width for k in range(len(y17_rf))], \
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Tipo de escola no médio');
+plt.title('Tipo de escola no médio (I17_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I17_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -1322,7 +1322,7 @@ plt.xticks([k + bar_width for k in range(len(y18_rf))], \
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Modalidade do Ensino Médio');
+plt.title('Modalidade do Ensino Médio (I18_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I18_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -1362,7 +1362,7 @@ plt.xticks([k + bar_width for k in range(len(y19_rf))], \
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Maior incentivo para cursar a graduação');
+plt.title('Maior incentivo para cursar a graduação (I19_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I19_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -1404,7 +1404,7 @@ plt.xticks([k + bar_width for k in range(len(y20_rf))], \
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Grupo determinante para enfrentar as dificuldades do curso e concluí-lo');
+plt.title('Grupo determinante para enfrentar as dificuldades do curso e concluí-lo (I20_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I20_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -1441,7 +1441,7 @@ plt.xticks([k + bar_width for k in range(len(y21_rf))], \
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Alguém da família concluiu curso superior');
+plt.title('Alguém da família concluiu curso superior (I21_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I21_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -1477,7 +1477,7 @@ plt.xticks([k + bar_width for k in range(len(y22_rf))], \
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Livros lido no ano (excluindo da biografia do curso)');
+plt.title('Livros lido no ano (excluindo da biografia do curso) (I22_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I22_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -1513,7 +1513,7 @@ plt.xticks([k + bar_width for k in range(len(y23_rf))], \
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Horas de estudo por semana (excluindo aulas)');
+plt.title('Horas de estudo por semana (excluindo aulas) (I23_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I23_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -1551,7 +1551,7 @@ plt.xticks([k + bar_width for k in range(len(y24_rf))], \
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Oportunidade de aprendizado de idioma estrangeiro');
+plt.title('Oportunidade de aprendizado de idioma estrangeiro (I24_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I24_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -1592,7 +1592,7 @@ plt.xticks([k + bar_width for k in range(len(y25_rf))], \
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Porque escolhi o curso');
+plt.title('Porque escolhi o curso (I25_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I25_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -1633,7 +1633,7 @@ plt.xticks([k + bar_width for k in range(len(y26_rf))], \
            rotation=90, fontsize=9)
 plt.ylabel('Importância (%)'); 
 plt.xlabel('Variável (BR)');
-plt.title('Porque escolhi essa IES');
+plt.title('Porque escolhi essa IES (I26_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I26_BR_CP.png', dpi=450, bbox_inches='tight');
 
@@ -1764,7 +1764,7 @@ fields_vimp_br_rf = ['Version','Metodo',
                      'I01_BR', 'I02_BR', 'I03_BR', 'I04_BR', 'I05_BR', 'I06_BR',
                      'I07_BR', 'I08_BR', 'I09_BR', 'I10_BR', 'I11_BR', 'I12_BR', 
                      'I13_BR', 'I14_BR', 'I15_BR', 'I16_BR', 'I17_BR', 'I18_BR', 
-                     'I19_BR', 'I20_BR', 'I21_BR', 'I22_BR', 'I23_AL', 'I24_BR',
+                     'I19_BR', 'I20_BR', 'I21_BR', 'I22_BR', 'I23_BR', 'I24_BR',
                      'I25_BR', 'I26_BR']
 
 rows_vimp_br_rf = {'Version':0,'Metodo':'RF_BR',
