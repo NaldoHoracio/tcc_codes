@@ -165,11 +165,11 @@ print('Accuracy DT CV: ', round(np.mean(accuracy_br_dt_cv), 4))
 seconds_transform(sec_dt_br_cv)
 
 #%% Escrevendo em Arquivo - DT
-fields_br_dt_cv = ['Version','Método', 'Split', 'Leaf', 'Acc', 'Acc médio', 'Tempo (h,min,s)', 'n_cv']
+fields_br_dt_cv = ['Version','Metodo', 'Split', 'Leaf', 'Acc', 'Acc medio', 'Tempo (h,min,s)', 'n_cv']
 
-rows_br_dt_cv = {'Version':0,'Método':'DT', 
+rows_br_dt_cv = {'Version':0,'Metodo':'DT', 
                  'Split': 320, 'Leaf':200, 
-                 'Acc': accuracy_br_dt_cv, 'Acc médio': accuracy_br_dt_cv.mean(),
+                 'Acc': accuracy_br_dt_cv, 'Acc medio': accuracy_br_dt_cv.mean(),
                  'Tempo (h,min,s)':seconds_transform(sec_dt_br_cv), 'n_cv':n_cv}
 
 file_br_dt_cv = "../tcc_codes/compare_methods/Logs/CV/DT_CV_BR.csv"
@@ -190,12 +190,12 @@ print('Accuracy RF CV: ', round(np.mean(accuracy_br_rf_cv), 4))
 seconds_transform(sec_rf_br_cv)
 
 #%% Escrevendo em Arquivo - RF
-fields_br_rf_cv = ['Version', 'Método', 'N_tree', 'Split', 'Leaf', 'Acc', 'Acc médio', 
+fields_br_rf_cv = ['Version', 'Metodo', 'N_tree', 'Split', 'Leaf', 'Acc', 'Acc medio', 
                    'Tempo (h,min,s)', 'n_cv']
 
-rows_br_rf_cv = {'Version':0,'Método':'RF',
+rows_br_rf_cv = {'Version':0,'Metodo':'RF',
                  'N_tree':'1000', 'Split':40, 'Leaf':20, 
-                 'Acc':accuracy_br_rf_cv, 'Acc médio':accuracy_br_rf_cv.mean(), 
+                 'Acc':accuracy_br_rf_cv, 'Acc medio':accuracy_br_rf_cv.mean(), 
                  'Tempo (h,min,s)':seconds_transform(sec_rf_br_cv), 'n_cv':n_cv}
 
 file_br_rf_cv = "../tcc_codes/compare_methods/Logs/CV/RF_CV_BR.csv"
@@ -214,11 +214,11 @@ print('Accuracy LS CV: ', round(np.mean(accuracy_br_ls_cv), 4))
 seconds_transform(sec_ls_br_cv)
 
 #%% Escrevendo arquivo - LS
-fields_br_ls_cv = ['Version','Método', 'Alfa', 'Acc','Acc médio', 'Tempo (h,min,s)', 'n_cv']
+fields_br_ls_cv = ['Version','Metodo', 'Alfa', 'Acc','Acc medio', 'Tempo (h,min,s)', 'n_cv']
 
-rows_br_ls_cv = {'Version':0,'Método':'LS',
+rows_br_ls_cv = {'Version':0,'Metodo':'LS',
                  'Alfa':0.005, 'Acc':accuracy_br_ls_cv, 
-                 'Acc médio':accuracy_br_ls_cv.mean(),
+                 'Acc medio':accuracy_br_ls_cv.mean(),
                  'Tempo (h,min,s)':seconds_transform(sec_ls_br_cv),
                  'n_cv':n_cv}
 
@@ -315,7 +315,7 @@ for train_index_br, test_index_br in kf_cv_br.split(train_x_br):
     
     # Método 2 - Random Forest
     
-    rf_br.fit(train_features_al, train_labels_br)
+    rf_br.fit(train_features_br, train_labels_br)
     
     predictions_br_rf = rf_br.predict(test_features_br)
     
@@ -398,17 +398,13 @@ print('Accuracy RF MAE BR RF: ', round(accuracy_mae_br_rf_f, 4))
 print('Accuracy RF MSE BR RF: ', round(accuracy_mse_br_rf_f, 4))
 
 #%% Escrevendo em arquivo - RF
-fields_br_rf = ['Método', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
+fields_br_rf = ['Version','Metodo', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
 
-rows_br_rf = [['RF', round(accuracy_br_rf_f,4), round(accuracy_mae_br_rf_f,4),
-               round(accuracy_mse_br_rf_f,4), seconds_transform(sec_rf_br)]]
-
-file_br_rf = "RF_BR.csv"
-
-fields_br_rf = ['Version','Método', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
-
-rows_br_rf = {'Version':0,'Método':'RF', 'R2':round(accuracy_br_rf_f,4), 'MAE':round(accuracy_mae_br_rf_f,4),
-               'MSE':round(accuracy_mse_br_rf_f,4), 'Tempo (h,min,s)':seconds_transform(sec_rf_br)}
+rows_br_rf = {'Version':0,'Metodo':'RF', 
+              'R2':round(accuracy_br_rf_f,4), 
+              'MAE':round(accuracy_mae_br_rf_f,4),
+              'MSE':round(accuracy_mse_br_rf_f,4), 
+              'Tempo (h,min,s)':seconds_transform(sec_rf_br)}
 
 file_br_rf = "../tcc_codes/compare_methods/Logs/METRICS_EVALUATE/RF_BR.csv"
 
@@ -428,14 +424,9 @@ print('Final Accuracy MAE BR DT: ', round(accuracy_mae_br_dt_f, 4))
 print('Final Accuracy MSE BR DT: ', round(accuracy_mse_br_dt_f, 4))
 
 #%% Escrevendo em arquivo - DT
-fields_br_dt = ['Método', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
+fields_br_dt = ['Version','Metodo', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
 
-rows_br_dt = [['DT', round(accuracy_br_dt_f,4), round(accuracy_mae_br_dt_f,4),
-               round(accuracy_mse_br_dt_f,4), seconds_transform(sec_dt_br)]]
-
-fields_al_dt = ['Version','Método', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
-
-rows_al_dt = {'Version':0,'Método':'DT', 
+rows_br_dt = {'Version':0,'Metodo':'DT', 
               'R2':round(accuracy_br_dt_f,4), 
               'MAE':round(accuracy_mae_br_dt_f,4),
               'MSE':round(accuracy_mse_br_dt_f,4), 
@@ -459,15 +450,12 @@ print('Final Accuracy MAE BR LS: ', round(accuracy_mae_br_ls_f, 4))
 print('Final Accuracy MSE BR LS: ', round(accuracy_mse_br_ls_f, 4))
 
 #%% Escrevendo em arquivo - LS
-fields_br_ls = ['Método', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
+fields_br_ls = ['Version','Metodo', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
 
-rows_br_ls = [['DT', round(accuracy_br_ls_f,4), round(accuracy_mae_br_ls_f,4),
-               round(accuracy_mse_br_ls_f,4), seconds_transform(sec_ls_br)]]
-
-fields_br_ls = ['Version','Método', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
-
-rows_br_ls = {'Version':0, 'Método':'LS', 'R2':round(accuracy_br_ls_f,4), 
-              'MAE':round(accuracy_mae_br_ls_f,4),'MSE':round(accuracy_mse_br_ls_f,4), 
+rows_br_ls = {'Version':0, 'Metodo':'LS', 
+              'R2':round(accuracy_br_ls_f,4), 
+              'MAE':round(accuracy_mae_br_ls_f,4),
+              'MSE':round(accuracy_mse_br_ls_f,4), 
               'Tempo (h,min,s)':seconds_transform(sec_ls_br)}
 
 file_br_ls = "../tcc_codes/compare_methods/Logs/METRICS_EVALUATE/LS_BR.csv"
@@ -1744,14 +1732,14 @@ plt.legend();
 plt.savefig('compare_methods/BR/QE_I27b_BR_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Arquivo de registro BR DT
-fields_vimp_br_dt = ['Version','Método', 
+fields_vimp_br_dt = ['Version','Metodo', 
                      'I01_BR', 'I02_BR', 'I03_BR', 'I04_BR', 'I05_BR', 'I06_BR',
                      'I07_BR', 'I08_BR', 'I09_BR', 'I10_BR', 'I11_BR', 'I12_BR', 
                      'I13_BR', 'I14_BR', 'I15_BR', 'I16_BR', 'I17_BR', 'I18_BR', 
                      'I19_BR', 'I20_BR', 'I21_BR', 'I22_BR', 'I23_BR', 'I24_BR',
                      'I25_BR', 'I26_BR']
 
-rows_vimp_br_dt = {'Version':0,'Método':'DT_BR',
+rows_vimp_br_dt = {'Version':0,'Metodo':'DT_BR',
                    'I01_BR':round(np.sum(I01_BR_DT),6),
                    'I02_BR':round(np.sum(I02_BR_DT),6), 'I03_BR':round(np.sum(I03_BR_DT),6),
                    'I04_BR':round(np.sum(I04_BR_DT),6), 'I05_BR':round(np.sum(I05_BR_DT),6),
@@ -1772,14 +1760,14 @@ file_vimp_br_dt = "../tcc_codes/compare_methods/Logs/VIMPS/VIMP_DT_BR.csv"
 version_file(file_vimp_br_dt, fields_vimp_br_dt, rows_vimp_br_dt)
 
 #%% Arquivo de registro BR RF
-fields_vimp_br_rf = ['Version','Método', 
+fields_vimp_br_rf = ['Version','Metodo', 
                      'I01_BR', 'I02_BR', 'I03_BR', 'I04_BR', 'I05_BR', 'I06_BR',
                      'I07_BR', 'I08_BR', 'I09_BR', 'I10_BR', 'I11_BR', 'I12_BR', 
                      'I13_BR', 'I14_BR', 'I15_BR', 'I16_BR', 'I17_BR', 'I18_BR', 
                      'I19_BR', 'I20_BR', 'I21_BR', 'I22_BR', 'I23_AL', 'I24_BR',
                      'I25_BR', 'I26_BR']
 
-rows_vimp_br_rf = {'Version':0,'Método':'RF_BR',
+rows_vimp_br_rf = {'Version':0,'Metodo':'RF_BR',
                    'I01_BR':round(np.sum(I01_BR_RF),6),
                    'I02_BR':round(np.sum(I02_BR_RF),6), 'I03_BR':round(np.sum(I03_BR_RF),6),
                    'I04_BR':round(np.sum(I04_BR_RF),6), 'I05_BR':round(np.sum(I05_BR_RF),6),
@@ -1800,14 +1788,14 @@ file_vimp_br_rf = "../tcc_codes/compare_methods/Logs/VIMPS/VIMP_RF_BR.csv"
 version_file(file_vimp_br_rf, fields_vimp_br_rf, rows_vimp_br_rf)
     
 #%% Arquivo de registro BR LS
-fields_vimp_br_ls = ['Version','Método', 
+fields_vimp_br_ls = ['Version','Metodo', 
                      'I01_BR', 'I02_BR', 'I03_BR', 'I04_BR', 'I05_BR', 'I06_BR',
                      'I07_BR', 'I08_BR', 'I09_BR', 'I10_BR', 'I11_BR', 'I12_BR', 
                      'I13_BR', 'I14_BR', 'I15_BR', 'I16_BR', 'I17_BR', 'I18_BR', 
                      'I19_BR', 'I20_BR', 'I21_BR', 'I22_BR', 'I23_BR', 'I24_BR',
                      'I25_BR', 'I26_BR']
 
-rows_vimp_br_ls = {'Version':0,'Método':'LS_BR',
+rows_vimp_br_ls = {'Version':0,'Metodo':'LS_BR',
                    'I01_BR':round(np.sum(I01_BR_LS),6),
                    'I02_BR':round(np.sum(I02_BR_LS),6), 'I03_BR':round(np.sum(I03_BR_LS),6),
                    'I04_BR':round(np.sum(I04_BR_LS),6), 'I05_BR':round(np.sum(I05_BR_LS),6),

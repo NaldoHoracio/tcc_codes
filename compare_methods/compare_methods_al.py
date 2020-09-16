@@ -165,11 +165,11 @@ print('Accuracy DT CV: ', round(np.mean(accuracy_al_dt_cv), 4))
 seconds_transform(sec_dt_al_cv)
 
 #%% Escrevendo em Arquivo - DT
-fields_al_dt_cv = ['Version','Método', 'Split', 'Leaf', 'Acc', 'Acc médio', 'Tempo (h,min,s)', 'n_cv']
+fields_al_dt_cv = ['Version','Metodo', 'Split', 'Leaf', 'Acc', 'Acc medio', 'Tempo (h,min,s)', 'n_cv']
 
-rows_al_dt_cv = {'Version':0,'Método':'DT', 
+rows_al_dt_cv = {'Version':0,'Metodo':'DT', 
                  'Split': 320, 'Leaf':200, 
-                 'Acc': accuracy_al_dt_cv, 'Acc médio': accuracy_al_dt_cv.mean(),
+                 'Acc': accuracy_al_dt_cv, 'Acc medio': accuracy_al_dt_cv.mean(),
                  'Tempo (h,min,s)':seconds_transform(sec_dt_al_cv), 'n_cv':n_cv}
 
 file_al_dt_cv = "../tcc_codes/compare_methods/Logs/CV/DT_CV_AL.csv"
@@ -190,12 +190,12 @@ print('Accuracy RF CV: ', round(np.mean(accuracy_al_rf_cv), 4))
 seconds_transform(sec_rf_al_cv)
 
 #%% Escrevendo em Arquivo - RF
-fields_al_rf_cv = ['Version', 'Método', 'N_tree', 'Split', 'Leaf', 'Acc', 'Acc médio', 
+fields_al_rf_cv = ['Version', 'Metodo', 'N_tree', 'Split', 'Leaf', 'Acc', 'Acc medio', 
                    'Tempo (h,min,s)', 'n_cv']
 
-rows_al_rf_cv = {'Version':0,'Método':'RF',
+rows_al_rf_cv = {'Version':0,'Metodo':'RF',
                  'N_tree':'1000', 'Split':40, 'Leaf':20, 
-                 'Acc':accuracy_al_rf_cv, 'Acc médio':accuracy_al_rf_cv.mean(), 
+                 'Acc':accuracy_al_rf_cv, 'Acc medio':accuracy_al_rf_cv.mean(), 
                  'Tempo (h,min,s)':seconds_transform(sec_rf_al_cv), 'n_cv':n_cv}
 
 file_al_rf_cv = "../tcc_codes/compare_methods/Logs/CV/RF_CV_AL.csv"
@@ -214,12 +214,12 @@ print('Accuracy LS CV: ', round(np.mean(accuracy_al_ls_cv), 4))
 seconds_transform(sec_ls_al_cv)
 
 #%% Escrevendo arquivo - LS
-fields_al_ls_cv = ['Version','Método', 'Alfa', 'Acc','Acc médio', 'Tempo (h,min,s)', 'n_cv']
+fields_al_ls_cv = ['Version','Metodo', 'Alfa', 'Acc','Acc medio', 'Tempo (h,min,s)', 'n_cv']
 
-rows_al_ls_cv = {'Version':0,'Método':'LS',
+rows_al_ls_cv = {'Version':0,'Metodo':'LS',
                  'Alfa':0.005, 'Acc':accuracy_al_ls_cv, 
-                 'Acc médio':accuracy_al_ls_cv.mean(),
-                 'Tempo (h,min,s)':seconds_transform(sec_ls_al_cv),
+                 'Acc medio':accuracy_al_ls_cv.mean(),
+                 'Tempo (h,min,s)':seconds_transform(sec_ls_al_cv), 
                  'n_cv':n_cv}
 
 file_al_ls_cv = "../tcc_codes/compare_methods/Logs/CV/LS_CV_AL.csv"
@@ -269,8 +269,6 @@ for train_index_al, test_index_al in kf_cv_al.split(train_x_al):
     test_features_al = train_x_al[test_index_al]
     train_labels_al = train_y_al[train_index_al]
     test_labels_al = train_y_al[test_index_al]
-    
-    # Ajustando cada features e label com RF e DT
     
     # Método 1 - Árvore de decisão
     
@@ -398,9 +396,9 @@ print('Accuracy MAE AL RF: ', round(accuracy_mae_al_rf_f, 4))
 print('Accuracy MSE AL RF: ', round(accuracy_mse_al_rf_f, 4))
 
 #%% Escrevendo em arquivo - RF
-fields_al_rf = ['Version','Método', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
+fields_al_rf = ['Version','Metodo', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
 
-rows_al_rf = {'Version':0,'Método':'RF', 'R2':round(accuracy_al_rf_f,4), 'MAE':round(accuracy_mae_al_rf_f,4),
+rows_al_rf = {'Version':0,'Metodo':'RF', 'R2':round(accuracy_al_rf_f,4), 'MAE':round(accuracy_mae_al_rf_f,4),
                'MSE':round(accuracy_mse_al_rf_f,4), 'Tempo (h,min,s)':seconds_transform(sec_rf_al)}
 
 file_al_rf = "../tcc_codes/compare_methods/Logs/METRICS_EVALUATE/RF_AL.csv"
@@ -421,9 +419,9 @@ print('Final Accuracy MAE AL DT: ', round(accuracy_mae_al_dt_f, 4))
 print('Final Accuracy MSE AL DT: ', round(accuracy_mse_al_dt_f, 4))
 
 #%% Escrevendo em arquivo - DT
-fields_al_dt = ['Version','Método', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
+fields_al_dt = ['Version','Metodo', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
 
-rows_al_dt = {'Version':0,'Método':'DT', 
+rows_al_dt = {'Version':0,'Metodo':'DT', 
               'R2':round(accuracy_al_dt_f,4), 
               'MAE':round(accuracy_mae_al_dt_f,4),
               'MSE':round(accuracy_mse_al_dt_f,4), 
@@ -447,20 +445,19 @@ print('Final Accuracy MAE AL LS: ', round(accuracy_mae_al_ls_f, 4))
 print('Final Accuracy MSE AL LS: ', round(accuracy_mse_al_ls_f, 4))
 
 #%% Escrevendo em arquivo - LS
-fields_al_ls = ['Version','Método', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
+fields_al_ls = ['Version','Metodo', 'R2', 'MAE', 'MSE', 'Tempo (h,min,s)']
 
-rows_al_ls = {'Version':0, 'Método':'LS', 'R2':round(accuracy_al_ls_f,4), 
-              'MAE':round(accuracy_mae_al_ls_f,4),'MSE':round(accuracy_mse_al_ls_f,4), 
+rows_al_ls = {'Version':0, 'Metodo':'LS', 
+              'R2':round(accuracy_al_ls_f,4), 
+              'MAE':round(accuracy_mae_al_ls_f,4),
+              'MSE':round(accuracy_mse_al_ls_f,4), 
               'Tempo (h,min,s)':seconds_transform(sec_ls_al)}
 
 file_al_ls = "../tcc_codes/compare_methods/Logs/METRICS_EVALUATE/LS_AL.csv"
 
-version_file(file_al_dt, fields_al_dt, rows_al_ls)
+version_file(file_al_ls, fields_al_ls, rows_al_ls)
 
 #%% Acurácia AL
-#print('Accuracy RF: ', round(np.average(scores_al_rf), 4), "%.")
-#print('Accuracy DT: ', round(np.average(scores_al_dt), 4), "%.")
-#print('Accuracy LS: ', round(np.average(scores_al_ls), 4), "%.")
 
 importance_fields_al_rf_t = importance_fields_al_rf/n_cv
 importance_fields_al_dt_t = importance_fields_al_dt/n_cv
@@ -489,7 +486,7 @@ feature_importances_al_dt = \
 # Print out the feature and importances
 [print('Variable DT: {:20} Importance DT: {}'.format(*pair)) for pair in feature_importances_al_dt];
 
-# Lista de tupla com as variáveis de importância - Lasso
+#%% Lista de tupla com as variáveis de importância - Lasso
 feature_importances_al_ls = \
 [(feature, round(importance, 8)) \
  for feature, importance in zip(features_al_list_oh, importance_fields_al_ls_t)]
@@ -552,7 +549,7 @@ I23_AL_DT = importance_fields_al_dt_t[130:135]; I24_AL_DT = importance_fields_al
 
 I25_AL_DT = importance_fields_al_dt_t[140:148]; I26_AL_DT = importance_fields_al_dt_t[148:157];
 
-# Lasso
+#%% Lasso
 I01_AL_LS = importance_fields_al_ls_t[0:5]; I02_AL_LS = importance_fields_al_ls_t[5:11]; 
 
 I03_AL_LS = importance_fields_al_ls_t[11:14]; I04_AL_LS = importance_fields_al_ls_t[14:20]; 
@@ -609,6 +606,20 @@ I21_AL_LS = I21_AL_LS/sum_variables_al; I22_AL_LS = I22_AL_LS/sum_variables_al;
 I23_AL_LS = I23_AL_LS/sum_variables_al; I24_AL_LS = I24_AL_LS/sum_variables_al;
 
 I25_AL_LS = I25_AL_LS/sum_variables_al; I26_AL_LS = I26_AL_LS/sum_variables_al;
+
+'''
+
+sum_ = np.sum(I01_AL_LS) + np.sum(I02_AL_LS) + np.sum(I03_AL_LS) + np.sum(I04_AL_LS)+ \
+    np.sum(I05_AL_LS) + np.sum(I06_AL_LS)+ np.sum(I07_AL_LS) + np.sum(I08_AL_LS) + \
+        np.sum(I09_AL_LS)+ np.sum(I10_AL_LS)+ np.sum(I11_AL_LS)+ np.sum(I12_AL_LS)+ \
+            np.sum(I13_AL_LS)+ np.sum(I14_AL_LS)+ np.sum(I15_AL_LS)+ np.sum(I16_AL_LS)+ \
+                np.sum(I17_AL_LS)+ np.sum(I18_AL_LS)+ np.sum(I19_AL_LS)+ np.sum(I20_AL_LS)+ \
+                    np.sum(I21_AL_LS)+ np.sum(I22_AL_LS)+ np.sum(I23_AL_LS)+ np.sum(I24_AL_LS)+ \
+                        np.sum(I25_AL_LS)+ np.sum(I26_AL_LS)
+
+print(sum_)
+
+'''
 
 #%% Visualization of Variable Importances
 # QE_I01
@@ -1721,14 +1732,14 @@ plt.legend();
 plt.savefig('compare_methods/AL/QE_I27b_AL_CP.png', dpi=450, bbox_inches='tight');
 
 #%% Arquivo de registro AL DT
-fields_vimp_al_dt = ['Version','Método', 
+fields_vimp_al_dt = ['Version','Metodo', 
                      'I01_AL', 'I02_AL', 'I03_AL', 'I04_AL', 'I05_AL', 'I06_AL',
                      'I07_AL', 'I08_AL', 'I09_AL', 'I10_AL', 'I11_AL', 'I12_AL', 
                      'I13_AL', 'I14_AL', 'I15_AL', 'I16_AL', 'I17_AL', 'I18_AL', 
                      'I19_AL', 'I20_AL', 'I21_AL', 'I22_AL', 'I23_AL', 'I24_AL',
                      'I25_AL', 'I26_AL']
 
-rows_vimp_al_dt = {'Version':0,'Método':'DT_AL',
+rows_vimp_al_dt = {'Version':0,'Metodo':'DT_AL',
                    'I01_AL':round(np.sum(I01_AL_DT),6),
                    'I02_AL':round(np.sum(I02_AL_DT),6), 'I03_AL':round(np.sum(I03_AL_DT),6),
                    'I04_AL':round(np.sum(I04_AL_DT),6), 'I05_AL':round(np.sum(I05_AL_DT),6),
@@ -1749,14 +1760,14 @@ file_vimp_al_dt = "../tcc_codes/compare_methods/Logs/VIMPS/VIMP_DT_AL.csv"
 version_file(file_vimp_al_dt, fields_vimp_al_dt, rows_vimp_al_dt)
 
 #%% Arquivo de registro AL RF
-fields_vimp_al_rf = ['Version','Método', 
+fields_vimp_al_rf = ['Version','Metodo', 
                      'I01_AL', 'I02_AL', 'I03_AL', 'I04_AL', 'I05_AL', 'I06_AL',
                      'I07_AL', 'I08_AL', 'I09_AL', 'I10_AL', 'I11_AL', 'I12_AL', 
                      'I13_AL', 'I14_AL', 'I15_AL', 'I16_AL', 'I17_AL', 'I18_AL', 
                      'I19_AL', 'I20_AL', 'I21_AL', 'I22_AL', 'I23_AL', 'I24_AL',
                      'I25_AL', 'I26_AL']
 
-rows_vimp_al_rf = {'Version':0,'Método':'RF_AL',
+rows_vimp_al_rf = {'Version':0,'Metodo':'RF_AL',
                    'I01_AL':round(np.sum(I01_AL_RF),6),
                    'I02_AL':round(np.sum(I02_AL_RF),6), 'I03_AL':round(np.sum(I03_AL_RF),6),
                    'I04_AL':round(np.sum(I04_AL_RF),6), 'I05_AL':round(np.sum(I05_AL_RF),6),
@@ -1777,14 +1788,14 @@ file_vimp_al_rf = "../tcc_codes/compare_methods/Logs/VIMPS/VIMP_RF_AL.csv"
 version_file(file_vimp_al_rf, fields_vimp_al_rf, rows_vimp_al_rf)
     
 #%% Arquivo de registro AL LS
-fields_vimp_al_ls = ['Version','Método', 
+fields_vimp_al_ls = ['Version','Metodo', 
                      'I01_AL', 'I02_AL', 'I03_AL', 'I04_AL', 'I05_AL', 'I06_AL',
                      'I07_AL', 'I08_AL', 'I09_AL', 'I10_AL', 'I11_AL', 'I12_AL', 
                      'I13_AL', 'I14_AL', 'I15_AL', 'I16_AL', 'I17_AL', 'I18_AL', 
                      'I19_AL', 'I20_AL', 'I21_AL', 'I22_AL', 'I23_AL', 'I24_AL',
                      'I25_AL', 'I26_AL']
 
-rows_vimp_al_ls = {'Version':0,'Método':'LS_AL',
+rows_vimp_al_ls = {'Version':0,'Metodo':'LS_AL',
                    'I01_AL':round(np.sum(I01_AL_LS),6),
                    'I02_AL':round(np.sum(I02_AL_LS),6), 'I03_AL':round(np.sum(I03_AL_LS),6),
                    'I04_AL':round(np.sum(I04_AL_LS),6), 'I05_AL':round(np.sum(I05_AL_LS),6),
