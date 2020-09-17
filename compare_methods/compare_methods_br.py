@@ -370,7 +370,7 @@ for train_index_br, test_index_br in kf_cv_br.split(train_x_br):
     accuracy_mse_br_ls = mean_squared_error(test_labels_br, predictions_br_ls)    
     
     # Importância das variáveis
-    importance_fields_aux_br_ls = ls_br.coef_
+    importance_fields_aux_br_ls = lasso_br.coef_
     importance_fields_br_ls += importance_fields_aux_br_ls
     
     # Append em cada valor médio
@@ -650,7 +650,7 @@ plt.title('Estado civil (I01_BR)');
 plt.legend();
 plt.savefig('compare_methods/BR/DETAILS_VAR_BR/QE_I01_BR_CP.png', dpi=450, bbox_inches='tight');
 
-#%% VisuBRization of Variable Importances
+#%% Visualization of Variable Importances
 # QE_I02
 fig2 = plt.figure();
 ax2 = fig2.add_axes([0,0,1,1]);
