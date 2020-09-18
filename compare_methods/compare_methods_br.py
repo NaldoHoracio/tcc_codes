@@ -152,7 +152,7 @@ n_cv = int(5);
 
 train_x_br, test_x_br, train_y_br, test_y_br = train_test_split(features_br, labels_br, test_size=0.33, random_state=42)
 
-#%% Cross Vbridation - Árvore de decisão
+#%% Cross Validation - Árvore de decisão
 
 dt_br = DecisionTreeRegressor(min_samples_split=320, min_samples_leaf=200, random_state=42)
 
@@ -460,7 +460,7 @@ rows_br_ls = {'Version':0, 'Metodo':'LS',
 
 file_br_ls = "../tcc_codes/compare_methods/Logs/METRICS_EVALUATE/LS_BR.csv"
 
-version_file(file_br_dt, fields_br_dt, rows_br_ls)
+version_file(file_br_ls, fields_br_ls, rows_br_ls)
 
 #%% Acurácia BR
 #print('Accuracy RF: ', round(np.average(scores_br_rf), 4), "%.")
