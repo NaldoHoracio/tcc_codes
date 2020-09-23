@@ -635,8 +635,8 @@ y12 = [x + bar_width for x in y11]
 y13 = [x + bar_width for x in y12]
 
 # Fazendo o plot
-plt.bar(y11, y1_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y12, y1_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y11, y1_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y12, y1_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y13, y1_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -671,8 +671,8 @@ y22 = [x + bar_width for x in y21]
 y23 = [x + bar_width for x in y22]
 
 # Fazendo o plot
-plt.bar(y21, y2_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y22, y2_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y21, y2_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y22, y2_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y23, y2_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -707,8 +707,8 @@ y32 = [x + bar_width for x in y31]
 y33 = [x + bar_width for x in y32]
 
 # Fazendo o plot
-plt.bar(y31, y3_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y32, y3_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y31, y3_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y32, y3_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y33, y3_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -742,8 +742,8 @@ y41 = [x + bar_width for x in axis4]
 y42 = [x + bar_width for x in y41]
 
 # Fazendo o plot
-plt.bar(y41, y4_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y42, y4_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y41, y4_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y42, y4_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y42, y4_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -779,8 +779,8 @@ y52 = [x + bar_width for x in y51]
 y53 = [x + bar_width for x in y52]
 
 # Fazendo o plot
-plt.bar(y51, y5_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y52, y5_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y51, y5_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y52, y5_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y53, y5_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
 
     
@@ -818,8 +818,8 @@ y62 = [x + bar_width for x in y61]
 y63 = [x + bar_width for x in y62]
 
 # Fazendo o plot
-plt.bar(y61, y6_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y62, y6_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y61, y6_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y62, y6_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y63, y6_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -857,8 +857,8 @@ y72 = [x + bar_width for x in y71]
 y73 = [x + bar_width for x in y72]
 
 # Fazendo o plot
-plt.bar(y71, y7_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y72, y7_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y71, y7_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y72, y7_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y73, y7_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -898,8 +898,8 @@ y82 = [x + bar_width for x in y81]
 y83 = [x + bar_width for x in y82]
 
 # Fazendo o plot
-plt.bar(y81, y8_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y82, y8_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y81, y8_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y82, y8_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y83, y8_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -940,8 +940,8 @@ y92 = [x + bar_width for x in y91]
 y93 = [x + bar_width for x in y92]
 
 # Fazendo o plot
-plt.bar(y91, y9_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y92, y9_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y91, y9_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y92, y9_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y93, y9_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -980,8 +980,8 @@ y102 = [x + bar_width for x in y101]
 y103 = [x + bar_width for x in y102]
 
 # Fazendo o plot
-plt.bar(y101, y10_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y102, y10_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y101, y10_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y102, y10_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y103, y10_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -1023,8 +1023,8 @@ y112 = [x + bar_width for x in y111]
 y113 = [x + bar_width for x in y112]
 
 # Fazendo o plot
-plt.bar(y111, y11_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y112, y11_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y111, y11_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y112, y11_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y113, y11_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -1062,8 +1062,8 @@ y122 = [x + bar_width for x in y121]
 y123 = [x + bar_width for x in y122]
 
 # Fazendo o plot
-plt.bar(y121, y12_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y122, y12_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y121, y12_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y122, y12_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y123, y12_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -1103,8 +1103,8 @@ y132 = [x + bar_width for x in y131]
 y133 = [x + bar_width for x in y132]
 
 # Fazendo o plot
-plt.bar(y131, y13_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y132, y13_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y131, y13_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y132, y13_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y133, y13_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -1144,8 +1144,8 @@ y142 = [x + bar_width for x in y141]
 y143 = [x + bar_width for x in y142]
 
 # Fazendo o plot
-plt.bar(y141, y14_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y142, y14_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y141, y14_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y142, y14_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y143, y14_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -1184,8 +1184,8 @@ y152 = [x + bar_width for x in y151]
 y153 = [x + bar_width for x in y152]
 
 # Fazendo o plot
-plt.bar(y151, y15_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y152, y15_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y151, y15_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y152, y15_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y153, y15_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -1233,8 +1233,8 @@ y162 = [x + bar_width for x in y161]
 y163 = [x + bar_width for x in y162]
 
 # Fazendo o plot
-plt.bar(y161, y16_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y162, y16_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y161, y16_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y162, y16_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y163, y16_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -1274,8 +1274,8 @@ y172 = [x + bar_width for x in y171]
 y173 = [x + bar_width for x in y172]
 
 # Fazendo o plot
-plt.bar(y171, y17_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y172, y17_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y171, y17_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y172, y17_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y173, y17_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -1311,8 +1311,8 @@ y182 = [x + bar_width for x in y181]
 y183 = [x + bar_width for x in y182]
 
 # Fazendo o plot
-plt.bar(y181, y18_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y182, y18_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y181, y18_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y182, y18_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y183, y18_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -1351,8 +1351,8 @@ y192 = [x + bar_width for x in y191]
 y193 = [x + bar_width for x in y192]
 
 # Fazendo o plot
-plt.bar(y191, y19_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y192, y19_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y191, y19_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y192, y19_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y193, y19_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -1393,8 +1393,8 @@ y202 = [x + bar_width for x in y201]
 y203 = [x + bar_width for x in y202]
 
 # Fazendo o plot
-plt.bar(y201, y20_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y202, y20_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y201, y20_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y202, y20_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y203, y20_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -1429,8 +1429,8 @@ y212 = [x + bar_width for x in y211]
 y213 = [x + bar_width for x in y212]
 
 # Fazendo o plot
-plt.bar(y211, y21_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y212, y21_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y211, y21_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y212, y21_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y213, y21_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
 
     
@@ -1466,8 +1466,8 @@ y222 = [x + bar_width for x in y221]
 y223 = [x + bar_width for x in y222]
 
 # Fazendo o plot
-plt.bar(y221, y22_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y222, y22_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y221, y22_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y222, y22_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y223, y22_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -1502,8 +1502,8 @@ y232 = [x + bar_width for x in y231]
 y233 = [x + bar_width for x in y232]
 
 # Fazendo o plot
-plt.bar(y231, y23_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y232, y23_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y231, y23_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y232, y23_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y233, y23_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -1540,8 +1540,8 @@ y242 = [x + bar_width for x in y241]
 y243 = [x + bar_width for x in y242]
 
 # Fazendo o plot
-plt.bar(y241, y24_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y242, y24_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y241, y24_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y242, y24_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y243, y24_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -1581,8 +1581,8 @@ y252 = [x + bar_width for x in y251]
 y253 = [x + bar_width for x in y252]
 
 # Fazendo o plot
-plt.bar(y251, y25_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y252, y25_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y251, y25_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y252, y25_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y253, y25_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -1622,8 +1622,8 @@ y262 = [x + bar_width for x in y261]
 y263 = [x + bar_width for x in y262]
 
 # Fazendo o plot
-plt.bar(y261, y26_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y262, y26_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y261, y26_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y262, y26_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y263, y26_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -1669,8 +1669,8 @@ y27a2 = [x + bar_width for x in y27a1]
 y27a3 = [x + bar_width for x in y27a2]
 
 # Fazendo o plot
-plt.bar(y27a1, y27a_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y27a2, y27a_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y27a1, y27a_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y27a2, y27a_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y27a3, y27a_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
@@ -1716,8 +1716,8 @@ y27b2 = [x + bar_width for x in y27b1]
 y27b3 = [x + bar_width for x in y27b2]
 
 # Fazendo o plot
-plt.bar(y27b1, y27b_rf, color='red', width=bar_width, edgecolor='white', label='Random Forest')
-plt.bar(y27b2, y27b_dt, color='green', width=bar_width, edgecolor='white', label='Decision Tree')
+plt.bar(y27b1, y27b_rf, color='red', width=bar_width, edgecolor='white', label='Floresta Aleatória')
+plt.bar(y27b2, y27b_dt, color='green', width=bar_width, edgecolor='white', label='Árvore de Decisão')
 plt.bar(y27b3, y27b_ls, color='blue', width=bar_width, edgecolor='white', label='Lasso')
     
 # Nomeando o eixo x
