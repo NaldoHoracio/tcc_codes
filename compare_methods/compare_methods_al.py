@@ -1604,7 +1604,7 @@ x26 = ['Gratuidade', 'Preço da mensalidade', 'Prox à residência', 'Prox ao tr
 y26_rf = [I26_AL_RF[0],I26_AL_RF[1],I26_AL_RF[2],I26_AL_RF[3], I26_AL_RF[4], I26_AL_RF[5], 
           I26_AL_RF[6], I26_AL_RF[7], I26_AL_RF[8]];
 y26_rf = list(map(lambda t:t*100, y26_rf));
-y26_dt = [I26_AL_DT[0],I26_AL_DT[1],I26_AL_DT[2],I26_AL_DT[3],I26_AL_DT[4], I26_AL_DT[5],
+y26_dt = [I26_AL_DT[0], I26_AL_DT[1], I26_AL_DT[2], I26_AL_DT[3], I26_AL_DT[4], I26_AL_DT[5],
           I26_AL_DT[6],I26_AL_DT[7], I26_AL_DT[8]];
 y26_dt = list(map(lambda t:t*100, y26_dt));
 y26_ls = [I26_AL_LS[0],I26_AL_LS[1],I26_AL_LS[2],I26_AL_LS[3],I26_AL_LS[4], I26_AL_LS[5],
@@ -1694,14 +1694,14 @@ ax27b = ['Atividade;exterior', 'Ingresso;cota', 'UF;medio', 'Tipo;escola;medio',
          'Quantos;livros;ano', 'Horas;estudo;semana', 'Oportunidade;idioma;estrang', 'Por que;curso', 
          'Por que;IES'];
 y27b_rf = [np.sum(I14_AL_RF),np.sum(I15_AL_RF),np.sum(I16_AL_RF),np.sum(I17_AL_RF),
-          np.sum(I18_AL_RF),np.sum(I19_AL_RF),np.sum(I19_AL_RF),np.sum(I20_AL_RF),
-          np.sum(I21_AL_RF),np.sum(I22_AL_RF),np.sum(I23_AL_RF),np.sum(I24_AL_RF),
-          np.sum(I13_AL_RF)];
+          np.sum(I18_AL_RF),np.sum(I19_AL_RF),np.sum(I20_AL_RF),np.sum(I21_AL_RF),
+          np.sum(I22_AL_RF),np.sum(I23_AL_RF),np.sum(I24_AL_RF), np.sum(I25_AL_RF),
+          np.sum(I26_AL_RF)];
 y27b_rf = list(map(lambda t:t*100, y27b_rf));
 y27b_dt =  [np.sum(I14_AL_DT),np.sum(I15_AL_DT),np.sum(I16_AL_DT),np.sum(I17_AL_DT),
-          np.sum(I18_AL_DT),np.sum(I19_AL_DT),np.sum(I19_AL_DT),np.sum(I20_AL_DT),
-          np.sum(I21_AL_DT),np.sum(I22_AL_DT),np.sum(I23_AL_DT),np.sum(I24_AL_DT),
-          np.sum(I13_AL_DT)];
+          np.sum(I18_AL_DT),np.sum(I19_AL_DT),np.sum(I20_AL_DT),np.sum(I21_AL_DT),
+          np.sum(I22_AL_DT),np.sum(I23_AL_DT),np.sum(I24_AL_DT),np.sum(I25_AL_DT),
+          np.sum(I26_AL_DT)];
 y27b_dt = list(map(lambda t:t*100, y27b_dt));
 y27b_ls =  [np.sum(I14_AL_LS),np.sum(I15_AL_LS),np.sum(I16_AL_LS),np.sum(I17_AL_LS),
           np.sum(I18_AL_LS),np.sum(I19_AL_LS),np.sum(I20_AL_LS), np.sum(I21_AL_LS),
@@ -1753,7 +1753,7 @@ rows_vimp_al_dt = {'Version':0,'Metodo':'DT_AL',
                    'I20_AL':round(np.sum(I20_AL_DT),6), 'I21_AL':round(np.sum(I21_AL_DT),6),
                    'I22_AL':round(np.sum(I22_AL_DT),6), 'I23_AL':round(np.sum(I23_AL_DT),6),
                    'I24_AL':round(np.sum(I24_AL_DT),6), 'I25_AL':round(np.sum(I25_AL_DT),6),
-                   'I26_AL': round(np.sum(I26_AL_DT),6)}
+                   'I26_AL':round(np.sum(I26_AL_DT),6)}
 
 file_vimp_al_dt = "../tcc_codes/compare_methods/Logs/VIMPS/VIMP_DT_AL.csv"
 
@@ -1781,7 +1781,7 @@ rows_vimp_al_rf = {'Version':0,'Metodo':'RF_AL',
                    'I20_AL':round(np.sum(I20_AL_RF),6), 'I21_AL':round(np.sum(I21_AL_RF),6),
                    'I22_AL':round(np.sum(I22_AL_RF),6), 'I23_AL':round(np.sum(I23_AL_RF),6),
                    'I24_AL':round(np.sum(I24_AL_RF),6), 'I25_AL':round(np.sum(I25_AL_RF),6),
-                   'I26_AL': round(np.sum(I26_AL_RF),6)}
+                   'I26_AL':round(np.sum(I26_AL_RF),6)}
 
 file_vimp_al_rf = "../tcc_codes/compare_methods/Logs/VIMPS/VIMP_RF_AL.csv"
 
@@ -1809,7 +1809,7 @@ rows_vimp_al_ls = {'Version':0,'Metodo':'LS_AL',
                    'I20_AL':round(np.sum(I20_AL_LS),6), 'I21_AL':round(np.sum(I21_AL_LS),6),
                    'I22_AL':round(np.sum(I22_AL_LS),6), 'I23_AL':round(np.sum(I23_AL_LS),6),
                    'I24_AL':round(np.sum(I24_AL_LS),6), 'I25_AL':round(np.sum(I25_AL_LS),6),
-                   'I26_AL': round(np.sum(I26_AL_LS),6)}
+                   'I26_AL':round(np.sum(I26_AL_LS),6)}
 
 file_vimp_al_ls = "../tcc_codes/compare_methods/Logs/VIMPS/VIMP_LS_AL.csv"
 

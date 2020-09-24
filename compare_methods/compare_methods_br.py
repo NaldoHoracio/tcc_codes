@@ -1753,7 +1753,7 @@ rows_vimp_br_dt = {'Version':0,'Metodo':'DT_BR',
                    'I20_BR':round(np.sum(I20_BR_DT),6), 'I21_BR':round(np.sum(I21_BR_DT),6),
                    'I22_BR':round(np.sum(I22_BR_DT),6), 'I23_BR':round(np.sum(I23_BR_DT),6),
                    'I24_BR':round(np.sum(I24_BR_DT),6), 'I25_BR':round(np.sum(I25_BR_DT),6),
-                   'I26_BR': round(np.sum(I26_BR_DT),6)}
+                   'I26_BR':round(np.sum(I26_BR_DT),6)}
 
 file_vimp_br_dt = "../tcc_codes/compare_methods/Logs/VIMPS/VIMP_DT_BR.csv"
 
@@ -1781,7 +1781,7 @@ rows_vimp_br_rf = {'Version':0,'Metodo':'RF_BR',
                    'I20_BR':round(np.sum(I20_BR_RF),6), 'I21_BR':round(np.sum(I21_BR_RF),6),
                    'I22_BR':round(np.sum(I22_BR_RF),6), 'I23_BR':round(np.sum(I23_BR_RF),6),
                    'I24_BR':round(np.sum(I24_BR_RF),6), 'I25_BR':round(np.sum(I25_BR_RF),6),
-                   'I26_BR': round(np.sum(I26_BR_RF),6)}
+                   'I26_BR':round(np.sum(I26_BR_RF),6)}
 
 file_vimp_br_rf = "../tcc_codes/compare_methods/Logs/VIMPS/VIMP_RF_BR.csv"
 
