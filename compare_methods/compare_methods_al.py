@@ -148,7 +148,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn import linear_model
 import time
 
-n_cv = int(5);
+n_cv_al = int(10);
 
 train_x_al, test_x_al, train_y_al, test_y_al = train_test_split(features_al, labels_al, test_size=0.33, random_state=42)
 
@@ -158,7 +158,7 @@ dt_al = DecisionTreeRegressor(min_samples_split=320, min_samples_leaf=200, rando
 
 time_dt_al_cv = time.time() # Time start DT CV
 # min_samples_split = 320; min_samples_leaf = 200; max_features= log2
-accuracy_al_dt_cv = cross_val_score(dt_al, train_x_al, train_y_al, cv=n_cv, scoring='r2')
+accuracy_al_dt_cv = cross_val_score(dt_al, train_x_al, train_y_al, cv=n_cv_al, scoring='r2')
 sec_dt_al_cv = (time.time() - time_dt_al_cv) # Time end DT CV
 
 print('Accuracy DT CV: ', round(np.mean(accuracy_al_dt_cv), 4))
@@ -170,7 +170,7 @@ fields_al_dt_cv = ['Version','Metodo', 'Split', 'Leaf', 'Acc', 'Acc medio', 'Tem
 rows_al_dt_cv = {'Version':0,'Metodo':'DT', 
                  'Split': 320, 'Leaf':200, 
                  'Acc': accuracy_al_dt_cv, 'Acc medio': accuracy_al_dt_cv.mean(),
-                 'Tempo (h,min,s)':seconds_transform(sec_dt_al_cv), 'n_cv':n_cv}
+                 'Tempo (h,min,s)':seconds_transform(sec_dt_al_cv), 'n_cv':n_cv_al}
 
 file_al_dt_cv = "../tcc_codes/compare_methods/Logs/CV/DT_CV_AL.csv"
 
@@ -182,7 +182,7 @@ version_file(file_al_dt_cv, fields_al_dt_cv, rows_al_dt_cv)
 rf_al = RandomForestRegressor(n_estimators=1000, min_samples_split=40, min_samples_leaf=20, random_state=42)
 
 time_rf_al_cv = time.time()
-accuracy_al_rf_cv = cross_val_score(rf_al, train_x_al, train_y_al, cv=n_cv, scoring='r2')
+accuracy_al_rf_cv = cross_val_score(rf_al, train_x_al, train_y_al, cv=n_cv_al, scoring='r2')
 
 sec_rf_al_cv = (time.time() - time_rf_al_cv)
 
@@ -196,7 +196,7 @@ fields_al_rf_cv = ['Version', 'Metodo', 'N_tree', 'Split', 'Leaf', 'Acc', 'Acc m
 rows_al_rf_cv = {'Version':0,'Metodo':'RF',
                  'N_tree':'1000', 'Split':40, 'Leaf':20, 
                  'Acc':accuracy_al_rf_cv, 'Acc medio':accuracy_al_rf_cv.mean(), 
-                 'Tempo (h,min,s)':seconds_transform(sec_rf_al_cv), 'n_cv':n_cv}
+                 'Tempo (h,min,s)':seconds_transform(sec_rf_al_cv), 'n_cv':n_cv_al}
 
 file_al_rf_cv = "../tcc_codes/compare_methods/Logs/CV/RF_CV_AL.csv"
 
@@ -204,10 +204,10 @@ version_file(file_al_rf_cv, fields_al_rf_cv, rows_al_rf_cv)
 
 #%% LASSO
 
-ls_al = linear_model.Lasso(alpha=0.005, positive=True, random_state=42)
+lasso_al = linear_model.Lasso(alpha=0.005, positive=True, random_state=42)
 
 time_ls_al_cv = time.time()
-accuracy_al_ls_cv = cross_val_score(ls_al, train_x_al, train_y_al, cv=n_cv, scoring='r2')
+accuracy_al_ls_cv = cross_val_score(lasso_al, train_x_al, train_y_al, cv=n_cv_al, scoring='r2')
 sec_ls_al_cv = (time.time() - time_ls_al_cv)
 
 print('Accuracy LS CV: ', round(np.mean(accuracy_al_ls_cv), 4))
@@ -220,7 +220,7 @@ rows_al_ls_cv = {'Version':0,'Metodo':'LS',
                  'Alfa':0.005, 'Acc':accuracy_al_ls_cv, 
                  'Acc medio':accuracy_al_ls_cv.mean(),
                  'Tempo (h,min,s)':seconds_transform(sec_ls_al_cv), 
-                 'n_cv':n_cv}
+                 'n_cv':n_cv_al}
 
 file_al_ls_cv = "../tcc_codes/compare_methods/Logs/CV/LS_CV_AL.csv"
 
@@ -250,48 +250,48 @@ importance_fields_aux_al_dt = []
 importance_fields_al_ls = 0.0
 importance_fields_aux_al_ls = []
 
-dt_al = DecisionTreeRegressor(min_samples_split=320, min_samples_leaf=200, random_state=42)
-rf_al = RandomForestRegressor(n_estimators=1000, min_samples_split=40, min_samples_leaf=20, random_state=42)
-lasso_al = linear_model.Lasso(alpha=0.005, positive=True, random_state=42)
+# dt_al = DecisionTreeRegressor(min_samples_split=320, min_samples_leaf=200, random_state=42)
+# rf_al = RandomForestRegressor(n_estimators=1000, min_samples_split=40, min_samples_leaf=20, random_state=42)
+# lasso_al = linear_model.Lasso(alpha=0.005, positive=True, random_state=42)
 
-kf_cv_al = KFold(n_splits=n_cv, random_state=42, shuffle=False) # n_splits
+# kf_cv_al = KFold(n_splits=n_cv_al, random_state=42, shuffle=False) # n_splits
 
 #%% Treinando dados - DT_AL
 
 time_dt_al = time.time() # Time start dt loop
 
-for train_index_al, test_index_al in kf_cv_al.split(train_x_al):
-    #print("Train index: ", np.min(train_index_al), '- ', np.max(train_index_al))
-    print("Test index: ", np.min(test_index_al), '-', np.max(test_index_al))
+# for train_index_al, test_index_al in kf_cv_al.split(train_x_al):
+#     #print("Train index: ", np.min(train_index_al), '- ', np.max(train_index_al))
+#     print("Test index: ", np.min(test_index_al), '-', np.max(test_index_al))
     
-    # Dividindo nas features e labels
-    train_features_al = train_x_al[train_index_al]
-    test_features_al = train_x_al[test_index_al]
-    train_labels_al = train_y_al[train_index_al]
-    test_labels_al = train_y_al[test_index_al]
-    
-    # Método 1 - Árvore de decisão
-    
-    dt_al.fit(train_features_al, train_labels_al)
-    
-    predictions_al_dt = dt_al.predict(test_features_al)
-    
-    accuracy_al_dt = dt_al.score(test_features_al, test_labels_al)
+# # Dividindo nas features e labels
+# train_features_al = train_x_al[train_index_al]
+# test_features_al = train_x_al[test_index_al]
+# train_labels_al = train_y_al[train_index_al]
+# test_labels_al = train_y_al[test_index_al]
 
-    accuracy_mae_al_dt = mean_absolute_error(test_labels_al, predictions_al_dt)
-    
-    accuracy_mse_al_dt = mean_squared_error(test_labels_al, predictions_al_dt)
-    
-    # Importância de variável
-    importance_fields_aux_al_dt = dt_al.feature_importances_
-    importance_fields_al_dt += importance_fields_aux_al_dt
-    
-    # Append em cada valor médio
-    scores_al_dt.append(accuracy_al_dt)
-    
-    scores_al_dt_mae.append(accuracy_mae_al_dt)
-    
-    scores_al_dt_mse.append(accuracy_mse_al_dt)
+# Método 1 - Árvore de decisão
+
+dt_al.fit(train_x_al, train_y_al)
+
+# predictions_al_dt = dt_al.predict(test_x_al)
+
+# accuracy_al_dt = dt_al.score(test_x_al, test_y_al)
+
+# accuracy_mae_al_dt = mean_absolute_error(test_y_al, predictions_al_dt)
+
+# accuracy_mse_al_dt = mean_squared_error(test_y_al, predictions_al_dt)
+
+# Importância de variável
+importance_fields_aux_al_dt = dt_al.feature_importances_
+importance_fields_al_dt += importance_fields_aux_al_dt
+
+# # Append em cada valor médio
+# scores_al_dt.append(accuracy_al_dt)
+
+# scores_al_dt_mae.append(accuracy_mae_al_dt)
+
+# scores_al_dt_mse.append(accuracy_mse_al_dt)
 
 sec_dt_al = (time.time() - time_dt_al) # Time end dt loop
 
@@ -301,38 +301,38 @@ seconds_transform(sec_dt_al)
 
 time_rf_al = time.time() # Time start dt loop
 
-for train_index_al, test_index_al in kf_cv_al.split(train_x_al):
-    #print("Train index: ", np.min(train_index_al), '- ', np.max(train_index_al))
-    print("Test index: ", np.min(test_index_al), '-', np.max(test_index_al))
+# for train_index_al, test_index_al in kf_cv_al.split(train_x_al):
+#     #print("Train index: ", np.min(train_index_al), '- ', np.max(train_index_al))
+#     print("Test index: ", np.min(test_index_al), '-', np.max(test_index_al))
     
-    # Dividindo nas features e labels
-    train_features_al = train_x_al[train_index_al]
-    test_features_al = train_x_al[test_index_al]
-    train_labels_al = train_y_al[train_index_al]
-    test_labels_al = train_y_al[test_index_al]
+#     # Dividindo nas features e labels
+#     train_features_al = train_x_al[train_index_al]
+#     test_features_al = train_x_al[test_index_al]
+#     train_labels_al = train_y_al[train_index_al]
+#     test_labels_al = train_y_al[test_index_al]
     
-    # Método 2 - Random Forest
-    
-    rf_al.fit(train_features_al, train_labels_al)
-    
-    predictions_al_rf = rf_al.predict(test_features_al)
-    
-    accuracy_al_rf = rf_al.score(test_features_al, test_labels_al)
+# Método 2 - Random Forest
 
-    accuracy_mae_al_rf = mean_absolute_error(test_labels_al, predictions_al_rf)
-    
-    accuracy_mse_al_rf = mean_squared_error(test_labels_al, predictions_al_rf)
-     
-    # Importância de variável
-    importance_fields_aux_al_rf = rf_al.feature_importances_
-    importance_fields_al_rf += importance_fields_aux_al_rf
-    
-    # Append em cada valor médio
-    scores_al_rf.append(accuracy_al_rf)
-    
-    scores_al_rf_mae.append(accuracy_mae_al_rf)
-    
-    scores_al_rf_mse.append(accuracy_mse_al_rf)
+rf_al.fit(train_x_al, train_y_al)
+
+# predictions_al_rf = rf_al.predict(test_x_al)
+
+# accuracy_al_rf = rf_al.score(test_x_al, test_y_al)
+
+# accuracy_mae_al_rf = mean_absolute_error(test_y_al, predictions_al_rf)
+
+# accuracy_mse_al_rf = mean_squared_error(test_y_al, predictions_al_rf)
+ 
+# Importância de variável
+importance_fields_aux_al_rf = rf_al.feature_importances_
+importance_fields_al_rf += importance_fields_aux_al_rf
+
+# # Append em cada valor médio
+# scores_al_rf.append(accuracy_al_rf)
+
+# scores_al_rf_mae.append(accuracy_mae_al_rf)
+
+# scores_al_rf_mse.append(accuracy_mse_al_rf)
 
 sec_rf_al = (time.time() - time_rf_al) # Time end dt loop
 
@@ -340,43 +340,43 @@ seconds_transform(sec_rf_al)
 
 #%% Treino dos dados - LS_AL
 
-lasso_al = linear_model.Lasso(alpha=0.005, positive=True, random_state=42)
+#lasso_al = linear_model.Lasso(alpha=0.005, positive=True, random_state=42)
 
 time_ls_al = time.time() # Time start dt loop
 
-for train_index_al, test_index_al in kf_cv_al.split(train_x_al):
-    #print("Train index: ", np.min(train_index_al), '- ', np.max(train_index_al))
-    print("Test index: ", np.min(test_index_al), '-', np.max(test_index_al))
+# for train_index_al, test_index_al in kf_cv_al.split(train_x_al):
+#     #print("Train index: ", np.min(train_index_al), '- ', np.max(train_index_al))
+#     print("Test index: ", np.min(test_index_al), '-', np.max(test_index_al))
     
-    # Dividindo nas features e labels
-    train_features_al = train_x_al[train_index_al]
-    test_features_al = train_x_al[test_index_al]
-    train_labels_al = train_y_al[train_index_al]
-    test_labels_al = train_y_al[test_index_al]
+#     # Dividindo nas features e labels
+#     train_features_al = train_x_al[train_index_al]
+#     test_features_al = train_x_al[test_index_al]
+#     train_labels_al = train_y_al[train_index_al]
+#     test_labels_al = train_y_al[test_index_al]
     
     
-    # Método 3 - Lasso
-    
-    lasso_al.fit(train_features_al, train_labels_al)
-    
-    predictions_al_ls = lasso_al.predict(test_features_al)
-    
-    accuracy_al_ls = lasso_al.score(test_features_al, test_labels_al)
+# Método 3 - Lasso
 
-    accuracy_mae_al_ls = mean_absolute_error(test_labels_al, predictions_al_ls)
-    
-    accuracy_mse_al_ls = mean_squared_error(test_labels_al, predictions_al_ls)    
-    
-    # Importância das variáveis
-    importance_fields_aux_al_ls = lasso_al.coef_
-    importance_fields_al_ls += importance_fields_aux_al_ls
-    
-    # Append em cada valor médio
-    scores_al_ls.append(accuracy_al_ls)
-    
-    scores_al_ls_mae.append(accuracy_mae_al_ls)
-    
-    scores_al_ls_mse.append(accuracy_mse_al_ls)
+lasso_al.fit(train_x_al, train_y_al)
+
+# predictions_al_ls = lasso_al.predict(test_x_al)
+
+# accuracy_al_ls = lasso_al.score(test_x_al, test_y_al)
+
+# accuracy_mae_al_ls = mean_absolute_error(test_y_al, predictions_al_ls)
+
+# accuracy_mse_al_ls = mean_squared_error(test_y_al, predictions_al_ls)    
+
+# Importância das variáveis
+importance_fields_aux_al_ls = lasso_al.coef_
+importance_fields_al_ls += importance_fields_aux_al_ls
+
+# # Append em cada valor médio
+# scores_al_ls.append(accuracy_al_ls)
+
+# scores_al_ls_mae.append(accuracy_mae_al_ls)
+
+# scores_al_ls_mse.append(accuracy_mse_al_ls)
 
 sec_ls_al = (time.time() - time_ls_al) # Time end dt loop
 
@@ -458,6 +458,7 @@ file_al_ls = "../tcc_codes/compare_methods/Logs/METRICS_EVALUATE/LS_AL.csv"
 version_file(file_al_ls, fields_al_ls, rows_al_ls)
 
 #%% Acurácia AL
+n_cv = int(1)
 
 importance_fields_al_rf_t = importance_fields_al_rf/n_cv
 importance_fields_al_dt_t = importance_fields_al_dt/n_cv

@@ -148,7 +148,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn import linear_model
 import time
 
-n_cv = int(5);
+n_cv_br = int(10);
 
 train_x_br, test_x_br, train_y_br, test_y_br = train_test_split(features_br, labels_br, test_size=0.33, random_state=42)
 
@@ -158,7 +158,7 @@ dt_br = DecisionTreeRegressor(min_samples_split=320, min_samples_leaf=200, rando
 
 time_dt_br_cv = time.time() # Time start DT CV
 # min_samples_split = 320; min_samples_leaf = 200; max_features= log2
-accuracy_br_dt_cv = cross_val_score(dt_br, train_x_br, train_y_br, cv=n_cv, scoring='r2')
+accuracy_br_dt_cv = cross_val_score(dt_br, train_x_br, train_y_br, cv=n_cv_br, scoring='r2')
 sec_dt_br_cv = (time.time() - time_dt_br_cv) # Time end DT CV
 
 print('Accuracy DT CV: ', round(np.mean(accuracy_br_dt_cv), 4))
@@ -170,7 +170,7 @@ fields_br_dt_cv = ['Version','Metodo', 'Split', 'Leaf', 'Acc', 'Acc medio', 'Tem
 rows_br_dt_cv = {'Version':0,'Metodo':'DT', 
                  'Split': 320, 'Leaf':200, 
                  'Acc': accuracy_br_dt_cv, 'Acc medio': accuracy_br_dt_cv.mean(),
-                 'Tempo (h,min,s)':seconds_transform(sec_dt_br_cv), 'n_cv':n_cv}
+                 'Tempo (h,min,s)':seconds_transform(sec_dt_br_cv), 'n_cv':n_cv_br}
 
 file_br_dt_cv = "../tcc_codes/compare_methods/Logs/CV/DT_CV_BR.csv"
 
@@ -182,7 +182,7 @@ version_file(file_br_dt_cv, fields_br_dt_cv, rows_br_dt_cv)
 rf_br = RandomForestRegressor(n_estimators=1000, min_samples_split=40, min_samples_leaf=20, random_state=42)
 
 time_rf_br_cv = time.time()
-accuracy_br_rf_cv = cross_val_score(rf_br, train_x_br, train_y_br, cv=n_cv, scoring='r2')
+accuracy_br_rf_cv = cross_val_score(rf_br, train_x_br, train_y_br, cv=n_cv_br, scoring='r2')
 
 sec_rf_br_cv = (time.time() - time_rf_br_cv)
 
@@ -196,7 +196,7 @@ fields_br_rf_cv = ['Version', 'Metodo', 'N_tree', 'Split', 'Leaf', 'Acc', 'Acc m
 rows_br_rf_cv = {'Version':0,'Metodo':'RF',
                  'N_tree':'1000', 'Split':40, 'Leaf':20, 
                  'Acc':accuracy_br_rf_cv, 'Acc medio':accuracy_br_rf_cv.mean(), 
-                 'Tempo (h,min,s)':seconds_transform(sec_rf_br_cv), 'n_cv':n_cv}
+                 'Tempo (h,min,s)':seconds_transform(sec_rf_br_cv), 'n_cv':n_cv_br}
 
 file_br_rf_cv = "../tcc_codes/compare_methods/Logs/CV/RF_CV_BR.csv"
 
@@ -204,10 +204,10 @@ version_file(file_br_rf_cv, fields_br_rf_cv, rows_br_rf_cv)
 
 #%% LASSO
 
-ls_br = linear_model.Lasso(alpha=0.005, positive=True, random_state=42)
+lasso_br = linear_model.Lasso(alpha=0.005, positive=True, random_state=42)
 
 time_ls_br_cv = time.time()
-accuracy_br_ls_cv = cross_val_score(ls_br, train_x_br, train_y_br, cv=n_cv, scoring='r2')
+accuracy_br_ls_cv = cross_val_score(lasso_br, train_x_br, train_y_br, cv=n_cv_br, scoring='r2')
 sec_ls_br_cv = (time.time() - time_ls_br_cv)
 
 print('Accuracy LS CV: ', round(np.mean(accuracy_br_ls_cv), 4))
@@ -220,7 +220,7 @@ rows_br_ls_cv = {'Version':0,'Metodo':'LS',
                  'Alfa':0.005, 'Acc':accuracy_br_ls_cv, 
                  'Acc medio':accuracy_br_ls_cv.mean(),
                  'Tempo (h,min,s)':seconds_transform(sec_ls_br_cv),
-                 'n_cv':n_cv}
+                 'n_cv':n_cv_br}
 
 file_br_ls_cv = "../tcc_codes/compare_methods/Logs/CV/LS_CV_BR.csv"
 
@@ -250,50 +250,50 @@ importance_fields_aux_br_dt = []
 importance_fields_br_ls = 0.0
 importance_fields_aux_br_ls = []
 
-dt_br = DecisionTreeRegressor(min_samples_split=320, min_samples_leaf=200, random_state=42)
-rf_br = RandomForestRegressor(n_estimators=1000, min_samples_split=40, min_samples_leaf=20, random_state=42)
-lasso_br = linear_model.Lasso(alpha=0.005, positive=True, random_state=42)
+# dt_br = DecisionTreeRegressor(min_samples_split=320, min_samples_leaf=200, random_state=42)
+# rf_br = RandomForestRegressor(n_estimators=1000, min_samples_split=40, min_samples_leaf=20, random_state=42)
+# lasso_br = linear_model.Lasso(alpha=0.005, positive=True, random_state=42)
 
-kf_cv_br = KFold(n_splits=n_cv, random_state=42, shuffle=False) # n_splits
+kf_cv_br = KFold(n_splits=n_cv_br, random_state=42, shuffle=False) # n_splits
 
 #%% Treinando dados - DT_BR
 
 time_dt_br = time.time() # Time start dt loop
 
-for train_index_br, test_index_br in kf_cv_br.split(train_x_br):
-    #print("Train index: ", np.min(train_index_br), '- ', np.max(train_index_br))
-    print("Test index: ", np.min(test_index_br), '-', np.max(test_index_br))
+# for train_index_br, test_index_br in kf_cv_br.split(train_x_br):
+#     #print("Train index: ", np.min(train_index_br), '- ', np.max(train_index_br))
+#     print("Test index: ", np.min(test_index_br), '-', np.max(test_index_br))
     
-    # Dividindo nas features e labels
-    train_features_br = train_x_br[train_index_br]
-    test_features_br = train_x_br[test_index_br]
-    train_labels_br = train_y_br[train_index_br]
-    test_labels_br = train_y_br[test_index_br]
+#     # Dividindo nas features e labels
+#     train_features_br = train_x_br[train_index_br]
+#     test_features_br = train_x_br[test_index_br]
+#     train_labels_br = train_y_br[train_index_br]
+#     test_labels_br = train_y_br[test_index_br]
     
-    # Ajustando cada features e label com RF e DT
-    
-    # Método 1 - Árvore de decisão
-    
-    dt_br.fit(train_features_br, train_labels_br)
-    
-    predictions_br_dt = dt_br.predict(test_features_br)
-    
-    accuracy_br_dt = dt_br.score(test_features_br, test_labels_br)
+# Ajustando cada features e label com RF e DT
 
-    accuracy_mae_br_dt = mean_absolute_error(test_labels_br, predictions_br_dt)
-    
-    accuracy_mse_br_dt = mean_squared_error(test_labels_br, predictions_br_dt)
-    
-    # Importância de variável
-    importance_fields_aux_br_dt = dt_br.feature_importances_
-    importance_fields_br_dt += importance_fields_aux_br_dt
-    
-    # Append em cada valor médio
-    scores_br_dt.append(accuracy_br_dt)
-    
-    scores_br_dt_mae.append(accuracy_mae_br_dt)
-    
-    scores_br_dt_mse.append(accuracy_mse_br_dt)
+# Método 1 - Árvore de decisão
+
+dt_br.fit(train_x_br, train_y_br)
+
+# predictions_br_dt = dt_br.predict(test_features_br)
+
+# accuracy_br_dt = dt_br.score(test_features_br, test_labels_br)
+
+# accuracy_mae_br_dt = mean_absolute_error(test_labels_br, predictions_br_dt)
+
+# accuracy_mse_br_dt = mean_squared_error(test_labels_br, predictions_br_dt)
+
+# Importância de variável
+importance_fields_aux_br_dt = dt_br.feature_importances_
+importance_fields_br_dt += importance_fields_aux_br_dt
+
+# # Append em cada valor médio
+# scores_br_dt.append(accuracy_br_dt)
+
+# scores_br_dt_mae.append(accuracy_mae_br_dt)
+
+# scores_br_dt_mse.append(accuracy_mse_br_dt)
 
 sec_dt_br = (time.time() - time_dt_br) # Time end dt loop
 
@@ -303,38 +303,38 @@ seconds_transform(sec_dt_br)
 
 time_rf_br = time.time() # Time start dt loop
 
-for train_index_br, test_index_br in kf_cv_br.split(train_x_br):
-    #print("Train index: ", np.min(train_index_br), '- ', np.max(train_index_br))
-    print("Test index: ", np.min(test_index_br), '-', np.max(test_index_br))
+# for train_index_br, test_index_br in kf_cv_br.split(train_x_br):
+#     #print("Train index: ", np.min(train_index_br), '- ', np.max(train_index_br))
+#     print("Test index: ", np.min(test_index_br), '-', np.max(test_index_br))
     
-    # Dividindo nas features e labels
-    train_features_br = train_x_br[train_index_br]
-    test_features_br = train_x_br[test_index_br]
-    train_labels_br = train_y_br[train_index_br]
-    test_labels_br = train_y_br[test_index_br]
+#     # Dividindo nas features e labels
+#     train_features_br = train_x_br[train_index_br]
+#     test_features_br = train_x_br[test_index_br]
+#     train_labels_br = train_y_br[train_index_br]
+#     test_labels_br = train_y_br[test_index_br]
     
-    # Método 2 - Random Forest
-    
-    rf_br.fit(train_features_br, train_labels_br)
-    
-    predictions_br_rf = rf_br.predict(test_features_br)
-    
-    accuracy_br_rf = rf_br.score(test_features_br, test_labels_br)
+# Método 2 - Random Forest
 
-    accuracy_mae_br_rf = mean_absolute_error(test_labels_br, predictions_br_rf)
-    
-    accuracy_mse_br_rf = mean_squared_error(test_labels_br, predictions_br_rf)
-     
-    # Importância de variável
-    importance_fields_aux_br_rf = rf_br.feature_importances_
-    importance_fields_br_rf += importance_fields_aux_br_rf
-    
-    # Append em cada vbror médio
-    scores_br_rf.append(accuracy_br_rf)
-    
-    scores_br_rf_mae.append(accuracy_mae_br_rf)
-    
-    scores_br_rf_mse.append(accuracy_mse_br_rf)
+rf_br.fit(train_x_br, train_y_br)
+
+# predictions_br_rf = rf_br.predict(test_features_br)
+
+# accuracy_br_rf = rf_br.score(test_features_br, test_labels_br)
+
+# accuracy_mae_br_rf = mean_absolute_error(test_labels_br, predictions_br_rf)
+
+# accuracy_mse_br_rf = mean_squared_error(test_labels_br, predictions_br_rf)
+ 
+# Importância de variável
+importance_fields_aux_br_rf = rf_br.feature_importances_
+importance_fields_br_rf += importance_fields_aux_br_rf
+
+# # Append em cada vbror médio
+# scores_br_rf.append(accuracy_br_rf)
+
+# scores_br_rf_mae.append(accuracy_mae_br_rf)
+
+# scores_br_rf_mse.append(accuracy_mse_br_rf)
 
 sec_rf_br = (time.time() - time_rf_br) # Time end dt loop
 
@@ -342,43 +342,43 @@ seconds_transform(sec_rf_br)
 
 #%% Treino dos dados - LS_BR
 
-lasso_br = linear_model.Lasso(alpha=0.005, positive=True, random_state=42)
+#lasso_br = linear_model.Lasso(alpha=0.005, positive=True, random_state=42)
 
 time_ls_br = time.time() # Time start dt loop
 
-for train_index_br, test_index_br in kf_cv_br.split(train_x_br):
-    #print("Train index: ", np.min(train_index_br), '- ', np.max(train_index_br))
-    print("Test index: ", np.min(test_index_br), '-', np.max(test_index_br))
+# for train_index_br, test_index_br in kf_cv_br.split(train_x_br):
+#     #print("Train index: ", np.min(train_index_br), '- ', np.max(train_index_br))
+#     print("Test index: ", np.min(test_index_br), '-', np.max(test_index_br))
     
-    # Dividindo nas features e labels
-    train_features_br = train_x_br[train_index_br]
-    test_features_br = train_x_br[test_index_br]
-    train_labels_br = train_y_br[train_index_br]
-    test_labels_br = train_y_br[test_index_br]
+#     # Dividindo nas features e labels
+#     train_features_br = train_x_br[train_index_br]
+#     test_features_br = train_x_br[test_index_br]
+#     train_labels_br = train_y_br[train_index_br]
+#     test_labels_br = train_y_br[test_index_br]
     
     
-    # Método 3 - Lasso
-    
-    lasso_br.fit(train_features_br, train_labels_br)
-    
-    predictions_br_ls = lasso_br.predict(test_features_br)
-    
-    accuracy_br_ls = lasso_br.score(test_features_br, test_labels_br)
+# Método 3 - Lasso
 
-    accuracy_mae_br_ls = mean_absolute_error(test_labels_br, predictions_br_ls)
-    
-    accuracy_mse_br_ls = mean_squared_error(test_labels_br, predictions_br_ls)    
-    
-    # Importância das variáveis
-    importance_fields_aux_br_ls = lasso_br.coef_
-    importance_fields_br_ls += importance_fields_aux_br_ls
-    
-    # Append em cada valor médio
-    scores_br_ls.append(accuracy_br_ls)
-    
-    scores_br_ls_mae.append(accuracy_mae_br_ls)
-    
-    scores_br_ls_mse.append(accuracy_mse_br_ls)
+lasso_br.fit(train_x_br, train_y_br)
+
+# predictions_br_ls = lasso_br.predict(test_features_br)
+
+# accuracy_br_ls = lasso_br.score(test_features_br, test_labels_br)
+
+# accuracy_mae_br_ls = mean_absolute_error(test_labels_br, predictions_br_ls)
+
+# accuracy_mse_br_ls = mean_squared_error(test_labels_br, predictions_br_ls)    
+
+# Importância das variáveis
+importance_fields_aux_br_ls = lasso_br.coef_
+importance_fields_br_ls += importance_fields_aux_br_ls
+
+# # Append em cada valor médio
+# scores_br_ls.append(accuracy_br_ls)
+
+# scores_br_ls_mae.append(accuracy_mae_br_ls)
+
+# scores_br_ls_mse.append(accuracy_mse_br_ls)
 
 sec_ls_br = (time.time() - time_ls_br) # Time end dt loop
 
@@ -466,6 +466,7 @@ version_file(file_br_ls, fields_br_ls, rows_br_ls)
 #print('Accuracy RF: ', round(np.average(scores_br_rf), 4), "%.")
 #print('Accuracy DT: ', round(np.average(scores_br_dt), 4), "%.")
 #print('Accuracy LS: ', round(np.average(scores_br_ls), 4), "%.")
+n_cv = int(1)
 
 importance_fields_br_rf_t = importance_fields_br_rf/n_cv
 importance_fields_br_dt_t = importance_fields_br_dt/n_cv
