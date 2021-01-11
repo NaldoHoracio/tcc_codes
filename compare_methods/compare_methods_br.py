@@ -1816,3 +1816,166 @@ file_vimp_br_ls = "../tcc_codes/compare_methods/Logs/VIMPS/VIMP_LS_BR.csv"
 
 version_file(file_vimp_br_ls, fields_vimp_br_ls, rows_vimp_br_ls)
 
+#%% GRÁFICO NA HORIZONTAL
+import os
+import csv
+import math
+import random
+import numpy as np
+import pandas as pd
+import datetime as dt
+import matplotlib.pyplot as plt
+import matplotlib
+
+font = {'family' : 'normal',
+        'weight' : 'bold',
+        'size'   : 4}
+
+importance_fields_br_dt_t = pd.read_csv(r'Logs/VIMPS/VIMP_DT_BR.csv')
+importance_fields_br_rf_t = pd.read_csv(r'Logs/VIMPS/VIMP_RF_BR.csv')
+importance_fields_br_ls_t = pd.read_csv(r'Logs/VIMPS/VIMP_LS_BR.csv')
+
+# Importância de variáveis
+
+vimp_br_rf = importance_fields_br_rf_t.iloc[4]
+
+vimp_br_dt = importance_fields_br_dt_t.iloc[4]
+
+vimp_br_ls = importance_fields_br_ls_t.iloc[4]
+
+#%%
+
+I01_BR_RF = vimp_br_rf['I01_BR']; I02_BR_RF = vimp_br_rf['I02_BR'];
+
+I03_BR_RF = vimp_br_rf['I03_BR']; I04_BR_RF = vimp_br_rf['I04_BR']; 
+
+I05_BR_RF = vimp_br_rf['I05_BR']; I06_BR_RF = vimp_br_rf['I06_BR'];
+
+I07_BR_RF = vimp_br_rf['I07_BR']; I08_BR_RF = vimp_br_rf['I08_BR'];
+
+I09_BR_RF = vimp_br_rf['I09_BR']; I10_BR_RF = vimp_br_rf['I10_BR']; 
+
+I11_BR_RF = vimp_br_rf['I11_BR']; I12_BR_RF = vimp_br_rf['I12_BR'];
+
+I13_BR_RF = vimp_br_rf['I13_BR']; I14_BR_RF = vimp_br_rf['I14_BR']; 
+
+I15_BR_RF = vimp_br_rf['I15_BR']; I16_BR_RF = vimp_br_rf['I16_BR']; 
+
+I17_BR_RF = vimp_br_rf['I17_BR']; I18_BR_RF = vimp_br_rf['I18_BR'];
+
+I19_BR_RF = vimp_br_rf['I19_BR']; I20_BR_RF = vimp_br_rf['I20_BR']; 
+
+I21_BR_RF = vimp_br_rf['I21_BR']; I22_BR_RF = vimp_br_rf['I22_BR']; 
+
+I23_BR_RF = vimp_br_rf['I23_BR']; I24_BR_RF = vimp_br_rf['I24_BR'];
+
+I25_BR_RF = vimp_br_rf['I25_BR']; I26_BR_RF = vimp_br_rf['I26_BR'];
+
+# Decision Tree
+I01_BR_DT = vimp_br_dt['I01_BR']; I02_BR_DT = vimp_br_dt['I02_BR'];
+
+I03_BR_DT = vimp_br_dt['I03_BR']; I04_BR_DT = vimp_br_dt['I04_BR']; 
+
+I05_BR_DT = vimp_br_dt['I05_BR']; I06_BR_DT = vimp_br_dt['I06_BR'];
+
+I07_BR_DT = vimp_br_dt['I07_BR']; I08_BR_DT = vimp_br_dt['I08_BR'];
+
+I09_BR_DT = vimp_br_dt['I09_BR']; I10_BR_DT = vimp_br_dt['I10_BR']; 
+
+I11_BR_DT = vimp_br_dt['I11_BR']; I12_BR_DT = vimp_br_dt['I12_BR'];
+
+I13_BR_DT = vimp_br_dt['I13_BR']; I14_BR_DT = vimp_br_dt['I14_BR']; 
+
+I15_BR_DT = vimp_br_dt['I15_BR']; I16_BR_DT = vimp_br_dt['I16_BR']; 
+
+I17_BR_DT = vimp_br_dt['I17_BR']; I18_BR_DT = vimp_br_dt['I18_BR'];
+
+I19_BR_DT = vimp_br_dt['I19_BR']; I20_BR_DT = vimp_br_dt['I20_BR']; 
+
+I21_BR_DT = vimp_br_dt['I21_BR']; I22_BR_DT = vimp_br_dt['I22_BR']; 
+
+I23_BR_DT = vimp_br_dt['I23_BR']; I24_BR_DT = vimp_br_dt['I24_BR'];
+
+I25_BR_DT = vimp_br_dt['I25_BR']; I26_BR_DT = vimp_br_dt['I26_BR'];
+
+# Lasso
+I01_BR_LS = vimp_br_ls['I01_BR']; I02_BR_LS = vimp_br_ls['I02_BR'];
+
+I03_BR_LS = vimp_br_ls['I03_BR']; I04_BR_LS = vimp_br_ls['I04_BR']; 
+
+I05_BR_LS = vimp_br_ls['I05_BR']; I06_BR_LS = vimp_br_ls['I06_BR'];
+
+I07_BR_LS = vimp_br_ls['I07_BR']; I08_BR_LS = vimp_br_ls['I08_BR'];
+
+I09_BR_LS = vimp_br_ls['I09_BR']; I10_BR_LS = vimp_br_ls['I10_BR']; 
+
+I11_BR_LS = vimp_br_ls['I11_BR']; I12_BR_LS = vimp_br_ls['I12_BR'];
+
+I13_BR_LS = vimp_br_ls['I13_BR']; I14_BR_LS = vimp_br_ls['I14_BR']; 
+
+I15_BR_LS = vimp_br_ls['I15_BR']; I16_BR_LS = vimp_br_ls['I16_BR']; 
+
+I17_BR_LS = vimp_br_ls['I17_BR']; I18_BR_LS = vimp_br_ls['I18_BR'];
+
+I19_BR_LS = vimp_br_ls['I19_BR']; I20_BR_LS = vimp_br_ls['I20_BR']; 
+
+I21_BR_LS = vimp_br_ls['I21_BR']; I22_BR_LS = vimp_br_ls['I22_BR']; 
+
+I23_BR_LS = vimp_br_ls['I23_BR']; I24_BR_LS = vimp_br_ls['I24_BR'];
+
+I25_BR_LS = vimp_br_ls['I25_BR']; I26_BR_LS = vimp_br_ls['I26_BR'];
+
+#%%
+
+matplotlib.rc('font', **font)
+
+df_br = pd.DataFrame(dict(graph=['Estado civil', 'Cor;raça', 'Nacionalidade', 'Escolarização;pai', 'Escolarização;mãe', 
+                 'Onde;com quem;moro', 'Qtde;moram;comigo', 'Renda;total;família', 
+                 'Situação;financeira;atual', 'Situação;atual;trabalho', 
+                 'Fonte;bolsa;mensalidade', 'Aux;permanência', 
+                 'Bolsa;acadêmica;graduação',
+                 'Atividade;exterior', 'Ingresso;cota', 'UF;medio', 'Tipo;escola;medio', 'Modalidade;medio', 
+                 'Quem;incentivo;curso','Grupo;força;curso', 'Quem;família;superior', 
+                 'Quantos;livros;ano', 'Horas;estudo;semana', 'Oportunidade;idioma;estrang',
+                 'Por que;curso', 'Por que;IES'],
+                vimp_rf_br=[100*I01_BR_RF, 100*I02_BR_RF, 100*I03_BR_RF, 100*I04_BR_RF, 
+                            100*I05_BR_RF, 100*I06_BR_RF, 100*I07_BR_RF,
+                            100*I08_BR_RF, 100*I09_BR_RF, 100*I10_BR_RF, 100*I11_BR_RF, 
+                            100*I12_BR_RF, 100*I13_BR_RF, 100*I14_BR_RF,
+                            100*I15_BR_RF, 100*I16_BR_RF, 100*I17_BR_RF, 100*I18_BR_RF, 
+                            100*I19_BR_RF, 100*I20_BR_RF, 100*I21_BR_RF,
+                            100*I22_BR_RF, 100*I23_BR_RF, 100*I24_BR_RF, 100*I25_BR_RF, 100*I26_BR_RF], 
+                vimp_dt_br=[100*I01_BR_DT, 100*I02_BR_DT, 100*I03_BR_DT, 100*I04_BR_DT, 
+                            100*I05_BR_DT, 100*I06_BR_DT, 100*I07_BR_DT,
+                            100*I08_BR_DT, 100*I09_BR_DT, 100*I10_BR_DT, 100*I11_BR_DT, 
+                            100*I12_BR_DT, 100*I13_BR_DT, 100*I14_BR_DT,
+                            100*I15_BR_DT, 100*I16_BR_DT, 100*I17_BR_DT, 100*I18_BR_DT, 100*I19_BR_DT, 100*I20_BR_DT, 100*I21_BR_DT,
+                            100*I22_BR_DT, 100*I23_BR_DT, 100*I24_BR_DT, 100*I25_BR_DT, 100*I26_BR_DT], 
+                vimp_ls_br=[100*I01_BR_LS, 100*I02_BR_LS, 100*I03_BR_LS, 100*I04_BR_LS, 
+                            100*I05_BR_LS, 100*I06_BR_LS, 100*I07_BR_LS,
+                            100*I08_BR_LS, 100*I09_BR_LS, 100*I10_BR_LS, 
+                            100*I11_BR_LS, 100*I12_BR_LS, 100*I13_BR_LS, 
+                            100*I14_BR_LS, 100*I15_BR_LS, 100*I16_BR_LS, 
+                            100*I17_BR_LS, 100*I18_BR_LS, 100*I19_BR_LS, 
+                            100*I20_BR_LS, 100*I21_BR_LS, 100*I22_BR_LS, 
+                            100*I23_BR_LS, 100*I24_BR_LS, 100*I25_BR_LS, 
+                            100*I26_BR_LS]))
+ind = np.arange(len(df_br))
+width = 0.3
+r1 = ind
+r2 = ind + width
+r3 = r2 + width
+fig, ax = plt.subplots()
+ax.barh(r1, df_br.vimp_rf_br, width, color='red', label='Floresta Aleatória')
+ax.barh(r2, df_br.vimp_dt_br, width, color='green', label='Árvore de Decisão')
+ax.barh(r3, df_br.vimp_ls_br, width, color='blue', label='Lasso')
+
+ax.set(yticks=ind + width, yticklabels=df_br.graph, ylim=[2*width - 1, len(df_br)])
+ 
+# Create legend & Show graphic
+plt.title('Impacto dos fatores QE_I01 a QE_I26 sobre a nota geral do Enade - Dados no Brasil (exceto Alagoas)');
+plt.xlabel('Importância (%)');
+#plt.ylabel('Variável');
+plt.legend();
+plt.savefig('BR/QE_I27_BR_CP_H.png', dpi=450, bbox_inches='tight', pad_inches=0.015);
+
