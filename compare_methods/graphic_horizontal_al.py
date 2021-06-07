@@ -19,7 +19,12 @@ importance_fields_al_dt_t = pd.read_csv(r'compare_methods/Logs/VIMPS/VIMP_DT_AL.
 importance_fields_al_rf_t = pd.read_csv(r'compare_methods/Logs/VIMPS/VIMP_RF_AL.csv')
 importance_fields_al_ls_t = pd.read_csv(r'compare_methods/Logs/VIMPS/VIMP_LS_AL.csv')
 
+<<<<<<< Updated upstream
 # Importância de variáveis
+=======
+
+#%% Importância de variáveis
+>>>>>>> Stashed changes
 
 vimp_al_rf = importance_fields_al_rf_t.iloc[5]
 
