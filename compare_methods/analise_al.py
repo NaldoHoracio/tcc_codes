@@ -184,13 +184,7 @@ file_stats_al = "../tcc_codes/analise_stats/Stats_AL.csv"
 
 version_file(file_stats_al, fields_stats_al, rows_stats_al)
 
-#%%
-fields_t = ['Version',
-            'VV']
+#%% Plotando gráfico de distribuição das notas em Alagoas
+import seaborn as sns
 
-rows_t = {'Version':0,
-          'VV':'0'}
-
-file_t = "../tcc_codes/analise_stats/teste_AL.csv"
-
-version_file(file_t, fields_t, rows_t)
+sns.distplot(labels_al, kde='true')
