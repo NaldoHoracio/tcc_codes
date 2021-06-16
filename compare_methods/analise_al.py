@@ -70,6 +70,33 @@ features_al = [] # Features
 features_al_list = [] # Guardando as variáveis das features
 features_al_list_oh = [] # Variáveis das features com one-hot
 
+#%% Percentual de valores NaN
+
+nan_2014 = float(data_al2014['NT_GER'].isnull().sum());
+nan_2015 = float(data_al2015['NT_GER'].isnull().sum());
+nan_2016 = float(data_al2016['NT_GER'].isnull().sum());
+nan_2017 = float(data_al2017['NT_GER'].isnull().sum());
+nan_2018 = float(data_al2018['NT_GER'].isnull().sum());
+
+column_2014 = float(data_al2014.shape[0]);
+column_2015 = float(data_al2015.shape[0]);
+column_2016 = float(data_al2016.shape[0]);
+column_2017 = float(data_al2017.shape[0]);
+column_2018 = float(data_al2018.shape[0]);
+
+per_2014 = nan_2014/column_2014;
+per_2015 = nan_2015/column_2015;
+per_2016 = nan_2016/column_2016;
+per_2017 = nan_2017/column_2017;
+per_2018 = nan_2018/column_2018;
+
+
+print("Qtde. % NaN values in NT_GER 2014:", 100*round(per_2014, 4));
+print("Qtde. % NaN values in NT_GER 2015:", 100*round(per_2015, 4));
+print("Qtde. % NaN values in NT_GER 2016:", 100*round(per_2016, 4));
+print("Qtde. % NaN values in NT_GER 2017:", 100*round(per_2017, 4));
+print("Qtde. % NaN values in NT_GER 2018:", 100*round(per_2018, 4));
+
 #%% Pré-processamento e enriquecimento
 
 def processing_set_al(data_al2014, data_al2015, data_al2016, data_al2017, data_al2018):
@@ -111,6 +138,8 @@ def processing_set_al(data_al2014, data_al2015, data_al2016, data_al2017, data_a
     
     data_al['NT_GER'] = data_al['NT_GER'].fillna(data_al_media)
     
+    dataset_al = data_al
+    
     describe_al = data_al.describe()
     
     # 3 - Transformação
@@ -137,12 +166,21 @@ def processing_set_al(data_al2014, data_al2015, data_al2016, data_al2017, data_a
     # Convertendo para numpy
     features_al = np.array(features_al)
     
-    return features_al, labels_al, features_al_list_oh
+    return features_al, labels_al, features_al_list_oh, dataset_al
 
 #%% Aplicando o pré-processamento
 
-features_al, labels_al, features_al_list_oh = processing_set_al(data_al2014, data_al2015, data_al2016, data_al2017, data_al2018)
+features_al, labels_al, features_al_list_oh, dataset_al = processing_set_al(data_al2014, data_al2015, data_al2016, data_al2017, data_al2018)
 
+#%% Percentual de valores NaN
+
+nan_al = float(nan_2014+nan_2015+nan_2016+nan_2017+nan_2018);
+
+column_al = float(labels_al.shape[0]);
+
+per_al = nan_al/column_al;
+
+print("Qtde. % NaN values in NT_GER AL:", 100*round(per_al, 4));
 #%% Dados estatísticos gerais
 # < 20 --> Amostra
 # >= 20 --> população
@@ -170,7 +208,8 @@ fields_stats_al = ['Version',
                    'Variancia',
                    'Desvio padrao',
                    'Max val',
-                   'Min val']
+                   'Min val',
+                   '% Nan val']
 
 rows_stats_al = {'Version':0,
                  'Media':mean_al,
@@ -178,13 +217,52 @@ rows_stats_al = {'Version':0,
                  'Variancia':variance_al,
                  'Desvio padrao':std_dev_al,
                  'Max val':max_al,
-                 'Min val':min_al}
+                 'Min val':min_al,
+                 '% Nan val': 100*per_al}
 
-file_stats_al = "../tcc_codes/analise_stats/Stats_AL.csv"
+file_stats_al = "../tcc_codes/analise_stats/AL/Stats_AL.csv"
 
 version_file(file_stats_al, fields_stats_al, rows_stats_al)
 
 #%% Plotando gráfico de distribuição das notas em Alagoas
 import seaborn as sns
 
-sns.distplot(labels_al, kde='true')
+sns.distplot(labels_al, kde=True)
+plt.title("Distribuição de notas do Enade de 2014 a 2018: Alagoas");
+plt.xlabel('Notas do Enade');
+plt.ylabel('Distribuição');
+plt.legend();
+# Dica: você deve estar na pasta tcc_codes (Variable explorer)
+plt.savefig('../tcc_codes/analise_stats/AL/imagens/DIST_NOTA_AL.png', dpi=450, bbox_inches='tight', pad_inches=0.015);
+
+#%% Subplots - Maior impacto
+# QE_02
+
+# QE_08
+
+# QE_11
+
+# QE_13
+
+# QE_17
+
+# QE_18
+
+# QE_23
+
+#%% Subplots - Menor impacto
+# QE_01
+
+# QE_03
+
+# QE_12
+
+# QE_15
+
+# QE_16
+
+# QE_18
+
+# QE_19
+
+# QE_21
