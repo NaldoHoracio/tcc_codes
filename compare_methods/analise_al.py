@@ -2,7 +2,7 @@
 """
 Criação:
     
-Modificação:
+Modificação: 
 
 @author: Edvonaldo (edvonaldohoracio@gmail.com)
 """
@@ -227,18 +227,80 @@ version_file(file_stats_al, fields_stats_al, rows_stats_al)
 #%% Plotando gráfico de distribuição das notas em Alagoas
 import seaborn as sns
 
+#sns.displot(data=labels_al, kind="kde", kde=True)
 sns.distplot(labels_al, kde=True)
 plt.title("Distribuição de notas do Enade de 2014 a 2018: Alagoas");
 plt.xlabel('Notas do Enade');
 plt.ylabel('Distribuição');
 plt.legend();
 # Dica: você deve estar na pasta tcc_codes (Variable explorer)
-plt.savefig('../tcc_codes/analise_stats/AL/imagens/DIST_NOTA_AL.png', dpi=450, bbox_inches='tight', pad_inches=0.015);
+plt.savefig('../tcc_codes/analise_stats/AL/imagens/DIST_NOTA_AL.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+
+#%%
+# Ref: https://dev.to/thalesbruno/subplotting-with-matplotlib-and-seaborn-5ei8
+fig, axes = plt.subplots(2, 3, figsize=(10,10))
+
+fig.suptitle('Distribuição de notas do Enade de Alagoas: QE_I02')
+
+qe_i02_a = dataset_al.loc[(dataset_al['QE_I02'] == 'A')]
+qe_i02_b = dataset_al.loc[(dataset_al['QE_I02'] == 'B')]
+qe_i02_c = dataset_al.loc[(dataset_al['QE_I02'] == 'C')]
+qe_i02_d = dataset_al.loc[(dataset_al['QE_I02'] == 'D')]
+qe_i02_e = dataset_al.loc[(dataset_al['QE_I02'] == 'E')]
+qe_i02_f = dataset_al.loc[(dataset_al['QE_I02'] == 'F')]
+sns.kdeplot(ax=axes[0, 0], data=qe_i02_a, x='NT_GER')
+axes[0,0].set_title('A')
+sns.kdeplot(ax=axes[0, 1], data=qe_i02_b, x='NT_GER')
+axes[0,1].set_title('B')
+sns.kdeplot(ax=axes[0, 2], data=qe_i02_c, x='NT_GER')
+axes[0,2].set_title('C')
+sns.kdeplot(ax=axes[1, 0], data=qe_i02_d, x='NT_GER')
+axes[1,0].set_title('D')
+sns.kdeplot(ax=axes[1, 1], data=qe_i02_e, x='NT_GER')
+axes[1,1].set_title('E')
+sns.kdeplot(ax=axes[1, 2], data=qe_i02_f, x='NT_GER')
+axes[1,2].set_title('F')
+
+#plt.set_title(r'Distribuição de notas do Enade de 2014 a 2018: Alagoas - Categoria QE_I02')
+# Dica: você deve estar na pasta tcc_codes (Variable explorer)
+plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I02_KDE1_AL.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
 
 #%% Subplots - Maior impacto
+# Ref: https://tryolabs.com/blog/2017/03/16/pandas-seaborn-a-guide-to-handle-visualize-data-elegantly/
+# Ref: https://www.python-graph-gallery.com/25-histogram-with-several-variables-seaborn
 # QE_02
-#df_qe_02 = 
+import matplotlib.colors as mcolors
 
+df_qe_i02 = dataset_al[['QE_I02', 'NT_GER']]
+
+df_qe_i02.hist(by="QE_I02", figsize=(7,7), layout=(3,2), bins=20,
+               alpha=0.9, density=True, color="seagreen")
+
+plt.suptitle('Distribuição de notas do Enade de Alagoas: QE_I02')
+#plt.set_title(r'Distribuição de notas do Enade de 2014 a 2018: Alagoas - Categoria QE_I02')
+# Dica: você deve estar na pasta tcc_codes (Variable explorer)
+plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I02_BOX_AL.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+
+#%%
+# Ref: https://tryolabs.com/blog/2017/03/16/pandas-seaborn-a-guide-to-handle-visualize-data-elegantly/
+# Ref: https://www.python-graph-gallery.com/25-histogram-with-several-variables-seaborn
+# QE_02
+
+g_qei02 = sns.FacetGrid(dataset_al, col="QE_I02", height=2, col_wrap=3, ylim=(0,0.7))
+g_qei02.map(sns.kdeplot, "NT_GER")
+
+#sns.displot(data=dataset_al, x="NT_GER", hue="QE_I02", kind="kde")
+#plt.show()
+#plt.title("QE_I02: ...");
+#plt.xlabel('Notas do Enade');
+#plt.ylabel('Distribuição');
+#plt.legend();
+# Dica: você deve estar na pasta tcc_codes (Variable explorer)
+plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I02_KDE2_AL.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+
+
+
+#%%
 # QE_08
 
 # QE_11
