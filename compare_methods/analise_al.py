@@ -237,6 +237,7 @@ plt.savefig('../tcc_codes/analise_stats/AL/imagens/DIST_NOTA_AL.png', dpi=450, b
 
 #%% Subplots - Maior impacto
 # QE_02
+#df_qe_02 = 
 
 # QE_08
 
