@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Criação:
+Criação: Abril/2021
     
 Modificação: 
 
@@ -236,6 +236,26 @@ plt.legend();
 # Dica: você deve estar na pasta tcc_codes (Variable explorer)
 plt.savefig('../tcc_codes/analise_stats/AL/imagens/DIST_NOTA_AL.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
 
+#%% Distribuição normal
+# Ref: https://www.geeksforgeeks.org/how-to-plot-normal-distribution-over-histogram-in-python/
+from scipy.stats import norm
+
+mu_al, std_al = norm.fit(labels_al)
+
+# Plot the histogram.
+plt.hist(labels_al, density=True, alpha=0.6, color='b')
+  
+# Plot the PDF.
+xmin, xmax = plt.xlim()
+x_al = np.linspace(xmin, xmax, 100)
+p_al = norm.pdf(x_al, mu_al, std_al)
+  
+plt.plot(x_al, p_al, 'k', linewidth=2)
+plt.title("Distribuição de notas do Enade de 2014 a 2018: Alagoas")
+plt.xlabel('Notas do Enade');
+plt.ylabel('Distribuição');
+plt.legend();
+plt.savefig('../tcc_codes/analise_stats/AL/imagens/DIST_GAUSS_AL.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
 #%%
 # Ref: https://dev.to/thalesbruno/subplotting-with-matplotlib-and-seaborn-5ei8
 fig, axes = plt.subplots(2, 3, figsize=(10,10))
@@ -273,7 +293,7 @@ import matplotlib.colors as mcolors
 
 df_qe_i02 = dataset_al[['QE_I02', 'NT_GER']]
 
-df_qe_i02.hist(by="QE_I02", figsize=(7,7), layout=(3,2), bins=20,
+df_qe_i02.hist(by="QE_I02", figsize=(7,7), layout=(3,2), bins=30,
                alpha=0.9, density=True, color="seagreen")
 
 plt.suptitle('Distribuição de notas do Enade de Alagoas: QE_I02')
