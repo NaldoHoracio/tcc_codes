@@ -226,110 +226,49 @@ rows_stats_al = {'Version':0,
 file_stats_al = "../tcc_codes/analise_stats/AL/Stats_AL.csv"
 
 version_file(file_stats_al, fields_stats_al, rows_stats_al)
-
-#%% Plotando gráfico de distribuição das notas em Alagoas
-
-#sns.displot(data=labels_al, kind="kde", kde=True)
-sns.distplot(labels_al, kde=True)
-plt.title("Distribuição de notas do Enade de 2014 a 2018: Alagoas");
-plt.xlabel('Notas do Enade');
-plt.ylabel('Distribuição');
-plt.legend();
-# Dica: você deve estar na pasta tcc_codes (Variable explorer)
-plt.savefig('../tcc_codes/analise_stats/AL/imagens/DIST_NOTA_AL.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
-#%% Gerando distribuição de frequencia
-
-def generante_random_numbers(start, end, qtde):
-    x = []
-    for i in range(0,qtde):
-        n = np.random.uniform(start, end)
-        x.append(round(n,2))
-    return x
-
-x1 = generante_random_numbers(0, 100, 300)
-x2 = generante_random_numbers(0, 20, 150)
-X_ = x1 + x2
-X = np.array(X_)
-# Ref: https://realpython.com/python-histograms/
-sns.set_style('darkgrid')
-#sns.distplot(X, bins=50, kde_kws={'clip': (0.0, 100.0)})
-sns.distplot(X, bins=100)
-plt.xlim(0,100)
-plt.title("Gaussiana")
-plt.xlabel('Notas do Enade');
-plt.ylabel('Distribuição');
-plt.show()
-
 #%% Gaussiana com matplotlib da distribuição anterior
 print("Matplotlib version: ",matplotlib.__version__)
-mu_X, std_X = norm.fit(X)
+font = {'family' : 'sans-serif',
+        'weight' : 'normal',
+        'size'   : 10}
 
-# Plot the histogram.
-plt.hist(X, bins=150, density=True, alpha=0.0, histtype='barstacked', 
-         color='springgreen', stacked=True, edgecolor='k')
+matplotlib.rc('font', **font)
+
+mu_al, std_al = norm.fit(labels_al) # Média e desvio padrão dos dados
+
+# Histograma
+plt.hist(labels_al, bins=150, density=True, alpha=0.0)
   
-# Plot the PDF.
-min_ylim, max_ylim = plt.ylim(0,0.02)
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.06)
 xmin, xmax = plt.xlim(0,100)
-x_X = np.linspace(xmin, xmax, 100)
-p_X = norm.pdf(x_X, mu_X, std_X)
-  
-plt.plot(x_X, p_X, 'k', linewidth=1.5)
-plt.fill_between(x_X, p_X, color='brown')# Ref: https://moonbooks.org/Articles/How-to-fill-an-area-in-matplotlib-/
-plt.axvline(X.mean(), color='k', linestyle='dashed', linewidth=1)
-plt.text(X.mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'.format(X.mean()))
-plt.title("Gaussiana")
-plt.xlabel('Notas do Enade');
-plt.ylabel('Distribuição');
-#%% Distribuição normal
-# Ref: https://www.geeksforgeeks.org/how-to-plot-normal-distribution-over-histogram-in-python/
-from scipy.stats import norm
-
-mu_al, std_al = norm.fit(labels_al)
-
-# Plot the histogram.
-plt.hist(labels_al, bins=10, density=True, alpha=0.6, 
-         histtype='barstacked', color='springgreen', edgecolor='k')
-  
-# Plot the PDF.
-xmin, xmax = plt.xlim()
 x_al = np.linspace(xmin, xmax, 100)
+
+# Normalizando (Gaussiana)
 p_al = norm.pdf(x_al, mu_al, std_al)
-  
-plt.plot(x_al, p_al, 'k', linewidth=2)
-plt.title("Distribuição de notas do Enade de 2014 a 2018: Alagoas")
+
+# Plot Gaussiana
+plt.plot(x_al, p_al, 'k', linewidth=1.5)# Ref: https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#examples-using-matplotlib-pyplot-plot
+plt.fill_between(x_al, p_al, color='brown')# Ref: https://moonbooks.org/Articles/How-to-fill-an-area-in-matplotlib-/
+plt.axvline(labels_al.mean(), color='k', linestyle='dashed', linewidth=1.5)
+plt.text(labels_al.mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+         .format(labels_al.mean()))
+plt.title("Distribuição de notas do Enade em Alagoas: 2014 a 2018")
 plt.xlabel('Notas do Enade');
 plt.ylabel('Distribuição');
-#plt.legend();
-plt.savefig('../tcc_codes/analise_stats/AL/imagens/DIST_GAUSS_AL.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.savefig('../tcc_codes/analise_stats/AL/imagens/DIST_NOTA_AL.png', 
+            dpi=150, bbox_inches='tight', pad_inches=0.015);
 #%%
 # Ref: https://dev.to/thalesbruno/subplotting-with-matplotlib-and-seaborn-5ei8
-fig, axes = plt.subplots(2, 3, figsize=(10,10))
+#fig, axes = plt.subplots(2, 3, figsize=(10,10))
 
-fig.suptitle('Distribuição de notas do Enade de Alagoas: QE_I02')
+#fig.suptitle('Distribuição de notas do Enade de Alagoas: QE_I02')
 
-qe_i02_a = dataset_al.loc[(dataset_al['QE_I02'] == 'A')]
-qe_i02_b = dataset_al.loc[(dataset_al['QE_I02'] == 'B')]
-qe_i02_c = dataset_al.loc[(dataset_al['QE_I02'] == 'C')]
-qe_i02_d = dataset_al.loc[(dataset_al['QE_I02'] == 'D')]
-qe_i02_e = dataset_al.loc[(dataset_al['QE_I02'] == 'E')]
-qe_i02_f = dataset_al.loc[(dataset_al['QE_I02'] == 'F')]
-sns.kdeplot(ax=axes[0, 0], data=qe_i02_a, x='NT_GER')
-axes[0,0].set_title('A')
-sns.kdeplot(ax=axes[0, 1], data=qe_i02_b, x='NT_GER')
-axes[0,1].set_title('B')
-sns.kdeplot(ax=axes[0, 2], data=qe_i02_c, x='NT_GER')
-axes[0,2].set_title('C')
-sns.kdeplot(ax=axes[1, 0], data=qe_i02_d, x='NT_GER')
-axes[1,0].set_title('D')
-sns.kdeplot(ax=axes[1, 1], data=qe_i02_e, x='NT_GER')
-axes[1,1].set_title('E')
-sns.kdeplot(ax=axes[1, 2], data=qe_i02_f, x='NT_GER')
-axes[1,2].set_title('F')
+qe_i02 = dataset_al[["QE_I02", "NT_GER"]]
 
 #plt.set_title(r'Distribuição de notas do Enade de 2014 a 2018: Alagoas - Categoria QE_I02')
 # Dica: você deve estar na pasta tcc_codes (Variable explorer)
-plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I02_KDE1_AL.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+#plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I02_AL.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
 
 #%% Subplots - Maior impacto
 # Ref: https://tryolabs.com/blog/2017/03/16/pandas-seaborn-a-guide-to-handle-visualize-data-elegantly/
