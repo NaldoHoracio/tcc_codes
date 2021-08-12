@@ -6,14 +6,17 @@ Modificação:
 
 @author: Edvonaldo (edvonaldohoracio@gmail.com)
 """
-
 import os
 import csv
 import math
 import random
+import pylab
+import matplotlib
 import numpy as np
 import pandas as pd
 import datetime as dt
+import seaborn as sns
+from scipy.stats import norm
 import matplotlib.pyplot as plt
 
 # Funções úteis
@@ -225,7 +228,6 @@ file_stats_al = "../tcc_codes/analise_stats/AL/Stats_AL.csv"
 version_file(file_stats_al, fields_stats_al, rows_stats_al)
 
 #%% Plotando gráfico de distribuição das notas em Alagoas
-import seaborn as sns
 
 #sns.displot(data=labels_al, kind="kde", kde=True)
 sns.distplot(labels_al, kde=True)
@@ -235,7 +237,50 @@ plt.ylabel('Distribuição');
 plt.legend();
 # Dica: você deve estar na pasta tcc_codes (Variable explorer)
 plt.savefig('../tcc_codes/analise_stats/AL/imagens/DIST_NOTA_AL.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+#%% Gerando distribuição de frequencia
 
+def generante_random_numbers(start, end, qtde):
+    x = []
+    for i in range(0,qtde):
+        n = np.random.uniform(start, end)
+        x.append(round(n,2))
+    return x
+
+x1 = generante_random_numbers(0, 100, 300)
+x2 = generante_random_numbers(0, 20, 150)
+X_ = x1 + x2
+X = np.array(X_)
+# Ref: https://realpython.com/python-histograms/
+sns.set_style('darkgrid')
+#sns.distplot(X, bins=50, kde_kws={'clip': (0.0, 100.0)})
+sns.distplot(X, bins=100)
+plt.xlim(0,100)
+plt.title("Gaussiana")
+plt.xlabel('Notas do Enade');
+plt.ylabel('Distribuição');
+plt.show()
+
+#%% Gaussiana com matplotlib da distribuição anterior
+print("Matplotlib version: ",matplotlib.__version__)
+mu_X, std_X = norm.fit(X)
+
+# Plot the histogram.
+plt.hist(X, bins=150, density=True, alpha=0.0, histtype='barstacked', 
+         color='springgreen', stacked=True, edgecolor='k')
+  
+# Plot the PDF.
+min_ylim, max_ylim = plt.ylim(0,0.02)
+xmin, xmax = plt.xlim(0,100)
+x_X = np.linspace(xmin, xmax, 100)
+p_X = norm.pdf(x_X, mu_X, std_X)
+  
+plt.plot(x_X, p_X, 'k', linewidth=1.5)
+plt.fill_between(x_X, p_X, color='brown')# Ref: https://moonbooks.org/Articles/How-to-fill-an-area-in-matplotlib-/
+plt.axvline(X.mean(), color='k', linestyle='dashed', linewidth=1)
+plt.text(X.mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'.format(X.mean()))
+plt.title("Gaussiana")
+plt.xlabel('Notas do Enade');
+plt.ylabel('Distribuição');
 #%% Distribuição normal
 # Ref: https://www.geeksforgeeks.org/how-to-plot-normal-distribution-over-histogram-in-python/
 from scipy.stats import norm
@@ -243,7 +288,8 @@ from scipy.stats import norm
 mu_al, std_al = norm.fit(labels_al)
 
 # Plot the histogram.
-plt.hist(labels_al, density=True, alpha=0.6, color='b')
+plt.hist(labels_al, bins=10, density=True, alpha=0.6, 
+         histtype='barstacked', color='springgreen', edgecolor='k')
   
 # Plot the PDF.
 xmin, xmax = plt.xlim()
@@ -254,7 +300,7 @@ plt.plot(x_al, p_al, 'k', linewidth=2)
 plt.title("Distribuição de notas do Enade de 2014 a 2018: Alagoas")
 plt.xlabel('Notas do Enade');
 plt.ylabel('Distribuição');
-plt.legend();
+#plt.legend();
 plt.savefig('../tcc_codes/analise_stats/AL/imagens/DIST_GAUSS_AL.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
 #%%
 # Ref: https://dev.to/thalesbruno/subplotting-with-matplotlib-and-seaborn-5ei8
