@@ -226,8 +226,280 @@ rows_stats_al = {'Version':0,
 file_stats_al = "../tcc_codes/analise_stats/AL/Stats_AL.csv"
 
 version_file(file_stats_al, fields_stats_al, rows_stats_al)
+#%% Dataframe com Questionário do estudante
+# Ref: https://pandas.pydata.org/docs/user_guide/advanced.html
+
+
+df_qe_aux = pd.DataFrame([['QE_I01', 'Estado civil','A:Solteiro(a)'],
+          ['QE_I01', 'Estado civil','B:Casado(a)'],
+          ['QE_I01', 'Estado civil','C:Separado(a)'],
+          ['QE_I01', 'Estado civil','D:Viúvo(a)'],
+          ['QE_I01', 'Estado civil','E:Outro'],
+          
+          ['QE_I02', 'Cor ou raça', 'A:Branca'],
+          ['QE_I02', 'Cor ou raça', 'B:Preta'],
+          ['QE_I02', 'Cor ou raça', 'C:Amarela'],
+          ['QE_I02', 'Cor ou raça', 'D:Parda'],
+          ['QE_I02', 'Cor ou raça', 'E:Indígena'],
+          ['QE_I02', 'Cor ou raça', 'F:Não quero declarar'],
+          
+          ['QE_I03',  'Nacionalidade?','A:Brasileira'],
+          ['QE_I03',  'Nacionalidade?','A:Brasileira naturalizada'],
+          ['QE_I03',  'Nacionalidade?','A:Estrageira'],
+          
+          ['QE_I04', 'Escolarização máxima do pai','A:Nenhuma'],
+          ['QE_I04', 'Escolarização máxima do pai','B:Fundamental: 1º ao 5º ano'],
+          ['QE_I04', 'Escolarização máxima do pai','C:Fundamental: 6º ao 9º ano'],
+          ['QE_I04', 'Escolarização máxima do pai','D:Ensino Médio'],
+          ['QE_I04', 'Escolarização máxima do pai','E:Ensino superior'],
+          ['QE_I04', 'Escolarização máxima do pai','F:Pós-graduação'],
+          
+          ['QE_I04', 'Escolarização máxima do mãe','A:Nenhuma'],
+          ['QE_I04', 'Escolarização máxima do mãe','B:Fundamental: 1º ao 5º ano'],
+          ['QE_I04', 'Escolarização máxima do mãe','C:Fundamental: 6º ao 9º ano'],
+          ['QE_I04', 'Escolarização máxima do mãe','D:Ensino Médio'],
+          ['QE_I04', 'Escolarização máxima do mãe','E:Ensino superior'],
+          ['QE_I04', 'Escolarização máxima do mãe','F:Pós-graduação'],
+          
+          ['QE_I06', 'Onde e com quem o estudante mora','A:Casa/apartamento,sozinho'],
+          ['QE_I06', 'Onde e com quem o estudante mora','B:Casa/apartamento,pais/parentes'],
+          ['QE_I06', 'Onde e com quem o estudante mora','C:Casa/apartamento,cônjugue/filhos'],
+          ['QE_I06', 'Onde e com quem o estudante mora','D:Casa/apartamento/república,com outras pessoas'],
+          ['QE_I06', 'Onde e com quem o estudante mora','E:Alojamento na IES'],
+          ['QE_I06', 'Onde e com quem o estudante mora','F:Outros (hotel,hospedaria,etc)'],
+          
+          ['QE_I07', 'Pessoas da família que moram com o estudante','A:Nenhuma'],
+          ['QE_I07', 'Pessoas da família que moram com o estudante','B:Uma'],
+          ['QE_I07', 'Pessoas da família que moram com o estudante','C:Duas'],
+          ['QE_I07', 'Pessoas da família que moram com o estudante','D:Três'],
+          ['QE_I07', 'Pessoas da família que moram com o estudante','E:Quatro'],
+          ['QE_I07', 'Pessoas da família que moram com o estudante','F:Cinco'],
+          ['QE_I07', 'Pessoas da família que moram com o estudante','G:Seis'],
+          ['QE_I07', 'Pessoas da família que moram com o estudante','H:Sete ou mais'],
+          
+          ['QE_I08', 'Renda total da família (incluindo rendimento do estudante)',
+           'A:Até R$1.431,00'],
+          ['QE_I08', 'Renda total da família (incluindo rendimento do estudante)',
+           'B:De R$1.431,01 a R$2.862,00'],
+          ['QE_I08', 'Renda total da família (incluindo rendimento do estudante)',
+           'C:De R$2.862,01 a R$4.293,00'],
+          ['QE_I08', 'Renda total da família (incluindo rendimento do estudante)',
+           'D:De R$4.293,01 a R$5.724,00'],
+          ['QE_I08', 'Renda total da família (incluindo rendimento do estudante)',
+           'E:De R$5.274,01 a R$9.540,00'],
+          ['QE_I08', 'Renda total da família (incluindo rendimento do estudante)',
+           'F:De R$9.540,01 a R$28.620,00'],
+          ['QE_I08', 'Renda total da família (incluindo rendimento do estudante)',
+           'G:Mais de R$28.620,00'],
+          
+          ['QE_I09', 'Situação financeira atual','A:Sem renda;gastos por programas do governo'],
+          ['QE_I09', 'Situação financeira atual','B:Sem renda;gastos pela família ou outras pessoas'],
+          ['QE_I09', 'Situação financeira atual','C:Com renda;recebo auxílio de outras pessoas'],
+          ['QE_I09', 'Situação financeira atual','D:Com renda;não preciso de ajuda financeira'],
+          ['QE_I09', 'Situação financeira atual','E:Com renda;ajudo a família'],
+          ['QE_I09', 'Situação financeira atual','F:Responsável pelo sustento da família'],
+          
+          ['QE_I10', 'Situação atual de trabalho','A:Não trabalho'],
+          ['QE_I10', 'Situação atual de trabalho','B:Trabalho eventualmente'],
+          ['QE_I10', 'Situação atual de trabalho','C:Até 20h/semana'],
+          ['QE_I10', 'Situação atual de trabalho','D:De 21h/semana a 39h/semana'],
+          ['QE_I10', 'Situação atual de trabalho','E:Pelo menos 40h/semana'],
+          
+          ['QE_I11', 'Tipo de financiamento recebido p/ custeio das mensalidades',
+           'A:Nenhum;curso gratuito'],
+          ['QE_I11', 'Tipo de financiamento recebido p/ custeio das mensalidades',
+           'B:Nenhum;curso pago'],
+          ['QE_I11', 'Tipo de financiamento recebido p/ custeio das mensalidades',
+           'C:ProUni integral'],
+          ['QE_I11', 'Tipo de financiamento recebido p/ custeio das mensalidades',
+           'D:ProUni parcial,apenas'],
+          ['QE_I11', 'Tipo de financiamento recebido p/ custeio das mensalidades',
+           'E:FIES,apenas'],
+          ['QE_I11', 'Tipo de financiamento recebido p/ custeio das mensalidades',
+           'F:ProUni parcial e FIES'],
+          ['QE_I11', 'Tipo de financiamento recebido p/ custeio das mensalidades',
+           'G:Bolsa pelo estado,governo ou município'],
+          ['QE_I11', 'Tipo de financiamento recebido p/ custeio das mensalidades',
+           'H:Bolsa pela IES'],
+          ['QE_I11', 'Tipo de financiamento recebido p/ custeio das mensalidades',
+           'I:Bolsa por outra entidade'],
+          ['QE_I11', 'Tipo de financiamento recebido p/ custeio das mensalidades',
+           'J:Financiamento pela IES'],
+          ['QE_I11', 'Tipo de financiamento recebido p/ custeio das mensalidades',
+           'K:Financiamento bancário'],
+          
+          ['QE_I12', 'Tipo de bolsa de permanência durante da graduação','A:Nenhum'],
+          ['QE_I12', 'Tipo de bolsa de permanência durante da graduação','B:Aux.moradia'],
+          ['QE_I12', 'Tipo de bolsa de permanência durante da graduação','C:Aux.alimentação'],
+          ['QE_I12', 'Tipo de bolsa de permanência durante da graduação','D:Aux.moradia e alimentaçãos'],
+          ['QE_I12', 'Tipo de bolsa de permanência durante da graduação','E:Aux.permanência'],
+          ['QE_I12', 'Tipo de bolsa de permanência durante da graduação','F:Outro'],
+          
+          ['QE_I13', 'Tipo de bolsa acadêmica durante a graduação','A:Nenhum'],
+          ['QE_I13', 'Tipo de bolsa acadêmica durante a graduação','B:PIBIC'],
+          ['QE_I13', 'Tipo de bolsa acadêmica durante a graduação','C:Extensão'],
+          ['QE_I13', 'Tipo de bolsa acadêmica durante a graduação','D:Monitoria/tutoria'],
+          ['QE_I13', 'Tipo de bolsa acadêmica durante a graduação','E:PET'],
+          ['QE_I13', 'Tipo de bolsa acadêmica durante a graduação','F:Outro'],
+          
+          ['QE_I14', 'Participação de programas e/ou atividades curriculares no exterior',
+           'A:Não participei'],
+          ['QE_I14', 'Participação de programas e/ou atividades curriculares no exterior',
+           'B:Sim;Ciência sem Fronteiras'],
+          ['QE_I14', 'Participação de programas e/ou atividades curriculares no exterior',
+           'C:Sim;Finan.:Gov.Federal(Marca,PLI,outro)'],
+          ['QE_I14', 'Participação de programas e/ou atividades curriculares no exterior',
+           'D:Sim;Finan.:Gov.Estadual'],
+          ['QE_I14', 'Participação de programas e/ou atividades curriculares no exterior',
+           'E:Sim;Finan.:pela IES'],
+          ['QE_I14', 'Participação de programas e/ou atividades curriculares no exterior',
+           'F:Sim;Outro não Institucional'],
+          
+          ['QE_I15', 'Ingresso por ação afrimativa e critério','A:Não'],
+          ['QE_I15', 'Ingresso por ação afrimativa','B:Sim;étnico-racial'],
+          ['QE_I15', 'Ingresso por ação afrimativa','C:Sim;renda'],
+          ['QE_I15', 'Ingresso por ação afrimativa','D:Sim;esc.pública/bolsa esc. privada'],
+          ['QE_I15', 'Ingresso por ação afrimativa','E:Sim;2 ou mais critérios anteriores'],
+          ['QE_I15', 'Ingresso por ação afrimativa','F:Sim;outro critério'],
+          
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','11:Rondônia'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','12:Acre'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','13:Amazonas'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','14:Roraima'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','15:Pará'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','16:Amapá'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','17:Tocantins'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','21:Maranhão'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','22:Piauí'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','23:Ceará'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','24:Rio Grande do Norte'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','25:Paraíba'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','26:Pernambuco'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','27:Alagoas'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','28:Sergipe'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','29:Bahia'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','31:Minas Gerais'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','33:Espírito Santo'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','35:São Paulo'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','41:Paraná'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','42:Santa Catarina'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','43:Rio Grande do Sul'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','50:Mato Grosso do Sul'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','51:Mato Grosso'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','52:Goiás'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','53:Distrito Federal'],
+          ['QE_I16', 'Unidade da Federação que concluiu o ensino médio','99:Não se aplica'],
+          
+          
+          ['QE_I17', 'Tipo de escola que cursou o ensino médio','A:Todo em pública'],
+          ['QE_I17', 'Tipo de escola que cursou o ensino médio','B:Todo em particular'],
+          ['QE_I17', 'Tipo de escola que cursou o ensino médio','C:Todo no exterior'],
+          ['QE_I17', 'Tipo de escola que cursou o ensino médio','D:Maior parte em pública'],
+          ['QE_I17', 'Tipo de escola que cursou o ensino médio','E:Maior parte em particular'],
+          ['QE_I17', 'Tipo de escola que cursou o ensino médio','F:Brasil e exterior'],
+          
+          
+          ['QE_I18', 'Modalidade de ensino médio','A:Tradicional'], 
+          ['QE_I18', 'Modalidade de ensino médio','B:Profissionalizante técnico'], 
+          ['QE_I18', 'Modalidade de ensino médio','C:Profissionalizante magistério'], 
+          ['QE_I18', 'Modalidade de ensino médio','D:EJA e/ou Supletivo'], 
+          ['QE_I18', 'Modalidade de ensino médio','E:Outro'], 
+          
+          ['QE_I19', 'Pessoa que mais incentivou a cursar a graduação','A:Ninguém'], 
+          ['QE_I19', 'Pessoa que mais incentivou a cursar a graduação','B:Pais'], 
+          ['QE_I19', 'Pessoa que mais incentivou a cursar a graduação','C:Outros membros da família'], 
+          ['QE_I19', 'Pessoa que mais incentivou a cursar a graduação','D:Professores'], 
+          ['QE_I19', 'Pessoa que mais incentivou a cursar a graduação','E:Líder religioso'], 
+          ['QE_I19', 'Pessoa que mais incentivou a cursar a graduação','F:Colegas/amigos'], 
+          ['QE_I19', 'Pessoa que mais incentivou a cursar a graduação','G:Outras pessoas'],
+          
+          ['QE_I20', 'Grupo(s) decisivo que o ajudou a enfrentar dificuldades durante o curso',
+           'A:Sem dificuldades'],
+          ['QE_I20', 'Grupo(s) decisivo que o ajudou a enfrentar dificuldades durante o curso',
+           'B:Não recebi apoio'],
+          ['QE_I20', 'Grupo(s) decisivo que o ajudou a enfrentar dificuldades durante o curso',
+           'C:Pais'],
+          ['QE_I20', 'Grupo(s) decisivo que o ajudou a enfrentar dificuldades durante o curso',
+           'D:Avós'],
+          ['QE_I20', 'Grupo(s) decisivo que o ajudou a enfrentar dificuldades durante o curso',
+           'E:Irmãos/primos/tios'],
+          ['QE_I20', 'Grupo(s) decisivo que o ajudou a enfrentar dificuldades durante o curso',
+           'F:Líder religioso'],
+          ['QE_I20', 'Grupo(s) decisivo que o ajudou a enfrentar dificuldades durante o curso',
+           'G:Colegas de curso/amigos'],
+          ['QE_I20', 'Grupo(s) decisivo que o ajudou a enfrentar dificuldades durante o curso',
+           'I:Profissionais de apoio da IES'],
+          ['QE_I20', 'Grupo(s) decisivo que o ajudou a enfrentar dificuldades durante o curso',
+           'J:Colegas de trabalho'],
+          ['QE_I20', 'Grupo(s) decisivo que o ajudou a enfrentar dificuldades durante o curso',
+           'K:Outro'],
+          
+          ['QE_I21', 'Alguém em sua família concluiu um curso superior','A:Sim'],
+          ['QE_I21', 'Alguém em sua família concluiu um curso superior','B:Não'],
+          
+          ['QE_I22', 'Livros lido no ano do Enade (excluindo a bibliografia do curso)',
+           'A:Nenhum'],
+          ['QE_I22', 'Livros lido no ano do Enade (excluindo a bibliografia do curso)',
+           'B:Um/Dois'],
+          ['QE_I22', 'Livros lido no ano do Enade (excluindo a bibliografia do curso)',
+           'C:Três a cinco'],
+          ['QE_I22', 'Livros lido no ano do Enade (excluindo a bibliografia do curso)',
+           'D:Oito a doze'],
+          ['QE_I22', 'Livros lido no ano do Enade (excluindo a bibliografia do curso)',
+           'E:Mais de doze'],
+          
+          ['QE_I23', 'Horas de estudo por semana (excluindo aulas)','A:Nenhuma'],
+          ['QE_I23', 'Horas de estudo por semana (excluindo aulas)','B:Uma a três'],
+          ['QE_I23', 'Horas de estudo por semana (excluindo aulas)','C:Quatro a sete'],
+          ['QE_I23', 'Horas de estudo por semana (excluindo aulas)','D:Oito a doze'],
+          ['QE_I23', 'Horas de estudo por semana (excluindo aulas)','E:Mais de doze'],
+          
+          ['QE_I24', 'Oportunidade de aprendizado de idioma estrangeiro na IES',
+           'A:Sim;apenas presencial'],
+          ['QE_I24', 'Oportunidade de aprendizado de idioma estrangeiro na IES',
+           'B:Sim;apenas semipresencial'],
+          ['QE_I24', 'Oportunidade de aprendizado de idioma estrangeiro na IES',
+           'C:Sim;presencial e semipresencial'],
+          ['QE_I24', 'Oportunidade de aprendizado de idioma estrangeiro na IES',
+           'D:Sim;EAD'],
+          ['QE_I24', 'Oportunidade de aprendizado de idioma estrangeiro na IES',
+           'E:Não'],
+          
+          ['QE_I25', 'Principal motivo de escolha do curso',
+           'A:Inserção no mercado de trabalho'],
+          ['QE_I25', 'Principal motivo de escolha do curso',
+           'B:Influência familiar'],
+          ['QE_I25', 'Principal motivo de escolha do curso',
+           'C:Valorização profissional'],
+          ['QE_I25', 'Principal motivo de escolha do curso',
+           'D:Prestígio social'],
+          ['QE_I25', 'Principal motivo de escolha do curso',
+           'E:Vocação'],
+          ['QE_I25', 'Principal motivo de escolha do curso',
+           'F:Porque é EAD'],
+          ['QE_I25', 'Principal motivo de escolha do curso',
+           'G:Baixa concorrência no ingresso'],
+          ['QE_I25', 'Principal motivo de escolha do curso',
+           'H:Outro'],
+          
+          
+          ['QE_I26', 'Principal motivo de escolha da IES','A:Gratuidade'],
+          ['QE_I26', 'Principal motivo de escolha da IES','B:Preço da mensalidade'],
+          ['QE_I26', 'Principal motivo de escolha da IES','C:Prox. da residência'],
+          ['QE_I26', 'Principal motivo de escolha da IES','D:Prox. do trabalho'],
+          ['QE_I26', 'Principal motivo de escolha da IES','E:Facilidade de acesso'],
+          ['QE_I26', 'Principal motivo de escolha da IES','F:Qualidade/reputação'],
+          ['QE_I26', 'Principal motivo de escolha da IES','G:Foi a única onde ingressei'],
+          ['QE_I26', 'Principal motivo de escolha da IES','H:Possibilidade de bolsa'],
+          ['QE_I26', 'Principal motivo de escolha da IES','I:Outro']],
+                         columns=['cod_qe','description','alternatives'])
+              
+#tuples = list(zip(cod_qe, description))
+
+df_qe = pd.MultiIndex.from_frame(df_qe_aux)
 #%% Gaussiana com matplotlib da distribuição anterior
 print("Matplotlib version: ",matplotlib.__version__)
+print("Pandas version", pd.__version__)
 font = {'family' : 'sans-serif',
         'weight' : 'normal',
         'size'   : 10}
@@ -253,6 +525,8 @@ plt.fill_between(x_al, p_al, color='brown')# Ref: https://moonbooks.org/Articles
 plt.axvline(labels_al.mean(), color='k', linestyle='dashed', linewidth=1.5)
 plt.text(labels_al.mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(labels_al.mean()))
+plt.text(labels_al.mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(labels_al.std()))
 plt.title("Distribuição de notas do Enade em Alagoas: 2014 a 2018")
 plt.xlabel('Notas do Enade');
 plt.ylabel('Distribuição');
@@ -265,6 +539,8 @@ plt.savefig('../tcc_codes/analise_stats/AL/imagens/DIST_NOTA_AL.png',
 #fig.suptitle('Distribuição de notas do Enade de Alagoas: QE_I02')
 
 qe_i02 = dataset_al[["QE_I02", "NT_GER"]]
+
+desc_qe_i02 = []
 
 #plt.set_title(r'Distribuição de notas do Enade de 2014 a 2018: Alagoas - Categoria QE_I02')
 # Dica: você deve estar na pasta tcc_codes (Variable explorer)
