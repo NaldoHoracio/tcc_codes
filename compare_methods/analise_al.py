@@ -226,277 +226,7 @@ rows_stats_al = {'Version':0,
 file_stats_al = "../tcc_codes/analise_stats/AL/Stats_AL.csv"
 
 version_file(file_stats_al, fields_stats_al, rows_stats_al)
-#%% Dataframe com Questionário do estudante
-# Ref: https://pandas.pydata.org/docs/user_guide/advanced.html
 
-
-df_qe_aux = pd.DataFrame([["QE_I01", "Estado civil","A:Solteiro(a)"],
-          ["QE_I01", "Estado civil","B:Casado(a)"],
-          ["QE_I01", "Estado civil","C:Separado(a)"],
-          ["QE_I01", "Estado civil","D:Viúvo(a)"],
-          ["QE_I01", "Estado civil","E:Outro"],
-          
-          ["QE_I02", "Cor ou raça", "A:Branca"],
-          ["QE_I02", "Cor ou raça", "B:Preta"],
-          ["QE_I02", "Cor ou raça", "C:Amarela"],
-          ["QE_I02", "Cor ou raça", "D:Parda"],
-          ["QE_I02", "Cor ou raça", "E:Indígena"],
-          ["QE_I02", "Cor ou raça", "F:Não quero declarar"],
-          
-          ["QE_I03",  "Nacionalidade?","A:Brasileira"],
-          ["QE_I03",  "Nacionalidade?","A:Brasileira naturalizada"],
-          ["QE_I03",  "Nacionalidade?","A:Estrageira"],
-          
-          ["QE_I04", "Escolarização máxima do pai","A:Nenhuma"],
-          ["QE_I04", "Escolarização máxima do pai","B:Fundamental: 1º ao 5º ano"],
-          ["QE_I04", "Escolarização máxima do pai","C:Fundamental: 6º ao 9º ano"],
-          ["QE_I04", "Escolarização máxima do pai","D:Ensino Médio"],
-          ["QE_I04", "Escolarização máxima do pai","E:Ensino superior"],
-          ["QE_I04", "Escolarização máxima do pai","F:Pós-graduação"],
-          
-          ["QE_I04", "Escolarização máxima do mãe","A:Nenhuma"],
-          ["QE_I04", "Escolarização máxima do mãe","B:Fundamental: 1º ao 5º ano"],
-          ["QE_I04", "Escolarização máxima do mãe","C:Fundamental: 6º ao 9º ano"],
-          ["QE_I04", "Escolarização máxima do mãe","D:Ensino Médio"],
-          ["QE_I04", "Escolarização máxima do mãe","E:Ensino superior"],
-          ["QE_I04", "Escolarização máxima do mãe","F:Pós-graduação"],
-          
-          ["QE_I06", "Onde e com quem o estudante mora","A:Casa/apartamento,sozinho"],
-          ["QE_I06", "Onde e com quem o estudante mora","B:Casa/apartamento,pais/parentes"],
-          ["QE_I06", "Onde e com quem o estudante mora","C:Casa/apartamento,cônjugue/filhos"],
-          ["QE_I06", "Onde e com quem o estudante mora","D:Casa/apartamento/república,com outras pessoas"],
-          ["QE_I06", "Onde e com quem o estudante mora","E:Alojamento na IES"],
-          ["QE_I06", "Onde e com quem o estudante mora","F:Outros (hotel,hospedaria,etc)"],
-          
-          ["QE_I07", "Pessoas da família que moram com o estudante","A:Nenhuma"],
-          ["QE_I07", "Pessoas da família que moram com o estudante","B:Uma"],
-          ["QE_I07", "Pessoas da família que moram com o estudante","C:Duas"],
-          ["QE_I07", "Pessoas da família que moram com o estudante","D:Três"],
-          ["QE_I07", "Pessoas da família que moram com o estudante","E:Quatro"],
-          ["QE_I07", "Pessoas da família que moram com o estudante","F:Cinco"],
-          ["QE_I07", "Pessoas da família que moram com o estudante","G:Seis"],
-          ["QE_I07", "Pessoas da família que moram com o estudante","H:Sete ou mais"],
-          
-          ["QE_I08", "Renda total da família (incluindo rendimento do estudante)",
-           "A:Até R$1.431,00"],
-          ["QE_I08", "Renda total da família (incluindo rendimento do estudante)",
-           "B:De R$1.431,01 a R$2.862,00"],
-          ["QE_I08", "Renda total da família (incluindo rendimento do estudante)",
-           "C:De R$2.862,01 a R$4.293,00"],
-          ["QE_I08", "Renda total da família (incluindo rendimento do estudante)",
-           "D:De R$4.293,01 a R$5.724,00"],
-          ["QE_I08", "Renda total da família (incluindo rendimento do estudante)",
-           "E:De R$5.274,01 a R$9.540,00"],
-          ["QE_I08", "Renda total da família (incluindo rendimento do estudante)",
-           "F:De R$9.540,01 a R$28.620,00"],
-          ["QE_I08", "Renda total da família (incluindo rendimento do estudante)",
-           "G:Mais de R$28.620,00"],
-          
-          ["QE_I09", "Situação financeira atual","A:Sem renda;gastos por programas do governo"],
-          ["QE_I09", "Situação financeira atual","B:Sem renda;gastos pela família ou outras pessoas"],
-          ["QE_I09", "Situação financeira atual","C:Com renda;recebo auxílio de outras pessoas"],
-          ["QE_I09", "Situação financeira atual","D:Com renda;não preciso de ajuda financeira"],
-          ["QE_I09", "Situação financeira atual","E:Com renda;ajudo a família"],
-          ["QE_I09", "Situação financeira atual","F:Responsável pelo sustento da família"],
-          
-          ["QE_I10", "Situação atual de trabalho","A:Não trabalho"],
-          ["QE_I10", "Situação atual de trabalho","B:Trabalho eventualmente"],
-          ["QE_I10", "Situação atual de trabalho","C:Até 20h/semana"],
-          ["QE_I10", "Situação atual de trabalho","D:De 21h/semana a 39h/semana"],
-          ["QE_I10", "Situação atual de trabalho","E:Pelo menos 40h/semana"],
-          
-          ["QE_I11", "Tipo de financiamento recebido p/ custeio das mensalidades",
-           "A:Nenhum;curso gratuito"],
-          ["QE_I11", "Tipo de financiamento recebido p/ custeio das mensalidades",
-           "B:Nenhum;curso pago"],
-          ["QE_I11", "Tipo de financiamento recebido p/ custeio das mensalidades",
-           "C:ProUni integral"],
-          ["QE_I11", "Tipo de financiamento recebido p/ custeio das mensalidades",
-           "D:ProUni parcial,apenas"],
-          ["QE_I11", "Tipo de financiamento recebido p/ custeio das mensalidades",
-           "E:FIES,apenas"],
-          ["QE_I11", "Tipo de financiamento recebido p/ custeio das mensalidades",
-           "F:ProUni parcial e FIES"],
-          ["QE_I11", "Tipo de financiamento recebido p/ custeio das mensalidades",
-           "G:Bolsa pelo estado,governo ou município"],
-          ["QE_I11", "Tipo de financiamento recebido p/ custeio das mensalidades",
-           "H:Bolsa pela IES"],
-          ["QE_I11", "Tipo de financiamento recebido p/ custeio das mensalidades",
-           "I:Bolsa por outra entidade"],
-          ["QE_I11", "Tipo de financiamento recebido p/ custeio das mensalidades",
-           "J:Financiamento pela IES"],
-          ["QE_I11", "Tipo de financiamento recebido p/ custeio das mensalidades",
-           "K:Financiamento bancário"],
-          
-          ["QE_I12", "Tipo de bolsa de permanência durante da graduação","A:Nenhum"],
-          ["QE_I12", "Tipo de bolsa de permanência durante da graduação","B:Aux.moradia"],
-          ["QE_I12", "Tipo de bolsa de permanência durante da graduação","C:Aux.alimentação"],
-          ["QE_I12", "Tipo de bolsa de permanência durante da graduação","D:Aux.moradia e alimentaçãos"],
-          ["QE_I12", "Tipo de bolsa de permanência durante da graduação","E:Aux.permanência"],
-          ["QE_I12", "Tipo de bolsa de permanência durante da graduação","F:Outro"],
-          
-          ["QE_I13", "Tipo de bolsa acadêmica durante a graduação","A:Nenhum"],
-          ["QE_I13", "Tipo de bolsa acadêmica durante a graduação","B:PIBIC"],
-          ["QE_I13", "Tipo de bolsa acadêmica durante a graduação","C:Extensão"],
-          ["QE_I13", "Tipo de bolsa acadêmica durante a graduação","D:Monitoria/tutoria"],
-          ["QE_I13", "Tipo de bolsa acadêmica durante a graduação","E:PET"],
-          ["QE_I13", "Tipo de bolsa acadêmica durante a graduação","F:Outro"],
-          
-          ["QE_I14", "Participação de programas e/ou atividades curriculares no exterior",
-           "A:Não participei"],
-          ["QE_I14", "Participação de programas e/ou atividades curriculares no exterior",
-           "B:Sim;Ciência sem Fronteiras"],
-          ["QE_I14", "Participação de programas e/ou atividades curriculares no exterior",
-           "C:Sim;Finan.:Gov.Federal(Marca,PLI,outro)"],
-          ["QE_I14", "Participação de programas e/ou atividades curriculares no exterior",
-           "D:Sim;Finan.:Gov.Estadual"],
-          ["QE_I14", "Participação de programas e/ou atividades curriculares no exterior",
-           "E:Sim;Finan.:pela IES"],
-          ["QE_I14", "Participação de programas e/ou atividades curriculares no exterior",
-           "F:Sim;Outro não Institucional"],
-          
-          ["QE_I15", "Ingresso por ação afrimativa e critério","A:Não"],
-          ["QE_I15", "Ingresso por ação afrimativa","B:Sim;étnico-racial"],
-          ["QE_I15", "Ingresso por ação afrimativa","C:Sim;renda"],
-          ["QE_I15", "Ingresso por ação afrimativa","D:Sim;esc.pública/bolsa esc. privada"],
-          ["QE_I15", "Ingresso por ação afrimativa","E:Sim;2 ou mais critérios anteriores"],
-          ["QE_I15", "Ingresso por ação afrimativa","F:Sim;outro critério"],
-          
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","11:Rondônia"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","12:Acre"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","13:Amazonas"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","14:Roraima"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","15:Pará"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","16:Amapá"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","17:Tocantins"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","21:Maranhão"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","22:Piauí"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","23:Ceará"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","24:Rio Grande do Norte"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","25:Paraíba"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","26:Pernambuco"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","27:Alagoas"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","28:Sergipe"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","29:Bahia"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","31:Minas Gerais"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","33:Espírito Santo"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","35:São Paulo"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","41:Paraná"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","42:Santa Catarina"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","43:Rio Grande do Sul"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","50:Mato Grosso do Sul"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","51:Mato Grosso"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","52:Goiás"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","53:Distrito Federal"],
-          ["QE_I16", "Unidade da Federação que concluiu o ensino médio","99:Não se aplica"],
-          
-          
-          ["QE_I17", "Tipo de escola que cursou o ensino médio","A:Todo em pública"],
-          ["QE_I17", "Tipo de escola que cursou o ensino médio","B:Todo em particular"],
-          ["QE_I17", "Tipo de escola que cursou o ensino médio","C:Todo no exterior"],
-          ["QE_I17", "Tipo de escola que cursou o ensino médio","D:Maior parte em pública"],
-          ["QE_I17", "Tipo de escola que cursou o ensino médio","E:Maior parte em particular"],
-          ["QE_I17", "Tipo de escola que cursou o ensino médio","F:Brasil e exterior"],
-          
-          
-          ["QE_I18", "Modalidade de ensino médio","A:Tradicional"], 
-          ["QE_I18", "Modalidade de ensino médio","B:Profissionalizante técnico"], 
-          ["QE_I18", "Modalidade de ensino médio","C:Profissionalizante magistério"], 
-          ["QE_I18", "Modalidade de ensino médio","D:EJA e/ou Supletivo"], 
-          ["QE_I18", "Modalidade de ensino médio","E:Outro"], 
-          
-          ["QE_I19", "Pessoa que mais incentivou a cursar a graduação","A:Ninguém"], 
-          ["QE_I19", "Pessoa que mais incentivou a cursar a graduação","B:Pais"], 
-          ["QE_I19", "Pessoa que mais incentivou a cursar a graduação","C:Outros membros da família"], 
-          ["QE_I19", "Pessoa que mais incentivou a cursar a graduação","D:Professores"], 
-          ["QE_I19", "Pessoa que mais incentivou a cursar a graduação","E:Líder religioso"], 
-          ["QE_I19", "Pessoa que mais incentivou a cursar a graduação","F:Colegas/amigos"], 
-          ["QE_I19", "Pessoa que mais incentivou a cursar a graduação","G:Outras pessoas"],
-          
-          ["QE_I20", "Grupo(s) decisivo que o ajudou a enfrentar dificuldades durante o curso",
-           "A:Sem dificuldades"],
-          ["QE_I20", "Grupo(s) decisivo que o ajudou a enfrentar dificuldades durante o curso",
-           "B:Não recebi apoio"],
-          ["QE_I20", "Grupo(s) decisivo que o ajudou a enfrentar dificuldades durante o curso",
-           "C:Pais"],
-          ["QE_I20", "Grupo(s) decisivo que o ajudou a enfrentar dificuldades durante o curso",
-           "D:Avós"],
-          ["QE_I20", "Grupo(s) decisivo que o ajudou a enfrentar dificuldades durante o curso",
-           "E:Irmãos/primos/tios"],
-          ["QE_I20", "Grupo(s) decisivo que o ajudou a enfrentar dificuldades durante o curso",
-           "F:Líder religioso"],
-          ["QE_I20", "Grupo(s) decisivo que o ajudou a enfrentar dificuldades durante o curso",
-           "G:Colegas de curso/amigos"],
-          ["QE_I20", "Grupo(s) decisivo que o ajudou a enfrentar dificuldades durante o curso",
-           "I:Profissionais de apoio da IES"],
-          ["QE_I20", "Grupo(s) decisivo que o ajudou a enfrentar dificuldades durante o curso",
-           "J:Colegas de trabalho"],
-          ["QE_I20", "Grupo(s) decisivo que o ajudou a enfrentar dificuldades durante o curso",
-           "K:Outro"],
-          
-          ["QE_I21", "Alguém em sua família concluiu um curso superior","A:Sim"],
-          ["QE_I21", "Alguém em sua família concluiu um curso superior","B:Não"],
-          
-          ["QE_I22", "Livros lido no ano do Enade (excluindo a bibliografia do curso)",
-           "A:Nenhum"],
-          ["QE_I22", "Livros lido no ano do Enade (excluindo a bibliografia do curso)",
-           "B:Um/Dois"],
-          ["QE_I22", "Livros lido no ano do Enade (excluindo a bibliografia do curso)",
-           "C:Três a cinco"],
-          ["QE_I22", "Livros lido no ano do Enade (excluindo a bibliografia do curso)",
-           "D:Oito a doze"],
-          ["QE_I22", "Livros lido no ano do Enade (excluindo a bibliografia do curso)",
-           "E:Mais de doze"],
-          
-          ["QE_I23", "Horas de estudo por semana (excluindo aulas)","A:Nenhuma"],
-          ["QE_I23", "Horas de estudo por semana (excluindo aulas)","B:Uma a três"],
-          ["QE_I23", "Horas de estudo por semana (excluindo aulas)","C:Quatro a sete"],
-          ["QE_I23", "Horas de estudo por semana (excluindo aulas)","D:Oito a doze"],
-          ["QE_I23", "Horas de estudo por semana (excluindo aulas)","E:Mais de doze"],
-          
-          ["QE_I24", "Oportunidade de aprendizado de idioma estrangeiro na IES",
-           "A:Sim;apenas presencial"],
-          ["QE_I24", "Oportunidade de aprendizado de idioma estrangeiro na IES",
-           "B:Sim;apenas semipresencial"],
-          ["QE_I24", "Oportunidade de aprendizado de idioma estrangeiro na IES",
-           "C:Sim;presencial e semipresencial"],
-          ["QE_I24", "Oportunidade de aprendizado de idioma estrangeiro na IES",
-           "D:Sim;EAD"],
-          ["QE_I24", "Oportunidade de aprendizado de idioma estrangeiro na IES",
-           "E:Não"],
-          
-          ["QE_I25", "Principal motivo de escolha do curso",
-           "A:Inserção no mercado de trabalho"],
-          ["QE_I25", "Principal motivo de escolha do curso",
-           "B:Influência familiar"],
-          ["QE_I25", "Principal motivo de escolha do curso",
-           "C:Valorização profissional"],
-          ["QE_I25", "Principal motivo de escolha do curso",
-           "D:Prestígio social"],
-          ["QE_I25", "Principal motivo de escolha do curso",
-           "E:Vocação"],
-          ["QE_I25", "Principal motivo de escolha do curso",
-           "F:Porque é EAD"],
-          ["QE_I25", "Principal motivo de escolha do curso",
-           "G:Baixa concorrência no ingresso"],
-          ["QE_I25", "Principal motivo de escolha do curso",
-           "H:Outro"],
-          
-          
-          ["QE_I26", "Principal motivo de escolha da IES","A:Gratuidade"],
-          ["QE_I26", "Principal motivo de escolha da IES","B:Preço da mensalidade"],
-          ["QE_I26", "Principal motivo de escolha da IES","C:Prox. da residência"],
-          ["QE_I26", "Principal motivo de escolha da IES","D:Prox. do trabalho"],
-          ["QE_I26", "Principal motivo de escolha da IES","E:Facilidade de acesso"],
-          ["QE_I26", "Principal motivo de escolha da IES","F:Qualidade/reputação"],
-          ["QE_I26", "Principal motivo de escolha da IES","G:Foi a única onde ingressei"],
-          ["QE_I26", "Principal motivo de escolha da IES","H:Possibilidade de bolsa"],
-          ["QE_I26", "Principal motivo de escolha da IES","I:Outro"]],
-                         columns=["cod_qe","description","alternatives"])
-              
-#tuples = list(zip(cod_qe, description))
-
-df_qe = pd.MultiIndex.from_frame(df_qe_aux)
 #%% Gaussiana com matplotlib da distribuição anterior
 print("Matplotlib version: ",matplotlib.__version__)
 print("Pandas version", pd.__version__)
@@ -521,7 +251,7 @@ p_al = norm.pdf(x_al, mu_al, std_al)
 
 # Plot Gaussiana
 plt.plot(x_al, p_al, 'k', linewidth=1.5)# Ref: https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#examples-using-matplotlib-pyplot-plot
-plt.fill_between(x_al, p_al, color='brown')# Ref: https://moonbooks.org/Articles/How-to-fill-an-area-in-matplotlib-/
+plt.fill_between(x_al, p_al, color='royalblue')# Ref: https://moonbooks.org/Articles/How-to-fill-an-area-in-matplotlib-/
 plt.axvline(labels_al.mean(), color='k', linestyle='dashed', linewidth=1.5)
 plt.text(labels_al.mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(labels_al.mean()))
@@ -532,19 +262,180 @@ plt.xlabel('Notas do Enade');
 plt.ylabel('Distribuição');
 plt.savefig('../tcc_codes/analise_stats/AL/imagens/DIST_NOTA_AL.png', 
             dpi=150, bbox_inches='tight', pad_inches=0.015);
+
+#%% Get nas notas de 
+qe_i02 = dataset_al[["QE_I02", "NT_GER"]]
+qe_i08 = dataset_al[["QE_I08", "NT_GER"]]
+qe_i11 = dataset_al[["QE_I11", "NT_GER"]]
+qe_i13 = dataset_al[["QE_I13", "NT_GER"]]
+qe_i17 = dataset_al[["QE_I17", "NT_GER"]]
+qe_i18 = dataset_al[["QE_I18", "NT_GER"]]
+qe_i23 = dataset_al[["QE_I23", "NT_GER"]]
+
 #%%
 # Ref: https://dev.to/thalesbruno/subplotting-with-matplotlib-and-seaborn-5ei8
-#fig, axes = plt.subplots(2, 3, figsize=(10,10))
+size_title = 18
+size_subtitle = 14
+fig_i02, axes_i02 = plt.subplots(nrows=2, ncols=3, sharex=False, sharey=True, figsize=(20,10))
+fig_i02.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\nDado socieconômico:Cor',
+                 fontsize=size_title)
 
-#fig.suptitle('Distribuição de notas do Enade de Alagoas: QE_I02')
 
-qe_i02 = dataset_al[["QE_I02", "NT_GER"]]
+# Alternative A
+qe_i02_aa = qe_i02.loc[(qe_i02['QE_I02'] == 'A')]
 
-desc_qe_i02 = []
+# Média e desvio padrão
+mu_al_qei02_aa, std_al_qei02_aa = norm.fit(qe_i02_aa['NT_GER'])
 
-#plt.set_title(r'Distribuição de notas do Enade de 2014 a 2018: Alagoas - Categoria QE_I02')
+# Limites
+min_ylim, max_ylim = plt.ylim(0, 0.15)
+xmin, xmax = plt.xlim(0,100)
+x_al = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_al_qei02_aa = norm.pdf(x_al, mu_al_qei02_aa, std_al_qei02_aa)
+
+# Plot histogram
+axes_i02[0,0].plot(x_al, p_al_qei02_aa, 'k', linewidth=1.5)
+
+axes_i02[0,0].fill_between(x_al, p_al_qei02_aa, color='royalblue')
+axes_i02[0,0].axvline(qe_i02_aa['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i02[0,0].text(qe_i02_aa['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i02_aa['NT_GER'].mean()))
+axes_i02[0,0].text(qe_i02_aa['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i02_aa['NT_GER'].std()))
+axes_i02[0,0].set_title("A:Branca", fontsize=size_subtitle)
+
+# Plot Gaussiana
+qe_i02_bb = qe_i02.loc[(qe_i02['QE_I02'] == 'B')]
+
+mu_al_qei02_bb, std_al_qei02_bb = norm.fit(qe_i02_bb['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_al = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_al_qei02_bb = norm.pdf(x_al, mu_al_qei02_bb, std_al_qei02_bb)
+
+# Plot histogram
+axes_i02[0,1].plot(x_al, p_al_qei02_bb, 'k', linewidth=1.5)
+
+axes_i02[0,1].fill_between(x_al, p_al_qei02_bb, color='royalblue')
+axes_i02[0,1].axvline(qe_i02_bb['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i02[0,1].text(qe_i02_bb['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i02_bb['NT_GER'].mean()))
+axes_i02[0,1].text(qe_i02_bb['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i02_bb['NT_GER'].std()))
+axes_i02[0,1].set_title("B:Preta", fontsize=size_subtitle)
+
+# Alternative C
+qe_i02_cc = qe_i02.loc[(qe_i02['QE_I02'] == 'C')]
+
+mu_al_qei02_cc, std_al_qei02_cc = norm.fit(qe_i02_cc['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_al = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_al_qei02_cc = norm.pdf(x_al, mu_al_qei02_cc, std_al_qei02_cc)
+
+# Plot histogram
+axes_i02[0,2].plot(x_al, p_al_qei02_cc, 'k', linewidth=1.5)
+
+axes_i02[0,2].fill_between(x_al, p_al_qei02_cc, color='royalblue')
+axes_i02[0,2].axvline(qe_i02_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i02[0,2].text(qe_i02_cc['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i02_cc['NT_GER'].mean()))
+axes_i02[0,2].text(qe_i02_cc['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i02_cc['NT_GER'].std()))
+axes_i02[0,2].set_title("C:Amarela", fontsize=size_subtitle)
+
+# Alternative D
+qe_i02_dd = qe_i02.loc[(qe_i02['QE_I02'] == 'D')]
+
+mu_al_qei02_dd, std_al_qei02_dd = norm.fit(qe_i02_dd['NT_GER'])
+
+#axes_i02[1][0].hist(qe_i02_dd['NT_GER'], bins=150, density=True, alpha=0.0)
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_al = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_al_qei02_dd = norm.pdf(x_al, mu_al_qei02_dd, std_al_qei02_dd)
+
+# Plot histogram
+axes_i02[1,0].plot(x_al, p_al_qei02_dd, 'k', linewidth=1.5)
+axes_i02[1,0].fill_between(x_al, p_al_qei02_dd, color='royalblue')
+axes_i02[1,0].axvline(qe_i02_dd['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i02[1,0].text(qe_i02_dd['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i02_dd['NT_GER'].mean()))
+axes_i02[1,0].text(qe_i02_dd['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i02_dd['NT_GER'].std()))
+axes_i02[1,0].set_title("D:Parda", fontsize=size_subtitle)
+
+# Alternative E
+qe_i02_ee = qe_i02.loc[(qe_i02['QE_I02'] == 'E')]
+
+mu_al_qei02_ee, std_al_qei02_ee = norm.fit(qe_i02_ee['NT_GER'])
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_al = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_al_qei02_ee = norm.pdf(x_al, mu_al_qei02_ee, std_al_qei02_ee)
+
+# Plot histogram
+axes_i02[1,1].plot(x_al, p_al_qei02_ee, 'k', linewidth=1.5)
+
+axes_i02[1,1].fill_between(x_al, p_al_qei02_ee, color='royalblue')
+axes_i02[1,1].axvline(qe_i02_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i02[1,1].text(qe_i02_ee['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i02_ee['NT_GER'].mean()))
+axes_i02[1,1].text(qe_i02_ee['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i02_ee['NT_GER'].std()))
+axes_i02[1,1].set_title("E:Indígena", fontsize=size_subtitle)
+
+# Alternative F
+qe_i02_ff = qe_i02.loc[(qe_i02['QE_I02'] == 'F')]
+
+mu_al_qei02_ff, std_al_qei02_ff = norm.fit(qe_i02_ff['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_al = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_al_qei02_ff = norm.pdf(x_al, mu_al_qei02_ff, std_al_qei02_ff)
+
+# Plot histogram
+axes_i02[1,2].plot(x_al, p_al_qei02_ff, 'k', linewidth=1.5)
+
+axes_i02[1,2].fill_between(x_al, p_al_qei02_ff, color='royalblue')
+axes_i02[1,2].axvline(qe_i02_ff['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i02[1,2].text(qe_i02_ff['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i02_ff['NT_GER'].mean()))
+axes_i02[1,2].text(qe_i02_ff['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i02_ff['NT_GER'].std()))
+axes_i02[1,2].set_title("F:Não quero declarar", fontsize=size_subtitle)
+
+for ax in axes_i02.flat:
+    ax.set(xlabel='Nota', ylabel='Distribuição')
+
+# Hide x labels and tick labels for top plots and y ticks for right plots.
+for ax in axes_i02.flat:
+    ax.label_outer()
+
 # Dica: você deve estar na pasta tcc_codes (Variable explorer)
-#plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I02_AL.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I02_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.show()
 
 #%% Subplots - Maior impacto
 # Ref: https://tryolabs.com/blog/2017/03/16/pandas-seaborn-a-guide-to-handle-visualize-data-elegantly/
