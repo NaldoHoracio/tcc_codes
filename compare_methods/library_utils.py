@@ -219,6 +219,19 @@ sns.kdeplot(ax=axes[1, 1], data=qe_i02_e, x='NT_GER')
 axes[1,1].set_title('E')
 sns.kdeplot(ax=axes[1, 2], data=qe_i02_f, x='NT_GER')
 axes[1,2].set_title('F')
+#%%
+g_qei02 = sns.FacetGrid(dataset_al, col="QE_I02", height=2, col_wrap=3, ylim=(0,0.7))
+g_qei02.map(sns.kdeplot, "NT_GER")
+
+#sns.displot(data=dataset_al, x="NT_GER", hue="QE_I02", kind="kde")
+#plt.show()
+#plt.title("QE_I02: ...");
+#plt.xlabel('Notas do Enade');
+#plt.ylabel('Distribuição');
+#plt.legend();
+# Dica: você deve estar na pasta tcc_codes (Variable explorer)
+plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I02_KDE2_AL.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+
 #%% Dataframe com Questionário do estudante
 # Ref: https://pandas.pydata.org/docs/user_guide/advanced.html
 df_qe_aux = pd.DataFrame([["QE_I01", "Estado civil","A:Solteiro(a)"],

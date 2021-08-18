@@ -5,6 +5,7 @@ Criação: Abril/2021
 Modificação: 
 
 @author: Edvonaldo (edvonaldohoracio@gmail.com)
+
 """
 import os
 import csv
@@ -250,8 +251,8 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al = norm.pdf(x_al, mu_al, std_al)
 
 # Plot Gaussiana
-plt.plot(x_al, p_al, 'k', linewidth=1.5)# Ref: https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#examples-using-matplotlib-pyplot-plot
-plt.fill_between(x_al, p_al, color='royalblue')# Ref: https://moonbooks.org/Articles/How-to-fill-an-area-in-matplotlib-/
+plt.plot(x_al, p_al, 'k', linewidth=1.5)# Ref: 
+plt.fill_between(x_al, p_al, color='royalblue')# Ref: 
 plt.axvline(labels_al.mean(), color='k', linestyle='dashed', linewidth=1.5)
 plt.text(labels_al.mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(labels_al.mean()))
@@ -273,7 +274,7 @@ qe_i18 = dataset_al[["QE_I18", "NT_GER"]]
 qe_i23 = dataset_al[["QE_I23", "NT_GER"]]
 
 #%%
-# Ref: https://dev.to/thalesbruno/subplotting-with-matplotlib-and-seaborn-5ei8
+# Ref: 
 size_title = 18
 size_subtitle = 14
 fig_i02, axes_i02 = plt.subplots(nrows=2, ncols=3, sharex=False, sharey=True, figsize=(20,10))
@@ -438,43 +439,197 @@ plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I02_AL_GAUSS.png', dpi=150
 plt.show()
 
 #%% Subplots - Maior impacto
-# Ref: https://tryolabs.com/blog/2017/03/16/pandas-seaborn-a-guide-to-handle-visualize-data-elegantly/
-# Ref: https://www.python-graph-gallery.com/25-histogram-with-several-variables-seaborn
-# QE_02
-import matplotlib.colors as mcolors
+size_title = 18
+size_subtitle = 14
+fig_i08, axes_i08 = plt.subplots(nrows=3, ncols=3, sharex=False, sharey=True, figsize=(20,10))
+fig_i08.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\nDado socieconômico:Renda bruta',
+                 fontsize=size_title)
 
-df_qe_i02 = dataset_al[['QE_I02', 'NT_GER']]
 
-df_qe_i02.hist(by="QE_I02", figsize=(7,7), layout=(3,2), bins=30,
-               alpha=0.9, density=True, color="seagreen")
+# Alternative A
+qe_i08_aa = qe_i08.loc[(qe_i08['QE_I08'] == 'A')]
 
-plt.suptitle('Distribuição de notas do Enade de Alagoas: QE_I02')
-#plt.set_title(r'Distribuição de notas do Enade de 2014 a 2018: Alagoas - Categoria QE_I02')
+# Média e desvio padrão
+mu_al_qei08_aa, std_al_qei08_aa = norm.fit(qe_i08_aa['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0, 0.15)
+xmin, xmax = plt.xlim(0,100)
+x_al = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_al_qei08_aa = norm.pdf(x_al, mu_al_qei08_aa, std_al_qei08_aa)
+
+# Plot histogram
+axes_i08[0,0].plot(x_al, p_al_qei08_aa, 'k', linewidth=1.5)
+
+axes_i08[0,0].fill_between(x_al, p_al_qei08_aa, color='royalblue')
+axes_i08[0,0].axvline(qe_i08_aa['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i08[0,0].text(qe_i08_aa['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i08_aa['NT_GER'].mean()))
+axes_i08[0,0].text(qe_i08_aa['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i08_aa['NT_GER'].std()))
+axes_i08[0,0].set_title("A:Até R$ 1.431,00", fontsize=size_subtitle)
+
+# Plot Gaussiana
+qe_i08_bb = qe_i08.loc[(qe_i08['QE_I08'] == 'B')]
+
+mu_al_qei08_bb, std_al_qei08_bb = norm.fit(qe_i08_bb['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_al = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_al_qei08_bb = norm.pdf(x_al, mu_al_qei08_bb, std_al_qei08_bb)
+
+# Plot histogram
+axes_i08[0,1].plot(x_al, p_al_qei08_bb, 'k', linewidth=1.5)
+
+axes_i08[0,1].fill_between(x_al, p_al_qei08_bb, color='royalblue')
+axes_i08[0,1].axvline(qe_i08_bb['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i08[0,1].text(qe_i08_bb['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i08_bb['NT_GER'].mean()))
+axes_i08[0,1].text(qe_i08_bb['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i08_bb['NT_GER'].std()))
+axes_i08[0,1].set_title("B:De R\$ 1.431,01 a R\$ 2.862,00", fontsize=size_subtitle)
+
+# Alternative C
+qe_i08_cc = qe_i08.loc[(qe_i08['QE_I08'] == 'C')]
+
+mu_al_qei08_cc, std_al_qei08_cc = norm.fit(qe_i08_cc['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_al = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_al_qei08_cc = norm.pdf(x_al, mu_al_qei08_cc, std_al_qei08_cc)
+
+# Plot histogram
+axes_i08[0,2].plot(x_al, p_al_qei08_cc, 'k', linewidth=1.5)
+
+axes_i08[0,2].fill_between(x_al, p_al_qei08_cc, color='royalblue')
+axes_i08[0,2].axvline(qe_i08_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i08[0,2].text(qe_i08_cc['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i08_cc['NT_GER'].mean()))
+axes_i08[0,2].text(qe_i08_cc['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i08_cc['NT_GER'].std()))
+axes_i08[0,2].set_title("C:De R\$ 2.862,01 a R\$ 4.293,00", fontsize=size_subtitle)
+
+# Alternative D
+qe_i08_dd = qe_i08.loc[(qe_i08['QE_I08'] == 'D')]
+
+mu_al_qei08_dd, std_al_qei08_dd = norm.fit(qe_i08_dd['NT_GER'])
+
+#axes_i02[1][0].hist(qe_i02_dd['NT_GER'], bins=150, density=True, alpha=0.0)
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_al = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_al_qei08_dd = norm.pdf(x_al, mu_al_qei08_dd, std_al_qei08_dd)
+
+# Plot histogram
+axes_i08[1,0].plot(x_al, p_al_qei08_dd, 'k', linewidth=1.5)
+axes_i08[1,0].fill_between(x_al, p_al_qei08_dd, color='royalblue')
+axes_i08[1,0].axvline(qe_i08_dd['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i08[1,0].text(qe_i08_dd['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i08_dd['NT_GER'].mean()))
+axes_i08[1,0].text(qe_i08_dd['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i08_dd['NT_GER'].std()))
+axes_i08[1,0].set_title("D:De R\$ 4.293,01 a R\$ 5.724,00", fontsize=size_subtitle)
+
+# Alternative E
+qe_i08_ee = qe_i08.loc[(qe_i08['QE_I08'] == 'E')]
+
+mu_al_qei08_ee, std_al_qei08_ee = norm.fit(qe_i08_ee['NT_GER'])
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_al = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_al_qei08_ee = norm.pdf(x_al, mu_al_qei08_ee, std_al_qei08_ee)
+
+# Plot histogram
+axes_i08[1,1].plot(x_al, p_al_qei08_ee, 'k', linewidth=1.5)
+
+axes_i08[1,1].fill_between(x_al, p_al_qei08_ee, color='royalblue')
+axes_i08[1,1].axvline(qe_i08_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i08[1,1].text(qe_i08_ee['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i08_ee['NT_GER'].mean()))
+axes_i08[1,1].text(qe_i08_ee['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i08_ee['NT_GER'].std()))
+axes_i08[1,1].set_title("E:De R\$ 5.274,01 a R\$ 9.540,00", fontsize=size_subtitle)
+
+# Alternative F
+qe_i08_ff = qe_i08.loc[(qe_i08['QE_I08'] == 'F')]
+
+mu_al_qei08_ff, std_al_qei08_ff = norm.fit(qe_i08_ff['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_al = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_al_qei08_ff = norm.pdf(x_al, mu_al_qei08_ff, std_al_qei08_ff)
+
+# Plot histogram
+axes_i08[1,2].plot(x_al, p_al_qei08_ff, 'k', linewidth=1.5)
+
+axes_i08[1,2].fill_between(x_al, p_al_qei08_ff, color='royalblue')
+axes_i08[1,2].axvline(qe_i08_ff['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i08[1,2].text(qe_i08_ff['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i08_ff['NT_GER'].mean()))
+axes_i08[1,2].text(qe_i08_ff['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i08_ff['NT_GER'].std()))
+axes_i08[1,2].set_title("F:De R\$ 9.540,01 a R\$ 28.620,00", fontsize=size_subtitle)
+
+# Alternative G
+qe_i08_gg = qe_i08.loc[(qe_i08['QE_I08'] == 'G')]
+
+mu_al_qei08_gg, std_al_qei08_gg = norm.fit(qe_i08_gg['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_al = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_al_qei08_gg = norm.pdf(x_al, mu_al_qei08_gg, std_al_qei08_gg)
+
+# Plot histogram
+axes_i08[2,0].plot(x_al, p_al_qei08_gg, 'k', linewidth=1.5)
+
+axes_i08[2,0].fill_between(x_al, p_al_qei08_gg, color='royalblue')
+axes_i08[2,0].axvline(qe_i08_gg['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i08[2,0].text(qe_i08_gg['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i08_gg['NT_GER'].mean()))
+axes_i08[2,0].text(qe_i08_gg['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i08_gg['NT_GER'].std()))
+axes_i08[2,0].set_title("G:Mais de R$ 28.620,00", fontsize=size_subtitle)
+
+axes_i08[2,1].axis('off')
+axes_i08[2,2].axis('off')
+
+for ax in axes_i08.flat:
+    ax.set(xlabel='Nota', ylabel='Distribuição')
+
+# Hide x labels and tick labels for top plots and y ticks for right plots.
+for ax in axes_i08.flat:
+    ax.label_outer()
+
 # Dica: você deve estar na pasta tcc_codes (Variable explorer)
-plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I02_BOX_AL.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I08_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.show()
 
 #%%
-# Ref: https://tryolabs.com/blog/2017/03/16/pandas-seaborn-a-guide-to-handle-visualize-data-elegantly/
-# Ref: https://www.python-graph-gallery.com/25-histogram-with-several-variables-seaborn
-# QE_02
-
-g_qei02 = sns.FacetGrid(dataset_al, col="QE_I02", height=2, col_wrap=3, ylim=(0,0.7))
-g_qei02.map(sns.kdeplot, "NT_GER")
-
-#sns.displot(data=dataset_al, x="NT_GER", hue="QE_I02", kind="kde")
-#plt.show()
-#plt.title("QE_I02: ...");
-#plt.xlabel('Notas do Enade');
-#plt.ylabel('Distribuição');
-#plt.legend();
-# Dica: você deve estar na pasta tcc_codes (Variable explorer)
-plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I02_KDE2_AL.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
-
-
-
-#%%
-# QE_08
-
 # QE_11
 
 # QE_13
@@ -501,3 +656,16 @@ plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I02_KDE2_AL.png', dpi=150,
 # QE_19
 
 # QE_21
+
+#%%
+'''
+# All references:
+    1) https://tryolabs.com/blog/2017/03/16/pandas-seaborn-a-guide-to-handle-visualize-data-elegantly/
+    2) https://www.python-graph-gallery.com/25-histogram-with-several-variables-seaborn
+    3) https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#examples-using-matplotlib-pyplot-plot
+    4) https://moonbooks.org/Articles/How-to-fill-an-area-in-matplotlib-/
+    5) https://dev.to/thalesbruno/subplotting-with-matplotlib-and-seaborn-5ei8
+    6) https://tryolabs.com/blog/2017/03/16/pandas-seaborn-a-guide-to-handle-visualize-data-elegantly/
+    7) https://www.python-graph-gallery.com/25-histogram-with-several-variables-seaborn
+    8) https://stackoverflow.com/questions/10035446/how-can-i-make-a-blank-subplot-in-matplotlib
+'''
