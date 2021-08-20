@@ -261,7 +261,7 @@ plt.text(labels_al.mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
 plt.title("Distribuição de notas do Enade em Alagoas: 2014 a 2018")
 plt.xlabel('Notas do Enade');
 plt.ylabel('Distribuição');
-plt.savefig('../tcc_codes/analise_stats/AL/imagens/DIST_NOTA_AL.png', 
+plt.savefig('../tcc_codes/analise_stats/AL/imagens/maior_impacto/DIST_NOTA_AL.png', 
             dpi=150, bbox_inches='tight', pad_inches=0.015);
 
 #%% Get nas notas de Maior impacto
@@ -282,10 +282,10 @@ qe_i19 = dataset_al[["QE_I19", "NT_GER"]]
 qe_i21 = dataset_al[["QE_I21", "NT_GER"]]
 
 #%% QE_I02
-# Ref: 
 size_title = 18
 size_subtitle = 14
-fig_i02, axes_i02 = plt.subplots(nrows=2, ncols=3, sharex=False, sharey=True, figsize=(20,10))
+fig_i02, axes_i02 = plt.subplots(nrows=3, ncols=2, constrained_layout=True,
+                                 sharex=False, sharey=True, figsize=(12,10))
 fig_i02.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'
                  'Dado socieconômico:Cor',
                  fontsize=size_title)
@@ -307,7 +307,7 @@ p_al_qei02_aa = norm.pdf(x_al, mu_al_qei02_aa, std_al_qei02_aa)
 
 # Plot histogram
 axes_i02[0,0].plot(x_al, p_al_qei02_aa, 'k', linewidth=1.5)
-
+axes_i02[0,0].set_xlim([0,100])
 axes_i02[0,0].fill_between(x_al, p_al_qei02_aa, color='royalblue')
 axes_i02[0,0].axvline(qe_i02_aa['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
 axes_i02[0,0].text(qe_i02_aa['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
@@ -331,7 +331,7 @@ p_al_qei02_bb = norm.pdf(x_al, mu_al_qei02_bb, std_al_qei02_bb)
 
 # Plot histogram
 axes_i02[0,1].plot(x_al, p_al_qei02_bb, 'k', linewidth=1.5)
-
+axes_i02[0,1].set_xlim([0,100])
 axes_i02[0,1].fill_between(x_al, p_al_qei02_bb, color='royalblue')
 axes_i02[0,1].axvline(qe_i02_bb['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
 axes_i02[0,1].text(qe_i02_bb['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
@@ -354,15 +354,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei02_cc = norm.pdf(x_al, mu_al_qei02_cc, std_al_qei02_cc)
 
 # Plot histogram
-axes_i02[0,2].plot(x_al, p_al_qei02_cc, 'k', linewidth=1.5)
-
-axes_i02[0,2].fill_between(x_al, p_al_qei02_cc, color='royalblue')
-axes_i02[0,2].axvline(qe_i02_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i02[0,2].text(qe_i02_cc['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i02[1,0].plot(x_al, p_al_qei02_cc, 'k', linewidth=1.5)
+axes_i02[1,0].set_xlim([0,100])
+axes_i02[1,0].fill_between(x_al, p_al_qei02_cc, color='royalblue')
+axes_i02[1,0].axvline(qe_i02_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i02[1,0].text(qe_i02_cc['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i02_cc['NT_GER'].mean()))
-axes_i02[0,2].text(qe_i02_cc['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i02[1,0].text(qe_i02_cc['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i02_cc['NT_GER'].std()))
-axes_i02[0,2].set_title("C:Amarela", fontsize=size_subtitle)
+axes_i02[1,0].set_title("C:Amarela", fontsize=size_subtitle)
 
 ####### Alternative D #######
 qe_i02_dd = qe_i02.loc[(qe_i02['QE_I02'] == 'D')]
@@ -378,14 +378,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei02_dd = norm.pdf(x_al, mu_al_qei02_dd, std_al_qei02_dd)
 
 # Plot histogram
-axes_i02[1,0].plot(x_al, p_al_qei02_dd, 'k', linewidth=1.5)
-axes_i02[1,0].fill_between(x_al, p_al_qei02_dd, color='royalblue')
-axes_i02[1,0].axvline(qe_i02_dd['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i02[1,0].text(qe_i02_dd['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i02[1,1].plot(x_al, p_al_qei02_dd, 'k', linewidth=1.5)
+axes_i02[1,1].set_xlim([0,100])
+axes_i02[1,1].fill_between(x_al, p_al_qei02_dd, color='royalblue')
+axes_i02[1,1].axvline(qe_i02_dd['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i02[1,1].text(qe_i02_dd['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i02_dd['NT_GER'].mean()))
-axes_i02[1,0].text(qe_i02_dd['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i02[1,1].text(qe_i02_dd['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i02_dd['NT_GER'].std()))
-axes_i02[1,0].set_title("D:Parda", fontsize=size_subtitle)
+axes_i02[1,1].set_title("D:Parda", fontsize=size_subtitle)
 
 # Alternative E
 qe_i02_ee = qe_i02.loc[(qe_i02['QE_I02'] == 'E')]
@@ -400,15 +401,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei02_ee = norm.pdf(x_al, mu_al_qei02_ee, std_al_qei02_ee)
 
 # Plot histogram
-axes_i02[1,1].plot(x_al, p_al_qei02_ee, 'k', linewidth=1.5)
-
-axes_i02[1,1].fill_between(x_al, p_al_qei02_ee, color='royalblue')
-axes_i02[1,1].axvline(qe_i02_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i02[1,1].text(qe_i02_ee['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i02[2,0].plot(x_al, p_al_qei02_ee, 'k', linewidth=1.5)
+axes_i02[2,0].set_xlim([0,100])
+axes_i02[2,0].fill_between(x_al, p_al_qei02_ee, color='royalblue')
+axes_i02[2,0].axvline(qe_i02_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i02[2,0].text(qe_i02_ee['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i02_ee['NT_GER'].mean()))
-axes_i02[1,1].text(qe_i02_ee['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i02[2,0].text(qe_i02_ee['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i02_ee['NT_GER'].std()))
-axes_i02[1,1].set_title("E:Indígena", fontsize=size_subtitle)
+axes_i02[2,0].set_title("E:Indígena", fontsize=size_subtitle)
 
 # Alternative F
 qe_i02_ff = qe_i02.loc[(qe_i02['QE_I02'] == 'F')]
@@ -424,28 +425,27 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei02_ff = norm.pdf(x_al, mu_al_qei02_ff, std_al_qei02_ff)
 
 # Plot histogram
-axes_i02[1,2].plot(x_al, p_al_qei02_ff, 'k', linewidth=1.5)
-
-axes_i02[1,2].fill_between(x_al, p_al_qei02_ff, color='royalblue')
-axes_i02[1,2].axvline(qe_i02_ff['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i02[1,2].text(qe_i02_ff['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i02[2,1].plot(x_al, p_al_qei02_ff, 'k', linewidth=1.5)
+axes_i02[2,1].set_xlim([0,100])
+axes_i02[2,1].fill_between(x_al, p_al_qei02_ff, color='royalblue')
+axes_i02[2,1].axvline(qe_i02_ff['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i02[2,1].text(qe_i02_ff['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i02_ff['NT_GER'].mean()))
-axes_i02[1,2].text(qe_i02_ff['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i02[2,1].text(qe_i02_ff['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i02_ff['NT_GER'].std()))
-axes_i02[1,2].set_title("F:Não quero declarar", fontsize=size_subtitle)
+axes_i02[2,1].set_title("F:Não quero declarar", fontsize=size_subtitle)
+
 
 for ax in axes_i02.flat:
     ax.set(xlabel='Nota', ylabel='Distribuição')
-
-# Hide x labels and tick labels for top plots and y ticks for right plots.
-for ax in axes_i02.flat:
-    ax.label_outer()
+    ax.label_outer() # Hide x labels and tick labels for top plots and y ticks for right plots.
 
 # Dica: você deve estar na pasta tcc_codes (Variable explorer)
-plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I02_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.savefig('../tcc_codes/analise_stats/AL/imagens/maior_impacto/QE_I02_AL_GAUSS.png', 
+            dpi=150, bbox_inches='tight', pad_inches=0.015);
 plt.show()
 #%% QE_I08
-fig_i08, axes_i08 = plt.subplots(nrows=3, ncols=3, sharex=False, sharey=True, figsize=(20,10))
+fig_i08, axes_i08 = plt.subplots(nrows=3, ncols=3, sharex=False, sharey=True, figsize=(12,10))
 fig_i08.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'
                  'Dado socieconômico:Renda bruta',
                  fontsize=size_title)
@@ -465,7 +465,7 @@ p_al_qei08_aa = norm.pdf(x_al, mu_al_qei08_aa, std_al_qei08_aa)
 
 # Plot histogram
 axes_i08[0,0].plot(x_al, p_al_qei08_aa, 'k', linewidth=1.5)
-
+axes_i08[0,0].set_xlim([0,100])
 axes_i08[0,0].fill_between(x_al, p_al_qei08_aa, color='royalblue')
 axes_i08[0,0].axvline(qe_i08_aa['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
 axes_i08[0,0].text(qe_i08_aa['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
@@ -489,7 +489,7 @@ p_al_qei08_bb = norm.pdf(x_al, mu_al_qei08_bb, std_al_qei08_bb)
 
 # Plot histogram
 axes_i08[0,1].plot(x_al, p_al_qei08_bb, 'k', linewidth=1.5)
-
+axes_i08[0,1].set_xlim([0,100])
 axes_i08[0,1].fill_between(x_al, p_al_qei08_bb, color='royalblue')
 axes_i08[0,1].axvline(qe_i08_bb['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
 axes_i08[0,1].text(qe_i08_bb['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
@@ -513,7 +513,7 @@ p_al_qei08_cc = norm.pdf(x_al, mu_al_qei08_cc, std_al_qei08_cc)
 
 # Plot histogram
 axes_i08[0,2].plot(x_al, p_al_qei08_cc, 'k', linewidth=1.5)
-
+axes_i08[0,2].set_xlim([0,100])
 axes_i08[0,2].fill_between(x_al, p_al_qei08_cc, color='royalblue')
 axes_i08[0,2].axvline(qe_i08_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
 axes_i08[0,2].text(qe_i08_cc['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
@@ -537,6 +537,7 @@ p_al_qei08_dd = norm.pdf(x_al, mu_al_qei08_dd, std_al_qei08_dd)
 
 # Plot histogram
 axes_i08[1,0].plot(x_al, p_al_qei08_dd, 'k', linewidth=1.5)
+axes_i08[1,0].set_xlim([0,100])
 axes_i08[1,0].fill_between(x_al, p_al_qei08_dd, color='royalblue')
 axes_i08[1,0].axvline(qe_i08_dd['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
 axes_i08[1,0].text(qe_i08_dd['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
@@ -559,7 +560,7 @@ p_al_qei08_ee = norm.pdf(x_al, mu_al_qei08_ee, std_al_qei08_ee)
 
 # Plot histogram
 axes_i08[1,1].plot(x_al, p_al_qei08_ee, 'k', linewidth=1.5)
-
+axes_i08[1,1].set_xlim([0,100])
 axes_i08[1,1].fill_between(x_al, p_al_qei08_ee, color='royalblue')
 axes_i08[1,1].axvline(qe_i08_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
 axes_i08[1,1].text(qe_i08_ee['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
@@ -583,7 +584,7 @@ p_al_qei08_ff = norm.pdf(x_al, mu_al_qei08_ff, std_al_qei08_ff)
 
 # Plot histogram
 axes_i08[1,2].plot(x_al, p_al_qei08_ff, 'k', linewidth=1.5)
-
+axes_i08[1,2].set_xlim([0,100])
 axes_i08[1,2].fill_between(x_al, p_al_qei08_ff, color='royalblue')
 axes_i08[1,2].axvline(qe_i08_ff['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
 axes_i08[1,2].text(qe_i08_ff['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
@@ -607,7 +608,7 @@ p_al_qei08_gg = norm.pdf(x_al, mu_al_qei08_gg, std_al_qei08_gg)
 
 # Plot histogram
 axes_i08[2,0].plot(x_al, p_al_qei08_gg, 'k', linewidth=1.5)
-
+axes_i08[2,0].set_xlim([0,100])
 axes_i08[2,0].fill_between(x_al, p_al_qei08_gg, color='royalblue')
 axes_i08[2,0].axvline(qe_i08_gg['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
 axes_i08[2,0].text(qe_i08_gg['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
@@ -627,12 +628,13 @@ for ax in axes_i08.flat:
     ax.label_outer()
 
 # Dica: você deve estar na pasta tcc_codes (Variable explorer)
-plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I08_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.savefig('../tcc_codes/analise_stats/AL/imagens/maior_impacto/QE_I08_AL_GAUSS.png', 
+            dpi=150, bbox_inches='tight', pad_inches=0.015);
 plt.show()
 #%% QE_I11A
 size_title = 18
 size_subtitle = 14
-fig_i11a, axes_i11a = plt.subplots(nrows=2, ncols=3, sharex=False, sharey=True, figsize=(20,10))
+fig_i11a, axes_i11a = plt.subplots(nrows=3, ncols=2, sharex=False, sharey=True, figsize=(20,10))
 fig_i11a.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'    
                   'Dado socieconômico:Tipo de financiamento p/ custeio das mensalidades',
                  fontsize=size_title)
@@ -654,7 +656,7 @@ p_al_qei11a_aa = norm.pdf(x_al, mu_al_qei11a_aa, std_al_qei11a_aa)
 
 # Plot histogram
 axes_i11a[0,0].plot(x_al, p_al_qei11a_aa, 'k', linewidth=1.5)
-
+axes_i11a[0,0].set_xlim([0,100])
 axes_i11a[0,0].fill_between(x_al, p_al_qei11a_aa, color='royalblue')
 axes_i11a[0,0].axvline(qe_i11a_aa['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
 axes_i11a[0,0].text(qe_i11a_aa['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
@@ -678,7 +680,7 @@ p_al_qei11a_bb = norm.pdf(x_al, mu_al_qei11a_bb, std_al_qei11a_bb)
 
 # Plot histogram
 axes_i11a[0,1].plot(x_al, p_al_qei11a_bb, 'k', linewidth=1.5)
-
+axes_i11a[0,1].set_xlim([0,100])
 axes_i11a[0,1].fill_between(x_al, p_al_qei11a_bb, color='royalblue')
 axes_i11a[0,1].axvline(qe_i11a_bb['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
 axes_i11a[0,1].text(qe_i11a_bb['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
@@ -701,15 +703,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei11a_cc = norm.pdf(x_al, mu_al_qei11a_cc, std_al_qei11a_cc)
 
 # Plot histogram
-axes_i11a[0,2].plot(x_al, p_al_qei11a_cc, 'k', linewidth=1.5)
-
-axes_i11a[0,2].fill_between(x_al, p_al_qei11a_cc, color='royalblue')
-axes_i11a[0,2].axvline(qe_i11a_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i11a[0,2].text(qe_i11a_cc['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i11a[1,0].plot(x_al, p_al_qei11a_cc, 'k', linewidth=1.5)
+axes_i11a[1,0].set_xlim([0,100])
+axes_i11a[1,0].fill_between(x_al, p_al_qei11a_cc, color='royalblue')
+axes_i11a[1,0].axvline(qe_i11a_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i11a[1,0].text(qe_i11a_cc['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i11a_cc['NT_GER'].mean()))
-axes_i11a[0,2].text(qe_i11a_cc['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i11a[1,0].text(qe_i11a_cc['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i11a_cc['NT_GER'].std()))
-axes_i11a[0,2].set_title("C:ProUni integral", fontsize=size_subtitle)
+axes_i11a[1,0].set_title("C:ProUni integral", fontsize=size_subtitle)
 
 ####### Alternative D #######
 qe_i11a_dd = qe_i11.loc[(qe_i11['QE_I11'] == 'D')]
@@ -725,14 +727,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei11a_dd = norm.pdf(x_al, mu_al_qei11a_dd, std_al_qei11a_dd)
 
 # Plot histogram
-axes_i11a[1,0].plot(x_al, p_al_qei11a_dd, 'k', linewidth=1.5)
-axes_i11a[1,0].fill_between(x_al, p_al_qei11a_dd, color='royalblue')
-axes_i11a[1,0].axvline(qe_i11a_dd['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i11a[1,0].text(qe_i11a_dd['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i11a[1,1].plot(x_al, p_al_qei11a_dd, 'k', linewidth=1.5)
+axes_i11a[1,1].set_xlim([0,100])
+axes_i11a[1,1].fill_between(x_al, p_al_qei11a_dd, color='royalblue')
+axes_i11a[1,1].axvline(qe_i11a_dd['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i11a[1,1].text(qe_i11a_dd['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i11a_dd['NT_GER'].mean()))
-axes_i11a[1,0].text(qe_i11a_dd['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i11a[1,1].text(qe_i11a_dd['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i11a_dd['NT_GER'].std()))
-axes_i11a[1,0].set_title("D:ProUni parcial,apenas", fontsize=size_subtitle)
+axes_i11a[1,1].set_title("D:ProUni parcial,apenas", fontsize=size_subtitle)
 
 ####### Alternative E #######
 qe_i11a_ee = qe_i11.loc[(qe_i11['QE_I11'] == 'E')]
@@ -747,15 +750,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei11a_ee = norm.pdf(x_al, mu_al_qei11a_ee, std_al_qei11a_ee)
 
 # Plot histogram
-axes_i11a[1,1].plot(x_al, p_al_qei11a_ee, 'k', linewidth=1.5)
-
-axes_i11a[1,1].fill_between(x_al, p_al_qei11a_ee, color='royalblue')
-axes_i11a[1,1].axvline(qe_i11a_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i11a[1,1].text(qe_i11a_ee['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i11a[2,0].plot(x_al, p_al_qei11a_ee, 'k', linewidth=1.5)
+axes_i11a[2,0].set_xlim([0,100])
+axes_i11a[2,0].fill_between(x_al, p_al_qei11a_ee, color='royalblue')
+axes_i11a[2,0].axvline(qe_i11a_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i11a[2,0].text(qe_i11a_ee['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i11a_ee['NT_GER'].mean()))
-axes_i11a[1,1].text(qe_i11a_ee['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i11a[2,0].text(qe_i11a_ee['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i11a_ee['NT_GER'].std()))
-axes_i11a[1,1].set_title("E:FIES,apenas", fontsize=size_subtitle)
+axes_i11a[2,0].set_title("E:FIES,apenas", fontsize=size_subtitle)
 
 ####### Alternative F #######
 qe_i11a_ff = qe_i11.loc[(qe_i11['QE_I11'] == 'F')]
@@ -771,15 +774,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei11a_ff = norm.pdf(x_al, mu_al_qei11a_ff, std_al_qei11a_ff)
 
 # Plot histogram
-axes_i11a[1,2].plot(x_al, p_al_qei11a_ff, 'k', linewidth=1.5)
-
-axes_i11a[1,2].fill_between(x_al, p_al_qei11a_ff, color='royalblue')
-axes_i11a[1,2].axvline(qe_i11a_ff['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i11a[1,2].text(qe_i11a_ff['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i11a[2,1].plot(x_al, p_al_qei11a_ff, 'k', linewidth=1.5)
+axes_i11a[2,1].set_xlim([0,100])
+axes_i11a[2,1].fill_between(x_al, p_al_qei11a_ff, color='royalblue')
+axes_i11a[2,1].axvline(qe_i11a_ff['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i11a[2,1].text(qe_i11a_ff['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i11a_ff['NT_GER'].mean()))
-axes_i11a[1,2].text(qe_i11a_ff['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i11a[2,1].text(qe_i11a_ff['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i11a_ff['NT_GER'].std()))
-axes_i11a[1,2].set_title("F:ProUni parcial e FIES", fontsize=size_subtitle)
+axes_i11a[2,1].set_title("F:ProUni parcial e FIES", fontsize=size_subtitle)
 
 for ax in axes_i11a.flat:
     ax.set(xlabel='Nota', ylabel='Distribuição')
@@ -793,7 +796,7 @@ plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I11A_AL_GAUSS.png', dpi=15
 plt.show()
 
 #%% QE_I11B
-fig_i11b, axes_i11b = plt.subplots(nrows=2, ncols=3, sharex=False, sharey=True, figsize=(20,10))
+fig_i11b, axes_i11b = plt.subplots(nrows=3, ncols=2, sharex=False, sharey=True, figsize=(20,10))
 fig_i11b.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'
                   'Dado socieconômico:Tipo de financiamento para custeio das mensalidades',
                  fontsize=size_title)
@@ -813,7 +816,7 @@ p_al_qei11b_gg = norm.pdf(x_al, mu_al_qei11b_gg, std_al_qei11b_gg)
 
 # Plot histogram
 axes_i11b[0,0].plot(x_al, p_al_qei11b_gg, 'k', linewidth=1.5)
-
+axes_i11b[0,0].set_xlim([0,100])
 axes_i11b[0,0].fill_between(x_al, p_al_qei11b_gg, color='royalblue')
 axes_i11b[0,0].axvline(qe_i11b_gg['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
 axes_i11b[0,0].text(qe_i11b_gg['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
@@ -837,7 +840,7 @@ p_al_qei11b_hh = norm.pdf(x_al, mu_al_qei11b_hh, std_al_qei11b_hh)
 
 # Plot histogram
 axes_i11b[0,1].plot(x_al, p_al_qei11b_hh, 'k', linewidth=1.5)
-
+axes_i11b[0,1].set_xlim([0,100])
 axes_i11b[0,1].fill_between(x_al, p_al_qei11b_hh, color='royalblue')
 axes_i11b[0,1].axvline(qe_i11b_hh['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
 axes_i11b[0,1].text(qe_i11b_hh['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
@@ -860,15 +863,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei11b_ii = norm.pdf(x_al, mu_al_qei11b_ii, std_al_qei11b_ii)
 
 # Plot histogram
-axes_i11b[0,2].plot(x_al, p_al_qei11b_ii, 'k', linewidth=1.5)
-
-axes_i11b[0,2].fill_between(x_al, p_al_qei11b_ii, color='royalblue')
-axes_i11b[0,2].axvline(qe_i11b_ii['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i11b[0,2].text(qe_i11b_ii['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i11b[1,0].plot(x_al, p_al_qei11b_ii, 'k', linewidth=1.5)
+axes_i11b[1,0].set_xlim([0,100])
+axes_i11b[1,0].fill_between(x_al, p_al_qei11b_ii, color='royalblue')
+axes_i11b[1,0].axvline(qe_i11b_ii['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i11b[1,0].text(qe_i11b_ii['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i11b_ii['NT_GER'].mean()))
-axes_i11b[0,2].text(qe_i11b_ii['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i11b[1,0].text(qe_i11b_ii['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i11b_ii['NT_GER'].std()))
-axes_i11b[0,2].set_title("I:Bolsa por outra entidade", fontsize=size_subtitle)
+axes_i11b[1,0].set_title("I:Bolsa por outra entidade", fontsize=size_subtitle)
 
 ####### Alternative J #######
 qe_i11b_jj = qe_i11.loc[(qe_i11['QE_I11'] == 'J')]
@@ -884,14 +887,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei11b_jj = norm.pdf(x_al, mu_al_qei11b_jj, std_al_qei11b_jj)
 
 # Plot histogram
-axes_i11b[1,0].plot(x_al, p_al_qei11b_jj, 'k', linewidth=1.5)
-axes_i11b[1,0].fill_between(x_al, p_al_qei11b_jj, color='royalblue')
-axes_i11b[1,0].axvline(qe_i11b_jj['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i11b[1,0].text(qe_i11b_jj['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i11b[1,1].plot(x_al, p_al_qei11b_jj, 'k', linewidth=1.5)
+axes_i11b[1,1].set_xlim([0,100])
+axes_i11b[1,1].fill_between(x_al, p_al_qei11b_jj, color='royalblue')
+axes_i11b[1,1].axvline(qe_i11b_jj['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i11b[1,1].text(qe_i11b_jj['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i11b_jj['NT_GER'].mean()))
-axes_i11b[1,0].text(qe_i11b_jj['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i11b[1,1].text(qe_i11b_jj['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i11b_jj['NT_GER'].std()))
-axes_i11b[1,0].set_title("J:Financiamento pela IES", fontsize=size_subtitle)
+axes_i11b[1,1].set_title("J:Financiamento pela IES", fontsize=size_subtitle)
 
 ####### Alternative K #######
 qe_i11b_kk = qe_i11.loc[(qe_i11['QE_I11'] == 'K')]
@@ -906,17 +910,17 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei11b_kk = norm.pdf(x_al, mu_al_qei11b_kk, std_al_qei11b_kk)
 
 # Plot histogram
-axes_i11b[1,1].plot(x_al, p_al_qei11b_kk, 'k', linewidth=1.5)
-
-axes_i11b[1,1].fill_between(x_al, p_al_qei11b_kk, color='royalblue')
-axes_i11b[1,1].axvline(qe_i11b_kk['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i11b[1,1].text(qe_i11b_kk['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i11b[2,0].plot(x_al, p_al_qei11b_kk, 'k', linewidth=1.5)
+axes_i11b[2,0].set_xlim([0,100])
+axes_i11b[2,0].fill_between(x_al, p_al_qei11b_kk, color='royalblue')
+axes_i11b[2,0].axvline(qe_i11b_kk['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i11b[2,0].text(qe_i11b_kk['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i11b_kk['NT_GER'].mean()))
-axes_i11b[1,1].text(qe_i11b_kk['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i11b[2,0].text(qe_i11b_kk['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i11b_kk['NT_GER'].std()))
-axes_i11b[1,1].set_title("K:Financiamento bancário", fontsize=size_subtitle)
+axes_i11b[2,0].set_title("K:Financiamento bancário", fontsize=size_subtitle)
 
-axes_i11b[1,2].axis('off')
+axes_i11b[2,1].axis('off')
 
 for ax in axes_i11b.flat:
     ax.set(xlabel='Nota', ylabel='Distribuição')
@@ -931,11 +935,10 @@ plt.show()
 
 
 #%% QE_13
-fig_i13, axes_i13 = plt.subplots(nrows=2, ncols=3, sharex=False, sharey=True, figsize=(20,10))
+fig_i13, axes_i13 = plt.subplots(nrows=3, ncols=2, sharex=False, sharey=True, figsize=(20,10))
 fig_i13.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'    
                   'Dado socioeconômico:Tipo de bolsa acadêmica durante a graduação',
                  fontsize=size_title)
-
 
 ####### Alternative A #######
 qe_i13_aa = qe_i13.loc[(qe_i13['QE_I13'] == 'A')]
@@ -953,7 +956,7 @@ p_al_qei13_aa = norm.pdf(x_al, mu_al_qei13_aa, std_al_qei13_aa)
 
 # Plot histogram
 axes_i13[0,0].plot(x_al, p_al_qei13_aa, 'k', linewidth=1.5)
-
+axes_i13[0,0].set_xlim([0,100])
 axes_i13[0,0].fill_between(x_al, p_al_qei13_aa, color='royalblue')
 axes_i13[0,0].axvline(qe_i13_aa['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
 axes_i13[0,0].text(qe_i13_aa['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
@@ -977,7 +980,7 @@ p_al_qei13_bb = norm.pdf(x_al, mu_al_qei13_bb, std_al_qei13_bb)
 
 # Plot histogram
 axes_i13[0,1].plot(x_al, p_al_qei13_bb, 'k', linewidth=1.5)
-
+axes_i13[0,1].set_xlim([0,100])
 axes_i13[0,1].fill_between(x_al, p_al_qei13_bb, color='royalblue')
 axes_i13[0,1].axvline(qe_i13_bb['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
 axes_i13[0,1].text(qe_i13_bb['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
@@ -1000,15 +1003,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei13_cc = norm.pdf(x_al, mu_al_qei13_cc, std_al_qei13_cc)
 
 # Plot histogram
-axes_i13[0,2].plot(x_al, p_al_qei13_cc, 'k', linewidth=1.5)
-
-axes_i13[0,2].fill_between(x_al, p_al_qei13_cc, color='royalblue')
-axes_i13[0,2].axvline(qe_i13_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i13[0,2].text(qe_i13_cc['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i13[1,0].plot(x_al, p_al_qei13_cc, 'k', linewidth=1.5)
+axes_i13[1,0].set_xlim([0,100])
+axes_i13[1,0].fill_between(x_al, p_al_qei13_cc, color='royalblue')
+axes_i13[1,0].axvline(qe_i13_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i13[1,0].text(qe_i13_cc['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i13_cc['NT_GER'].mean()))
-axes_i13[0,2].text(qe_i13_cc['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i13[1,0].text(qe_i13_cc['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i13_cc['NT_GER'].std()))
-axes_i13[0,2].set_title("C:Extensão", fontsize=size_subtitle)
+axes_i13[1,0].set_title("C:Extensão", fontsize=size_subtitle)
 
 ####### Alternative D #######
 qe_i13_dd = qe_i13.loc[(qe_i13['QE_I13'] == 'D')]
@@ -1024,14 +1027,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei13_dd = norm.pdf(x_al, mu_al_qei13_dd, std_al_qei13_dd)
 
 # Plot histogram
-axes_i13[1,0].plot(x_al, p_al_qei13_dd, 'k', linewidth=1.5)
-axes_i13[1,0].fill_between(x_al, p_al_qei13_dd, color='royalblue')
-axes_i13[1,0].axvline(qe_i13_dd['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i13[1,0].text(qe_i13_dd['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i13[1,1].plot(x_al, p_al_qei13_dd, 'k', linewidth=1.5)
+axes_i13[1,1].set_xlim([0,100])
+axes_i13[1,1].fill_between(x_al, p_al_qei13_dd, color='royalblue')
+axes_i13[1,1].axvline(qe_i13_dd['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i13[1,1].text(qe_i13_dd['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i13_dd['NT_GER'].mean()))
-axes_i13[1,0].text(qe_i13_dd['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i13[1,1].text(qe_i13_dd['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i13_dd['NT_GER'].std()))
-axes_i13[1,0].set_title("D:Monitoria/tutoria", fontsize=size_subtitle)
+axes_i13[1,1].set_title("D:Monitoria/tutoria", fontsize=size_subtitle)
 
 ####### Alternative E #######
 qe_i13_ee = qe_i13.loc[(qe_i13['QE_I13'] == 'E')]
@@ -1046,15 +1050,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei13_ee = norm.pdf(x_al, mu_al_qei13_ee, std_al_qei13_ee)
 
 # Plot histogram
-axes_i13[1,1].plot(x_al, p_al_qei13_ee, 'k', linewidth=1.5)
-
-axes_i13[1,1].fill_between(x_al, p_al_qei13_ee, color='royalblue')
-axes_i13[1,1].axvline(qe_i13_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i13[1,1].text(qe_i13_ee['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i13[2,0].plot(x_al, p_al_qei13_ee, 'k', linewidth=1.5)
+axes_i13[2,0].set_xlim([0,100])
+axes_i13[2,0].fill_between(x_al, p_al_qei13_ee, color='royalblue')
+axes_i13[2,0].axvline(qe_i13_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i13[2,0].text(qe_i13_ee['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i13_ee['NT_GER'].mean()))
-axes_i13[1,1].text(qe_i13_ee['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i13[2,0].text(qe_i13_ee['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i13_ee['NT_GER'].std()))
-axes_i13[1,1].set_title("E:PET", fontsize=size_subtitle)
+axes_i13[2,0].set_title("E:PET", fontsize=size_subtitle)
 
 ####### Alternative F #######
 qe_i13_ff = qe_i13.loc[(qe_i13['QE_I13'] == 'F')]
@@ -1070,15 +1074,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei13_ff = norm.pdf(x_al, mu_al_qei13_ff, std_al_qei13_ff)
 
 # Plot histogram
-axes_i13[1,2].plot(x_al, p_al_qei13_ff, 'k', linewidth=1.5)
-
-axes_i13[1,2].fill_between(x_al, p_al_qei13_ff, color='royalblue')
-axes_i13[1,2].axvline(qe_i13_ff['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i13[1,2].text(qe_i13_ff['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i13[2,1].plot(x_al, p_al_qei13_ff, 'k', linewidth=1.5)
+axes_i13[2,1].set_xlim([0,100])
+axes_i13[2,1].fill_between(x_al, p_al_qei13_ff, color='royalblue')
+axes_i13[2,1].axvline(qe_i13_ff['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i13[2,1].text(qe_i13_ff['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i13_ff['NT_GER'].mean()))
-axes_i13[1,2].text(qe_i13_ff['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i13[2,1].text(qe_i13_ff['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i13_ff['NT_GER'].std()))
-axes_i13[1,2].set_title("F:Outro", fontsize=size_subtitle)
+axes_i13[2,1].set_title("F:Outro", fontsize=size_subtitle)
 
 for ax in axes_i13.flat:
     ax.set(xlabel='Nota', ylabel='Distribuição')
@@ -1088,11 +1092,11 @@ for ax in axes_i13.flat:
     ax.label_outer()
 
 # Dica: você deve estar na pasta tcc_codes (Variable explorer)
-plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I13_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.savefig('../tcc_codes/analise_stats/AL/imagens/maior_impacto/QE_I13_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
 plt.show()
 
 #%% QE_I17
-fig_i17, axes_i17 = plt.subplots(nrows=2, ncols=3, sharex=False, sharey=True, figsize=(20,10))
+fig_i17, axes_i17 = plt.subplots(nrows=3, ncols=2, sharex=False, sharey=True, figsize=(20,10))
 fig_i17.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'    
                   'Dado socioeconômico:Tipo de escola que cursou o ensino médio',
                  fontsize=size_title)
@@ -1161,15 +1165,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei17_cc = norm.pdf(x_al, mu_al_qei17_cc, std_al_qei17_cc)
 
 # Plot histogram
-axes_i17[0,2].plot(x_al, p_al_qei17_cc, 'k', linewidth=1.5)
+axes_i17[1,0].plot(x_al, p_al_qei17_cc, 'k', linewidth=1.5)
 
-axes_i17[0,2].fill_between(x_al, p_al_qei17_cc, color='royalblue')
-axes_i17[0,2].axvline(qe_i17_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i17[0,2].text(qe_i17_cc['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i17[1,0].fill_between(x_al, p_al_qei17_cc, color='royalblue')
+axes_i17[1,0].axvline(qe_i17_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i17[1,0].text(qe_i17_cc['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i17_cc['NT_GER'].mean()))
-axes_i17[0,2].text(qe_i17_cc['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i17[1,0].text(qe_i17_cc['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i17_cc['NT_GER'].std()))
-axes_i17[0,2].set_title("C:Todo no exterior", fontsize=size_subtitle)
+axes_i17[1,0].set_title("C:Todo no exterior", fontsize=size_subtitle)
 
 ####### Alternative D #######
 qe_i17_dd = qe_i17.loc[(qe_i17['QE_I17'] == 'D')]
@@ -1185,14 +1189,14 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei17_dd = norm.pdf(x_al, mu_al_qei17_dd, std_al_qei17_dd)
 
 # Plot histogram
-axes_i17[1,0].plot(x_al, p_al_qei17_dd, 'k', linewidth=1.5)
-axes_i17[1,0].fill_between(x_al, p_al_qei17_dd, color='royalblue')
-axes_i17[1,0].axvline(qe_i17_dd['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i17[1,0].text(qe_i17_dd['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i17[1,1].plot(x_al, p_al_qei17_dd, 'k', linewidth=1.5)
+axes_i17[1,1].fill_between(x_al, p_al_qei17_dd, color='royalblue')
+axes_i17[1,1].axvline(qe_i17_dd['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i17[1,1].text(qe_i17_dd['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i17_dd['NT_GER'].mean()))
-axes_i17[1,0].text(qe_i17_dd['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i17[1,1].text(qe_i17_dd['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i17_dd['NT_GER'].std()))
-axes_i17[1,0].set_title("D:Maior parte em pública", fontsize=size_subtitle)
+axes_i17[1,1].set_title("D:Maior parte em pública", fontsize=size_subtitle)
 
 ####### Alternative E #######
 qe_i17_ee = qe_i17.loc[(qe_i17['QE_I17'] == 'E')]
@@ -1207,15 +1211,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei17_ee = norm.pdf(x_al, mu_al_qei17_ee, std_al_qei17_ee)
 
 # Plot histogram
-axes_i17[1,1].plot(x_al, p_al_qei17_ee, 'k', linewidth=1.5)
+axes_i17[2,0].plot(x_al, p_al_qei17_ee, 'k', linewidth=1.5)
 
-axes_i17[1,1].fill_between(x_al, p_al_qei17_ee, color='royalblue')
-axes_i17[1,1].axvline(qe_i17_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i17[1,1].text(qe_i17_ee['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i17[2,0].fill_between(x_al, p_al_qei17_ee, color='royalblue')
+axes_i17[2,0].axvline(qe_i17_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i17[2,0].text(qe_i17_ee['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i17_ee['NT_GER'].mean()))
-axes_i17[1,1].text(qe_i17_ee['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i17[2,0].text(qe_i17_ee['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i17_ee['NT_GER'].std()))
-axes_i17[1,1].set_title("E:Maior parte em particular", fontsize=size_subtitle)
+axes_i17[2,0].set_title("E:Maior parte em particular", fontsize=size_subtitle)
 
 ####### Alternative F #######
 qe_i17_ff = qe_i17.loc[(qe_i17['QE_I17'] == 'F')]
@@ -1231,15 +1235,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei17_ff = norm.pdf(x_al, mu_al_qei17_ff, std_al_qei17_ff)
 
 # Plot histogram
-axes_i17[1,2].plot(x_al, p_al_qei17_ff, 'k', linewidth=1.5)
+axes_i17[2,1].plot(x_al, p_al_qei17_ff, 'k', linewidth=1.5)
 
-axes_i17[1,2].fill_between(x_al, p_al_qei17_ff, color='royalblue')
-axes_i17[1,2].axvline(qe_i17_ff['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i17[1,2].text(qe_i17_ff['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i17[2,1].fill_between(x_al, p_al_qei17_ff, color='royalblue')
+axes_i17[2,1].axvline(qe_i17_ff['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i17[2,1].text(qe_i17_ff['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i17_ff['NT_GER'].mean()))
-axes_i17[1,2].text(qe_i17_ff['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i17[2,1].text(qe_i17_ff['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i17_ff['NT_GER'].std()))
-axes_i17[1,2].set_title("F:Brasil e exterior", fontsize=size_subtitle)
+axes_i17[2,1].set_title("F:Brasil e exterior", fontsize=size_subtitle)
 
 for ax in axes_i17.flat:
     ax.set(xlabel='Nota', ylabel='Distribuição')
@@ -1249,12 +1253,12 @@ for ax in axes_i17.flat:
     ax.label_outer()
 
 # Dica: você deve estar na pasta tcc_codes (Variable explorer)
-plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I17_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.savefig('../tcc_codes/analise_stats/AL/imagens/maior_impacto/QE_I17_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
 plt.show()
 
 
 #%% QE_I18
-fig_i18, axes_i18 = plt.subplots(nrows=2, ncols=3, sharex=False, sharey=True, figsize=(20,10))
+fig_i18, axes_i18 = plt.subplots(nrows=3, ncols=2, sharex=False, sharey=True, figsize=(20,10))
 fig_i18.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'    
                   'Dado socioeconômico:Modalidade de ensino médio',
                  fontsize=size_title)
@@ -1323,15 +1327,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei18_cc = norm.pdf(x_al, mu_al_qei18_cc, std_al_qei18_cc)
 
 # Plot histogram
-axes_i18[0,2].plot(x_al, p_al_qei18_cc, 'k', linewidth=1.5)
+axes_i18[1,0].plot(x_al, p_al_qei18_cc, 'k', linewidth=1.5)
 
-axes_i18[0,2].fill_between(x_al, p_al_qei18_cc, color='royalblue')
-axes_i18[0,2].axvline(qe_i18_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i18[0,2].text(qe_i18_cc['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i18[1,0].fill_between(x_al, p_al_qei18_cc, color='royalblue')
+axes_i18[1,0].axvline(qe_i18_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i18[1,0].text(qe_i18_cc['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i18_cc['NT_GER'].mean()))
-axes_i18[0,2].text(qe_i18_cc['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i18[1,0].text(qe_i18_cc['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i18_cc['NT_GER'].std()))
-axes_i18[0,2].set_title("C:Profissionalizante magistério", fontsize=size_subtitle)
+axes_i18[1,0].set_title("C:Profissionalizante magistério", fontsize=size_subtitle)
 
 ####### Alternative D #######
 qe_i18_dd = qe_i18.loc[(qe_i18['QE_I18'] == 'D')]
@@ -1347,14 +1351,14 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei18_dd = norm.pdf(x_al, mu_al_qei18_dd, std_al_qei18_dd)
 
 # Plot histogram
-axes_i18[1,0].plot(x_al, p_al_qei18_dd, 'k', linewidth=1.5)
-axes_i18[1,0].fill_between(x_al, p_al_qei18_dd, color='royalblue')
-axes_i18[1,0].axvline(qe_i18_dd['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i18[1,0].text(qe_i18_dd['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i18[1,1].plot(x_al, p_al_qei18_dd, 'k', linewidth=1.5)
+axes_i18[1,1].fill_between(x_al, p_al_qei18_dd, color='royalblue')
+axes_i18[1,1].axvline(qe_i18_dd['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i18[1,1].text(qe_i18_dd['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i18_dd['NT_GER'].mean()))
-axes_i18[1,0].text(qe_i18_dd['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i18[1,1].text(qe_i18_dd['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i18_dd['NT_GER'].std()))
-axes_i18[1,0].set_title("D:EJA e/ou Supletivo", fontsize=size_subtitle)
+axes_i18[1,1].set_title("D:EJA e/ou Supletivo", fontsize=size_subtitle)
 
 ####### Alternative E #######
 qe_i18_ee = qe_i18.loc[(qe_i18['QE_I18'] == 'E')]
@@ -1369,17 +1373,17 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei18_ee = norm.pdf(x_al, mu_al_qei18_ee, std_al_qei18_ee)
 
 # Plot histogram
-axes_i18[1,1].plot(x_al, p_al_qei18_ee, 'k', linewidth=1.5)
+axes_i18[2,0].plot(x_al, p_al_qei18_ee, 'k', linewidth=1.5)
 
-axes_i18[1,1].fill_between(x_al, p_al_qei18_ee, color='royalblue')
-axes_i18[1,1].axvline(qe_i18_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i18[1,1].text(qe_i18_ee['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i18[2,0].fill_between(x_al, p_al_qei18_ee, color='royalblue')
+axes_i18[2,0].axvline(qe_i18_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i18[2,0].text(qe_i18_ee['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i18_ee['NT_GER'].mean()))
-axes_i18[1,1].text(qe_i18_ee['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i18[2,0].text(qe_i18_ee['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i18_ee['NT_GER'].std()))
-axes_i18[1,1].set_title("E:Outro", fontsize=size_subtitle)
+axes_i18[2,0].set_title("E:Outro", fontsize=size_subtitle)
 
-axes_i18[1,2].axis('off')
+axes_i18[2,1].axis('off')
 
 for ax in axes_i18.flat:
     ax.set(xlabel='Nota', ylabel='Distribuição')
@@ -1389,11 +1393,11 @@ for ax in axes_i18.flat:
     ax.label_outer()
 
 # Dica: você deve estar na pasta tcc_codes (Variable explorer)
-plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I18_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.savefig('../tcc_codes/analise_stats/AL/imagens/maior_impacto/QE_I18_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
 plt.show()
 
 #%% QE_I23
-fig_i23, axes_i23 = plt.subplots(nrows=2, ncols=3, sharex=False, sharey=True, figsize=(20,10))
+fig_i23, axes_i23 = plt.subplots(nrows=3, ncols=2, sharex=False, sharey=True, figsize=(20,10))
 fig_i23.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'    
                   'Dado socioeconômico:Horas de estudo por semana (excluindo aulas)',
                  fontsize=size_title)
@@ -1462,15 +1466,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei23_cc = norm.pdf(x_al, mu_al_qei23_cc, std_al_qei23_cc)
 
 # Plot histogram
-axes_i23[0,2].plot(x_al, p_al_qei23_cc, 'k', linewidth=1.5)
+axes_i23[1,0].plot(x_al, p_al_qei23_cc, 'k', linewidth=1.5)
 
-axes_i23[0,2].fill_between(x_al, p_al_qei23_cc, color='royalblue')
-axes_i23[0,2].axvline(qe_i23_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i23[0,2].text(qe_i23_cc['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i23[1,0].fill_between(x_al, p_al_qei23_cc, color='royalblue')
+axes_i23[1,0].axvline(qe_i23_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i23[1,0].text(qe_i23_cc['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i23_cc['NT_GER'].mean()))
-axes_i23[0,2].text(qe_i23_cc['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i23[1,0].text(qe_i23_cc['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i23_cc['NT_GER'].std()))
-axes_i23[0,2].set_title("C:Quatro a sete", fontsize=size_subtitle)
+axes_i23[1,0].set_title("C:Quatro a sete", fontsize=size_subtitle)
 
 ####### Alternative D #######
 qe_i23_dd = qe_i23.loc[(qe_i23['QE_I23'] == 'D')]
@@ -1486,14 +1490,14 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei23_dd = norm.pdf(x_al, mu_al_qei23_dd, std_al_qei23_dd)
 
 # Plot histogram
-axes_i23[1,0].plot(x_al, p_al_qei23_dd, 'k', linewidth=1.5)
-axes_i23[1,0].fill_between(x_al, p_al_qei23_dd, color='royalblue')
-axes_i23[1,0].axvline(qe_i23_dd['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i23[1,0].text(qe_i23_dd['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i23[1,1].plot(x_al, p_al_qei23_dd, 'k', linewidth=1.5)
+axes_i23[1,1].fill_between(x_al, p_al_qei23_dd, color='royalblue')
+axes_i23[1,1].axvline(qe_i23_dd['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i23[1,1].text(qe_i23_dd['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i23_dd['NT_GER'].mean()))
-axes_i23[1,0].text(qe_i23_dd['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i23[1,1].text(qe_i23_dd['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i23_dd['NT_GER'].std()))
-axes_i23[1,0].set_title("D:Oito a doze", fontsize=size_subtitle)
+axes_i23[1,1].set_title("D:Oito a doze", fontsize=size_subtitle)
 
 ####### Alternative E #######
 qe_i23_ee = qe_i23.loc[(qe_i23['QE_I23'] == 'E')]
@@ -1508,17 +1512,17 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei23_ee = norm.pdf(x_al, mu_al_qei23_ee, std_al_qei23_ee)
 
 # Plot histogram
-axes_i23[1,1].plot(x_al, p_al_qei23_ee, 'k', linewidth=1.5)
+axes_i23[2,0].plot(x_al, p_al_qei23_ee, 'k', linewidth=1.5)
 
-axes_i23[1,1].fill_between(x_al, p_al_qei23_ee, color='royalblue')
-axes_i23[1,1].axvline(qe_i23_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i23[1,1].text(qe_i23_ee['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i23[2,0].fill_between(x_al, p_al_qei23_ee, color='royalblue')
+axes_i23[2,0].axvline(qe_i23_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i23[2,0].text(qe_i23_ee['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i23_ee['NT_GER'].mean()))
-axes_i23[1,1].text(qe_i23_ee['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i23[2,0].text(qe_i23_ee['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i23_ee['NT_GER'].std()))
-axes_i23[1,1].set_title("E:Mais de doze", fontsize=size_subtitle)
+axes_i23[2,0].set_title("E:Mais de doze", fontsize=size_subtitle)
 
-axes_i23[1,2].axis('off')
+axes_i23[2,1].axis('off')
 
 for ax in axes_i23.flat:
     ax.set(xlabel='Nota', ylabel='Distribuição')
@@ -1528,13 +1532,13 @@ for ax in axes_i23.flat:
     ax.label_outer()
 
 # Dica: você deve estar na pasta tcc_codes (Variable explorer)
-plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I23_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.savefig('../tcc_codes/analise_stats/AL//imagens/maior_impacto/QE_I23_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
 plt.show()
 
 #%% 
 ############################## Subplots - Menor impacto ##############################
 ############################## QE_I01 ##############################
-fig_i01, axes_i01 = plt.subplots(nrows=2, ncols=3, sharex=False, sharey=True, figsize=(20,10))
+fig_i01, axes_i01 = plt.subplots(nrows=3, ncols=2, sharex=False, sharey=True, figsize=(20,10))
 fig_i01.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'    
                   'Dado socioeconômico:Estado civil',
                  fontsize=size_title)
@@ -1603,15 +1607,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei01_cc = norm.pdf(x_al, mu_al_qei01_cc, std_al_qei01_cc)
 
 # Plot histogram
-axes_i01[0,2].plot(x_al, p_al_qei01_cc, 'k', linewidth=1.5)
+axes_i01[1,0].plot(x_al, p_al_qei01_cc, 'k', linewidth=1.5)
 
-axes_i01[0,2].fill_between(x_al, p_al_qei01_cc, color='royalblue')
-axes_i01[0,2].axvline(qe_i01_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i01[0,2].text(qe_i01_cc['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i01[1,0].fill_between(x_al, p_al_qei01_cc, color='royalblue')
+axes_i01[1,0].axvline(qe_i01_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i01[1,0].text(qe_i01_cc['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i01_cc['NT_GER'].mean()))
-axes_i01[0,2].text(qe_i01_cc['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i01[1,0].text(qe_i01_cc['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i01_cc['NT_GER'].std()))
-axes_i01[0,2].set_title("C:Separado(a)", fontsize=size_subtitle)
+axes_i01[1,0].set_title("C:Separado(a)", fontsize=size_subtitle)
 
 ####### Alternative D #######
 qe_i01_dd = qe_i01.loc[(qe_i01['QE_I01'] == 'D')]
@@ -1627,14 +1631,14 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei01_dd = norm.pdf(x_al, mu_al_qei01_dd, std_al_qei01_dd)
 
 # Plot histogram
-axes_i01[1,0].plot(x_al, p_al_qei01_dd, 'k', linewidth=1.5)
-axes_i01[1,0].fill_between(x_al, p_al_qei01_dd, color='royalblue')
-axes_i01[1,0].axvline(qe_i01_dd['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i01[1,0].text(qe_i01_dd['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i01[1,1].plot(x_al, p_al_qei01_dd, 'k', linewidth=1.5)
+axes_i01[1,1].fill_between(x_al, p_al_qei01_dd, color='royalblue')
+axes_i01[1,1].axvline(qe_i01_dd['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i01[1,1].text(qe_i01_dd['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i01_dd['NT_GER'].mean()))
-axes_i01[1,0].text(qe_i01_dd['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i01[1,1].text(qe_i01_dd['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i01_dd['NT_GER'].std()))
-axes_i01[1,0].set_title("D:Viúvo(a)", fontsize=size_subtitle)
+axes_i01[1,1].set_title("D:Viúvo(a)", fontsize=size_subtitle)
 
 ####### Alternative E #######
 qe_i01_ee = qe_i01.loc[(qe_i01['QE_I01'] == 'E')]
@@ -1649,17 +1653,17 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei01_ee = norm.pdf(x_al, mu_al_qei01_ee, std_al_qei01_ee)
 
 # Plot histogram
-axes_i01[1,1].plot(x_al, p_al_qei01_ee, 'k', linewidth=1.5)
+axes_i01[2,0].plot(x_al, p_al_qei01_ee, 'k', linewidth=1.5)
 
-axes_i01[1,1].fill_between(x_al, p_al_qei01_ee, color='royalblue')
-axes_i01[1,1].axvline(qe_i01_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i01[1,1].text(qe_i01_ee['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i01[2,0].fill_between(x_al, p_al_qei01_ee, color='royalblue')
+axes_i01[2,0].axvline(qe_i01_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i01[2,0].text(qe_i01_ee['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i01_ee['NT_GER'].mean()))
-axes_i01[1,1].text(qe_i01_ee['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i01[2,0].text(qe_i01_ee['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i01_ee['NT_GER'].std()))
-axes_i01[1,1].set_title("E:Outro", fontsize=size_subtitle)
+axes_i01[2,0].set_title("E:Outro", fontsize=size_subtitle)
 
-axes_i01[1,2].axis('off')
+axes_i01[2,1].axis('off')
 
 for ax in axes_i01.flat:
     ax.set(xlabel='Nota', ylabel='Distribuição')
@@ -1669,7 +1673,7 @@ for ax in axes_i01.flat:
     ax.label_outer()
 
 # Dica: você deve estar na pasta tcc_codes (Variable explorer)
-plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I01_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.savefig('../tcc_codes/analise_stats/AL/imagens/menor_impacto/QE_I01_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
 plt.show()
 
 
@@ -1764,12 +1768,12 @@ for ax in axes_i03.flat:
     ax.label_outer()
 
 # Dica: você deve estar na pasta tcc_codes (Variable explorer)
-plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I03_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.savefig('../tcc_codes/analise_stats/AL/imagens/menor_impacto/maior_impacto/QE_I03_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
 plt.show()
 
 #%%
 ############################## QE_I12 ##############################
-fig_i12, axes_i12 = plt.subplots(nrows=2, ncols=3, sharex=False, sharey=True, figsize=(20,10))
+fig_i12, axes_i12 = plt.subplots(nrows=3, ncols=2, sharex=False, sharey=True, figsize=(20,10))
 fig_i12.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'    
                   'Dado socioeconômico:Tipo de bolsa de permanência durante da graduação',
                  fontsize=size_title)
@@ -1838,15 +1842,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei12_cc = norm.pdf(x_al, mu_al_qei12_cc, std_al_qei12_cc)
 
 # Plot histogram
-axes_i12[0,2].plot(x_al, p_al_qei12_cc, 'k', linewidth=1.5)
+axes_i12[1,0].plot(x_al, p_al_qei12_cc, 'k', linewidth=1.5)
 
-axes_i12[0,2].fill_between(x_al, p_al_qei12_cc, color='royalblue')
-axes_i12[0,2].axvline(qe_i12_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i12[0,2].text(qe_i12_cc['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i12[1,0].fill_between(x_al, p_al_qei12_cc, color='royalblue')
+axes_i12[1,0].axvline(qe_i12_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i12[1,0].text(qe_i12_cc['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i12_cc['NT_GER'].mean()))
-axes_i12[0,2].text(qe_i12_cc['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i12[1,0].text(qe_i12_cc['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i12_cc['NT_GER'].std()))
-axes_i12[0,2].set_title("C:Aux.alimentação", fontsize=size_subtitle)
+axes_i12[1,0].set_title("C:Aux.alimentação", fontsize=size_subtitle)
 
 ####### Alternative D #######
 qe_i12_dd = qe_i12.loc[(qe_i12['QE_I12'] == 'D')]
@@ -1884,15 +1888,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei12_ee = norm.pdf(x_al, mu_al_qei12_ee, std_al_qei12_ee)
 
 # Plot histogram
-axes_i12[1,1].plot(x_al, p_al_qei12_ee, 'k', linewidth=1.5)
+axes_i12[2,0].plot(x_al, p_al_qei12_ee, 'k', linewidth=1.5)
 
-axes_i12[1,1].fill_between(x_al, p_al_qei12_ee, color='royalblue')
-axes_i12[1,1].axvline(qe_i12_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i12[1,1].text(qe_i12_ee['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i12[2,0].fill_between(x_al, p_al_qei12_ee, color='royalblue')
+axes_i12[2,0].axvline(qe_i12_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i12[2,0].text(qe_i12_ee['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i12_ee['NT_GER'].mean()))
-axes_i12[1,1].text(qe_i12_ee['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i12[2,0].text(qe_i12_ee['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i12_ee['NT_GER'].std()))
-axes_i12[1,1].set_title("E:Aux.permanência", fontsize=size_subtitle)
+axes_i12[2,0].set_title("E:Aux.permanência", fontsize=size_subtitle)
 
 ####### Alternative F #######
 qe_i12_ff = qe_i12.loc[(qe_i12['QE_I12'] == 'F')]
@@ -1908,15 +1912,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei12_ff = norm.pdf(x_al, mu_al_qei12_ff, std_al_qei12_ff)
 
 # Plot histogram
-axes_i12[1,2].plot(x_al, p_al_qei12_ff, 'k', linewidth=1.5)
+axes_i12[2,1].plot(x_al, p_al_qei12_ff, 'k', linewidth=1.5)
 
-axes_i12[1,2].fill_between(x_al, p_al_qei12_ff, color='royalblue')
-axes_i12[1,2].axvline(qe_i12_ff['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i12[1,2].text(qe_i12_ff['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i12[2,1].fill_between(x_al, p_al_qei12_ff, color='royalblue')
+axes_i12[2,1].axvline(qe_i12_ff['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i12[2,1].text(qe_i12_ff['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i12_ff['NT_GER'].mean()))
-axes_i12[1,2].text(qe_i12_ff['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i12[2,1].text(qe_i12_ff['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i12_ff['NT_GER'].std()))
-axes_i12[1,2].set_title("F:Outro", fontsize=size_subtitle)
+axes_i12[2,1].set_title("F:Outro", fontsize=size_subtitle)
 
 for ax in axes_i12.flat:
     ax.set(xlabel='Nota', ylabel='Distribuição')
@@ -1926,12 +1930,12 @@ for ax in axes_i12.flat:
     ax.label_outer()
 
 # Dica: você deve estar na pasta tcc_codes (Variable explorer)
-plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I12_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.savefig('../tcc_codes/analise_stats/AL/imagens/menor_impacto/QE_I12_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
 plt.show()
 
 #%%
 ############################## QE_I15 ##############################
-fig_i15, axes_i15 = plt.subplots(nrows=2, ncols=3, sharex=False, sharey=True, figsize=(20,10))
+fig_i15, axes_i15 = plt.subplots(nrows=3, ncols=2, sharex=False, sharey=True, figsize=(20,10))
 fig_i15.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'    
                   'Dado socioeconômico:Ingresso por ação afrimativa e critério',
                  fontsize=size_title)
@@ -2000,15 +2004,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei15_cc = norm.pdf(x_al, mu_al_qei15_cc, std_al_qei15_cc)
 
 # Plot histogram
-axes_i15[0,2].plot(x_al, p_al_qei15_cc, 'k', linewidth=1.5)
+axes_i15[1,0].plot(x_al, p_al_qei15_cc, 'k', linewidth=1.5)
 
-axes_i15[0,2].fill_between(x_al, p_al_qei15_cc, color='royalblue')
-axes_i15[0,2].axvline(qe_i15_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i15[0,2].text(qe_i15_cc['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i15[1,0].fill_between(x_al, p_al_qei15_cc, color='royalblue')
+axes_i15[1,0].axvline(qe_i15_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i15[1,0].text(qe_i15_cc['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i15_cc['NT_GER'].mean()))
-axes_i15[0,2].text(qe_i15_cc['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i15[1,0].text(qe_i15_cc['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i15_cc['NT_GER'].std()))
-axes_i15[0,2].set_title("C:Sim;renda", fontsize=size_subtitle)
+axes_i15[1,0].set_title("C:Sim;renda", fontsize=size_subtitle)
 
 ####### Alternative D #######
 qe_i15_dd = qe_i15.loc[(qe_i15['QE_I15'] == 'D')]
@@ -2046,15 +2050,15 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei15_ee = norm.pdf(x_al, mu_al_qei15_ee, std_al_qei15_ee)
 
 # Plot histogram
-axes_i15[1,1].plot(x_al, p_al_qei15_ee, 'k', linewidth=1.5)
+axes_i15[2,0].plot(x_al, p_al_qei15_ee, 'k', linewidth=1.5)
 
-axes_i15[1,1].fill_between(x_al, p_al_qei15_ee, color='royalblue')
-axes_i15[1,1].axvline(qe_i15_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i15[1,1].text(qe_i15_ee['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
+axes_i15[2,0].fill_between(x_al, p_al_qei15_ee, color='royalblue')
+axes_i15[2,0].axvline(qe_i15_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i15[2,0].text(qe_i15_ee['NT_GER'].mean()*1.1, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i15_ee['NT_GER'].mean()))
-axes_i15[1,1].text(qe_i15_ee['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i15[2,0].text(qe_i15_ee['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i15_ee['NT_GER'].std()))
-axes_i15[1,1].set_title("E:Sim;2 ou mais critérios anteriores", fontsize=size_subtitle)
+axes_i15[2,0].set_title("E:Sim;2 ou mais critérios anteriores", fontsize=size_subtitle)
 
 ####### Alternative F #######
 qe_i15_ff = qe_i15.loc[(qe_i15['QE_I15'] == 'F')]
@@ -2088,7 +2092,7 @@ for ax in axes_i15.flat:
     ax.label_outer()
 
 # Dica: você deve estar na pasta tcc_codes (Variable explorer)
-plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I15_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.savefig('../tcc_codes/analise_stats/AL/imagens/menor_impacto/QE_I15_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
 plt.show()
 
 #%% QE_I16
@@ -2279,7 +2283,7 @@ for ax in axes_i19.flat:
     ax.label_outer()
 
 # Dica: você deve estar na pasta tcc_codes (Variable explorer)
-plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I19_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.savefig('../tcc_codes/analise_stats/AL/imagens/menor_impacto/QE_I19_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
 plt.show()
 #%% QE_I21
 ############################## QE_I21 ##############################
@@ -2338,7 +2342,7 @@ axes_i21[0,1].text(qe_i21_bb['NT_GER'].mean()*1.1, max_ylim*0.83, 'Desvio padrã
 axes_i21[0,1].set_title("B:Não", fontsize=size_subtitle)
 
 axes_i21[1,0].axes('off')
-axes_i21[1,1].axes('off')
+axes_i21[2,0].axes('off')
 
 for ax in axes_i21.flat:
     ax.set(xlabel='Nota', ylabel='Distribuição')
@@ -2348,7 +2352,7 @@ for ax in axes_i21.flat:
     ax.label_outer()
 
 # Dica: você deve estar na pasta tcc_codes (Variable explorer)
-plt.savefig('../tcc_codes/analise_stats/AL/imagens/QE_I21_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.savefig('../tcc_codes/analise_stats/AL/imagens/menor_impacto/QE_I21_AL_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
 plt.show()
 
 #%%
