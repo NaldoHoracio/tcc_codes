@@ -290,6 +290,7 @@ qe_i03 = dataset_br[["QE_I03", "NT_GER"]]
 qe_i06 = dataset_br[["QE_I06", "NT_GER"]]
 qe_i12 = dataset_br[["QE_I12", "NT_GER"]]
 qe_i15 = dataset_br[["QE_I15", "NT_GER"]]
+qe_i16 = dataset_br[["QE_I16", "NT_GER"]]
 qe_i19 = dataset_br[["QE_I19", "NT_GER"]]
 qe_i20 = dataset_br[["QE_I20", "NT_GER"]]
 qe_i21 = dataset_br[["QE_I21", "NT_GER"]]
@@ -456,11 +457,11 @@ for ax in axes_i02.flat:
     plot_axis_name(ax, fontsize=10)
 
 # Dica: você deve estar na pasta tcc_codes (Variable explorer)
-plt.savefig('../tcc_codes/analise_stats/BR/imagens/maior_impacto/QE_I02_BR_GAUSS.png', 
+plt.savefig('../tcc_codes/analise_stats/BR/imagens/menor_impacto/QE_I02_BR_GAUSS.png', 
             dpi=150, bbox_inches='tight', pad_inches=0.015);
 plt.show()
 #%% QE_I08
-fig_i08, axes_i08 = plt.subplots(nrows=3, ncols=3, sharex=False, sharey=True, figsize=(15,15))
+fig_i08, axes_i08 = plt.subplots(nrows=3, ncols=3, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
 fig_i08.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'
                  'Dado socieconômico:Renda bruta',
                  fontsize=size_title)
@@ -649,7 +650,7 @@ plt.show()
 #%% QE_I11A
 size_title = 18
 size_subtitle = 14
-fig_i11a, axes_i11a = plt.subplots(nrows=3, ncols=2, sharex=False, sharey=True, figsize=(15,15))
+fig_i11a, axes_i11a = plt.subplots(nrows=3, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
 fig_i11a.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'    
                   'Dado socieconômico:Tipo de financiamento p/ custeio das mensalidades',
                  fontsize=size_title)
@@ -811,7 +812,7 @@ plt.savefig('../tcc_codes/analise_stats/BR/imagens/maior_impacto/QE_I11A_BR_GAUS
 plt.show()
 
 #%% QE_I11B
-fig_i11b, axes_i11b = plt.subplots(nrows=3, ncols=2, sharex=False, sharey=True, figsize=(15,15))
+fig_i11b, axes_i11b = plt.subplots(nrows=3, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
 fig_i11b.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'
                   'Dado socieconômico:Tipo de financiamento para custeio das mensalidades',
                  fontsize=size_title)
@@ -950,7 +951,7 @@ plt.show()
 
 
 #%% QE_13
-fig_i13, axes_i13 = plt.subplots(nrows=3, ncols=2, sharex=False, sharey=True, figsize=(15,15))
+fig_i13, axes_i13 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
 fig_i13.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'    
                   'Dado socioeconômico:Tipo de bolsa acadêmica durante a graduação',
                  fontsize=size_title)
@@ -1111,7 +1112,7 @@ plt.savefig('../tcc_codes/analise_stats/BR/imagens/maior_impacto/QE_I13_BR_GAUSS
 plt.show()
 
 #%% QE_I17
-fig_i17, axes_i17 = plt.subplots(nrows=3, ncols=2, sharex=False, sharey=True, figsize=(15,15))
+fig_i17, axes_i17 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
 fig_i17.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'    
                   'Dado socioeconômico:Tipo de escola que cursou o ensino médio',
                  fontsize=size_title)
@@ -1272,7 +1273,7 @@ plt.savefig('../tcc_codes/analise_stats/BR/imagens/maior_impacto/QE_I17_BR_GAUSS
 plt.show()
 
 #%% QE_I23
-fig_i23, axes_i23 = plt.subplots(nrows=3, ncols=2, sharex=False, sharey=True, figsize=(15,15))
+fig_i23, axes_i23 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
 fig_i23.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'    
                   'Dado socioeconômico:Horas de estudo por semana (excluindo aulas)',
                  fontsize=size_title)
@@ -1411,7 +1412,7 @@ plt.savefig('../tcc_codes/analise_stats/BR//imagens/maior_impacto/QE_I23_BR_GAUS
 plt.show()
 
 #%% QE_I25
-fig_i25, axes_i25 = plt.subplots(nrows=3, ncols=3, sharex=False, sharey=True, figsize=(15,15))
+fig_i25, axes_i25 = plt.subplots(nrows=3, ncols=3, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
 fig_i25.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'    
                   'Dado socioeconômico:Principal motivo de escolha do curso',
                  fontsize=size_title)
@@ -1621,7 +1622,7 @@ plt.show()
 #%% 
 ############################## Subplots - Menor impacto ##############################
 ############################## QE_I01 ##############################
-fig_i01, axes_i01 = plt.subplots(nrows=3, ncols=2, sharex=False, sharey=True, figsize=(15,15))
+fig_i01, axes_i01 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
 fig_i01.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'    
                   'Dado socioeconômico:Estado civil',
                  fontsize=size_title)
@@ -1762,7 +1763,7 @@ plt.show()
 
 #%%
 ############################## QE_I03 ##############################
-fig_i03, axes_i03 = plt.subplots(nrows=2, ncols=2, sharex=False, sharey=True, figsize=(15,15))
+fig_i03, axes_i03 = plt.subplots(nrows=2, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
 fig_i03.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'    
                   'Dado socioeconômico:Nacionalidade',
                  fontsize=size_title)
@@ -1855,8 +1856,176 @@ plt.savefig('../tcc_codes/analise_stats/BR/imagens/menor_impacto/QE_I03_BR_GAUSS
 plt.show()
 
 #%%
+############################## QE_I06 ##############################
+size_title = 18
+size_subtitle = 12
+fig_i06, axes_i06 = plt.subplots(nrows=3, ncols=2, constrained_layout=True,
+                                 sharex=False, sharey=True, figsize=(10,10))
+fig_i06.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'
+                 'Dado socieconômico:Onde e com quem o estudante mora',
+                 fontsize=size_title)
+
+
+# Alternative A
+qe_i06_aa = qe_i06.loc[(qe_i06['QE_I06'] == 'A')]
+
+# Média e desvio padrão
+mu_br_qei06_aa, std_br_qei06_aa = norm.fit(qe_i06_aa['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0, 0.15)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei06_aa = norm.pdf(x_br, mu_br_qei06_aa, std_br_qei06_aa)
+
+# Plot histogram
+axes_i06[0,0].plot(x_br, p_br_qei06_aa, 'k', linewidth=1.5)
+axes_i06[0,0].set_xlim([0,100])
+axes_i06[0,0].fill_between(x_br, p_br_qei06_aa, color='mediumseagreen')
+axes_i06[0,0].axvline(qe_i06_aa['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i06[0,0].text(qe_i06_aa['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i06_aa['NT_GER'].mean()), fontstyle='italic', weight='bold')
+axes_i06[0,0].text(qe_i06_aa['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i06_aa['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i06[0,0].set_title("A:Casa/apartamento,sozinho", fontsize=size_subtitle, weight='bold')
+
+# Plot Gaussiana
+qe_i06_bb = qe_i06.loc[(qe_i06['QE_I06'] == 'B')]
+
+mu_br_qei06_bb, std_br_qei06_bb = norm.fit(qe_i06_bb['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei06_bb = norm.pdf(x_br, mu_br_qei06_bb, std_br_qei06_bb)
+
+# Plot histogram
+axes_i06[0,1].plot(x_br, p_br_qei06_bb, 'k', linewidth=1.5)
+axes_i06[0,1].set_xlim([0,100])
+axes_i06[0,1].fill_between(x_br, p_br_qei06_bb, color='mediumseagreen')
+axes_i06[0,1].axvline(qe_i06_bb['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i06[0,1].text(qe_i06_bb['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i06_bb['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i06[0,1].text(qe_i06_bb['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i06_bb['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i06[0,1].set_title("B:Casa/apartamento,pais/parentes", fontsize=size_subtitle, weight='bold')
+
+# Alternative C
+qe_i06_cc = qe_i06.loc[(qe_i06['QE_I06'] == 'C')]
+
+mu_br_qei06_cc, std_br_qei06_cc = norm.fit(qe_i06_cc['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei06_cc = norm.pdf(x_br, mu_br_qei06_cc, std_br_qei06_cc)
+
+# Plot histogram
+axes_i06[1,0].plot(x_br, p_br_qei06_cc, 'k', linewidth=1.5)
+axes_i06[1,0].set_xlim([0,100])
+axes_i06[1,0].fill_between(x_br, p_br_qei06_cc, color='mediumseagreen')
+axes_i06[1,0].axvline(qe_i06_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i06[1,0].text(qe_i06_cc['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i06_cc['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i06[1,0].text(qe_i06_cc['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i06_cc['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i06[1,0].set_title("C:Casa/apartamento,cônjugue/filhos", fontsize=size_subtitle, weight='bold')
+
+####### Alternative D #######
+qe_i06_dd = qe_i06.loc[(qe_i06['QE_I06'] == 'D')]
+
+mu_br_qei06_dd, std_br_qei06_dd = norm.fit(qe_i06_dd['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei06_dd = norm.pdf(x_br, mu_br_qei06_dd, std_br_qei06_dd)
+
+# Plot histogram
+axes_i06[1,1].plot(x_br, p_br_qei06_dd, 'k', linewidth=1.5)
+axes_i06[1,1].set_xlim([0,100])
+axes_i06[1,1].fill_between(x_br, p_br_qei06_dd, color='mediumseagreen')
+axes_i06[1,1].axvline(qe_i06_dd['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i06[1,1].text(qe_i06_dd['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i06_dd['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i06[1,1].text(qe_i06_dd['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i06_dd['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i06[1,1].set_title("D:Casa/apartamento/república,com outras pessoas", fontsize=size_subtitle, weight='bold')
+
+# Alternative E
+qe_i06_ee = qe_i06.loc[(qe_i06['QE_I06'] == 'E')]
+
+mu_br_qei06_ee, std_br_qei06_ee = norm.fit(qe_i06_ee['NT_GER'])
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei06_ee = norm.pdf(x_br, mu_br_qei06_ee, std_br_qei06_ee)
+
+# Plot histogram
+axes_i06[2,0].plot(x_br, p_br_qei06_ee, 'k', linewidth=1.5)
+axes_i06[2,0].set_xlim([0,100])
+axes_i06[2,0].fill_between(x_br, p_br_qei06_ee, color='mediumseagreen')
+axes_i06[2,0].axvline(qe_i06_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i06[2,0].text(qe_i06_ee['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i06_ee['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i06[2,0].text(qe_i06_ee['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i06_ee['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i06[2,0].set_title("E:Alojamento na IES", fontsize=size_subtitle, weight='bold')
+
+# Alternative F
+qe_i06_ff = qe_i06.loc[(qe_i06['QE_I06'] == 'F')]
+
+mu_br_qei06_ff, std_br_qei06_ff = norm.fit(qe_i06_ff['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei06_ff = norm.pdf(x_br, mu_br_qei06_ff, std_br_qei06_ff)
+
+# Plot histogram
+axes_i06[2,1].plot(x_br, p_br_qei06_ff, 'k', linewidth=1.5)
+axes_i06[2,1].set_xlim([0,100])
+axes_i06[2,1].fill_between(x_br, p_br_qei06_ff, color='mediumseagreen')
+axes_i06[2,1].axvline(qe_i06_ff['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i06[2,1].text(qe_i06_ff['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i06_ff['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i06[2,1].text(qe_i06_ff['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i06_ff['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i06[2,1].set_title("F:Outros (hotel,hospedaria,etc)", fontsize=size_subtitle, weight='bold')
+
+axes_i06[0,0].set_ylabel('Distribuição')
+axes_i06[1,0].set_ylabel('Distribuição')
+axes_i06[2,0].set_ylabel('Distribuição')
+
+for ax in axes_i06.flat:
+    plot_axis_name(ax, fontsize=10)
+
+# Dica: você deve estar na pasta tcc_codes (Variable explorer)
+plt.savefig('../tcc_codes/analise_stats/BR/imagens/menor_impacto/QE_I06_BR_GAUSS.png', 
+            dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.show()
+
+#%%
 ############################## QE_I12 ##############################
-fig_i12, axes_i12 = plt.subplots(nrows=3, ncols=2, sharex=False, sharey=True, figsize=(15,15))
+fig_i12, axes_i12 = plt.subplots(nrows=3, ncols=2, constrained_layout=True,
+                                 sharex=False, sharey=True, figsize=(10,10))
 fig_i12.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'    
                   'Dado socioeconômico:Tipo de bolsa de permanência durante da graduação',
                  fontsize=size_title)
@@ -1878,14 +2047,14 @@ p_br_qei12_aa = norm.pdf(x_br, mu_br_qei12_aa, std_br_qei12_aa)
 
 # Plot histogram
 axes_i12[0,0].plot(x_br, p_br_qei12_aa, 'k', linewidth=1.5)
-
+axes_i12[0,0].set_xlim([0,100])
 axes_i12[0,0].fill_between(x_br, p_br_qei12_aa, color='mediumseagreen')
 axes_i12[0,0].axvline(qe_i12_aa['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
 axes_i12[0,0].text(qe_i12_aa['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i12_aa['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
 axes_i12[0,0].text(qe_i12_aa['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
-         .format(qe_i01_aa['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
-axes_i01[0,0].set_title("A:Nenhum", fontsize=size_subtitle, weight='bold')
+         .format(qe_i12_aa['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i12[0,0].set_title("A:Nenhum", fontsize=size_subtitle, weight='bold')
 
 ####### Alternative B #######
 qe_i12_bb = qe_i12.loc[(qe_i12['QE_I12'] == 'B')]
@@ -1902,7 +2071,7 @@ p_br_qei12_bb = norm.pdf(x_br, mu_br_qei12_bb, std_br_qei12_bb)
 
 # Plot histogram
 axes_i12[0,1].plot(x_br, p_br_qei12_bb, 'k', linewidth=1.5)
-
+axes_i12[0,1].set_xlim([0,100])
 axes_i12[0,1].fill_between(x_br, p_br_qei12_bb, color='mediumseagreen')
 axes_i12[0,1].axvline(qe_i12_bb['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
 axes_i12[0,1].text(qe_i12_bb['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
@@ -1926,7 +2095,7 @@ p_br_qei12_cc = norm.pdf(x_br, mu_br_qei12_cc, std_br_qei12_cc)
 
 # Plot histogram
 axes_i12[1,0].plot(x_br, p_br_qei12_cc, 'k', linewidth=1.5)
-
+axes_i12[1,0].set_xlim([0,100])
 axes_i12[1,0].fill_between(x_br, p_br_qei12_cc, color='mediumseagreen')
 axes_i12[1,0].axvline(qe_i12_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
 axes_i12[1,0].text(qe_i12_cc['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
@@ -1950,6 +2119,7 @@ p_br_qei12_dd = norm.pdf(x_br, mu_br_qei12_dd, std_br_qei12_dd)
 
 # Plot histogram
 axes_i12[1,1].plot(x_br, p_br_qei12_dd, 'k', linewidth=1.5)
+axes_i12[1,1].set_xlim([0,100])
 axes_i12[1,1].fill_between(x_br, p_br_qei12_dd, color='mediumseagreen')
 axes_i12[1,1].axvline(qe_i12_dd['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
 axes_i12[1,1].text(qe_i12_dd['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
@@ -1972,7 +2142,7 @@ p_br_qei12_ee = norm.pdf(x_br, mu_br_qei12_ee, std_br_qei12_ee)
 
 # Plot histogram
 axes_i12[2,0].plot(x_br, p_br_qei12_ee, 'k', linewidth=1.5)
-
+axes_i12[2,0].set_xlim([0,100])
 axes_i12[2,0].fill_between(x_br, p_br_qei12_ee, color='mediumseagreen')
 axes_i12[2,0].axvline(qe_i12_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
 axes_i12[2,0].text(qe_i12_ee['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
@@ -1996,7 +2166,7 @@ p_br_qei12_ff = norm.pdf(x_br, mu_br_qei12_ff, std_br_qei12_ff)
 
 # Plot histogram
 axes_i12[2,1].plot(x_br, p_br_qei12_ff, 'k', linewidth=1.5)
-
+axes_i12[2,1].set_xlim([0,100])
 axes_i12[2,1].fill_between(x_br, p_br_qei12_ff, color='mediumseagreen')
 axes_i12[2,1].axvline(qe_i12_ff['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
 axes_i12[2,1].text(qe_i12_ff['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
@@ -2013,12 +2183,14 @@ for ax in axes_i12.flat:
     plot_axis_name(ax, fontsize=10)
 
 # Dica: você deve estar na pasta tcc_codes (Variable explorer)
-plt.savefig('../tcc_codes/analise_stats/BR/imagens/menor_impacto/QE_I12_BR_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.savefig('../tcc_codes/analise_stats/BR/imagens/menor_impacto/QE_I12_BR_GAUSS.png', 
+            dpi=150, bbox_inches='tight', pad_inches=0.015);
 plt.show()
 
 #%%
 ############################## QE_I15 ##############################
-fig_i15, axes_i15 = plt.subplots(nrows=3, ncols=2, sharex=False, sharey=True, figsize=(15,15))
+fig_i15, axes_i15 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, 
+                                 sharex=False, sharey=True, figsize=(10,10))
 fig_i15.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'    
                   'Dado socioeconômico:Ingresso por ação afrimativa e critério',
                  fontsize=size_title)
@@ -2046,8 +2218,8 @@ axes_i15[0,0].axvline(qe_i15_aa['NT_GER'].mean(), color='k', linestyle='dashed',
 axes_i15[0,0].text(qe_i15_aa['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i15_aa['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
 axes_i15[0,0].text(qe_i15_aa['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
-         .format(qe_i01_aa['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
-axes_i01[0,0].set_title("A:Não", fontsize=size_subtitle, weight='bold')
+         .format(qe_i15_aa['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i15[0,0].set_title("A:Não", fontsize=size_subtitle, weight='bold')
 
 ####### Alternative B #######
 qe_i15_bb = qe_i15.loc[(qe_i15['QE_I15'] == 'B')]
@@ -2179,10 +2351,702 @@ plt.savefig('../tcc_codes/analise_stats/BR/imagens/menor_impacto/QE_I15_BR_GAUSS
 plt.show()
 
 #%% QE_I16
-############################## QE_I16 ##############################
+############################## QE_I16A ##############################
+size_title = 18
+size_subtitle = 14
+fig_i16a, axes_i16a = plt.subplots(nrows=3, ncols=3, constrained_layout=True, 
+                                   sharex=False, sharey=True, figsize=(10,10))
+fig_i16a.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'    
+                  'Dado socieconômico:Unidade da Federação que concluiu o ensino médio',
+                 fontsize=size_title)
+
+
+####### Alternative 11 #######
+qe_i16a_aa = qe_i16.loc[(qe_i16['QE_I16'] == 11)]
+# Média e desvio padrão
+mu_br_qei16a_aa, std_br_qei16a_aa = norm.fit(qe_i16a_aa['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0, 0.2)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16a_aa = norm.pdf(x_br, mu_br_qei16a_aa, std_br_qei16a_aa)
+
+# Plot histogram
+axes_i16a[0,0].plot(x_br, p_br_qei16a_aa, 'k', linewidth=1.5)
+axes_i16a[0,0].set_xlim([0,100])
+axes_i16a[0,0].fill_between(x_br, p_br_qei16a_aa, color='mediumseagreen')
+axes_i16a[0,0].axvline(qe_i16a_aa['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16a[0,0].text(qe_i16a_aa['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16a_aa['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16a[0,0].text(qe_i16a_aa['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16a_aa['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16a[0,0].set_title("Rondônia", fontsize=size_subtitle, weight='bold')
+
+####### Alternative 12 #######
+qe_i16a_bb = qe_i16.loc[(qe_i16['QE_I16'] == 12)]
+
+mu_br_qei16a_bb, std_br_qei16a_bb = norm.fit(qe_i16a_bb['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.2)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16a_bb = norm.pdf(x_br, mu_br_qei16a_bb, std_br_qei16a_bb)
+
+# Plot histogram
+axes_i16a[0,1].plot(x_br, p_br_qei16a_bb, 'k', linewidth=1.5)
+axes_i16a[0,1].set_xlim([0,100])
+axes_i16a[0,1].fill_between(x_br, p_br_qei16a_bb, color='mediumseagreen')
+axes_i16a[0,1].axvline(qe_i16a_bb['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16a[0,1].text(qe_i16a_bb['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16a_bb['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16a[0,1].text(qe_i16a_bb['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16a_bb['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16a[0,1].set_title("Acre", fontsize=size_subtitle, weight='bold')
+
+####### Alternative 13 #######
+qe_i16a_cc = qe_i16.loc[(qe_i16['QE_I16'] == 13)]
+
+mu_br_qei16a_cc, std_br_qei16a_cc = norm.fit(qe_i16a_cc['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.2)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16a_cc = norm.pdf(x_br, mu_br_qei16a_cc, std_br_qei16a_cc)
+
+# Plot histogram
+axes_i16a[0,2].plot(x_br, p_br_qei16a_cc, 'k', linewidth=1.5)
+axes_i16a[0,2].set_xlim([0,100])
+axes_i16a[0,2].fill_between(x_br, p_br_qei16a_cc, color='mediumseagreen')
+axes_i16a[0,2].axvline(qe_i16a_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16a[0,2].text(qe_i16a_cc['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16a_cc['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16a[0,2].text(qe_i16a_cc['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16a_cc['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16a[0,2].set_title("Amazonas", fontsize=size_subtitle, weight='bold')
+
+####### Alternative 14 #######
+qe_i16a_dd = qe_i16.loc[(qe_i16['QE_I16'] == 14)]
+
+mu_br_qei16a_dd, std_br_qei16a_dd = norm.fit(qe_i16a_dd['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.2)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16a_dd = norm.pdf(x_br, mu_br_qei16a_dd, std_br_qei16a_dd)
+
+# Plot histogram
+axes_i16a[1,0].plot(x_br, p_br_qei16a_dd, 'k', linewidth=1.5)
+axes_i16a[1,0].set_xlim([0,100])
+axes_i16a[1,0].fill_between(x_br, p_br_qei16a_dd, color='mediumseagreen')
+axes_i16a[1,0].axvline(qe_i16a_dd['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16a[1,0].text(qe_i16a_dd['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16a_dd['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16a[1,0].text(qe_i16a_dd['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16a_dd['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16a[1,0].set_title("Roraima", fontsize=size_subtitle, weight='bold')
+
+####### Alternative 15 #######
+qe_i16a_ee = qe_i16.loc[(qe_i16['QE_I16'] == 15)]
+
+mu_br_qei16a_ee, std_br_qei16a_ee = norm.fit(qe_i16a_ee['NT_GER'])
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.2)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16a_ee = norm.pdf(x_br, mu_br_qei16a_ee, std_br_qei16a_ee)
+
+# Plot histogram
+axes_i16a[1,1].plot(x_br, p_br_qei16a_ee, 'k', linewidth=1.5)
+axes_i16a[1,1].set_xlim([0,100])
+axes_i16a[1,1].fill_between(x_br, p_br_qei16a_ee, color='mediumseagreen')
+axes_i16a[1,1].axvline(qe_i16a_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16a[1,1].text(qe_i16a_ee['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16a_ee['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16a[1,1].text(qe_i16a_ee['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16a_ee['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16a[1,1].set_title("Pará", fontsize=size_subtitle, weight='bold')
+
+####### Alternative 16 #######
+qe_i16a_ff = qe_i16.loc[(qe_i16['QE_I16'] == 16)]
+
+mu_br_qei16a_ff, std_br_qei16a_ff = norm.fit(qe_i16a_ff['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.2)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16a_ff = norm.pdf(x_br, mu_br_qei16a_ff, std_br_qei16a_ff)
+
+# Plot histogram
+axes_i16a[1,2].plot(x_br, p_br_qei16a_ff, 'k', linewidth=1.5)
+axes_i16a[1,2].set_xlim([0,100])
+axes_i16a[1,2].fill_between(x_br, p_br_qei16a_ff, color='mediumseagreen')
+axes_i16a[1,2].axvline(qe_i16a_ff['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16a[1,2].text(qe_i16a_ff['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16a_ff['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16a[1,2].text(qe_i16a_ff['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16a_ff['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16a[1,2].set_title("Amapá", fontsize=size_subtitle, weight='bold')
+
+####### Alternative 17 #######
+qe_i16a_gg = qe_i16.loc[(qe_i16['QE_I16'] == 17)]
+
+mu_br_qei16a_gg, std_br_qei16a_gg = norm.fit(qe_i16a_gg['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.2)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16a_gg = norm.pdf(x_br, mu_br_qei16a_gg, std_br_qei16a_gg)
+
+# Plot histogram
+axes_i16a[2,0].plot(x_br, p_br_qei16a_gg, 'k', linewidth=1.5)
+axes_i16a[2,0].set_xlim([0,100])
+axes_i16a[2,0].fill_between(x_br, p_br_qei16a_gg, color='mediumseagreen')
+axes_i16a[2,0].axvline(qe_i16a_gg['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16a[2,0].text(qe_i16a_gg['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16a_gg['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16a[2,0].text(qe_i16a_gg['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16a_gg['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16a[2,0].set_title("Tocantins", fontsize=size_subtitle, weight='bold')
+
+####### Alternative 21 #######
+qe_i16a_hh = qe_i16.loc[(qe_i16['QE_I16'] == 21)]
+
+mu_br_qei16a_hh, std_br_qei16a_hh = norm.fit(qe_i16a_hh['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.2)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16a_hh = norm.pdf(x_br, mu_br_qei16a_hh, std_br_qei16a_hh)
+
+# Plot histogram
+axes_i16a[2,1].plot(x_br, p_br_qei16a_hh, 'k', linewidth=1.5)
+axes_i16a[2,1].set_xlim([0,100])
+axes_i16a[2,1].fill_between(x_br, p_br_qei16a_hh, color='mediumseagreen')
+axes_i16a[2,1].axvline(qe_i16a_hh['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16a[2,1].text(qe_i16a_hh['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16a_hh['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16a[2,1].text(qe_i16a_hh['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16a_hh['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16a[2,1].set_title("Maranhão", fontsize=size_subtitle, weight='bold')
+
+####### Alternative 22 #######
+qe_i16a_ii = qe_i16.loc[(qe_i16['QE_I16'] == 22)]
+
+mu_br_qei16a_ii, std_br_qei16a_ii = norm.fit(qe_i16a_ii['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.2)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16a_ii = norm.pdf(x_br, mu_br_qei16a_ii, std_br_qei16a_ii)
+
+# Plot histogram
+axes_i16a[2,2].plot(x_br, p_br_qei16a_ii, 'k', linewidth=1.5)
+axes_i16a[2,2].set_xlim([0,100])
+axes_i16a[2,2].fill_between(x_br, p_br_qei16a_ii, color='mediumseagreen')
+axes_i16a[2,2].axvline(qe_i16a_ii['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16a[2,2].text(qe_i16a_ii['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16a_ii['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16a[2,2].text(qe_i16a_ii['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16a_ii['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16a[2,2].set_title("Piauí", fontsize=size_subtitle, weight='bold')
+
+axes_i16a[0,0].set_ylabel('Distribuição')
+axes_i16a[1,0].set_ylabel('Distribuição')
+axes_i16a[2,0].set_ylabel('Distribuição')
+
+for ax in axes_i16a.flat:
+    plot_axis_name(ax, fontsize=10)
+
+# Dica: você deve estar na pasta tcc_codes (Variable explorer)
+plt.savefig('../tcc_codes/analise_stats/BR/imagens/menor_impacto/QE_I16A_BR_GAUSS.png', 
+            dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.show()
+
+#%% QE_I16B
+############################## QE_I16B ##############################
+size_title = 18
+size_subtitle = 14
+fig_i16b, axes_i16b = plt.subplots(nrows=3, ncols=3, constrained_layout=True, 
+                                   sharex=False, sharey=True, figsize=(10,10))
+fig_i16b.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'    
+                  'Dado socieconômico:Unidade da Federação que concluiu o ensino médio',
+                 fontsize=size_title)
+
+
+####### Alternative 23 #######
+qe_i16b_aa = qe_i16.loc[(qe_i16['QE_I16'] == 23)]
+
+# Média e desvio padrão
+mu_br_qei16b_aa, std_br_qei16b_aa = norm.fit(qe_i16b_aa['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0, 0.10)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16b_aa = norm.pdf(x_br, mu_br_qei16b_aa, std_br_qei16b_aa)
+
+# Plot histogram
+axes_i16b[0,0].plot(x_br, p_br_qei16b_aa, 'k', linewidth=1.5)
+axes_i16b[0,0].set_xlim([0,100])
+axes_i16b[0,0].fill_between(x_br, p_br_qei16b_aa, color='mediumseagreen')
+axes_i16b[0,0].axvline(qe_i16b_aa['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16b[0,0].text(qe_i16b_aa['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16b_aa['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16b[0,0].text(qe_i16b_aa['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16b_aa['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16b[0,0].set_title("Ceará", fontsize=size_subtitle, weight='bold')
+
+####### Alternative 24 #######
+qe_i16b_bb = qe_i16.loc[(qe_i16['QE_I16'] == 24)]
+
+mu_br_qei16b_bb, std_br_qei16b_bb = norm.fit(qe_i16b_bb['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.10)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16b_bb = norm.pdf(x_br, mu_br_qei16b_bb, std_br_qei16b_bb)
+
+# Plot histogram
+axes_i16b[0,1].plot(x_br, p_br_qei16b_bb, 'k', linewidth=1.5)
+axes_i16b[0,1].set_xlim([0,100])
+axes_i16b[0,1].fill_between(x_br, p_br_qei16b_bb, color='mediumseagreen')
+axes_i16b[0,1].axvline(qe_i16b_bb['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16b[0,1].text(qe_i16b_bb['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16b_bb['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16b[0,1].text(qe_i16b_bb['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16b_bb['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16b[0,1].set_title("Rio Grande do Norte", fontsize=size_subtitle, weight='bold')
+
+####### Alternative 25 #######
+qe_i16b_cc = qe_i16.loc[(qe_i16['QE_I16'] == 25)]
+
+mu_br_qei16b_cc, std_br_qei16b_cc = norm.fit(qe_i16b_cc['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.10)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16b_cc = norm.pdf(x_br, mu_br_qei16b_cc, std_br_qei16b_cc)
+
+# Plot histogram
+axes_i16b[0,2].plot(x_br, p_br_qei16b_cc, 'k', linewidth=1.5)
+axes_i16b[0,2].set_xlim([0,100])
+axes_i16b[0,2].fill_between(x_br, p_br_qei16b_cc, color='mediumseagreen')
+axes_i16b[0,2].axvline(qe_i16b_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16b[0,2].text(qe_i16b_cc['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16b_cc['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16b[0,2].text(qe_i16b_cc['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16b_cc['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16b[0,2].set_title("Paraíba", fontsize=size_subtitle, weight='bold')
+
+####### Alternative 26 #######
+qe_i16b_dd = qe_i16.loc[(qe_i16['QE_I16'] == 26)]
+
+mu_br_qei16b_dd, std_br_qei16b_dd = norm.fit(qe_i16b_dd['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.10)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16b_dd = norm.pdf(x_br, mu_br_qei16b_dd, std_br_qei16b_dd)
+
+# Plot histogram
+axes_i16b[1,0].plot(x_br, p_br_qei16b_dd, 'k', linewidth=1.5)
+axes_i16b[1,0].set_xlim([0,100])
+axes_i16b[1,0].fill_between(x_br, p_br_qei16b_dd, color='mediumseagreen')
+axes_i16b[1,0].axvline(qe_i16b_dd['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16b[1,0].text(qe_i16b_dd['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16b_dd['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16b[1,0].text(qe_i16b_dd['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16b_dd['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16b[1,0].set_title("Pernambuco", fontsize=size_subtitle, weight='bold')
+
+####### Alternative 28 #######
+qe_i16b_ee = qe_i16.loc[(qe_i16['QE_I16'] == 28)]
+
+mu_br_qei16b_ee, std_br_qei16b_ee = norm.fit(qe_i16b_ee['NT_GER'])
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.10)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16b_ee = norm.pdf(x_br, mu_br_qei16b_ee, std_br_qei16b_ee)
+
+# Plot histogram
+axes_i16b[1,1].plot(x_br, p_br_qei16b_ee, 'k', linewidth=1.5)
+axes_i16b[1,1].set_xlim([0,100])
+axes_i16b[1,1].fill_between(x_br, p_br_qei16b_ee, color='mediumseagreen')
+axes_i16b[1,1].axvline(qe_i16b_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16b[1,1].text(qe_i16b_ee['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16b_ee['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16b[1,1].text(qe_i16b_ee['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16b_ee['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16b[1,1].set_title("Sergipe", fontsize=size_subtitle, weight='bold')
+
+####### Alternative 29 #######
+qe_i16b_ff = qe_i16.loc[(qe_i16['QE_I16'] == 29)]
+
+mu_br_qei16b_ff, std_br_qei16b_ff = norm.fit(qe_i16b_ff['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.10)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16b_ff = norm.pdf(x_br, mu_br_qei16b_ff, std_br_qei16b_ff)
+
+# Plot histogram
+axes_i16b[1,2].plot(x_br, p_br_qei16b_ff, 'k', linewidth=1.5)
+axes_i16b[1,2].set_xlim([0,100])
+axes_i16b[1,2].fill_between(x_br, p_br_qei16b_ff, color='mediumseagreen')
+axes_i16b[1,2].axvline(qe_i16b_ff['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16b[1,2].text(qe_i16b_ff['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16b_ff['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16b[1,2].text(qe_i16b_ff['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16b_ff['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16b[1,2].set_title("Bahia", fontsize=size_subtitle, weight='bold')
+
+####### Alternative 31 #######
+qe_i16b_gg = qe_i16.loc[(qe_i16['QE_I16'] == 31)]
+
+mu_br_qei16b_gg, std_br_qei16b_gg = norm.fit(qe_i16b_gg['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.10)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16b_gg = norm.pdf(x_br, mu_br_qei16b_gg, std_br_qei16b_gg)
+
+# Plot histogram
+axes_i16b[2,0].plot(x_br, p_br_qei16b_gg, 'k', linewidth=1.5)
+axes_i16b[2,0].set_xlim([0,100])
+axes_i16b[2,0].fill_between(x_br, p_br_qei16b_gg, color='mediumseagreen')
+axes_i16b[2,0].axvline(qe_i16b_gg['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16b[2,0].text(qe_i16b_gg['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16b_gg['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16b[2,0].text(qe_i16b_gg['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16b_gg['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16b[2,0].set_title("Minas Gerais", fontsize=size_subtitle, weight='bold')
+
+####### Alternative 33 #######
+qe_i16b_hh = qe_i16.loc[(qe_i16['QE_I16'] == 33)]
+
+mu_br_qei16b_hh, std_br_qei16b_hh = norm.fit(qe_i16b_hh['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.10)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16b_hh = norm.pdf(x_br, mu_br_qei16b_hh, std_br_qei16b_hh)
+
+# Plot histogram
+axes_i16b[2,1].plot(x_br, p_br_qei16b_hh, 'k', linewidth=1.5)
+axes_i16b[2,1].set_xlim([0,100])
+axes_i16b[2,1].fill_between(x_br, p_br_qei16b_hh, color='mediumseagreen')
+axes_i16b[2,1].axvline(qe_i16b_hh['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16b[2,1].text(qe_i16b_hh['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16b_hh['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16b[2,1].text(qe_i16b_hh['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16b_hh['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16b[2,1].set_title("Espírito Santo", fontsize=size_subtitle, weight='bold')
+
+####### Alternative 35 #######
+qe_i16b_ii = qe_i16.loc[(qe_i16['QE_I16'] == 35)]
+
+mu_br_qei16b_ii, std_br_qei16b_ii = norm.fit(qe_i16b_ii['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.10)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16b_ii = norm.pdf(x_br, mu_br_qei16b_ii, std_br_qei16b_ii)
+
+# Plot histogram
+axes_i16b[2,2].plot(x_br, p_br_qei16b_ii, 'k', linewidth=1.5)
+axes_i16b[2,2].set_xlim([0,100])
+axes_i16b[2,2].fill_between(x_br, p_br_qei16b_ii, color='mediumseagreen')
+axes_i16b[2,2].axvline(qe_i16b_ii['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16b[2,2].text(qe_i16b_ii['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16b_ii['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16b[2,2].text(qe_i16b_ii['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16b_ii['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16b[2,2].set_title("São Paulo", fontsize=size_subtitle, weight='bold')
+
+axes_i16b[0,0].set_ylabel('Distribuição')
+axes_i16b[1,0].set_ylabel('Distribuição')
+axes_i16b[2,0].set_ylabel('Distribuição')
+
+for ax in axes_i16b.flat:
+    plot_axis_name(ax, fontsize=10)
+
+# Dica: você deve estar na pasta tcc_codes (Variable explorer)
+plt.savefig('../tcc_codes/analise_stats/BR/imagens/menor_impacto/QE_I16B_BR_GAUSS.png', 
+            dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.show()
+
+#%% QE_I16C
+############################## QE_I16C ##############################
+size_title = 18
+size_subtitle = 14
+fig_i16c, axes_i16c = plt.subplots(nrows=3, ncols=3, constrained_layout=True, 
+                                   sharex=False, sharey=True, figsize=(10,10))
+fig_i16c.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'    
+                  'Dado socieconômico:Unidade da Federação que concluiu o ensino médio',
+                 fontsize=size_title)
+
+
+####### Alternative 41 #######
+qe_i16c_aa = qe_i16.loc[(qe_i16['QE_I16'] == 41)]
+
+# Média e desvio padrão
+mu_br_qei16c_aa, std_br_qei16c_aa = norm.fit(qe_i16c_aa['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0, 0.10)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16c_aa = norm.pdf(x_br, mu_br_qei16c_aa, std_br_qei16c_aa)
+
+# Plot histogram
+axes_i16c[0,0].plot(x_br, p_br_qei16c_aa, 'k', linewidth=1.5)
+axes_i16c[0,0].set_xlim([0,100])
+axes_i16c[0,0].fill_between(x_br, p_br_qei16c_aa, color='mediumseagreen')
+axes_i16c[0,0].axvline(qe_i16c_aa['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16c[0,0].text(qe_i16c_aa['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16c_aa['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16c[0,0].text(qe_i16c_aa['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16c_aa['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16c[0,0].set_title("Paraná", fontsize=size_subtitle, weight='bold')
+
+####### Alternative 42 #######
+qe_i16c_bb = qe_i16.loc[(qe_i16['QE_I16'] == 42)]
+
+mu_br_qei16c_bb, std_br_qei16c_bb = norm.fit(qe_i16c_bb['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.10)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16c_bb = norm.pdf(x_br, mu_br_qei16c_bb, std_br_qei16c_bb)
+
+# Plot histogram
+axes_i16c[0,1].plot(x_br, p_br_qei16c_bb, 'k', linewidth=1.5)
+axes_i16c[0,1].set_xlim([0,100])
+axes_i16c[0,1].fill_between(x_br, p_br_qei16c_bb, color='mediumseagreen')
+axes_i16c[0,1].axvline(qe_i16c_bb['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16c[0,1].text(qe_i16c_bb['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16c_bb['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16c[0,1].text(qe_i16c_bb['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16c_bb['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16c[0,1].set_title("Santa Catarina", fontsize=size_subtitle, weight='bold')
+
+####### Alternative 43 #######
+qe_i16c_cc = qe_i16.loc[(qe_i16['QE_I16'] == 43)]
+
+mu_br_qei16c_cc, std_br_qei16c_cc = norm.fit(qe_i16c_cc['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.10)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16c_cc = norm.pdf(x_br, mu_br_qei16c_cc, std_br_qei16c_cc)
+
+# Plot histogram
+axes_i16c[0,2].plot(x_br, p_br_qei16c_cc, 'k', linewidth=1.5)
+axes_i16c[0,2].set_xlim([0,100])
+axes_i16c[0,2].fill_between(x_br, p_br_qei16c_cc, color='mediumseagreen')
+axes_i16c[0,2].axvline(qe_i16c_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16c[0,2].text(qe_i16c_cc['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16c_cc['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16c[0,2].text(qe_i16c_cc['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16c_cc['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16c[0,2].set_title("Rio Grande do Sul", fontsize=size_subtitle, weight='bold')
+
+####### Alternative 26 #######
+qe_i16c_dd = qe_i16.loc[(qe_i16['QE_I16'] == 50)]
+
+mu_br_qei16c_dd, std_br_qei16c_dd = norm.fit(qe_i16c_dd['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.10)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16c_dd = norm.pdf(x_br, mu_br_qei16c_dd, std_br_qei16c_dd)
+
+# Plot histogram
+axes_i16c[1,0].plot(x_br, p_br_qei16c_dd, 'k', linewidth=1.5)
+axes_i16c[1,0].set_xlim([0,100])
+axes_i16c[1,0].fill_between(x_br, p_br_qei16c_dd, color='mediumseagreen')
+axes_i16c[1,0].axvline(qe_i16c_dd['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16c[1,0].text(qe_i16c_dd['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16c_dd['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16c[1,0].text(qe_i16c_dd['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16c_dd['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16c[1,0].set_title("Mato Grosso do Sul", fontsize=size_subtitle, weight='bold')
+
+####### Alternative 51 #######
+qe_i16c_ee = qe_i16.loc[(qe_i16['QE_I16'] == 51)]
+
+mu_br_qei16c_ee, std_br_qei16c_ee = norm.fit(qe_i16c_ee['NT_GER'])
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.10)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16c_ee = norm.pdf(x_br, mu_br_qei16c_ee, std_br_qei16c_ee)
+
+# Plot histogram
+axes_i16c[1,1].plot(x_br, p_br_qei16c_ee, 'k', linewidth=1.5)
+axes_i16c[1,1].set_xlim([0,100])
+axes_i16c[1,1].fill_between(x_br, p_br_qei16c_ee, color='mediumseagreen')
+axes_i16c[1,1].axvline(qe_i16c_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16c[1,1].text(qe_i16c_ee['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16c_ee['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16c[1,1].text(qe_i16c_ee['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16c_ee['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16c[1,1].set_title("Mato Grosso", fontsize=size_subtitle, weight='bold')
+
+####### Alternative 52#######
+qe_i16c_ff = qe_i16.loc[(qe_i16['QE_I16'] == 52)]
+
+mu_br_qei16c_ff, std_br_qei16c_ff = norm.fit(qe_i16c_ff['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.10)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16c_ff = norm.pdf(x_br, mu_br_qei16c_ff, std_br_qei16c_ff)
+
+# Plot histogram
+axes_i16c[1,2].plot(x_br, p_br_qei16c_ff, 'k', linewidth=1.5)
+axes_i16c[1,2].set_xlim([0,100])
+axes_i16c[1,2].fill_between(x_br, p_br_qei16c_ff, color='mediumseagreen')
+axes_i16c[1,2].axvline(qe_i16c_ff['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16c[1,2].text(qe_i16c_ff['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16c_ff['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16c[1,2].text(qe_i16c_ff['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16c_ff['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16c[1,2].set_title("Goiás", fontsize=size_subtitle, weight='bold')
+
+####### Alternative 53 #######
+qe_i16c_gg = qe_i16.loc[(qe_i16['QE_I16'] == 53)]
+
+mu_br_qei16c_gg, std_br_qei16c_gg = norm.fit(qe_i16c_gg['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.10)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16c_gg = norm.pdf(x_br, mu_br_qei16c_gg, std_br_qei16c_gg)
+
+# Plot histogram
+axes_i16c[2,0].plot(x_br, p_br_qei16c_gg, 'k', linewidth=1.5)
+axes_i16c[2,0].set_xlim([0,100])
+axes_i16c[2,0].fill_between(x_br, p_br_qei16c_gg, color='mediumseagreen')
+axes_i16c[2,0].axvline(qe_i16c_gg['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16c[2,0].text(qe_i16c_gg['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16c_gg['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16c[2,0].text(qe_i16c_gg['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16c_gg['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16c[2,0].set_title("Distrito Federal", fontsize=size_subtitle, weight='bold')
+
+####### Alternative 99 #######
+qe_i16c_hh = qe_i16.loc[(qe_i16['QE_I16'] == 99)]
+
+mu_br_qei16c_hh, std_br_qei16c_hh = norm.fit(qe_i16c_hh['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.10)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei16c_hh = norm.pdf(x_br, mu_br_qei16c_hh, std_br_qei16c_hh)
+
+# Plot histogram
+axes_i16c[2,1].plot(x_br, p_br_qei16c_hh, 'k', linewidth=1.5)
+axes_i16c[2,1].set_xlim([0,100])
+axes_i16c[2,1].fill_between(x_br, p_br_qei16c_hh, color='mediumseagreen')
+axes_i16c[2,1].axvline(qe_i16c_hh['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i16c[2,1].text(qe_i16c_hh['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i16c_hh['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i16c[2,1].text(qe_i16c_hh['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i16c_hh['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i16c[2,1].set_title("Não se aplica", fontsize=size_subtitle, weight='bold')
+
+axes_i16c[2,2].axis('off')
+
+axes_i16c[0,0].set_ylabel('Distribuição')
+axes_i16c[1,0].set_ylabel('Distribuição')
+axes_i16c[2,0].set_ylabel('Distribuição')
+
+for ax in axes_i16c.flat:
+    plot_axis_name(ax, fontsize=10)
+
+# Dica: você deve estar na pasta tcc_codes (Variable explorer)
+plt.savefig('../tcc_codes/analise_stats/BR/imagens/menor_impacto/QE_I16C_BR_GAUSS.png', 
+            dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.show()
 #%% QE_I19
 ############################## QE_I19 ##############################
-fig_i19, axes_i19 = plt.subplots(nrows=3, ncols=3, sharex=False, sharey=True, figsize=(15,15))
+fig_i19, axes_i19 = plt.subplots(nrows=3, ncols=3, constrained_layout=True, 
+                                 sharex=False, sharey=True, figsize=(10,10))
 fig_i19.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'    
                   'Dado socioeconômico:Pessoa que mais incentivou a cursar a graduação',
                  fontsize=size_title)
@@ -2332,7 +3196,7 @@ axes_i19[1,2].text(qe_i19_ff['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrã
 axes_i19[1,2].set_title("F:Colegas/amigos", fontsize=size_subtitle, weight='bold')
 
 ####### Alternative G #######
-qe_i19_gg = qe_i19.loc[(qe_i19['QE_I19'] == 'F')]
+qe_i19_gg = qe_i19.loc[(qe_i19['QE_I19'] == 'G')]
 
 mu_br_qei19_gg, std_br_qei19_gg = norm.fit(qe_i19_gg['NT_GER'])
 
@@ -2368,9 +3232,322 @@ for ax in axes_i19.flat:
 # Dica: você deve estar na pasta tcc_codes (Variable explorer)
 plt.savefig('../tcc_codes/analise_stats/BR/imagens/menor_impacto/QE_I19_BR_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
 plt.show()
+
+#%%
+############################## QE_I20A ##############################
+size_title = 18
+size_subtitle = 12
+fig_i20a, axes_i20a = plt.subplots(nrows=3, ncols=2, constrained_layout=True,
+                                 sharex=False, sharey=True, figsize=(10,10))
+fig_i20a.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'
+                 'Dado socieconômico:Grupo(s) que o ajudou a enfrentar dificuldades',
+                 fontsize=size_title)
+
+
+####### Alternative A #######
+qe_i20a_aa = qe_i20.loc[(qe_i20['QE_I20'] == 'A')]
+
+# Média e desvio padrão
+mu_br_qei20a_aa, std_br_qei20a_aa = norm.fit(qe_i20a_aa['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0, 0.15)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei20a_aa = norm.pdf(x_br, mu_br_qei20a_aa, std_br_qei20a_aa)
+
+# Plot histogram
+axes_i20a[0,0].plot(x_br, p_br_qei20a_aa, 'k', linewidth=1.5)
+axes_i20a[0,0].set_xlim([0,100])
+axes_i20a[0,0].fill_between(x_br, p_br_qei20a_aa, color='mediumseagreen')
+axes_i20a[0,0].axvline(qe_i20a_aa['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i20a[0,0].text(qe_i20a_aa['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i20a_aa['NT_GER'].mean()), fontstyle='italic', weight='bold')
+axes_i20a[0,0].text(qe_i20a_aa['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i20a_aa['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i20a[0,0].set_title("A:Sem dificuldades", fontsize=size_subtitle, weight='bold')
+
+
+####### Alternative B #######
+# Plot Gaussiana
+qe_i20a_bb = qe_i20.loc[(qe_i20['QE_I20'] == 'B')]
+
+mu_br_qei20a_bb, std_br_qei20a_bb = norm.fit(qe_i20a_bb['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei20a_bb = norm.pdf(x_br, mu_br_qei20a_bb, std_br_qei20a_bb)
+
+# Plot histogram
+axes_i20a[0,1].plot(x_br, p_br_qei20a_bb, 'k', linewidth=1.5)
+axes_i20a[0,1].set_xlim([0,100])
+axes_i20a[0,1].fill_between(x_br, p_br_qei20a_bb, color='mediumseagreen')
+axes_i20a[0,1].axvline(qe_i20a_bb['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i20a[0,1].text(qe_i20a_bb['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i20a_bb['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i20a[0,1].text(qe_i20a_bb['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i20a_bb['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i20a[0,1].set_title("B:Não recebi apoio", fontsize=size_subtitle, weight='bold')
+
+####### Alternative C #######
+qe_i20a_cc = qe_i20.loc[(qe_i20['QE_I20'] == 'C')]
+
+mu_br_qei20a_cc, std_br_qei20a_cc = norm.fit(qe_i20a_cc['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei20a_cc = norm.pdf(x_br, mu_br_qei20a_cc, std_br_qei20a_cc)
+
+# Plot histogram
+axes_i20a[1,0].plot(x_br, p_br_qei20a_cc, 'k', linewidth=1.5)
+axes_i20a[1,0].set_xlim([0,100])
+axes_i20a[1,0].fill_between(x_br, p_br_qei20a_cc, color='mediumseagreen')
+axes_i20a[1,0].axvline(qe_i20a_cc['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i20a[1,0].text(qe_i20a_cc['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i20a_cc['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i20a[1,0].text(qe_i20a_cc['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i20a_cc['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i20a[1,0].set_title("C:Pais", fontsize=size_subtitle, weight='bold')
+
+####### Alternative D #######
+qe_i20a_dd = qe_i20.loc[(qe_i20['QE_I20'] == 'D')]
+
+mu_br_qei20a_dd, std_br_qei20a_dd = norm.fit(qe_i20a_dd['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei20a_dd = norm.pdf(x_br, mu_br_qei20a_dd, std_br_qei20a_dd)
+
+# Plot histogram
+axes_i20a[1,1].plot(x_br, p_br_qei20a_dd, 'k', linewidth=1.5)
+axes_i20a[1,1].set_xlim([0,100])
+axes_i20a[1,1].fill_between(x_br, p_br_qei20a_dd, color='mediumseagreen')
+axes_i20a[1,1].axvline(qe_i20a_dd['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i20a[1,1].text(qe_i20a_dd['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i20a_dd['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i20a[1,1].text(qe_i20a_dd['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i20a_dd['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i20a[1,1].set_title("D:Avós", fontsize=size_subtitle, weight='bold')
+
+####### Alternative E #######
+qe_i20a_ee = qe_i20.loc[(qe_i20['QE_I20'] == 'E')]
+
+mu_br_qei20a_ee, std_br_qei20a_ee = norm.fit(qe_i20a_ee['NT_GER'])
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei20a_ee = norm.pdf(x_br, mu_br_qei20a_ee, std_br_qei20a_ee)
+
+# Plot histogram
+axes_i20a[2,0].plot(x_br, p_br_qei20a_ee, 'k', linewidth=1.5)
+axes_i20a[2,0].set_xlim([0,100])
+axes_i20a[2,0].fill_between(x_br, p_br_qei20a_ee, color='mediumseagreen')
+axes_i20a[2,0].axvline(qe_i20a_ee['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i20a[2,0].text(qe_i20a_ee['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i20a_ee['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i20a[2,0].text(qe_i20a_ee['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i20a_ee['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i20a[2,0].set_title("E:Irmãos/primos/tios", fontsize=size_subtitle, weight='bold')
+
+####### Alternative F #######
+qe_i20a_ff = qe_i20.loc[(qe_i20['QE_I20'] == 'F')]
+
+# Média e desvio padrão
+mu_br_qei20a_ff, std_br_qei20a_ff = norm.fit(qe_i20a_ff['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0, 0.15)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei20a_ff = norm.pdf(x_br, mu_br_qei20a_ff, std_br_qei20a_ff)
+
+# Plot histogram
+axes_i20a[2,1].plot(x_br, p_br_qei20a_ff, 'k', linewidth=1.5)
+axes_i20a[2,1].set_xlim([0,100])
+axes_i20a[2,1].fill_between(x_br, p_br_qei20a_ff, color='mediumseagreen')
+axes_i20a[2,1].axvline(qe_i20a_ff['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i20a[2,1].text(qe_i20a_ff['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i20a_ff['NT_GER'].mean()), fontstyle='italic', weight='bold')
+axes_i20a[2,1].text(qe_i20a_ff['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i20a_ff['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i20a[2,1].set_title("F:Líder religioso", fontsize=size_subtitle, weight='bold')
+
+axes_i20a[0,0].set_ylabel('Distribuição')
+axes_i20a[1,0].set_ylabel('Distribuição')
+axes_i20a[2,0].set_ylabel('Distribuição')
+
+for ax in axes_i20a.flat:
+    plot_axis_name(ax, fontsize=10)
+
+# Dica: você deve estar na pasta tcc_codes (Variable explorer)
+plt.savefig('../tcc_codes/analise_stats/BR/imagens/menor_impacto/QE_I20A_BR_GAUSS.png', 
+            dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.show()
+#%%
+############################## QE_I20B ##############################
+size_title = 18
+size_subtitle = 12
+fig_i20b, axes_i20b = plt.subplots(nrows=3, ncols=2, constrained_layout=True,
+                                 sharex=False, sharey=True, figsize=(10,10))
+fig_i20b.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'
+                 'Dado socieconômico:Grupo(s) que o ajudou a enfrentar dificuldades',
+                 fontsize=size_title)
+
+####### Alternative G #######
+# Plot Gaussiana
+qe_i20b_gg = qe_i20.loc[(qe_i20['QE_I20'] == 'G')]
+
+mu_br_qei20b_gg, std_br_qei20b_gg = norm.fit(qe_i20b_gg['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei20b_gg = norm.pdf(x_br, mu_br_qei20b_gg, std_br_qei20b_gg)
+
+# Plot histogram
+axes_i20b[0,0].plot(x_br, p_br_qei20b_gg, 'k', linewidth=1.5)
+axes_i20b[0,0].set_xlim([0,100])
+axes_i20b[0,0].fill_between(x_br, p_br_qei20b_gg, color='mediumseagreen')
+axes_i20b[0,0].axvline(qe_i20b_gg['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i20b[0,0].text(qe_i20b_gg['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i20b_gg['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i20b[0,0].text(qe_i20b_gg['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i20b_gg['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i20b[0,0].set_title("G:Colegas de curso/amigos", fontsize=size_subtitle, weight='bold')
+
+####### Alternative H #######
+qe_i20b_hh = qe_i20.loc[(qe_i20['QE_I20'] == 'H')]
+
+mu_br_qei20b_hh, std_br_qei20b_hh = norm.fit(qe_i20b_hh['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei20b_hh = norm.pdf(x_br, mu_br_qei20b_hh, std_br_qei20b_hh)
+
+# Plot histogram
+axes_i20b[0,1].plot(x_br, p_br_qei20b_hh, 'k', linewidth=1.5)
+axes_i20b[0,1].set_xlim([0,100])
+axes_i20b[0,1].fill_between(x_br, p_br_qei20b_hh, color='mediumseagreen')
+axes_i20b[0,1].axvline(qe_i20b_hh['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i20b[0,1].text(qe_i20b_hh['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i20b_hh['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i20b[0,1].text(qe_i20b_hh['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i20b_hh['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i20b[0,1].set_title("I:Professores do curso", fontsize=size_subtitle, weight='bold')
+
+####### Alternative I #######
+qe_i20b_ii = qe_i20.loc[(qe_i20['QE_I20'] == 'I')]
+
+mu_br_qei20b_ii, std_br_qei20b_ii = norm.fit(qe_i20b_ii['NT_GER'])
+
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei20b_ii = norm.pdf(x_br, mu_br_qei20b_ii, std_br_qei20b_ii)
+
+# Plot histogram
+axes_i20b[1,0].plot(x_br, p_br_qei20b_ii, 'k', linewidth=1.5)
+axes_i20b[1,0].set_xlim([0,100])
+axes_i20b[1,0].fill_between(x_br, p_br_qei20b_ii, color='mediumseagreen')
+axes_i20b[1,0].axvline(qe_i20b_ii['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i20b[1,0].text(qe_i20b_ii['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i20b_ii['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i20b[1,0].text(qe_i20b_ii['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i20b_ii['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i20b[1,0].set_title("I:Profissionais de apoio da IES", fontsize=size_subtitle, weight='bold')
+
+####### Alternative J #######
+qe_i20b_jj = qe_i20.loc[(qe_i20['QE_I20'] == 'J')]
+
+mu_br_qei20b_jj, std_br_qei20b_jj = norm.fit(qe_i20b_jj['NT_GER'])
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei20b_jj = norm.pdf(x_br, mu_br_qei20b_jj, std_br_qei20b_jj)
+
+# Plot histogram
+axes_i20b[1,1].plot(x_br, p_br_qei20b_jj, 'k', linewidth=1.5)
+axes_i20b[1,1].set_xlim([0,100])
+axes_i20b[1,1].fill_between(x_br, p_br_qei20b_jj, color='mediumseagreen')
+axes_i20b[1,1].axvline(qe_i20b_jj['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i20b[1,1].text(qe_i20b_jj['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i20b_jj['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i20b[1,1].text(qe_i20b_jj['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i20b_jj['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i20b[1,1].set_title("J:Colegas de trabalho", fontsize=size_subtitle, weight='bold')
+
+######## Alternative K #######
+qe_i20b_kk = qe_i20.loc[(qe_i20['QE_I20'] == 'K')]
+
+mu_br_qei20b_kk, std_br_qei20b_kk = norm.fit(qe_i20b_kk['NT_GER'])
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.15)
+xmin, xmax = plt.xlim(0,100)
+x_br = np.linspace(xmin, xmax, 100)
+
+# Normalizando
+p_br_qei20b_kk = norm.pdf(x_br, mu_br_qei20b_kk, std_br_qei20b_kk)
+
+# Plot histogram
+axes_i20b[2,0].plot(x_br, p_br_qei20b_kk, 'k', linewidth=1.5)
+axes_i20b[2,0].set_xlim([0,100])
+axes_i20b[2,0].fill_between(x_br, p_br_qei20b_kk, color='mediumseagreen')
+axes_i20b[2,0].axvline(qe_i20b_kk['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i20b[2,0].text(qe_i20b_kk['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(qe_i20b_kk['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
+axes_i20b[2,0].text(qe_i20b_kk['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(qe_i20b_kk['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
+axes_i20b[2,0].set_title("K:Outro", fontsize=size_subtitle, weight='bold')
+
+axes_i20b[2,1].axis('off')
+
+axes_i20b[0,0].set_ylabel('Distribuição')
+axes_i20b[1,0].set_ylabel('Distribuição')
+axes_i20b[2,0].set_ylabel('Distribuição')
+
+for ax in axes_i20b.flat:
+    plot_axis_name(ax, fontsize=10)
+
+# Dica: você deve estar na pasta tcc_codes (Variable explorer)
+plt.savefig('../tcc_codes/analise_stats/BR/imagens/menor_impacto/QE_I20B_BR_GAUSS.png', 
+            dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.show()
 #%% QE_I21
 ############################## QE_I21 ##############################
-fig_i21, axes_i21 = plt.subplots(nrows=2, ncols=2, sharex=False, sharey=True, figsize=(10,10))
+fig_i21, axes_i21 = plt.subplots(nrows=2, ncols=2, constrained_layout=True, 
+                                 sharex=False, sharey=True, figsize=(10,10))
 fig_i21.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'    
                   'Dado socioeconômico:Alguém da família concluiu um curso superior',
                  fontsize=size_title)
@@ -2414,22 +3591,20 @@ x_br = np.linspace(xmin, xmax, 100)
 p_br_qei21_bb = norm.pdf(x_br, mu_br_qei21_bb, std_br_qei21_bb)
 
 # Plot histogram
-axes_i21[1,0].plot(x_br, p_br_qei21_bb, 'k', linewidth=1.5)
+axes_i21[0,1].plot(x_br, p_br_qei21_bb, 'k', linewidth=1.5)
 
-axes_i21[1,0].fill_between(x_br, p_br_qei21_bb, color='mediumseagreen')
-axes_i21[1,0].axvline(qe_i21_bb['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i21[1,0].text(qe_i21_bb['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+axes_i21[0,1].fill_between(x_br, p_br_qei21_bb, color='mediumseagreen')
+axes_i21[0,1].axvline(qe_i21_bb['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i21[0,1].text(qe_i21_bb['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i21_bb['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
-axes_i21[1,0].text(qe_i21_bb['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i21[0,1].text(qe_i21_bb['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i21_bb['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
-axes_i21[1,0].set_title("B:Não", fontsize=size_subtitle, weight='bold')
+axes_i21[0,1].set_title("B:Não", fontsize=size_subtitle, weight='bold')
 
-axes_i21[0,1].axes('off')
-axes_i21[1,1].axes('off')
+axes_i21[1,0].axis('off')
+axes_i21[1,1].axis('off')
 
 axes_i21[0,0].set_ylabel('Distribuição')
-#axes_i21[1,0].set_ylabel('Distribuição')
-#axes_i21[2,0].set_ylabel('Distribuição')
 
 for ax in axes_i21.flat:
     plot_axis_name(ax, fontsize=10)
