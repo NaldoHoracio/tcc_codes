@@ -461,7 +461,8 @@ plt.savefig('../tcc_codes/analise_stats/BR/imagens/menor_impacto/QE_I02_BR_GAUSS
             dpi=150, bbox_inches='tight', pad_inches=0.015);
 plt.show()
 #%% QE_I08
-fig_i08, axes_i08 = plt.subplots(nrows=3, ncols=3, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
+fig_i08, axes_i08 = plt.subplots(nrows=3, ncols=3, constrained_layout=True, 
+                                 sharex=False, sharey=True, figsize=(15,15))
 fig_i08.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'
                  'Dado socieconômico:Renda bruta',
                  fontsize=size_title)
@@ -650,7 +651,8 @@ plt.show()
 #%% QE_I11A
 size_title = 18
 size_subtitle = 14
-fig_i11a, axes_i11a = plt.subplots(nrows=3, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
+fig_i11a, axes_i11a = plt.subplots(nrows=3, ncols=2, constrained_layout=True, 
+                                   sharex=False, sharey=True, figsize=(15,15))
 fig_i11a.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'    
                   'Dado socieconômico:Tipo de financiamento p/ custeio das mensalidades',
                  fontsize=size_title)
@@ -812,7 +814,8 @@ plt.savefig('../tcc_codes/analise_stats/BR/imagens/maior_impacto/QE_I11A_BR_GAUS
 plt.show()
 
 #%% QE_I11B
-fig_i11b, axes_i11b = plt.subplots(nrows=3, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
+fig_i11b, axes_i11b = plt.subplots(nrows=3, ncols=2, constrained_layout=True, 
+                                   sharex=False, sharey=True, figsize=(15,15))
 fig_i11b.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'
                   'Dado socieconômico:Tipo de financiamento para custeio das mensalidades',
                  fontsize=size_title)
@@ -951,7 +954,8 @@ plt.show()
 
 
 #%% QE_13
-fig_i13, axes_i13 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
+fig_i13, axes_i13 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, 
+                                 sharex=False, sharey=True, figsize=(15,15))
 fig_i13.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'    
                   'Dado socioeconômico:Tipo de bolsa acadêmica durante a graduação',
                  fontsize=size_title)
@@ -1112,7 +1116,8 @@ plt.savefig('../tcc_codes/analise_stats/BR/imagens/maior_impacto/QE_I13_BR_GAUSS
 plt.show()
 
 #%% QE_I17
-fig_i17, axes_i17 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
+fig_i17, axes_i17 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, 
+                                 sharex=False, sharey=True, figsize=(15,15))
 fig_i17.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'    
                   'Dado socioeconômico:Tipo de escola que cursou o ensino médio',
                  fontsize=size_title)
@@ -1273,7 +1278,8 @@ plt.savefig('../tcc_codes/analise_stats/BR/imagens/maior_impacto/QE_I17_BR_GAUSS
 plt.show()
 
 #%% QE_I23
-fig_i23, axes_i23 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
+fig_i23, axes_i23 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, 
+                                 sharex=False, sharey=True, figsize=(15,15))
 fig_i23.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'    
                   'Dado socioeconômico:Horas de estudo por semana (excluindo aulas)',
                  fontsize=size_title)
@@ -1412,7 +1418,8 @@ plt.savefig('../tcc_codes/analise_stats/BR//imagens/maior_impacto/QE_I23_BR_GAUS
 plt.show()
 
 #%% QE_I25
-fig_i25, axes_i25 = plt.subplots(nrows=3, ncols=3, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
+fig_i25, axes_i25 = plt.subplots(nrows=3, ncols=3, constrained_layout=True, 
+                                 sharex=False, sharey=True, figsize=(15,15))
 fig_i25.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'    
                   'Dado socioeconômico:Principal motivo de escolha do curso',
                  fontsize=size_title)
@@ -1622,7 +1629,8 @@ plt.show()
 #%% 
 ############################## Subplots - Menor impacto ##############################
 ############################## QE_I01 ##############################
-fig_i01, axes_i01 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
+fig_i01, axes_i01 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, 
+                                 sharex=False, sharey=True, figsize=(15,15))
 fig_i01.suptitle('Distribuição de notas do Enade no Brasil de 2014 a 2018\n'    
                   'Dado socioeconômico:Estado civil',
                  fontsize=size_title)

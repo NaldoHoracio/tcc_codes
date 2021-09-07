@@ -2301,7 +2301,8 @@ plt.savefig('../tcc_codes/analise_stats/AL/imagens/menor_impacto/QE_I19_AL_GAUSS
 plt.show()
 #%% QE_I21
 ############################## QE_I21 ##############################
-fig_i21, axes_i21 = plt.subplots(nrows=2, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(10,10))
+fig_i21, axes_i21 = plt.subplots(nrows=2, ncols=2, constrained_layout=True, 
+                                 sharex=False, sharey=True, figsize=(10,10))
 fig_i21.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'    
                   'Dado socioeconômico:Alguém da família concluiu um curso superior',
                  fontsize=size_title)
@@ -2345,18 +2346,18 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei21_bb = norm.pdf(x_al, mu_al_qei21_bb, std_al_qei21_bb)
 
 # Plot histogram
-axes_i21[1,0].plot(x_al, p_al_qei21_bb, 'k', linewidth=1.5)
+axes_i21[0,1].plot(x_al, p_al_qei21_bb, 'k', linewidth=1.5)
 
-axes_i21[1,0].fill_between(x_al, p_al_qei21_bb, color='royalblue')
-axes_i21[1,0].axvline(qe_i21_bb['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i21[1,0].text(qe_i21_bb['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+axes_i21[0,1].fill_between(x_al, p_al_qei21_bb, color='royalblue')
+axes_i21[0,1].axvline(qe_i21_bb['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i21[0,1].text(qe_i21_bb['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i21_bb['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
-axes_i21[1,0].text(qe_i21_bb['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i21[0,1].text(qe_i21_bb['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i21_bb['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
-axes_i21[1,0].set_title("B:Não", fontsize=size_subtitle, weight='bold')
+axes_i21[0,1].set_title("B:Não", fontsize=size_subtitle, weight='bold')
 
-axes_i21[0,1].axes('off')
-axes_i21[1,1].axes('off')
+axes_i21[1,0].axis('off')
+axes_i21[1,1].axis('off')
 
 axes_i21[0,0].set_ylabel('Distribuição')
 #axes_i21[1,0].set_ylabel('Distribuição')
