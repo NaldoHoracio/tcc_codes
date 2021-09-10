@@ -459,7 +459,8 @@ plt.savefig('../tcc_codes/analise_stats/AL/imagens/maior_impacto/QE_I02_AL_GAUSS
             dpi=150, bbox_inches='tight', pad_inches=0.015);
 plt.show()
 #%% QE_I08
-fig_i08, axes_i08 = plt.subplots(nrows=3, ncols=3, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
+fig_i08, axes_i08 = plt.subplots(nrows=3, ncols=3, constrained_layout=True, 
+                                 sharex=False, sharey=True, figsize=(12,12))
 fig_i08.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'
                  'Dado socieconômico:Renda bruta',
                  fontsize=size_title)
@@ -647,8 +648,9 @@ plt.savefig('../tcc_codes/analise_stats/AL/imagens/maior_impacto/QE_I08_AL_GAUSS
 plt.show()
 #%% QE_I11A
 size_title = 18
-size_subtitle = 14
-fig_i11a, axes_i11a = plt.subplots(nrows=3, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
+size_subtitle = 12
+fig_i11a, axes_i11a = plt.subplots(nrows=3, ncols=2, constrained_layout=True, 
+                                   sharex=False, sharey=True, figsize=(10,10))
 fig_i11a.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'    
                   'Dado socieconômico:Tipo de financiamento p/ custeio das mensalidades',
                  fontsize=size_title)
@@ -810,7 +812,8 @@ plt.savefig('../tcc_codes/analise_stats/AL/imagens/maior_impacto/QE_I11A_AL_GAUS
 plt.show()
 
 #%% QE_I11B
-fig_i11b, axes_i11b = plt.subplots(nrows=3, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
+fig_i11b, axes_i11b = plt.subplots(nrows=3, ncols=2, constrained_layout=True, 
+                                   sharex=False, sharey=True, figsize=(10,10))
 fig_i11b.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'
                   'Dado socieconômico:Tipo de financiamento para custeio das mensalidades',
                  fontsize=size_title)
@@ -949,7 +952,8 @@ plt.show()
 
 
 #%% QE_13
-fig_i13, axes_i13 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
+fig_i13, axes_i13 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, 
+                                 sharex=False, sharey=True, figsize=(10,10))
 fig_i13.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'    
                   'Dado socioeconômico:Tipo de bolsa acadêmica durante a graduação',
                  fontsize=size_title)
@@ -1110,7 +1114,8 @@ plt.savefig('../tcc_codes/analise_stats/AL/imagens/maior_impacto/QE_I13_AL_GAUSS
 plt.show()
 
 #%% QE_I17
-fig_i17, axes_i17 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
+fig_i17, axes_i17 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, 
+                                 sharex=False, sharey=True, figsize=(10,10))
 fig_i17.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'    
                   'Dado socioeconômico:Tipo de escola que cursou o ensino médio',
                  fontsize=size_title)
@@ -1272,7 +1277,8 @@ plt.show()
 
 
 #%% QE_I18
-fig_i18, axes_i18 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
+fig_i18, axes_i18 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, 
+                                 sharex=False, sharey=True, figsize=(10,10))
 fig_i18.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'    
                   'Dado socioeconômico:Modalidade de ensino médio',
                  fontsize=size_title)
@@ -1411,7 +1417,8 @@ plt.savefig('../tcc_codes/analise_stats/AL/imagens/maior_impacto/QE_I18_AL_GAUSS
 plt.show()
 
 #%% QE_I23
-fig_i23, axes_i23 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
+fig_i23, axes_i23 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, 
+                                 sharex=False, sharey=True, figsize=(10,10))
 fig_i23.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'    
                   'Dado socioeconômico:Horas de estudo por semana (excluindo aulas)',
                  fontsize=size_title)
@@ -1552,7 +1559,8 @@ plt.show()
 #%% 
 ############################## Subplots - Menor impacto ##############################
 ############################## QE_I01 ##############################
-fig_i01, axes_i01 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
+fig_i01, axes_i01 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, 
+                                 sharex=False, sharey=True, figsize=(10,10))
 fig_i01.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'    
                   'Dado socioeconômico:Estado civil',
                  fontsize=size_title)
@@ -1693,7 +1701,8 @@ plt.show()
 
 #%%
 ############################## QE_I03 ##############################
-fig_i03, axes_i03 = plt.subplots(nrows=2, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
+fig_i03, axes_i03 = plt.subplots(nrows=2, ncols=2, constrained_layout=True, 
+                                 sharex=False, sharey=True, figsize=(10,10))
 fig_i03.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'    
                   'Dado socioeconômico:Nacionalidade',
                  fontsize=size_title)
@@ -1787,7 +1796,8 @@ plt.show()
 
 #%%
 ############################## QE_I12 ##############################
-fig_i12, axes_i12 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
+fig_i12, axes_i12 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, 
+                                 sharex=False, sharey=True, figsize=(10,10))
 fig_i12.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'    
                   'Dado socioeconômico:Tipo de bolsa de permanência durante da graduação',
                  fontsize=size_title)
@@ -1816,7 +1826,7 @@ axes_i12[0,0].text(qe_i12_aa['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}
          .format(qe_i12_aa['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
 axes_i12[0,0].text(qe_i12_aa['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i01_aa['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
-axes_i01[0,0].set_title("A:Nenhum", fontsize=size_subtitle, weight='bold')
+axes_i12[0,0].set_title("A:Nenhum", fontsize=size_subtitle, weight='bold')
 
 ####### Alternative B #######
 qe_i12_bb = qe_i12.loc[(qe_i12['QE_I12'] == 'B')]
@@ -1949,7 +1959,8 @@ plt.show()
 
 #%%
 ############################## QE_I15 ##############################
-fig_i15, axes_i15 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
+fig_i15, axes_i15 = plt.subplots(nrows=3, ncols=2, constrained_layout=True, 
+                                 sharex=False, sharey=True, figsize=(10,10))
 fig_i15.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'    
                   'Dado socioeconômico:Ingresso por ação afrimativa e critério',
                  fontsize=size_title)
@@ -2110,10 +2121,41 @@ plt.savefig('../tcc_codes/analise_stats/AL/imagens/menor_impacto/QE_I15_AL_GAUSS
 plt.show()
 
 #%% QE_I16
-############################## QE_I16 ##############################
+############################## QE_I16 ##############################    
+mu_al_i16, std_al_i16 = norm.fit(labels_al) # Média e desvio padrão dos dados
+
+# Histograma
+plt.hist(labels_al, bins=150, density=True, alpha=0.0)
+  
+# Limites
+min_ylim, max_ylim = plt.ylim(0,0.06)
+xmin, xmax = plt.xlim(0,100)
+x_al_i16 = np.linspace(xmin, xmax, 100)
+
+# Normalizando (Gaussiana)
+p_al_i16 = norm.pdf(x_al_i16, mu_al_i16, std_al_i16)
+
+# Plot Gaussiana
+plt.plot(x_al_i16, p_al_i16, 'k', linewidth=1.5)# Ref: 
+plt.fill_between(x_al_i16, p_al_i16, color='royalblue')# Ref: 
+plt.axvline(labels_al.mean(), color='k', linestyle='dashed', linewidth=1.5)
+plt.text(labels_al.mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+         .format(labels_al.mean()),fontsize=10, style='italic', weight='bold')
+plt.text(labels_al.mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+         .format(labels_al.std()),fontsize=10, style='italic', weight='bold')
+#plt.suptitle('Alagoas')
+plt.title('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'
+          'Dado socioeconômico:Unidade da Federação que concluiu o ensino médio\n'
+          'Alagoas')
+plt.xlabel('Notas do Enade');
+plt.ylabel('Distribuição');
+# Dica: você deve estar na pasta tcc_codes (Variable explorer)
+plt.savefig('../tcc_codes/analise_stats/AL/imagens/menor_impacto/QE_I16_BR_GAUSS.png', dpi=150, bbox_inches='tight', pad_inches=0.015);
+plt.show()
 #%% QE_I19
 ############################## QE_I19 ##############################
-fig_i19, axes_i19 = plt.subplots(nrows=3, ncols=3, constrained_layout=True, sharex=False, sharey=True, figsize=(15,15))
+fig_i19, axes_i19 = plt.subplots(nrows=3, ncols=3, constrained_layout=True, 
+                                 sharex=False, sharey=True, figsize=(12,12))
 fig_i19.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'    
                   'Dado socioeconômico:Pessoa que mais incentivou a cursar a graduação',
                  fontsize=size_title)
@@ -2301,8 +2343,8 @@ plt.savefig('../tcc_codes/analise_stats/AL/imagens/menor_impacto/QE_I19_AL_GAUSS
 plt.show()
 #%% QE_I21
 ############################## QE_I21 ##############################
-fig_i21, axes_i21 = plt.subplots(nrows=2, ncols=2, constrained_layout=True, 
-                                 sharex=False, sharey=True, figsize=(10,10))
+fig_i21, axes_i21 = plt.subplots(nrows=1, ncols=2, constrained_layout=True, 
+                                 sharex=False, sharey=True, figsize=(10,5))
 fig_i21.suptitle('Distribuição de notas do Enade em Alagoas de 2014 a 2018\n'    
                   'Dado socioeconômico:Alguém da família concluiu um curso superior',
                  fontsize=size_title)
@@ -2323,14 +2365,14 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei21_aa = norm.pdf(x_al, mu_al_qei21_aa, std_al_qei21_aa)
 
 # Plot histogram
-axes_i21[0,0].plot(x_al, p_al_qei21_aa, 'k', linewidth=1.5)
-axes_i21[0,0].fill_between(x_al, p_al_qei21_aa, color='royalblue')
-axes_i21[0,0].axvline(qe_i21_aa['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i21[0,0].text(qe_i21_aa['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+axes_i21[0].plot(x_al, p_al_qei21_aa, 'k', linewidth=1.5)
+axes_i21[0].fill_between(x_al, p_al_qei21_aa, color='royalblue')
+axes_i21[0].axvline(qe_i21_aa['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i21[0].text(qe_i21_aa['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i21_aa['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
-axes_i21[0,0].text(qe_i21_aa['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i21[0].text(qe_i21_aa['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i21_aa['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
-axes_i21[0,0].set_title("A:Sim", fontsize=size_subtitle, weight='bold')
+axes_i21[0].set_title("A:Sim", fontsize=size_subtitle, weight='bold')
 
 ####### Alternative B #######
 qe_i21_bb = qe_i21.loc[(qe_i21['QE_I21'] == 'B')]
@@ -2346,20 +2388,17 @@ x_al = np.linspace(xmin, xmax, 100)
 p_al_qei21_bb = norm.pdf(x_al, mu_al_qei21_bb, std_al_qei21_bb)
 
 # Plot histogram
-axes_i21[0,1].plot(x_al, p_al_qei21_bb, 'k', linewidth=1.5)
+axes_i21[1].plot(x_al, p_al_qei21_bb, 'k', linewidth=1.5)
 
-axes_i21[0,1].fill_between(x_al, p_al_qei21_bb, color='royalblue')
-axes_i21[0,1].axvline(qe_i21_bb['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
-axes_i21[0,1].text(qe_i21_bb['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
+axes_i21[1].fill_between(x_al, p_al_qei21_bb, color='royalblue')
+axes_i21[1].axvline(qe_i21_bb['NT_GER'].mean(), color='k', linestyle='dashed', linewidth=1.5)
+axes_i21[1].text(qe_i21_bb['NT_GER'].mean()*1.2, max_ylim*0.9, 'Média: {:.2f}'
          .format(qe_i21_bb['NT_GER'].mean()),fontsize=10, style='italic', weight='bold')
-axes_i21[0,1].text(qe_i21_bb['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
+axes_i21[1].text(qe_i21_bb['NT_GER'].mean()*1.2, max_ylim*0.83, 'Desvio padrão: {:.2f}'
          .format(qe_i21_bb['NT_GER'].std()),fontsize=10, style='italic', weight='bold')
-axes_i21[0,1].set_title("B:Não", fontsize=size_subtitle, weight='bold')
+axes_i21[1].set_title("B:Não", fontsize=size_subtitle, weight='bold')
 
-axes_i21[1,0].axis('off')
-axes_i21[1,1].axis('off')
-
-axes_i21[0,0].set_ylabel('Distribuição')
+axes_i21[0].set_ylabel('Distribuição')
 #axes_i21[1,0].set_ylabel('Distribuição')
 #axes_i21[2,0].set_ylabel('Distribuição')
 
