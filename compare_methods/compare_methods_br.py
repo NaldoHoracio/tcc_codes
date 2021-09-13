@@ -9,6 +9,7 @@ import os
 import csv
 import math
 import random
+import graphviz
 import numpy as np
 import pandas as pd
 import datetime as dt
@@ -146,6 +147,7 @@ from sklearn.model_selection import train_test_split, KFold, cross_val_score
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.tree import DecisionTreeRegressor
 from sklearn import linear_model
+from sklearn import tree
 import time
 
 n_cv_br = int(10);
@@ -164,6 +166,7 @@ sec_dt_br_cv = (time.time() - time_dt_br_cv) # Time end DT CV
 print('Accuracy DT CV: ', round(np.mean(accuracy_br_dt_cv), 4))
 seconds_transform(sec_dt_br_cv)
 
+
 #%% Escrevendo em Arquivo - DT
 fields_br_dt_cv = ['Version','Metodo', 'Split', 'Leaf', 'Acc', 'Acc medio', 'Tempo (h,min,s)', 'n_cv']
 
@@ -175,6 +178,7 @@ rows_br_dt_cv = {'Version':0,'Metodo':'DT',
 file_br_dt_cv = "../tcc_codes/compare_methods/Logs/CV/DT_CV_BR.csv"
 
 version_file(file_br_dt_cv, fields_br_dt_cv, rows_br_dt_cv)
+
 
 #%% Cross Validation - RF
 
@@ -299,6 +303,18 @@ sec_dt_br = (time.time() - time_dt_br) # Time end dt loop
 
 seconds_transform(sec_dt_br)
 
+#%% Plotando árvore do modelo BR
+dot_data_dt_br = tree.export_graphviz(dt_br, 
+                                      out_file='../tcc_codes/compare_methods/BR/TREEs/DT_BR.dot', 
+                                      filled=True, rounded=True,  
+                                      precision=2,
+                                      special_characters=True)
+#img_data_dt_br = graphviz.Source(dot_data_dt_br)
+import pydot
+
+(img_data_dt_br,) = pydot.graph_from_dot_file('../tcc_codes/compare_methods/BR/TREEs/DT_BR.dot')
+img_data_dt_br.write_png('../tcc_codes/compare_methods/BR/TREEs/DT_BR.png')
+
 #%% Treino dos dados - RF_BR
 
 time_rf_br = time.time() # Time start dt loop
@@ -339,6 +355,20 @@ importance_fields_br_rf += importance_fields_aux_br_rf
 sec_rf_br = (time.time() - time_rf_br) # Time end dt loop
 
 seconds_transform(sec_rf_br)
+
+# Plotando árvores do modelo BR
+
+#%% Plotando árvores do modelo BR
+dot_data_rf_br = tree.export_graphviz(rf_br, 
+                                      out_file='../tcc_codes/compare_methods/BR/TREEs/RF_BR.dot', 
+                                      filled=True, rounded=True,  
+                                      precision=2,
+                                      special_characters=True)
+#img_data_dt_br = graphviz.Source(dot_data_dt_br)
+import pydot
+
+(img_data_rf_br,) = pydot.graph_from_dot_file('../tcc_codes/compare_methods/BR/TREEs/RF_BR.dot')
+img_data_dt_br.write_png('../tcc_codes/compare_methods/BR/TREEs/RF_BR.png')
 
 #%% Treino dos dados - LS_BR
 
