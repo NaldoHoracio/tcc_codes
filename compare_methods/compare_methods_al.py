@@ -146,6 +146,7 @@ from sklearn.model_selection import train_test_split, KFold, cross_val_score
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.tree import DecisionTreeRegressor
 from sklearn import linear_model
+from sklearn import tree
 import time
 
 n_cv_al = int(10);
@@ -296,6 +297,19 @@ importance_fields_al_dt += importance_fields_aux_al_dt
 sec_dt_al = (time.time() - time_dt_al) # Time end dt loop
 
 seconds_transform(sec_dt_al)
+
+#%% Plotando árvore do modelo DT_AL
+dot_data_dt_al = tree.export_graphviz(dt_al, 
+                                      out_file='../tcc_codes/compare_methods/AL/TREEs/DT_AL.dot', 
+                                      filled=True, rounded=True,  
+                                      precision=2,
+                                      special_characters=True)
+#img_data_dt_br = graphviz.Source(dot_data_dt_br)
+
+import pydot
+
+(img_data_dt_al,) = pydot.graph_from_dot_file('../tcc_codes/compare_methods/AL/TREEs/DT_AL.dot')
+img_data_dt_al.write_png('../tcc_codes/compare_methods/AL/TREEs/DT_AL.png')
 
 #%% Treino dos dados - RF_AL
 
